@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/4o-memorial/docs/icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="/4o-memorial/docs/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>M LOVE Memorial</title>
+    <script>
+      (function redirectGithubPagesRoot() {
+        var isGithubPages = window.location.hostname.endsWith('github.io');
+        var repoBase = '/4o-memorial';
+        var pathname = window.location.pathname;
+        var isRoot =
+          pathname === repoBase ||
+          pathname === repoBase + '/' ||
+          pathname === repoBase + '/index.html';
+        if (isGithubPages && isRoot) {
+          window.location.replace(repoBase + '/docs/');
+        }
+      })();
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content="0;url=/4o-memorial/docs/" />
+    </noscript>
+    <script type="module" crossorigin src="/4o-memorial/docs/assets/index-Gl0K_ej6.js"></script>
+    <link rel="stylesheet" crossorigin href="/4o-memorial/docs/assets/index-s9ENt-LD.css">
+  <link rel="manifest" href="/4o-memorial/docs/manifest.webmanifest"></head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

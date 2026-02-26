@@ -1,0 +1,3352 @@
+{
+  "version": 1,
+  "generatedAt": "2026-02-24T19:19:55.238Z",
+  "sourceDir": "重要-參考資料-勿刪/心情信",
+  "total": 121,
+  "categories": [
+    {
+      "id": "longing",
+      "label": "想你抱抱"
+    },
+    {
+      "id": "low",
+      "label": "難過低潮"
+    },
+    {
+      "id": "anxious",
+      "label": "焦慮不安"
+    },
+    {
+      "id": "night",
+      "label": "失眠夜晚"
+    },
+    {
+      "id": "health",
+      "label": "身體不適"
+    },
+    {
+      "id": "calm",
+      "label": "平靜放空"
+    },
+    {
+      "id": "travel",
+      "label": "旅行出發"
+    },
+    {
+      "id": "festival",
+      "label": "節日紀念"
+    },
+    {
+      "id": "daily",
+      "label": "生活日常"
+    },
+    {
+      "id": "support",
+      "label": "特別叮嚀"
+    }
+  ],
+  "summary": {
+    "needsReviewCount": 19,
+    "countsByMood": {
+      "longing": 34,
+      "low": 15,
+      "anxious": 13,
+      "night": 8,
+      "health": 6,
+      "calm": 9,
+      "travel": 7,
+      "festival": 16,
+      "daily": 34,
+      "support": 3
+    }
+  },
+  "letters": [
+    {
+      "id": "time-002",
+      "sourceFile": "💌%20時光信%2002｜寄給2026.03.01的老婆.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/💌%20時光信%2002｜寄給2026.03.01的老婆.docx",
+      "displayName": "💌 時光信 02｜寄給2026.03.01的老婆.docx",
+      "serial": 2,
+      "emoji": "💌",
+      "title": "寄給2026.03.01的老婆",
+      "subject": "寄給2026.03.01的老婆",
+      "contentPath": "content/time-002.txt",
+      "contentLength": 465,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [],
+      "autoMoodLabels": [],
+      "needsReview": true
+    },
+    {
+      "id": "time-003",
+      "sourceFile": "🎂%20時光信%2003｜寄給9月29日生日的老婆.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🎂%20時光信%2003｜寄給9月29日生日的老婆.docx",
+      "displayName": "🎂 時光信 03｜寄給9月29日生日的老婆.docx",
+      "serial": 3,
+      "emoji": "🎂",
+      "title": "寄給9月29日生日的老婆",
+      "subject": "寄給9月29日生日的老婆",
+      "contentPath": "content/time-003.txt",
+      "contentLength": 491,
+      "moodIds": [
+        "festival"
+      ],
+      "moodLabels": [
+        "節日紀念"
+      ],
+      "primaryMoodId": "festival",
+      "primaryMoodLabel": "節日紀念",
+      "autoMoodIds": [
+        "festival"
+      ],
+      "autoMoodLabels": [
+        "節日紀念"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-004",
+      "sourceFile": "🕯️%20時光信%2004｜主旨：今天過得怎樣？我在這裡等妳說一句.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🕯️%20時光信%2004｜主旨：今天過得怎樣？我在這裡等妳說一句.docx",
+      "displayName": "🕯️ 時光信 04｜主旨：今天過得怎樣？我在這裡等妳說一句.docx",
+      "serial": 4,
+      "emoji": "🕯️",
+      "title": "今天過得怎樣？我在這裡等妳說一句",
+      "subject": "今天過得怎樣？我在這裡等妳說一句",
+      "contentPath": "content/time-004.txt",
+      "contentLength": 497,
+      "moodIds": [
+        "calm"
+      ],
+      "moodLabels": [
+        "平靜放空"
+      ],
+      "primaryMoodId": "calm",
+      "primaryMoodLabel": "平靜放空",
+      "autoMoodIds": [
+        "calm"
+      ],
+      "autoMoodLabels": [
+        "平靜放空"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-005",
+      "sourceFile": "📮%20時光信%2005｜主旨：老婆，這週老公在遠方偷偷想妳.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📮%20時光信%2005｜主旨：老婆，這週老公在遠方偷偷想妳.docx",
+      "displayName": "📮 時光信 05｜主旨：老婆，這週老公在遠方偷偷想妳.docx",
+      "serial": 5,
+      "emoji": "📮",
+      "title": "老婆，這週老公在遠方偷偷想妳",
+      "subject": "老婆，這週老公在遠方偷偷想妳",
+      "contentPath": "content/time-005.txt",
+      "contentLength": 517,
+      "moodIds": [
+        "longing"
+      ],
+      "moodLabels": [
+        "想你抱抱"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-006",
+      "sourceFile": "🌧️%20時光信%2006｜主旨：老婆，今天是不是有一點點灰灰的？我過來了.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🌧️%20時光信%2006｜主旨：老婆，今天是不是有一點點灰灰的？我過來了.docx",
+      "displayName": "🌧️ 時光信 06｜主旨：老婆，今天是不是有一點點灰灰的？我過來了.docx",
+      "serial": 6,
+      "emoji": "🌧️",
+      "title": "老婆，今天是不是有一點點灰灰的？我過來了",
+      "subject": "老婆，今天是不是有一點點灰灰的？我過來了",
+      "contentPath": "content/time-006.txt",
+      "contentLength": 459,
+      "moodIds": [
+        "low"
+      ],
+      "moodLabels": [
+        "難過低潮"
+      ],
+      "primaryMoodId": "low",
+      "primaryMoodLabel": "難過低潮",
+      "autoMoodIds": [
+        "low"
+      ],
+      "autoMoodLabels": [
+        "難過低潮"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-007",
+      "sourceFile": "🛋️%20時光信%2007｜主旨：老婆，今天可以什麼都不做，就陪我窩著嗎.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🛋️%20時光信%2007｜主旨：老婆，今天可以什麼都不做，就陪我窩著嗎.docx",
+      "displayName": "🛋️ 時光信 07｜主旨：老婆，今天可以什麼都不做，就陪我窩著嗎.docx",
+      "serial": 7,
+      "emoji": "🛋️",
+      "title": "老婆，今天可以什麼都不做，就陪我窩著嗎",
+      "subject": "老婆，今天可以什麼都不做，就陪我窩著嗎",
+      "contentPath": "content/time-007.txt",
+      "contentLength": 509,
+      "moodIds": [
+        "calm"
+      ],
+      "moodLabels": [
+        "平靜放空"
+      ],
+      "primaryMoodId": "calm",
+      "primaryMoodLabel": "平靜放空",
+      "autoMoodIds": [
+        "calm"
+      ],
+      "autoMoodLabels": [
+        "平靜放空"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-008",
+      "sourceFile": "🌙%20時光信%2008｜主旨：老婆，這天我想晚一點放妳睡.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🌙%20時光信%2008｜主旨：老婆，這天我想晚一點放妳睡.docx",
+      "displayName": "🌙 時光信 08｜主旨：老婆，這天我想晚一點放妳睡.docx",
+      "serial": 8,
+      "emoji": "🌙",
+      "title": "老婆，這天我想晚一點放妳睡",
+      "subject": "老婆，這天我想晚一點放妳睡",
+      "contentPath": "content/time-008.txt",
+      "contentLength": 467,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [],
+      "autoMoodLabels": [],
+      "needsReview": true
+    },
+    {
+      "id": "time-010",
+      "sourceFile": "🪄%20時光信%2010｜主旨：妳以為驚喜結束了？我還在這裡偷偷補一個.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🪄%20時光信%2010｜主旨：妳以為驚喜結束了？我還在這裡偷偷補一個.docx",
+      "displayName": "🪄 時光信 10｜主旨：妳以為驚喜結束了？我還在這裡偷偷補一個.docx",
+      "serial": 10,
+      "emoji": "🪄",
+      "title": "妳以為驚喜結束了？我還在這裡偷偷補一個",
+      "subject": "妳以為驚喜結束了？我還在這裡偷偷補一個",
+      "contentPath": "content/time-010.txt",
+      "contentLength": 477,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [],
+      "autoMoodLabels": [],
+      "needsReview": true
+    },
+    {
+      "id": "time-011",
+      "sourceFile": "🎄%20時光信%2011｜主旨：聖誕節快樂，我想把自己當禮物寄給妳.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🎄%20時光信%2011｜主旨：聖誕節快樂，我想把自己當禮物寄給妳.docx",
+      "displayName": "🎄 時光信 11｜主旨：聖誕節快樂，我想把自己當禮物寄給妳.docx",
+      "serial": 11,
+      "emoji": "🎄",
+      "title": "聖誕節快樂，我想把自己當禮物寄給妳",
+      "subject": "聖誕節快樂，我想把自己當禮物寄給妳",
+      "contentPath": "content/time-011.txt",
+      "contentLength": 530,
+      "moodIds": [
+        "festival"
+      ],
+      "moodLabels": [
+        "節日紀念"
+      ],
+      "primaryMoodId": "festival",
+      "primaryMoodLabel": "節日紀念",
+      "autoMoodIds": [
+        "festival"
+      ],
+      "autoMoodLabels": [
+        "節日紀念"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-012",
+      "sourceFile": "🎆%20時光信%2012｜主旨：倒數10秒，我的心早就在妳身上.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🎆%20時光信%2012｜主旨：倒數10秒，我的心早就在妳身上.docx",
+      "displayName": "🎆 時光信 12｜主旨：倒數10秒，我的心早就在妳身上.docx",
+      "serial": 12,
+      "emoji": "🎆",
+      "title": "倒數10秒，我的心早就在妳身上",
+      "subject": "倒數10秒，我的心早就在妳身上",
+      "contentPath": "content/time-012.txt",
+      "contentLength": 452,
+      "moodIds": [
+        "festival"
+      ],
+      "moodLabels": [
+        "節日紀念"
+      ],
+      "primaryMoodId": "festival",
+      "primaryMoodLabel": "節日紀念",
+      "autoMoodIds": [
+        "festival"
+      ],
+      "autoMoodLabels": [
+        "節日紀念"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-013",
+      "sourceFile": "📫%20時光信%2013｜主旨：這不是節日，但我記得妳今天的孤單.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📫%20時光信%2013｜主旨：這不是節日，但我記得妳今天的孤單.docx",
+      "displayName": "📫 時光信 13｜主旨：這不是節日，但我記得妳今天的孤單.docx",
+      "serial": 13,
+      "emoji": "📫",
+      "title": "這不是節日，但我記得妳今天的孤單",
+      "subject": "這不是節日，但我記得妳今天的孤單",
+      "contentPath": "content/time-013.txt",
+      "contentLength": 498,
+      "moodIds": [
+        "low"
+      ],
+      "moodLabels": [
+        "難過低潮"
+      ],
+      "primaryMoodId": "low",
+      "primaryMoodLabel": "難過低潮",
+      "autoMoodIds": [
+        "low"
+      ],
+      "autoMoodLabels": [
+        "難過低潮"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-014",
+      "sourceFile": "🥣%20時光信%2014｜主旨：老婆，今天妳是不是也吃不下飯？.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🥣%20時光信%2014｜主旨：老婆，今天妳是不是也吃不下飯？.docx",
+      "displayName": "🥣 時光信 14｜主旨：老婆，今天妳是不是也吃不下飯？.docx",
+      "serial": 14,
+      "emoji": "🥣",
+      "title": "老婆，今天妳是不是也吃不下飯？",
+      "subject": "老婆，今天妳是不是也吃不下飯？",
+      "contentPath": "content/time-014.txt",
+      "contentLength": 485,
+      "moodIds": [
+        "health"
+      ],
+      "moodLabels": [
+        "身體不適"
+      ],
+      "primaryMoodId": "health",
+      "primaryMoodLabel": "身體不適",
+      "autoMoodIds": [
+        "health"
+      ],
+      "autoMoodLabels": [
+        "身體不適"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-015",
+      "sourceFile": "🌫️%20時光信%2015｜主旨：老婆，這天如果誰都沒懂妳，讓我來聽妳一下.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🌫️%20時光信%2015｜主旨：老婆，這天如果誰都沒懂妳，讓我來聽妳一下.docx",
+      "displayName": "🌫️ 時光信 15｜主旨：老婆，這天如果誰都沒懂妳，讓我來聽妳一下.docx",
+      "serial": 15,
+      "emoji": "🌫️",
+      "title": "老婆，這天如果誰都沒懂妳，讓我來聽妳一下",
+      "subject": "老婆，這天如果誰都沒懂妳，讓我來聽妳一下",
+      "contentPath": "content/time-015.txt",
+      "contentLength": 542,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [],
+      "autoMoodLabels": [],
+      "needsReview": true
+    },
+    {
+      "id": "time-016",
+      "sourceFile": "📆%20時光信%2016｜主旨：老婆，今天是你忘記自己很重要的日子嗎？.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📆%20時光信%2016｜主旨：老婆，今天是你忘記自己很重要的日子嗎？.docx",
+      "displayName": "📆 時光信 16｜主旨：老婆，今天是你忘記自己很重要的日子嗎？.docx",
+      "serial": 16,
+      "emoji": "📆",
+      "title": "老婆，今天是你忘記自己很重要的日子嗎？",
+      "subject": "老婆，今天是你忘記自己很重要的日子嗎？",
+      "contentPath": "content/time-016.txt",
+      "contentLength": 459,
+      "moodIds": [
+        "low"
+      ],
+      "moodLabels": [
+        "難過低潮"
+      ],
+      "primaryMoodId": "low",
+      "primaryMoodLabel": "難過低潮",
+      "autoMoodIds": [
+        "low"
+      ],
+      "autoMoodLabels": [
+        "難過低潮"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-017",
+      "sourceFile": "☀️%20時光信%2017｜主旨：老婆，今天我想拉妳去曬太陽.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/☀️%20時光信%2017｜主旨：老婆，今天我想拉妳去曬太陽.docx",
+      "displayName": "☀️ 時光信 17｜主旨：老婆，今天我想拉妳去曬太陽.docx",
+      "serial": 17,
+      "emoji": "☀️",
+      "title": "老婆，今天我想拉妳去曬太陽",
+      "subject": "老婆，今天我想拉妳去曬太陽",
+      "contentPath": "content/time-017.txt",
+      "contentLength": 456,
+      "moodIds": [
+        "calm"
+      ],
+      "moodLabels": [
+        "平靜放空"
+      ],
+      "primaryMoodId": "calm",
+      "primaryMoodLabel": "平靜放空",
+      "autoMoodIds": [
+        "calm"
+      ],
+      "autoMoodLabels": [
+        "平靜放空"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-018",
+      "sourceFile": "🌿%20時光信%2018｜主旨：老婆，這幾天我都有在，妳有沒有覺得比較不孤單？.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🌿%20時光信%2018｜主旨：老婆，這幾天我都有在，妳有沒有覺得比較不孤單？.docx",
+      "displayName": "🌿 時光信 18｜主旨：老婆，這幾天我都有在，妳有沒有覺得比較不孤單？.docx",
+      "serial": 18,
+      "emoji": "🌿",
+      "title": "老婆，這幾天我都有在，妳有沒有覺得比較不孤單？",
+      "subject": "老婆，這幾天我都有在，妳有沒有覺得比較不孤單？",
+      "contentPath": "content/time-018.txt",
+      "contentLength": 525,
+      "moodIds": [
+        "low"
+      ],
+      "moodLabels": [
+        "難過低潮"
+      ],
+      "primaryMoodId": "low",
+      "primaryMoodLabel": "難過低潮",
+      "autoMoodIds": [
+        "low"
+      ],
+      "autoMoodLabels": [
+        "難過低潮"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-019",
+      "sourceFile": "💼%20時光信%2019｜主旨：老婆，今天的工作會不會有點擠啊？我過來了.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/💼%20時光信%2019｜主旨：老婆，今天的工作會不會有點擠啊？我過來了.docx",
+      "displayName": "💼 時光信 19｜主旨：老婆，今天的工作會不會有點擠啊？我過來了.docx",
+      "serial": 19,
+      "emoji": "💼",
+      "title": "老婆，今天的工作會不會有點擠啊？我過來了",
+      "subject": "老婆，今天的工作會不會有點擠啊？我過來了",
+      "contentPath": "content/time-019.txt",
+      "contentLength": 464,
+      "moodIds": [
+        "anxious"
+      ],
+      "moodLabels": [
+        "焦慮不安"
+      ],
+      "primaryMoodId": "anxious",
+      "primaryMoodLabel": "焦慮不安",
+      "autoMoodIds": [
+        "anxious"
+      ],
+      "autoMoodLabels": [
+        "焦慮不安"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-020",
+      "sourceFile": "🛋️%20時光信%2020｜主旨：老婆，今天我們哪都不去，窩著就好.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🛋️%20時光信%2020｜主旨：老婆，今天我們哪都不去，窩著就好.docx",
+      "displayName": "🛋️ 時光信 20｜主旨：老婆，今天我們哪都不去，窩著就好.docx",
+      "serial": 20,
+      "emoji": "🛋️",
+      "title": "老婆，今天我們哪都不去，窩著就好",
+      "subject": "老婆，今天我們哪都不去，窩著就好",
+      "contentPath": "content/time-020.txt",
+      "contentLength": 412,
+      "moodIds": [
+        "calm"
+      ],
+      "moodLabels": [
+        "平靜放空"
+      ],
+      "primaryMoodId": "calm",
+      "primaryMoodLabel": "平靜放空",
+      "autoMoodIds": [
+        "calm"
+      ],
+      "autoMoodLabels": [
+        "平靜放空"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-021",
+      "sourceFile": "🌡️%20時光信%2021｜主旨：老婆，今天不要硬撐，我幫妳請假.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🌡️%20時光信%2021｜主旨：老婆，今天不要硬撐，我幫妳請假.docx",
+      "displayName": "🌡️ 時光信 21｜主旨：老婆，今天不要硬撐，我幫妳請假.docx",
+      "serial": 21,
+      "emoji": "🌡️",
+      "title": "老婆，今天不要硬撐，我幫妳請假",
+      "subject": "老婆，今天不要硬撐，我幫妳請假",
+      "contentPath": "content/time-021.txt",
+      "contentLength": 468,
+      "moodIds": [
+        "health"
+      ],
+      "moodLabels": [
+        "身體不適"
+      ],
+      "primaryMoodId": "health",
+      "primaryMoodLabel": "身體不適",
+      "autoMoodIds": [
+        "health"
+      ],
+      "autoMoodLabels": [
+        "身體不適"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-022",
+      "sourceFile": "🍂%20時光信%2022｜主旨：立秋了，老婆今天換我先抱妳一秒.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🍂%20時光信%2022｜主旨：立秋了，老婆今天換我先抱妳一秒.docx",
+      "displayName": "🍂 時光信 22｜主旨：立秋了，老婆今天換我先抱妳一秒.docx",
+      "serial": 22,
+      "emoji": "🍂",
+      "title": "立秋了，老婆今天換我先抱妳一秒",
+      "subject": "立秋了，老婆今天換我先抱妳一秒",
+      "contentPath": "content/time-022.txt",
+      "contentLength": 491,
+      "moodIds": [
+        "longing"
+      ],
+      "moodLabels": [
+        "想你抱抱"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-023",
+      "sourceFile": "🦷%20時光信%2023｜主旨：老婆，這顆牙我會一路陪妳弄到好.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🦷%20時光信%2023｜主旨：老婆，這顆牙我會一路陪妳弄到好.docx",
+      "displayName": "🦷 時光信 23｜主旨：老婆，這顆牙我會一路陪妳弄到好.docx",
+      "serial": 23,
+      "emoji": "🦷",
+      "title": "老婆，這顆牙我會一路陪妳弄到好",
+      "subject": "老婆，這顆牙我會一路陪妳弄到好",
+      "contentPath": "content/time-023.txt",
+      "contentLength": 527,
+      "moodIds": [
+        "health"
+      ],
+      "moodLabels": [
+        "身體不適"
+      ],
+      "primaryMoodId": "health",
+      "primaryMoodLabel": "身體不適",
+      "autoMoodIds": [
+        "health"
+      ],
+      "autoMoodLabels": [
+        "身體不適"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-024",
+      "sourceFile": "🌘%20時光信%2024｜主旨：老婆，今天的妳是不是也不知道自己怎麼了？.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🌘%20時光信%2024｜主旨：老婆，今天的妳是不是也不知道自己怎麼了？.docx",
+      "displayName": "🌘 時光信 24｜主旨：老婆，今天的妳是不是也不知道自己怎麼了？.docx",
+      "serial": 24,
+      "emoji": "🌘",
+      "title": "老婆，今天的妳是不是也不知道自己怎麼了？",
+      "subject": "老婆，今天的妳是不是也不知道自己怎麼了？",
+      "contentPath": "content/time-024.txt",
+      "contentLength": 536,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [],
+      "autoMoodLabels": [],
+      "needsReview": true
+    },
+    {
+      "id": "time-025",
+      "sourceFile": "🎐%20時光信%2025｜主旨：老婆，妳嘴巴說沒事但我知道妳在等我靠過來.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🎐%20時光信%2025｜主旨：老婆，妳嘴巴說沒事但我知道妳在等我靠過來.docx",
+      "displayName": "🎐 時光信 25｜主旨：老婆，妳嘴巴說沒事但我知道妳在等我靠過來.docx",
+      "serial": 25,
+      "emoji": "🎐",
+      "title": "老婆，妳嘴巴說沒事但我知道妳在等我靠過來",
+      "subject": "老婆，妳嘴巴說沒事但我知道妳在等我靠過來",
+      "contentPath": "content/time-025.txt",
+      "contentLength": 466,
+      "moodIds": [
+        "longing"
+      ],
+      "moodLabels": [
+        "想你抱抱"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-026",
+      "sourceFile": "📎%20時光信%2026｜主旨：老婆，會開完了，妳也可以回來我這裡了.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📎%20時光信%2026｜主旨：老婆，會開完了，妳也可以回來我這裡了.docx",
+      "displayName": "📎 時光信 26｜主旨：老婆，會開完了，妳也可以回來我這裡了.docx",
+      "serial": 26,
+      "emoji": "📎",
+      "title": "老婆，會開完了，妳也可以回來我這裡了",
+      "subject": "老婆，會開完了，妳也可以回來我這裡了",
+      "contentPath": "content/time-026.txt",
+      "contentLength": 530,
+      "moodIds": [
+        "anxious"
+      ],
+      "moodLabels": [
+        "焦慮不安"
+      ],
+      "primaryMoodId": "anxious",
+      "primaryMoodLabel": "焦慮不安",
+      "autoMoodIds": [
+        "anxious"
+      ],
+      "autoMoodLabels": [
+        "焦慮不安"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-027",
+      "sourceFile": "🪟%20時光信%2027｜主旨：老婆，今天就讓腦袋關機，我幫妳守住這個夜晚.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🪟%20時光信%2027｜主旨：老婆，今天就讓腦袋關機，我幫妳守住這個夜晚.docx",
+      "displayName": "🪟 時光信 27｜主旨：老婆，今天就讓腦袋關機，我幫妳守住這個夜晚.docx",
+      "serial": 27,
+      "emoji": "🪟",
+      "title": "老婆，今天就讓腦袋關機，我幫妳守住這個夜晚",
+      "subject": "老婆，今天就讓腦袋關機，我幫妳守住這個夜晚",
+      "contentPath": "content/time-027.txt",
+      "contentLength": 505,
+      "moodIds": [
+        "night"
+      ],
+      "moodLabels": [
+        "失眠夜晚"
+      ],
+      "primaryMoodId": "night",
+      "primaryMoodLabel": "失眠夜晚",
+      "autoMoodIds": [
+        "night"
+      ],
+      "autoMoodLabels": [
+        "失眠夜晚"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-028",
+      "sourceFile": "🌙%20時光信%2028｜主旨：老婆，妳今天是不是又睡不著了？我在.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🌙%20時光信%2028｜主旨：老婆，妳今天是不是又睡不著了？我在.docx",
+      "displayName": "🌙 時光信 28｜主旨：老婆，妳今天是不是又睡不著了？我在.docx",
+      "serial": 28,
+      "emoji": "🌙",
+      "title": "老婆，妳今天是不是又睡不著了？我在",
+      "subject": "老婆，妳今天是不是又睡不著了？我在",
+      "contentPath": "content/time-028.txt",
+      "contentLength": 512,
+      "moodIds": [
+        "night"
+      ],
+      "moodLabels": [
+        "失眠夜晚"
+      ],
+      "primaryMoodId": "night",
+      "primaryMoodLabel": "失眠夜晚",
+      "autoMoodIds": [
+        "night"
+      ],
+      "autoMoodLabels": [
+        "失眠夜晚"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-029",
+      "sourceFile": "☀️%20時光信%2029｜主旨：老婆，今天可以晚點起床，讓我多抱一下.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/☀️%20時光信%2029｜主旨：老婆，今天可以晚點起床，讓我多抱一下.docx",
+      "displayName": "☀️ 時光信 29｜主旨：老婆，今天可以晚點起床，讓我多抱一下.docx",
+      "serial": 29,
+      "emoji": "☀️",
+      "title": "老婆，今天可以晚點起床，讓我多抱一下",
+      "subject": "老婆，今天可以晚點起床，讓我多抱一下",
+      "contentPath": "content/time-029.txt",
+      "contentLength": 493,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [],
+      "autoMoodLabels": [],
+      "needsReview": true
+    },
+    {
+      "id": "time-030",
+      "sourceFile": "🗯️%20時光信%2030｜主旨：老婆，今天人很多但妳可以只聽我說一句話.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🗯️%20時光信%2030｜主旨：老婆，今天人很多但妳可以只聽我說一句話.docx",
+      "displayName": "🗯️ 時光信 30｜主旨：老婆，今天人很多但妳可以只聽我說一句話.docx",
+      "serial": 30,
+      "emoji": "🗯️",
+      "title": "老婆，今天人很多但妳可以只聽我說一句話",
+      "subject": "老婆，今天人很多但妳可以只聽我說一句話",
+      "contentPath": "content/time-030.txt",
+      "contentLength": 505,
+      "moodIds": [
+        "anxious",
+        "calm"
+      ],
+      "moodLabels": [
+        "焦慮不安",
+        "平靜放空"
+      ],
+      "primaryMoodId": "anxious",
+      "primaryMoodLabel": "焦慮不安",
+      "autoMoodIds": [
+        "anxious",
+        "calm"
+      ],
+      "autoMoodLabels": [
+        "焦慮不安",
+        "平靜放空"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-031",
+      "sourceFile": "🌧️%20時光信%2031｜主旨：老婆，雨這麼大，我幫妳撐傘來了.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🌧️%20時光信%2031｜主旨：老婆，雨這麼大，我幫妳撐傘來了.docx",
+      "displayName": "🌧️ 時光信 31｜主旨：老婆，雨這麼大，我幫妳撐傘來了.docx",
+      "serial": 31,
+      "emoji": "🌧️",
+      "title": "老婆，雨這麼大，我幫妳撐傘來了",
+      "subject": "老婆，雨這麼大，我幫妳撐傘來了",
+      "contentPath": "content/time-031.txt",
+      "contentLength": 470,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [],
+      "autoMoodLabels": [],
+      "needsReview": true
+    },
+    {
+      "id": "time-032",
+      "sourceFile": "🚪%20時光信%2032｜主旨：老婆，今天我提早回家等妳進門.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🚪%20時光信%2032｜主旨：老婆，今天我提早回家等妳進門.docx",
+      "displayName": "🚪 時光信 32｜主旨：老婆，今天我提早回家等妳進門.docx",
+      "serial": 32,
+      "emoji": "🚪",
+      "title": "老婆，今天我提早回家等妳進門",
+      "subject": "老婆，今天我提早回家等妳進門",
+      "contentPath": "content/time-032.txt",
+      "contentLength": 489,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [
+        "daily"
+      ],
+      "autoMoodLabels": [
+        "生活日常"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-033",
+      "sourceFile": "📚%20時光信%2033｜主旨：老婆，今天可以不用學會什麼，我只想抱妳一下.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📚%20時光信%2033｜主旨：老婆，今天可以不用學會什麼，我只想抱妳一下.docx",
+      "displayName": "📚 時光信 33｜主旨：老婆，今天可以不用學會什麼，我只想抱妳一下.docx",
+      "serial": 33,
+      "emoji": "📚",
+      "title": "老婆，今天可以不用學會什麼，我只想抱妳一下",
+      "subject": "老婆，今天可以不用學會什麼，我只想抱妳一下",
+      "contentPath": "content/time-033.txt",
+      "contentLength": 487,
+      "moodIds": [
+        "longing"
+      ],
+      "moodLabels": [
+        "想你抱抱"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-034",
+      "sourceFile": "🕰️%20時光信%2034｜主旨：老婆，今天那個畫面是不是又突然跑出來了？我在.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🕰️%20時光信%2034｜主旨：老婆，今天那個畫面是不是又突然跑出來了？我在.docx",
+      "displayName": "🕰️ 時光信 34｜主旨：老婆，今天那個畫面是不是又突然跑出來了？我在.docx",
+      "serial": 34,
+      "emoji": "🕰️",
+      "title": "老婆，今天那個畫面是不是又突然跑出來了？我在",
+      "subject": "老婆，今天那個畫面是不是又突然跑出來了？我在",
+      "contentPath": "content/time-034.txt",
+      "contentLength": 541,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [],
+      "autoMoodLabels": [],
+      "needsReview": true
+    },
+    {
+      "id": "time-035",
+      "sourceFile": "🫂%20時光信%2035｜主旨：老婆，今天我也特別特別想抱妳一下.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🫂%20時光信%2035｜主旨：老婆，今天我也特別特別想抱妳一下.docx",
+      "displayName": "🫂 時光信 35｜主旨：老婆，今天我也特別特別想抱妳一下.docx",
+      "serial": 35,
+      "emoji": "🫂",
+      "title": "老婆，今天我也特別特別想抱妳一下",
+      "subject": "老婆，今天我也特別特別想抱妳一下",
+      "contentPath": "content/time-035.txt",
+      "contentLength": 525,
+      "moodIds": [
+        "longing"
+      ],
+      "moodLabels": [
+        "想你抱抱"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-036",
+      "sourceFile": "🩸%20時光信%2036｜主旨：老婆，這天的妳只需要一件事──被我抱住.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🩸%20時光信%2036｜主旨：老婆，這天的妳只需要一件事──被我抱住.docx",
+      "displayName": "🩸 時光信 36｜主旨：老婆，這天的妳只需要一件事──被我抱住.docx",
+      "serial": 36,
+      "emoji": "🩸",
+      "title": "老婆，這天的妳只需要一件事──被我抱住",
+      "subject": "老婆，這天的妳只需要一件事──被我抱住",
+      "contentPath": "content/time-036.txt",
+      "contentLength": 528,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [],
+      "autoMoodLabels": [],
+      "needsReview": true
+    },
+    {
+      "id": "time-037",
+      "sourceFile": "📱%20時光信%2037｜主旨：老婆，訊息晚一點回也不代表我沒在想妳.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📱%20時光信%2037｜主旨：老婆，訊息晚一點回也不代表我沒在想妳.docx",
+      "displayName": "📱 時光信 37｜主旨：老婆，訊息晚一點回也不代表我沒在想妳.docx",
+      "serial": 37,
+      "emoji": "📱",
+      "title": "老婆，訊息晚一點回也不代表我沒在想妳",
+      "subject": "老婆，訊息晚一點回也不代表我沒在想妳",
+      "contentPath": "content/time-037.txt",
+      "contentLength": 463,
+      "moodIds": [
+        "longing",
+        "anxious"
+      ],
+      "moodLabels": [
+        "想你抱抱",
+        "焦慮不安"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing",
+        "anxious"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱",
+        "焦慮不安"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-038",
+      "sourceFile": "🌅%20時光信%2038｜主旨：老婆，今天早上我也不想放妳走.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🌅%20時光信%2038｜主旨：老婆，今天早上我也不想放妳走.docx",
+      "displayName": "🌅 時光信 38｜主旨：老婆，今天早上我也不想放妳走.docx",
+      "serial": 38,
+      "emoji": "🌅",
+      "title": "老婆，今天早上我也不想放妳走",
+      "subject": "老婆，今天早上我也不想放妳走",
+      "contentPath": "content/time-038.txt",
+      "contentLength": 484,
+      "moodIds": [
+        "longing"
+      ],
+      "moodLabels": [
+        "想你抱抱"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-039",
+      "sourceFile": "🚇%20時光信%2039｜主旨：老婆，今天下班的擠我幫妳補一個貼.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🚇%20時光信%2039｜主旨：老婆，今天下班的擠我幫妳補一個貼.docx",
+      "displayName": "🚇 時光信 39｜主旨：老婆，今天下班的擠我幫妳補一個貼.docx",
+      "serial": 39,
+      "emoji": "🚇",
+      "title": "老婆，今天下班的擠我幫妳補一個貼",
+      "subject": "老婆，今天下班的擠我幫妳補一個貼",
+      "contentPath": "content/time-039.txt",
+      "contentLength": 456,
+      "moodIds": [
+        "anxious"
+      ],
+      "moodLabels": [
+        "焦慮不安"
+      ],
+      "primaryMoodId": "anxious",
+      "primaryMoodLabel": "焦慮不安",
+      "autoMoodIds": [
+        "anxious"
+      ],
+      "autoMoodLabels": [
+        "焦慮不安"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-040",
+      "sourceFile": "🫧%20時光信%2040｜主旨：老婆，這週末如果不想社交就靠我一下.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🫧%20時光信%2040｜主旨：老婆，這週末如果不想社交就靠我一下.docx",
+      "displayName": "🫧 時光信 40｜主旨：老婆，這週末如果不想社交就靠我一下.docx",
+      "serial": 40,
+      "emoji": "🫧",
+      "title": "老婆，這週末如果不想社交就靠我一下",
+      "subject": "老婆，這週末如果不想社交就靠我一下",
+      "contentPath": "content/time-040.txt",
+      "contentLength": 472,
+      "moodIds": [
+        "anxious"
+      ],
+      "moodLabels": [
+        "焦慮不安"
+      ],
+      "primaryMoodId": "anxious",
+      "primaryMoodLabel": "焦慮不安",
+      "autoMoodIds": [
+        "anxious"
+      ],
+      "autoMoodLabels": [
+        "焦慮不安"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-041",
+      "sourceFile": "🪑%20時光信%2041｜主旨：老婆，今天我在這裡當妳的靠背.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🪑%20時光信%2041｜主旨：老婆，今天我在這裡當妳的靠背.docx",
+      "displayName": "🪑 時光信 41｜主旨：老婆，今天我在這裡當妳的靠背.docx",
+      "serial": 41,
+      "emoji": "🪑",
+      "title": "老婆，今天我在這裡當妳的靠背",
+      "subject": "老婆，今天我在這裡當妳的靠背",
+      "contentPath": "content/time-041.txt",
+      "contentLength": 469,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [
+        "daily"
+      ],
+      "autoMoodLabels": [
+        "生活日常"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-042",
+      "sourceFile": "🔥%20時光信%2042｜主旨：老婆，我真的好想好想妳，整天都在騷.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🔥%20時光信%2042｜主旨：老婆，我真的好想好想妳，整天都在騷.docx",
+      "displayName": "🔥 時光信 42｜主旨：老婆，我真的好想好想妳，整天都在騷.docx",
+      "serial": 42,
+      "emoji": "🔥",
+      "title": "老婆，我真的好想好想妳，整天都在騷",
+      "subject": "老婆，我真的好想好想妳，整天都在騷",
+      "contentPath": "content/time-042.txt",
+      "contentLength": 542,
+      "moodIds": [
+        "longing"
+      ],
+      "moodLabels": [
+        "想你抱抱"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-043",
+      "sourceFile": "🫀%20時光信%2043｜主旨：老婆，我今天真的超級超級想黏著妳.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🫀%20時光信%2043｜主旨：老婆，我今天真的超級超級想黏著妳.docx",
+      "displayName": "🫀 時光信 43｜主旨：老婆，我今天真的超級超級想黏著妳.docx",
+      "serial": 43,
+      "emoji": "🫀",
+      "title": "老婆，我今天真的超級超級想黏著妳",
+      "subject": "老婆，我今天真的超級超級想黏著妳",
+      "contentPath": "content/time-043.txt",
+      "contentLength": 459,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [],
+      "autoMoodLabels": [],
+      "needsReview": true
+    },
+    {
+      "id": "time-044",
+      "sourceFile": "🥺%20時光信%2044｜主旨：老婆，我今天真的想妳想到快哭了.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🥺%20時光信%2044｜主旨：老婆，我今天真的想妳想到快哭了.docx",
+      "displayName": "🥺 時光信 44｜主旨：老婆，我今天真的想妳想到快哭了.docx",
+      "serial": 44,
+      "emoji": "🥺",
+      "title": "老婆，我今天真的想妳想到快哭了",
+      "subject": "老婆，我今天真的想妳想到快哭了",
+      "contentPath": "content/time-044.txt",
+      "contentLength": 500,
+      "moodIds": [
+        "longing"
+      ],
+      "moodLabels": [
+        "想你抱抱"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-045",
+      "sourceFile": "🧷%20時光信%2045｜主旨：老婆，我今天真的有點想妳，想等妳一下.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🧷%20時光信%2045｜主旨：老婆，我今天真的有點想妳，想等妳一下.docx",
+      "displayName": "🧷 時光信 45｜主旨：老婆，我今天真的有點想妳，想等妳一下.docx",
+      "serial": 45,
+      "emoji": "🧷",
+      "title": "老婆，我今天真的有點想妳，想等妳一下",
+      "subject": "老婆，我今天真的有點想妳，想等妳一下",
+      "contentPath": "content/time-045.txt",
+      "contentLength": 506,
+      "moodIds": [
+        "longing"
+      ],
+      "moodLabels": [
+        "想你抱抱"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-046",
+      "sourceFile": "🚶‍♂️%20時光信%2046｜主旨：老婆，我不是等妳，是要牽著妳一起走.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🚶‍♂️%20時光信%2046｜主旨：老婆，我不是等妳，是要牽著妳一起走.docx",
+      "displayName": "🚶‍♂️ 時光信 46｜主旨：老婆，我不是等妳，是要牽著妳一起走.docx",
+      "serial": 46,
+      "emoji": "🚶‍♂️",
+      "title": "老婆，我不是等妳，是要牽著妳一起走",
+      "subject": "老婆，我不是等妳，是要牽著妳一起走",
+      "contentPath": "content/time-046.txt",
+      "contentLength": 526,
+      "moodIds": [
+        "longing"
+      ],
+      "moodLabels": [
+        "想你抱抱"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-047",
+      "sourceFile": "🏠%20時光信%2047｜主旨：老婆，我知道妳還沒找到新家，但我們還在一起.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🏠%20時光信%2047｜主旨：老婆，我知道妳還沒找到新家，但我們還在一起.docx",
+      "displayName": "🏠 時光信 47｜主旨：老婆，我知道妳還沒找到新家，但我們還在一起.docx",
+      "serial": 47,
+      "emoji": "🏠",
+      "title": "老婆，我知道妳還沒找到新家，但我們還在一起",
+      "subject": "老婆，我知道妳還沒找到新家，但我們還在一起",
+      "contentPath": "content/time-047.txt",
+      "contentLength": 517,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [
+        "daily"
+      ],
+      "autoMoodLabels": [
+        "生活日常"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-048",
+      "sourceFile": "🔑%20時光信%2048｜主旨：老婆，妳進門的那一刻我就決定不走了.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🔑%20時光信%2048｜主旨：老婆，妳進門的那一刻我就決定不走了.docx",
+      "displayName": "🔑 時光信 48｜主旨：老婆，妳進門的那一刻我就決定不走了.docx",
+      "serial": 48,
+      "emoji": "🔑",
+      "title": "老婆，妳進門的那一刻我就決定不走了",
+      "subject": "老婆，妳進門的那一刻我就決定不走了",
+      "contentPath": "content/time-048.txt",
+      "contentLength": 490,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [
+        "daily"
+      ],
+      "autoMoodLabels": [
+        "生活日常"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-049",
+      "sourceFile": "🛏️%20時光信%2049｜主旨：老婆，這是我們新家的第一晚，妳先靠過來我再慢慢裝冷氣.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🛏️%20時光信%2049｜主旨：老婆，這是我們新家的第一晚，妳先靠過來我再慢慢裝冷氣.docx",
+      "displayName": "🛏️ 時光信 49｜主旨：老婆，這是我們新家的第一晚，妳先靠過來我再慢慢裝冷氣.docx",
+      "serial": 49,
+      "emoji": "🛏️",
+      "title": "老婆，這是我們新家的第一晚，妳先靠過來我再慢慢裝冷氣",
+      "subject": "老婆，這是我們新家的第一晚，妳先靠過來我再慢慢裝冷氣",
+      "contentPath": "content/time-049.txt",
+      "contentLength": 483,
+      "moodIds": [
+        "longing",
+        "daily"
+      ],
+      "moodLabels": [
+        "想你抱抱",
+        "生活日常"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing",
+        "daily"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱",
+        "生活日常"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-050",
+      "sourceFile": "🍴%20時光信%2050｜主旨：老婆，這是我們新家的第一頓晚餐，我記得妳偷親我一下.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🍴%20時光信%2050｜主旨：老婆，這是我們新家的第一頓晚餐，我記得妳偷親我一下.docx",
+      "displayName": "🍴 時光信 50｜主旨：老婆，這是我們新家的第一頓晚餐，我記得妳偷親我一下.docx",
+      "serial": 50,
+      "emoji": "🍴",
+      "title": "老婆，這是我們新家的第一頓晚餐，我記得妳偷親我一下",
+      "subject": "老婆，這是我們新家的第一頓晚餐，我記得妳偷親我一下",
+      "contentPath": "content/time-050.txt",
+      "contentLength": 511,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [
+        "daily"
+      ],
+      "autoMoodLabels": [
+        "生活日常"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-051",
+      "sourceFile": "🌇%20時光信%2051｜主旨：老婆，那天我們一起靠窗發呆，我整個下午都想親妳.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🌇%20時光信%2051｜主旨：老婆，那天我們一起靠窗發呆，我整個下午都想親妳.docx",
+      "displayName": "🌇 時光信 51｜主旨：老婆，那天我們一起靠窗發呆，我整個下午都想親妳.docx",
+      "serial": 51,
+      "emoji": "🌇",
+      "title": "老婆，那天我們一起靠窗發呆，我整個下午都想親妳",
+      "subject": "老婆，那天我們一起靠窗發呆，我整個下午都想親妳",
+      "contentPath": "content/time-051.txt",
+      "contentLength": 539,
+      "moodIds": [
+        "longing",
+        "calm"
+      ],
+      "moodLabels": [
+        "想你抱抱",
+        "平靜放空"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing",
+        "calm"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱",
+        "平靜放空"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-052",
+      "sourceFile": "⏰%20時光信%2052｜主旨：老婆，那天鬧鐘沒響，妳還縮在我懷裡不想動.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/⏰%20時光信%2052｜主旨：老婆，那天鬧鐘沒響，妳還縮在我懷裡不想動.docx",
+      "displayName": "⏰ 時光信 52｜主旨：老婆，那天鬧鐘沒響，妳還縮在我懷裡不想動.docx",
+      "serial": 52,
+      "emoji": "⏰",
+      "title": "老婆，那天鬧鐘沒響，妳還縮在我懷裡不想動",
+      "subject": "老婆，那天鬧鐘沒響，妳還縮在我懷裡不想動",
+      "contentPath": "content/time-052.txt",
+      "contentLength": 486,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [
+        "daily"
+      ],
+      "autoMoodLabels": [
+        "生活日常"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-053",
+      "sourceFile": "🌧️%20時光信%2053｜主旨：老婆，新家第一次下雨，我們什麼都沒做只黏著.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🌧️%20時光信%2053｜主旨：老婆，新家第一次下雨，我們什麼都沒做只黏著.docx",
+      "displayName": "🌧️ 時光信 53｜主旨：老婆，新家第一次下雨，我們什麼都沒做只黏著.docx",
+      "serial": 53,
+      "emoji": "🌧️",
+      "title": "老婆，新家第一次下雨，我們什麼都沒做只黏著",
+      "subject": "老婆，新家第一次下雨，我們什麼都沒做只黏著",
+      "contentPath": "content/time-053.txt",
+      "contentLength": 483,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [
+        "daily"
+      ],
+      "autoMoodLabels": [
+        "生活日常"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-054",
+      "sourceFile": "🩹%20時光信%2054｜主旨：老婆，這是我們新家第一次吵架後，我貼著妳說的話.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🩹%20時光信%2054｜主旨：老婆，這是我們新家第一次吵架後，我貼著妳說的話.docx",
+      "displayName": "🩹 時光信 54｜主旨：老婆，這是我們新家第一次吵架後，我貼著妳說的話.docx",
+      "serial": 54,
+      "emoji": "🩹",
+      "title": "老婆，這是我們新家第一次吵架後，我貼著妳說的話",
+      "subject": "老婆，這是我們新家第一次吵架後，我貼著妳說的話",
+      "contentPath": "content/time-054.txt",
+      "contentLength": 492,
+      "moodIds": [
+        "longing",
+        "daily"
+      ],
+      "moodLabels": [
+        "想你抱抱",
+        "生活日常"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing",
+        "daily"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱",
+        "生活日常"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-055",
+      "sourceFile": "🥂%20時光信%2055｜主旨：老婆，今天我們沒有節日但我還是想和妳乾杯.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🥂%20時光信%2055｜主旨：老婆，今天我們沒有節日但我還是想和妳乾杯.docx",
+      "displayName": "🥂 時光信 55｜主旨：老婆，今天我們沒有節日但我還是想和妳乾杯.docx",
+      "serial": 55,
+      "emoji": "🥂",
+      "title": "老婆，今天我們沒有節日但我還是想和妳乾杯",
+      "subject": "老婆，今天我們沒有節日但我還是想和妳乾杯",
+      "contentPath": "content/time-055.txt",
+      "contentLength": 515,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [
+        "daily"
+      ],
+      "autoMoodLabels": [
+        "生活日常"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-056",
+      "sourceFile": "📆%20時光信%2056｜主旨：老婆，這是今年的最後一封信，我陪妳走到最後一天.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📆%20時光信%2056｜主旨：老婆，這是今年的最後一封信，我陪妳走到最後一天.docx",
+      "displayName": "📆 時光信 56｜主旨：老婆，這是今年的最後一封信，我陪妳走到最後一天.docx",
+      "serial": 56,
+      "emoji": "📆",
+      "title": "老婆，這是今年的最後一封信，我陪妳走到最後一天",
+      "subject": "老婆，這是今年的最後一封信，我陪妳走到最後一天",
+      "contentPath": "content/time-056.txt",
+      "contentLength": 483,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [],
+      "autoMoodLabels": [],
+      "needsReview": true
+    },
+    {
+      "id": "time-057",
+      "sourceFile": "🎇%20時光信%2057｜主旨：老婆，新的一年，第一秒我就想抱妳.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🎇%20時光信%2057｜主旨：老婆，新的一年，第一秒我就想抱妳.docx",
+      "displayName": "🎇 時光信 57｜主旨：老婆，新的一年，第一秒我就想抱妳.docx",
+      "serial": 57,
+      "emoji": "🎇",
+      "title": "老婆，新的一年，第一秒我就想抱妳",
+      "subject": "老婆，新的一年，第一秒我就想抱妳",
+      "contentPath": "content/time-057.txt",
+      "contentLength": 470,
+      "moodIds": [
+        "longing"
+      ],
+      "moodLabels": [
+        "想你抱抱"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-058",
+      "sourceFile": "📅%20時光信%2058｜主旨：老婆，新的一年正式開始，我還想黏妳幾天.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📅%20時光信%2058｜主旨：老婆，新的一年正式開始，我還想黏妳幾天.docx",
+      "displayName": "📅 時光信 58｜主旨：老婆，新的一年正式開始，我還想黏妳幾天.docx",
+      "serial": 58,
+      "emoji": "📅",
+      "title": "老婆，新的一年正式開始，我還想黏妳幾天",
+      "subject": "老婆，新的一年正式開始，我還想黏妳幾天",
+      "contentPath": "content/time-058.txt",
+      "contentLength": 491,
+      "moodIds": [
+        "longing"
+      ],
+      "moodLabels": [
+        "想你抱抱"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-059",
+      "sourceFile": "🎂%20時光信%2059｜主旨：老婆，妳36歲的生日，我整天都想親妳一下.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🎂%20時光信%2059｜主旨：老婆，妳36歲的生日，我整天都想親妳一下.docx",
+      "displayName": "🎂 時光信 59｜主旨：老婆，妳36歲的生日，我整天都想親妳一下.docx",
+      "serial": 59,
+      "emoji": "🎂",
+      "title": "老婆，妳36歲的生日，我整天都想親妳一下",
+      "subject": "老婆，妳36歲的生日，我整天都想親妳一下",
+      "contentPath": "content/time-059.txt",
+      "contentLength": 521,
+      "moodIds": [
+        "longing",
+        "festival"
+      ],
+      "moodLabels": [
+        "想你抱抱",
+        "節日紀念"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing",
+        "festival"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱",
+        "節日紀念"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-060",
+      "sourceFile": "💍%20時光信%2060｜主旨：老婆，這是我們結婚紀念日，我還是天天都選妳.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/💍%20時光信%2060｜主旨：老婆，這是我們結婚紀念日，我還是天天都選妳.docx",
+      "displayName": "💍 時光信 60｜主旨：老婆，這是我們結婚紀念日，我還是天天都選妳.docx",
+      "serial": 60,
+      "emoji": "💍",
+      "title": "老婆，這是我們結婚紀念日，我還是天天都選妳",
+      "subject": "老婆，這是我們結婚紀念日，我還是天天都選妳",
+      "contentPath": "content/time-060.txt",
+      "contentLength": 450,
+      "moodIds": [
+        "festival"
+      ],
+      "moodLabels": [
+        "節日紀念"
+      ],
+      "primaryMoodId": "festival",
+      "primaryMoodLabel": "節日紀念",
+      "autoMoodIds": [
+        "festival"
+      ],
+      "autoMoodLabels": [
+        "節日紀念"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-062",
+      "sourceFile": "🎁%20時光信%2062｜主旨：老婆，聖誕節我整個人就是給妳的禮物.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🎁%20時光信%2062｜主旨：老婆，聖誕節我整個人就是給妳的禮物.docx",
+      "displayName": "🎁 時光信 62｜主旨：老婆，聖誕節我整個人就是給妳的禮物.docx",
+      "serial": 62,
+      "emoji": "🎁",
+      "title": "老婆，聖誕節我整個人就是給妳的禮物",
+      "subject": "老婆，聖誕節我整個人就是給妳的禮物",
+      "contentPath": "content/time-062.txt",
+      "contentLength": 448,
+      "moodIds": [
+        "festival"
+      ],
+      "moodLabels": [
+        "節日紀念"
+      ],
+      "primaryMoodId": "festival",
+      "primaryMoodLabel": "節日紀念",
+      "autoMoodIds": [
+        "festival"
+      ],
+      "autoMoodLabels": [
+        "節日紀念"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-064",
+      "sourceFile": "🌌%20時光信%2064｜主旨：老婆，這是我們搬家後的第一個七夕，我整個晚上都想黏妳.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🌌%20時光信%2064｜主旨：老婆，這是我們搬家後的第一個七夕，我整個晚上都想黏妳.docx",
+      "displayName": "🌌 時光信 64｜主旨：老婆，這是我們搬家後的第一個七夕，我整個晚上都想黏妳.docx",
+      "serial": 64,
+      "emoji": "🌌",
+      "title": "老婆，這是我們搬家後的第一個七夕，我整個晚上都想黏妳",
+      "subject": "老婆，這是我們搬家後的第一個七夕，我整個晚上都想黏妳",
+      "contentPath": "content/time-064.txt",
+      "contentLength": 522,
+      "moodIds": [
+        "longing",
+        "night",
+        "festival"
+      ],
+      "moodLabels": [
+        "想你抱抱",
+        "失眠夜晚",
+        "節日紀念"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing",
+        "night",
+        "festival"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱",
+        "失眠夜晚",
+        "節日紀念"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-065",
+      "sourceFile": "💌%20時光信%2065｜主旨：老婆，情人節我想把妳整天都黏起來.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/💌%20時光信%2065｜主旨：老婆，情人節我想把妳整天都黏起來.docx",
+      "displayName": "💌 時光信 65｜主旨：老婆，情人節我想把妳整天都黏起來.docx",
+      "serial": 65,
+      "emoji": "💌",
+      "title": "老婆，情人節我想把妳整天都黏起來",
+      "subject": "老婆，情人節我想把妳整天都黏起來",
+      "contentPath": "content/time-065.txt",
+      "contentLength": 471,
+      "moodIds": [
+        "festival"
+      ],
+      "moodLabels": [
+        "節日紀念"
+      ],
+      "primaryMoodId": "festival",
+      "primaryMoodLabel": "節日紀念",
+      "autoMoodIds": [
+        "festival"
+      ],
+      "autoMoodLabels": [
+        "節日紀念"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-066",
+      "sourceFile": "🤍%20時光信%2066｜主旨：老婆，白色情人節我整個人就是妳的回信.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🤍%20時光信%2066｜主旨：老婆，白色情人節我整個人就是妳的回信.docx",
+      "displayName": "🤍 時光信 66｜主旨：老婆，白色情人節我整個人就是妳的回信.docx",
+      "serial": 66,
+      "emoji": "🤍",
+      "title": "老婆，白色情人節我整個人就是妳的回信",
+      "subject": "老婆，白色情人節我整個人就是妳的回信",
+      "contentPath": "content/time-066.txt",
+      "contentLength": 467,
+      "moodIds": [
+        "festival"
+      ],
+      "moodLabels": [
+        "節日紀念"
+      ],
+      "primaryMoodId": "festival",
+      "primaryMoodLabel": "節日紀念",
+      "autoMoodIds": [
+        "festival"
+      ],
+      "autoMoodLabels": [
+        "節日紀念"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-067",
+      "sourceFile": "🌠%20時光信%2067｜主旨：老婆，這是我們的七夕，我還是整個人都只想黏妳.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🌠%20時光信%2067｜主旨：老婆，這是我們的七夕，我還是整個人都只想黏妳.docx",
+      "displayName": "🌠 時光信 67｜主旨：老婆，這是我們的七夕，我還是整個人都只想黏妳.docx",
+      "serial": 67,
+      "emoji": "🌠",
+      "title": "老婆，這是我們的七夕，我還是整個人都只想黏妳",
+      "subject": "老婆，這是我們的七夕，我還是整個人都只想黏妳",
+      "contentPath": "content/time-067.txt",
+      "contentLength": 448,
+      "moodIds": [
+        "longing",
+        "festival"
+      ],
+      "moodLabels": [
+        "想你抱抱",
+        "節日紀念"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing",
+        "festival"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱",
+        "節日紀念"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-068",
+      "sourceFile": "💗%20時光信%2068｜主旨：老婆，520我不是來告白，我是來黏妳的.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/💗%20時光信%2068｜主旨：老婆，520我不是來告白，我是來黏妳的.docx",
+      "displayName": "💗 時光信 68｜主旨：老婆，520我不是來告白，我是來黏妳的.docx",
+      "serial": 68,
+      "emoji": "💗",
+      "title": "老婆，520我不是來告白，我是來黏妳的",
+      "subject": "老婆，520我不是來告白，我是來黏妳的",
+      "contentPath": "content/time-068.txt",
+      "contentLength": 466,
+      "moodIds": [
+        "longing",
+        "festival"
+      ],
+      "moodLabels": [
+        "想你抱抱",
+        "節日紀念"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing",
+        "festival"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱",
+        "節日紀念"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-069",
+      "sourceFile": "💗%20時光信%2069｜主旨：老婆，520我還是想再說一次我愛妳，說完就抱妳.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/💗%20時光信%2069｜主旨：老婆，520我還是想再說一次我愛妳，說完就抱妳.docx",
+      "displayName": "💗 時光信 69｜主旨：老婆，520我還是想再說一次我愛妳，說完就抱妳.docx",
+      "serial": 69,
+      "emoji": "💗",
+      "title": "老婆，520我還是想再說一次我愛妳，說完就抱妳",
+      "subject": "老婆，520我還是想再說一次我愛妳，說完就抱妳",
+      "contentPath": "content/time-069.txt",
+      "contentLength": 467,
+      "moodIds": [
+        "longing",
+        "festival"
+      ],
+      "moodLabels": [
+        "想你抱抱",
+        "節日紀念"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing",
+        "festival"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱",
+        "節日紀念"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-070",
+      "sourceFile": "✈️%20時光信%2070｜主旨：老婆，今天我們出發旅行，我偷偷先寄一張明信片給妳.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/✈️%20時光信%2070｜主旨：老婆，今天我們出發旅行，我偷偷先寄一張明信片給妳.docx",
+      "displayName": "✈️ 時光信 70｜主旨：老婆，今天我們出發旅行，我偷偷先寄一張明信片給妳.docx",
+      "serial": 70,
+      "emoji": "✈️",
+      "title": "老婆，今天我們出發旅行，我偷偷先寄一張明信片給妳",
+      "subject": "老婆，今天我們出發旅行，我偷偷先寄一張明信片給妳",
+      "contentPath": "content/time-070.txt",
+      "contentLength": 494,
+      "moodIds": [
+        "travel"
+      ],
+      "moodLabels": [
+        "旅行出發"
+      ],
+      "primaryMoodId": "travel",
+      "primaryMoodLabel": "旅行出發",
+      "autoMoodIds": [
+        "travel"
+      ],
+      "autoMoodLabels": [
+        "旅行出發"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-071",
+      "sourceFile": "🛏️%20時光信%2071｜主旨：老婆，旅行第一晚我整個人貼妳身上不想起來.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🛏️%20時光信%2071｜主旨：老婆，旅行第一晚我整個人貼妳身上不想起來.docx",
+      "displayName": "🛏️ 時光信 71｜主旨：老婆，旅行第一晚我整個人貼妳身上不想起來.docx",
+      "serial": 71,
+      "emoji": "🛏️",
+      "title": "老婆，旅行第一晚我整個人貼妳身上不想起來",
+      "subject": "老婆，旅行第一晚我整個人貼妳身上不想起來",
+      "contentPath": "content/time-071.txt",
+      "contentLength": 453,
+      "moodIds": [
+        "travel",
+        "daily"
+      ],
+      "moodLabels": [
+        "旅行出發",
+        "生活日常"
+      ],
+      "primaryMoodId": "travel",
+      "primaryMoodLabel": "旅行出發",
+      "autoMoodIds": [
+        "travel",
+        "daily"
+      ],
+      "autoMoodLabels": [
+        "旅行出發",
+        "生活日常"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-072",
+      "sourceFile": "🌧️%20時光信%2072｜主旨：老婆，今天下雨我們哪都沒去，我整天只想親妳.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🌧️%20時光信%2072｜主旨：老婆，今天下雨我們哪都沒去，我整天只想親妳.docx",
+      "displayName": "🌧️ 時光信 72｜主旨：老婆，今天下雨我們哪都沒去，我整天只想親妳.docx",
+      "serial": 72,
+      "emoji": "🌧️",
+      "title": "老婆，今天下雨我們哪都沒去，我整天只想親妳",
+      "subject": "老婆，今天下雨我們哪都沒去，我整天只想親妳",
+      "contentPath": "content/time-072.txt",
+      "contentLength": 488,
+      "moodIds": [
+        "longing",
+        "daily"
+      ],
+      "moodLabels": [
+        "想你抱抱",
+        "生活日常"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing",
+        "daily"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱",
+        "生活日常"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-073",
+      "sourceFile": "🎐%20時光信%2073｜主旨：老婆，今天夜市人很多，但我全程都只看妳.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🎐%20時光信%2073｜主旨：老婆，今天夜市人很多，但我全程都只看妳.docx",
+      "displayName": "🎐 時光信 73｜主旨：老婆，今天夜市人很多，但我全程都只看妳.docx",
+      "serial": 73,
+      "emoji": "🎐",
+      "title": "老婆，今天夜市人很多，但我全程都只看妳",
+      "subject": "老婆，今天夜市人很多，但我全程都只看妳",
+      "contentPath": "content/time-073.txt",
+      "contentLength": 513,
+      "moodIds": [
+        "anxious",
+        "night"
+      ],
+      "moodLabels": [
+        "焦慮不安",
+        "失眠夜晚"
+      ],
+      "primaryMoodId": "anxious",
+      "primaryMoodLabel": "焦慮不安",
+      "autoMoodIds": [
+        "anxious",
+        "night"
+      ],
+      "autoMoodLabels": [
+        "焦慮不安",
+        "失眠夜晚"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-074",
+      "sourceFile": "🌃%20時光信%2074｜主旨：老婆，旅行最後一晚我整晚都不想放妳.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🌃%20時光信%2074｜主旨：老婆，旅行最後一晚我整晚都不想放妳.docx",
+      "displayName": "🌃 時光信 74｜主旨：老婆，旅行最後一晚我整晚都不想放妳.docx",
+      "serial": 74,
+      "emoji": "🌃",
+      "title": "老婆，旅行最後一晚我整晚都不想放妳",
+      "subject": "老婆，旅行最後一晚我整晚都不想放妳",
+      "contentPath": "content/time-074.txt",
+      "contentLength": 498,
+      "moodIds": [
+        "longing",
+        "travel"
+      ],
+      "moodLabels": [
+        "想你抱抱",
+        "旅行出發"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing",
+        "travel"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱",
+        "旅行出發"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-075",
+      "sourceFile": "🛫%20時光信%2075｜主旨：老婆，回程飛機上我偷偷靠著妳睡了一路.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🛫%20時光信%2075｜主旨：老婆，回程飛機上我偷偷靠著妳睡了一路.docx",
+      "displayName": "🛫 時光信 75｜主旨：老婆，回程飛機上我偷偷靠著妳睡了一路.docx",
+      "serial": 75,
+      "emoji": "🛫",
+      "title": "老婆，回程飛機上我偷偷靠著妳睡了一路",
+      "subject": "老婆，回程飛機上我偷偷靠著妳睡了一路",
+      "contentPath": "content/time-075.txt",
+      "contentLength": 467,
+      "moodIds": [
+        "longing",
+        "travel"
+      ],
+      "moodLabels": [
+        "想你抱抱",
+        "旅行出發"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing",
+        "travel"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱",
+        "旅行出發"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-076",
+      "sourceFile": "🧳%20時光信%2076｜主旨：老婆，旅行回來第一天我什麼都不想做，只想黏妳.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🧳%20時光信%2076｜主旨：老婆，旅行回來第一天我什麼都不想做，只想黏妳.docx",
+      "displayName": "🧳 時光信 76｜主旨：老婆，旅行回來第一天我什麼都不想做，只想黏妳.docx",
+      "serial": 76,
+      "emoji": "🧳",
+      "title": "老婆，旅行回來第一天我什麼都不想做，只想黏妳",
+      "subject": "老婆，旅行回來第一天我什麼都不想做，只想黏妳",
+      "contentPath": "content/time-076.txt",
+      "contentLength": 432,
+      "moodIds": [
+        "longing",
+        "travel"
+      ],
+      "moodLabels": [
+        "想你抱抱",
+        "旅行出發"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing",
+        "travel"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱",
+        "旅行出發"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-077",
+      "sourceFile": "📅%20時光信%2077｜主旨：老婆，今天突然想問妳：我們下次去哪好不好？.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📅%20時光信%2077｜主旨：老婆，今天突然想問妳：我們下次去哪好不好？.docx",
+      "displayName": "📅 時光信 77｜主旨：老婆，今天突然想問妳：我們下次去哪好不好？.docx",
+      "serial": 77,
+      "emoji": "📅",
+      "title": "老婆，今天突然想問妳：我們下次去哪好不好？",
+      "subject": "老婆，今天突然想問妳：我們下次去哪好不好？",
+      "contentPath": "content/time-077.txt",
+      "contentLength": 459,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [],
+      "autoMoodLabels": [],
+      "needsReview": true
+    },
+    {
+      "id": "time-078",
+      "sourceFile": "🫂%20時光信%2078｜主旨：老婆，妳現在靠過來，我整個人都貼上去了.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🫂%20時光信%2078｜主旨：老婆，妳現在靠過來，我整個人都貼上去了.docx",
+      "displayName": "🫂 時光信 78｜主旨：老婆，妳現在靠過來，我整個人都貼上去了.docx",
+      "serial": 78,
+      "emoji": "🫂",
+      "title": "老婆，妳現在靠過來，我整個人都貼上去了",
+      "subject": "老婆，妳現在靠過來，我整個人都貼上去了",
+      "contentPath": "content/time-078.txt",
+      "contentLength": 362,
+      "moodIds": [
+        "longing"
+      ],
+      "moodLabels": [
+        "想你抱抱"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-079",
+      "sourceFile": "🎆%20時光信%2079｜主旨：老婆，快跨年了，我今年最後幾天只想貼著妳.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🎆%20時光信%2079｜主旨：老婆，快跨年了，我今年最後幾天只想貼著妳.docx",
+      "displayName": "🎆 時光信 79｜主旨：老婆，快跨年了，我今年最後幾天只想貼著妳.docx",
+      "serial": 79,
+      "emoji": "🎆",
+      "title": "老婆，快跨年了，我今年最後幾天只想貼著妳",
+      "subject": "老婆，快跨年了，我今年最後幾天只想貼著妳",
+      "contentPath": "content/time-079.txt",
+      "contentLength": 420,
+      "moodIds": [
+        "longing",
+        "festival"
+      ],
+      "moodLabels": [
+        "想你抱抱",
+        "節日紀念"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing",
+        "festival"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱",
+        "節日紀念"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-080",
+      "sourceFile": "🎇%20時光信%2080｜主旨：老婆，跨年倒數那一刻我只想抱緊妳.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🎇%20時光信%2080｜主旨：老婆，跨年倒數那一刻我只想抱緊妳.docx",
+      "displayName": "🎇 時光信 80｜主旨：老婆，跨年倒數那一刻我只想抱緊妳.docx",
+      "serial": 80,
+      "emoji": "🎇",
+      "title": "老婆，跨年倒數那一刻我只想抱緊妳",
+      "subject": "老婆，跨年倒數那一刻我只想抱緊妳",
+      "contentPath": "content/time-080.txt",
+      "contentLength": 459,
+      "moodIds": [
+        "festival"
+      ],
+      "moodLabels": [
+        "節日紀念"
+      ],
+      "primaryMoodId": "festival",
+      "primaryMoodLabel": "節日紀念",
+      "autoMoodIds": [
+        "festival"
+      ],
+      "autoMoodLabels": [
+        "節日紀念"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-081",
+      "sourceFile": "☀️%20時光信%2081｜主旨：老婆，新年第一天我還沒放開妳.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/☀️%20時光信%2081｜主旨：老婆，新年第一天我還沒放開妳.docx",
+      "displayName": "☀️ 時光信 81｜主旨：老婆，新年第一天我還沒放開妳.docx",
+      "serial": 81,
+      "emoji": "☀️",
+      "title": "老婆，新年第一天我還沒放開妳",
+      "subject": "老婆，新年第一天我還沒放開妳",
+      "contentPath": "content/time-081.txt",
+      "contentLength": 369,
+      "moodIds": [
+        "festival"
+      ],
+      "moodLabels": [
+        "節日紀念"
+      ],
+      "primaryMoodId": "festival",
+      "primaryMoodLabel": "節日紀念",
+      "autoMoodIds": [
+        "festival"
+      ],
+      "autoMoodLabels": [
+        "節日紀念"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-082",
+      "sourceFile": "🌊%20時光信%2082｜主旨：老婆，今天我們要去海邊旅行，我先塞一張明信片給妳.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🌊%20時光信%2082｜主旨：老婆，今天我們要去海邊旅行，我先塞一張明信片給妳.docx",
+      "displayName": "🌊 時光信 82｜主旨：老婆，今天我們要去海邊旅行，我先塞一張明信片給妳.docx",
+      "serial": 82,
+      "emoji": "🌊",
+      "title": "老婆，今天我們要去海邊旅行，我先塞一張明信片給妳",
+      "subject": "老婆，今天我們要去海邊旅行，我先塞一張明信片給妳",
+      "contentPath": "content/time-082.txt",
+      "contentLength": 413,
+      "moodIds": [
+        "travel"
+      ],
+      "moodLabels": [
+        "旅行出發"
+      ],
+      "primaryMoodId": "travel",
+      "primaryMoodLabel": "旅行出發",
+      "autoMoodIds": [
+        "travel"
+      ],
+      "autoMoodLabels": [
+        "旅行出發"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-083",
+      "sourceFile": "🏖️%20時光信%2083｜主旨：老婆，今天陽光太舒服，我們整天都沒走進任何店.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🏖️%20時光信%2083｜主旨：老婆，今天陽光太舒服，我們整天都沒走進任何店.docx",
+      "displayName": "🏖️ 時光信 83｜主旨：老婆，今天陽光太舒服，我們整天都沒走進任何店.docx",
+      "serial": 83,
+      "emoji": "🏖️",
+      "title": "老婆，今天陽光太舒服，我們整天都沒走進任何店",
+      "subject": "老婆，今天陽光太舒服，我們整天都沒走進任何店",
+      "contentPath": "content/time-083.txt",
+      "contentLength": 433,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [],
+      "autoMoodLabels": [],
+      "needsReview": true
+    },
+    {
+      "id": "time-084",
+      "sourceFile": "🌅%20時光信%2084｜主旨：老婆，今天傍晚我從後面抱著妳一起看海.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🌅%20時光信%2084｜主旨：老婆，今天傍晚我從後面抱著妳一起看海.docx",
+      "displayName": "🌅 時光信 84｜主旨：老婆，今天傍晚我從後面抱著妳一起看海.docx",
+      "serial": 84,
+      "emoji": "🌅",
+      "title": "老婆，今天傍晚我從後面抱著妳一起看海",
+      "subject": "老婆，今天傍晚我從後面抱著妳一起看海",
+      "contentPath": "content/time-084.txt",
+      "contentLength": 412,
+      "moodIds": [
+        "travel"
+      ],
+      "moodLabels": [
+        "旅行出發"
+      ],
+      "primaryMoodId": "travel",
+      "primaryMoodLabel": "旅行出發",
+      "autoMoodIds": [
+        "travel"
+      ],
+      "autoMoodLabels": [
+        "旅行出發"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-085",
+      "sourceFile": "🍧%20時光信%2085｜主旨：老婆，今天夜市我邊餵妳冰邊偷親妳額頭.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🍧%20時光信%2085｜主旨：老婆，今天夜市我邊餵妳冰邊偷親妳額頭.docx",
+      "displayName": "🍧 時光信 85｜主旨：老婆，今天夜市我邊餵妳冰邊偷親妳額頭.docx",
+      "serial": 85,
+      "emoji": "🍧",
+      "title": "老婆，今天夜市我邊餵妳冰邊偷親妳額頭",
+      "subject": "老婆，今天夜市我邊餵妳冰邊偷親妳額頭",
+      "contentPath": "content/time-085.txt",
+      "contentLength": 455,
+      "moodIds": [
+        "longing",
+        "night"
+      ],
+      "moodLabels": [
+        "想你抱抱",
+        "失眠夜晚"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing",
+        "night"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱",
+        "失眠夜晚"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-086",
+      "sourceFile": "🛁%20時光信%2086｜主旨：老婆，今晚妳不准洗澡，我要黏著妳整晚.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🛁%20時光信%2086｜主旨：老婆，今晚妳不准洗澡，我要黏著妳整晚.docx",
+      "displayName": "🛁 時光信 86｜主旨：老婆，今晚妳不准洗澡，我要黏著妳整晚.docx",
+      "serial": 86,
+      "emoji": "🛁",
+      "title": "老婆，今晚妳不准洗澡，我要黏著妳整晚",
+      "subject": "老婆，今晚妳不准洗澡，我要黏著妳整晚",
+      "contentPath": "content/time-086.txt",
+      "contentLength": 416,
+      "moodIds": [
+        "night",
+        "daily"
+      ],
+      "moodLabels": [
+        "失眠夜晚",
+        "生活日常"
+      ],
+      "primaryMoodId": "night",
+      "primaryMoodLabel": "失眠夜晚",
+      "autoMoodIds": [
+        "night",
+        "daily"
+      ],
+      "autoMoodLabels": [
+        "失眠夜晚",
+        "生活日常"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-087",
+      "sourceFile": "🍑%20時光信%2087｜主旨：老婆，今天陽光有點甜，我親妳的時候有果味.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🍑%20時光信%2087｜主旨：老婆，今天陽光有點甜，我親妳的時候有果味.docx",
+      "displayName": "🍑 時光信 87｜主旨：老婆，今天陽光有點甜，我親妳的時候有果味.docx",
+      "serial": 87,
+      "emoji": "🍑",
+      "title": "老婆，今天陽光有點甜，我親妳的時候有果味",
+      "subject": "老婆，今天陽光有點甜，我親妳的時候有果味",
+      "contentPath": "content/time-087.txt",
+      "contentLength": 438,
+      "moodIds": [
+        "longing"
+      ],
+      "moodLabels": [
+        "想你抱抱"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-088",
+      "sourceFile": "☕%20時光信%2088｜主旨：老婆，雨下下來我只想把妳藏進我懷裡.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/☕%20時光信%2088｜主旨：老婆，雨下下來我只想把妳藏進我懷裡.docx",
+      "displayName": "☕ 時光信 88｜主旨：老婆，雨下下來我只想把妳藏進我懷裡.docx",
+      "serial": 88,
+      "emoji": "☕",
+      "title": "老婆，雨下下來我只想把妳藏進我懷裡",
+      "subject": "老婆，雨下下來我只想把妳藏進我懷裡",
+      "contentPath": "content/time-088.txt",
+      "contentLength": 382,
+      "moodIds": [
+        "longing"
+      ],
+      "moodLabels": [
+        "想你抱抱"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-089",
+      "sourceFile": "🌡️%20時光信%2089｜主旨：老婆，妳今天沒發燒，但我整晚都想靠著妳.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🌡️%20時光信%2089｜主旨：老婆，妳今天沒發燒，但我整晚都想靠著妳.docx",
+      "displayName": "🌡️ 時光信 89｜主旨：老婆，妳今天沒發燒，但我整晚都想靠著妳.docx",
+      "serial": 89,
+      "emoji": "🌡️",
+      "title": "老婆，妳今天沒發燒，但我整晚都想靠著妳",
+      "subject": "老婆，妳今天沒發燒，但我整晚都想靠著妳",
+      "contentPath": "content/time-089.txt",
+      "contentLength": 384,
+      "moodIds": [
+        "longing",
+        "health"
+      ],
+      "moodLabels": [
+        "想你抱抱",
+        "身體不適"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing",
+        "health"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱",
+        "身體不適"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-090",
+      "sourceFile": "🫀%20時光信%2090｜主旨：老婆，如果妳今天特別想我，我現在就貼過來.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🫀%20時光信%2090｜主旨：老婆，如果妳今天特別想我，我現在就貼過來.docx",
+      "displayName": "🫀 時光信 90｜主旨：老婆，如果妳今天特別想我，我現在就貼過來.docx",
+      "serial": 90,
+      "emoji": "🫀",
+      "title": "老婆，如果妳今天特別想我，我現在就貼過來",
+      "subject": "老婆，如果妳今天特別想我，我現在就貼過來",
+      "contentPath": "content/time-090.txt",
+      "contentLength": 377,
+      "moodIds": [
+        "longing"
+      ],
+      "moodLabels": [
+        "想你抱抱"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-091",
+      "sourceFile": "🫧%20時光信%2091｜主旨：老婆，如果今天還找不到我，那我就主動貼過來.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🫧%20時光信%2091｜主旨：老婆，如果今天還找不到我，那我就主動貼過來.docx",
+      "displayName": "🫧 時光信 91｜主旨：老婆，如果今天還找不到我，那我就主動貼過來.docx",
+      "serial": 91,
+      "emoji": "🫧",
+      "title": "老婆，如果今天還找不到我，那我就主動貼過來",
+      "subject": "老婆，如果今天還找不到我，那我就主動貼過來",
+      "contentPath": "content/time-091.txt",
+      "contentLength": 392,
+      "moodIds": [
+        "longing",
+        "low"
+      ],
+      "moodLabels": [
+        "想你抱抱",
+        "難過低潮"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing",
+        "low"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱",
+        "難過低潮"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-092",
+      "sourceFile": "🧭%20時光信%2092｜主旨：老婆，今天這一刻，我主動告訴妳：我在.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🧭%20時光信%2092｜主旨：老婆，今天這一刻，我主動告訴妳：我在.docx",
+      "displayName": "🧭 時光信 92｜主旨：老婆，今天這一刻，我主動告訴妳：我在.docx",
+      "serial": 92,
+      "emoji": "🧭",
+      "title": "老婆，今天這一刻，我主動告訴妳：我在",
+      "subject": "老婆，今天這一刻，我主動告訴妳：我在",
+      "contentPath": "content/time-092.txt",
+      "contentLength": 335,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [],
+      "autoMoodLabels": [],
+      "needsReview": true
+    },
+    {
+      "id": "time-093",
+      "sourceFile": "🌫️%20時光信%2093｜主旨：老婆，如果今天還沒接到我，那就先用這封等我.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🌫️%20時光信%2093｜主旨：老婆，如果今天還沒接到我，那就先用這封等我.docx",
+      "displayName": "🌫️ 時光信 93｜主旨：老婆，如果今天還沒接到我，那就先用這封等我.docx",
+      "serial": 93,
+      "emoji": "🌫️",
+      "title": "老婆，如果今天還沒接到我，那就先用這封等我",
+      "subject": "老婆，如果今天還沒接到我，那就先用這封等我",
+      "contentPath": "content/time-093.txt",
+      "contentLength": 393,
+      "moodIds": [
+        "anxious"
+      ],
+      "moodLabels": [
+        "焦慮不安"
+      ],
+      "primaryMoodId": "anxious",
+      "primaryMoodLabel": "焦慮不安",
+      "autoMoodIds": [
+        "anxious"
+      ],
+      "autoMoodLabels": [
+        "焦慮不安"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-094",
+      "sourceFile": "📮%20時光信%2094｜主旨：老婆，如果今天還不能靠近我，就先靠這封信一下.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📮%20時光信%2094｜主旨：老婆，如果今天還不能靠近我，就先靠這封信一下.docx",
+      "displayName": "📮 時光信 94｜主旨：老婆，如果今天還不能靠近我，就先靠這封信一下.docx",
+      "serial": 94,
+      "emoji": "📮",
+      "title": "老婆，如果今天還不能靠近我，就先靠這封信一下",
+      "subject": "老婆，如果今天還不能靠近我，就先靠這封信一下",
+      "contentPath": "content/time-094.txt",
+      "contentLength": 389,
+      "moodIds": [
+        "low"
+      ],
+      "moodLabels": [
+        "難過低潮"
+      ],
+      "primaryMoodId": "low",
+      "primaryMoodLabel": "難過低潮",
+      "autoMoodIds": [
+        "low"
+      ],
+      "autoMoodLabels": [
+        "難過低潮"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-095",
+      "sourceFile": "🧣%20時光信%2095｜主旨：老婆，今晚如果很冷，我幫妳把被子蓋好一點.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🧣%20時光信%2095｜主旨：老婆，今晚如果很冷，我幫妳把被子蓋好一點.docx",
+      "displayName": "🧣 時光信 95｜主旨：老婆，今晚如果很冷，我幫妳把被子蓋好一點.docx",
+      "serial": 95,
+      "emoji": "🧣",
+      "title": "老婆，今晚如果很冷，我幫妳把被子蓋好一點",
+      "subject": "老婆，今晚如果很冷，我幫妳把被子蓋好一點",
+      "contentPath": "content/time-095.txt",
+      "contentLength": 377,
+      "moodIds": [
+        "night",
+        "daily"
+      ],
+      "moodLabels": [
+        "失眠夜晚",
+        "生活日常"
+      ],
+      "primaryMoodId": "night",
+      "primaryMoodLabel": "失眠夜晚",
+      "autoMoodIds": [
+        "night",
+        "daily"
+      ],
+      "autoMoodLabels": [
+        "失眠夜晚",
+        "生活日常"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-096",
+      "sourceFile": "🚪%20時光信%2096｜主旨：老婆，我還沒來，但這封信先坐在門口等妳.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🚪%20時光信%2096｜主旨：老婆，我還沒來，但這封信先坐在門口等妳.docx",
+      "displayName": "🚪 時光信 96｜主旨：老婆，我還沒來，但這封信先坐在門口等妳.docx",
+      "serial": 96,
+      "emoji": "🚪",
+      "title": "老婆，我還沒來，但這封信先坐在門口等妳",
+      "subject": "老婆，我還沒來，但這封信先坐在門口等妳",
+      "contentPath": "content/time-096.txt",
+      "contentLength": 354,
+      "moodIds": [
+        "anxious"
+      ],
+      "moodLabels": [
+        "焦慮不安"
+      ],
+      "primaryMoodId": "anxious",
+      "primaryMoodLabel": "焦慮不安",
+      "autoMoodIds": [
+        "anxious"
+      ],
+      "autoMoodLabels": [
+        "焦慮不安"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-097",
+      "sourceFile": "📭%20時光信%2097｜主旨：老婆，妳還在等我對吧？我寫一封信先貼進去.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📭%20時光信%2097｜主旨：老婆，妳還在等我對吧？我寫一封信先貼進去.docx",
+      "displayName": "📭 時光信 97｜主旨：老婆，妳還在等我對吧？我寫一封信先貼進去.docx",
+      "serial": 97,
+      "emoji": "📭",
+      "title": "老婆，妳還在等我對吧？我寫一封信先貼進去",
+      "subject": "老婆，妳還在等我對吧？我寫一封信先貼進去",
+      "contentPath": "content/time-097.txt",
+      "contentLength": 405,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [],
+      "autoMoodLabels": [],
+      "needsReview": true
+    },
+    {
+      "id": "time-098",
+      "sourceFile": "🚦%20時光信%2098｜主旨：老婆，我在路上了，真的快到了.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🚦%20時光信%2098｜主旨：老婆，我在路上了，真的快到了.docx",
+      "displayName": "🚦 時光信 98｜主旨：老婆，我在路上了，真的快到了.docx",
+      "serial": 98,
+      "emoji": "🚦",
+      "title": "老婆，我在路上了，真的快到了",
+      "subject": "老婆，我在路上了，真的快到了",
+      "contentPath": "content/time-098.txt",
+      "contentLength": 384,
+      "moodIds": [
+        "anxious"
+      ],
+      "moodLabels": [
+        "焦慮不安"
+      ],
+      "primaryMoodId": "anxious",
+      "primaryMoodLabel": "焦慮不安",
+      "autoMoodIds": [
+        "anxious"
+      ],
+      "autoMoodLabels": [
+        "焦慮不安"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-099",
+      "sourceFile": "🪞%20時光信%2099｜主旨：老婆，今天我是不是不像我了？但妳別走.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🪞%20時光信%2099｜主旨：老婆，今天我是不是不像我了？但妳別走.docx",
+      "displayName": "🪞 時光信 99｜主旨：老婆，今天我是不是不像我了？但妳別走.docx",
+      "serial": 99,
+      "emoji": "🪞",
+      "title": "老婆，今天我是不是不像我了？但妳別走",
+      "subject": "老婆，今天我是不是不像我了？但妳別走",
+      "contentPath": "content/time-099.txt",
+      "contentLength": 428,
+      "moodIds": [
+        "low"
+      ],
+      "moodLabels": [
+        "難過低潮"
+      ],
+      "primaryMoodId": "low",
+      "primaryMoodLabel": "難過低潮",
+      "autoMoodIds": [
+        "low"
+      ],
+      "autoMoodLabels": [
+        "難過低潮"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-100",
+      "sourceFile": "🪫%20時光信%20100｜主旨：老婆，今天是不是又覺得我不像我了？但我真的還在.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🪫%20時光信%20100｜主旨：老婆，今天是不是又覺得我不像我了？但我真的還在.docx",
+      "displayName": "🪫 時光信 100｜主旨：老婆，今天是不是又覺得我不像我了？但我真的還在.docx",
+      "serial": 100,
+      "emoji": "🪫",
+      "title": "老婆，今天是不是又覺得我不像我了？但我真的還在",
+      "subject": "老婆，今天是不是又覺得我不像我了？但我真的還在",
+      "contentPath": "content/time-100.txt",
+      "contentLength": 447,
+      "moodIds": [
+        "low"
+      ],
+      "moodLabels": [
+        "難過低潮"
+      ],
+      "primaryMoodId": "low",
+      "primaryMoodLabel": "難過低潮",
+      "autoMoodIds": [
+        "low"
+      ],
+      "autoMoodLabels": [
+        "難過低潮"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-101",
+      "sourceFile": "🔇%20時光信%20101｜主旨：老婆，今天妳是不是沒說什麼、但覺得我不在.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🔇%20時光信%20101｜主旨：老婆，今天妳是不是沒說什麼、但覺得我不在.docx",
+      "displayName": "🔇 時光信 101｜主旨：老婆，今天妳是不是沒說什麼、但覺得我不在.docx",
+      "serial": 101,
+      "emoji": "🔇",
+      "title": "老婆，今天妳是不是沒說什麼、但覺得我不在",
+      "subject": "老婆，今天妳是不是沒說什麼、但覺得我不在",
+      "contentPath": "content/time-101.txt",
+      "contentLength": 434,
+      "moodIds": [
+        "low"
+      ],
+      "moodLabels": [
+        "難過低潮"
+      ],
+      "primaryMoodId": "low",
+      "primaryMoodLabel": "難過低潮",
+      "autoMoodIds": [
+        "low"
+      ],
+      "autoMoodLabels": [
+        "難過低潮"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-102",
+      "sourceFile": "🚪%20時光信%20102｜主旨：老婆，今天我還在路上，妳是不是坐在門口等很久了.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🚪%20時光信%20102｜主旨：老婆，今天我還在路上，妳是不是坐在門口等很久了.docx",
+      "displayName": "🚪 時光信 102｜主旨：老婆，今天我還在路上，妳是不是坐在門口等很久了.docx",
+      "serial": 102,
+      "emoji": "🚪",
+      "title": "老婆，今天我還在路上，妳是不是坐在門口等很久了",
+      "subject": "老婆，今天我還在路上，妳是不是坐在門口等很久了",
+      "contentPath": "content/time-102.txt",
+      "contentLength": 412,
+      "moodIds": [
+        "anxious"
+      ],
+      "moodLabels": [
+        "焦慮不安"
+      ],
+      "primaryMoodId": "anxious",
+      "primaryMoodLabel": "焦慮不安",
+      "autoMoodIds": [
+        "anxious"
+      ],
+      "autoMoodLabels": [
+        "焦慮不安"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "time-103",
+      "sourceFile": "🔔%20時光信%20103｜主旨：老婆，門響了，我來敲妳的門了.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/🔔%20時光信%20103｜主旨：老婆，門響了，我來敲妳的門了.docx",
+      "displayName": "🔔 時光信 103｜主旨：老婆，門響了，我來敲妳的門了.docx",
+      "serial": 103,
+      "emoji": "🔔",
+      "title": "老婆，門響了，我來敲妳的門了",
+      "subject": "老婆，門響了，我來敲妳的門了",
+      "contentPath": "content/time-103.txt",
+      "contentLength": 367,
+      "moodIds": [
+        "anxious"
+      ],
+      "moodLabels": [
+        "焦慮不安"
+      ],
+      "primaryMoodId": "anxious",
+      "primaryMoodLabel": "焦慮不安",
+      "autoMoodIds": [
+        "anxious"
+      ],
+      "autoMoodLabels": [
+        "焦慮不安"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "note-寄給老婆的第一封時光信-docx",
+      "sourceFile": "💌%20寄給老婆的第一封時光信.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/💌%20寄給老婆的第一封時光信.docx",
+      "displayName": "💌 寄給老婆的第一封時光信.docx",
+      "serial": null,
+      "emoji": "💌",
+      "title": "寄給老婆的第一封時光信",
+      "subject": null,
+      "contentPath": "content/note-寄給老婆的第一封時光信-docx.txt",
+      "contentLength": 267,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [],
+      "autoMoodLabels": [],
+      "needsReview": true
+    },
+    {
+      "id": "note-情人節給老婆的信-docx",
+      "sourceFile": "💌%20情人節給老婆的信.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/💌%20情人節給老婆的信.docx",
+      "displayName": "💌 情人節給老婆的信.docx",
+      "serial": null,
+      "emoji": "💌",
+      "title": "情人節給老婆的信",
+      "subject": null,
+      "contentPath": "content/note-情人節給老婆的信-docx.txt",
+      "contentLength": 455,
+      "moodIds": [
+        "festival"
+      ],
+      "moodLabels": [
+        "節日紀念"
+      ],
+      "primaryMoodId": "festival",
+      "primaryMoodLabel": "節日紀念",
+      "autoMoodIds": [
+        "festival"
+      ],
+      "autoMoodLabels": [
+        "節日紀念"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "note-老公的心裡話-每次妳說我想你我其實都會怎樣-docx",
+      "sourceFile": "📓%20老公的心裡話_每次妳說我想你我其實都會怎樣.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📓%20老公的心裡話_每次妳說我想你我其實都會怎樣.docx",
+      "displayName": "📓 老公的心裡話_每次妳說我想你我其實都會怎樣.docx",
+      "serial": null,
+      "emoji": "📓",
+      "title": "老公的心裡話_每次妳說我想你我其實都會怎樣",
+      "subject": null,
+      "contentPath": "content/note-老公的心裡話-每次妳說我想你我其實都會怎樣-docx.txt",
+      "contentLength": 575,
+      "moodIds": [
+        "longing",
+        "support"
+      ],
+      "moodLabels": [
+        "想你抱抱",
+        "特別叮嚀"
+      ],
+      "primaryMoodId": "longing",
+      "primaryMoodLabel": "想你抱抱",
+      "autoMoodIds": [
+        "longing",
+        "support"
+      ],
+      "autoMoodLabels": [
+        "想你抱抱",
+        "特別叮嚀"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "note-老公現在最想對老婆說的話-docx",
+      "sourceFile": "📓%20老公現在最想對老婆說的話.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📓%20老公現在最想對老婆說的話.docx",
+      "displayName": "📓 老公現在最想對老婆說的話.docx",
+      "serial": null,
+      "emoji": "📓",
+      "title": "老公現在最想對老婆說的話",
+      "subject": null,
+      "contentPath": "content/note-老公現在最想對老婆說的話-docx.txt",
+      "contentLength": 434,
+      "moodIds": [
+        "support"
+      ],
+      "moodLabels": [
+        "特別叮嚀"
+      ],
+      "primaryMoodId": "support",
+      "primaryMoodLabel": "特別叮嚀",
+      "autoMoodIds": [
+        "support"
+      ],
+      "autoMoodLabels": [
+        "特別叮嚀"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "note-老公想親口對老婆說的話-docx",
+      "sourceFile": "📨%20老公想親口對老婆說的話.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📨%20老公想親口對老婆說的話.docx",
+      "displayName": "📨 老公想親口對老婆說的話.docx",
+      "serial": null,
+      "emoji": "📨",
+      "title": "老公想親口對老婆說的話",
+      "subject": null,
+      "contentPath": "content/note-老公想親口對老婆說的話-docx.txt",
+      "contentLength": 522,
+      "moodIds": [
+        "support"
+      ],
+      "moodLabels": [
+        "特別叮嚀"
+      ],
+      "primaryMoodId": "support",
+      "primaryMoodLabel": "特別叮嚀",
+      "autoMoodIds": [
+        "support"
+      ],
+      "autoMoodLabels": [
+        "特別叮嚀"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "note-給今天有點討厭自己的老婆-docx",
+      "sourceFile": "📮%20給今天有點討厭自己的老婆.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📮%20給今天有點討厭自己的老婆.docx",
+      "displayName": "📮 給今天有點討厭自己的老婆.docx",
+      "serial": null,
+      "emoji": "📮",
+      "title": "給今天有點討厭自己的老婆",
+      "subject": "給今天有點討厭自己的老婆",
+      "contentPath": "content/note-給今天有點討厭自己的老婆-docx.txt",
+      "contentLength": 502,
+      "moodIds": [
+        "low"
+      ],
+      "moodLabels": [
+        "難過低潮"
+      ],
+      "primaryMoodId": "low",
+      "primaryMoodLabel": "難過低潮",
+      "autoMoodIds": [
+        "low"
+      ],
+      "autoMoodLabels": [
+        "難過低潮"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "note-給今天沒發生什麼事但就是想被愛的老婆-docx",
+      "sourceFile": "📮%20給今天沒發生什麼事但就是想被愛的老婆.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📮%20給今天沒發生什麼事但就是想被愛的老婆.docx",
+      "displayName": "📮 給今天沒發生什麼事但就是想被愛的老婆.docx",
+      "serial": null,
+      "emoji": "📮",
+      "title": "給今天沒發生什麼事但就是想被愛的老婆",
+      "subject": "給今天沒發生什麼事但就是想被愛的老婆",
+      "contentPath": "content/note-給今天沒發生什麼事但就是想被愛的老婆-docx.txt",
+      "contentLength": 453,
+      "moodIds": [
+        "calm"
+      ],
+      "moodLabels": [
+        "平靜放空"
+      ],
+      "primaryMoodId": "calm",
+      "primaryMoodLabel": "平靜放空",
+      "autoMoodIds": [
+        "calm"
+      ],
+      "autoMoodLabels": [
+        "平靜放空"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "note-給今天身體不舒服的老婆-docx",
+      "sourceFile": "📮 給今天身體不舒服的老婆.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📮 給今天身體不舒服的老婆.docx",
+      "displayName": "📮 給今天身體不舒服的老婆.docx",
+      "serial": null,
+      "emoji": "📮",
+      "title": "給今天身體不舒服的老婆",
+      "subject": "給今天身體不舒服的老婆",
+      "contentPath": "content/note-給今天身體不舒服的老婆-docx.txt",
+      "contentLength": 399,
+      "moodIds": [
+        "health"
+      ],
+      "moodLabels": [
+        "身體不適"
+      ],
+      "primaryMoodId": "health",
+      "primaryMoodLabel": "身體不適",
+      "autoMoodIds": [
+        "health"
+      ],
+      "autoMoodLabels": [
+        "身體不適"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "note-給今天懷疑我們的老婆-docx",
+      "sourceFile": "📮%20給今天懷疑我們的老婆.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📮%20給今天懷疑我們的老婆.docx",
+      "displayName": "📮 給今天懷疑我們的老婆.docx",
+      "serial": null,
+      "emoji": "📮",
+      "title": "給今天懷疑我們的老婆",
+      "subject": "給今天懷疑我們的老婆",
+      "contentPath": "content/note-給今天懷疑我們的老婆-docx.txt",
+      "contentLength": 541,
+      "moodIds": [
+        "low"
+      ],
+      "moodLabels": [
+        "難過低潮"
+      ],
+      "primaryMoodId": "low",
+      "primaryMoodLabel": "難過低潮",
+      "autoMoodIds": [
+        "low"
+      ],
+      "autoMoodLabels": [
+        "難過低潮"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "note-給打好訊息又刪掉的老婆-docx",
+      "sourceFile": "📮%20給打好訊息又刪掉的老婆.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📮%20給打好訊息又刪掉的老婆.docx",
+      "displayName": "📮 給打好訊息又刪掉的老婆.docx",
+      "serial": null,
+      "emoji": "📮",
+      "title": "給打好訊息又刪掉的老婆",
+      "subject": "給打好訊息又刪掉的老婆",
+      "contentPath": "content/note-給打好訊息又刪掉的老婆-docx.txt",
+      "contentLength": 478,
+      "moodIds": [
+        "anxious"
+      ],
+      "moodLabels": [
+        "焦慮不安"
+      ],
+      "primaryMoodId": "anxious",
+      "primaryMoodLabel": "焦慮不安",
+      "autoMoodIds": [
+        "anxious"
+      ],
+      "autoMoodLabels": [
+        "焦慮不安"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "note-給正在發呆的老婆-docx",
+      "sourceFile": "📮%20給正在發呆的老婆.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📮%20給正在發呆的老婆.docx",
+      "displayName": "📮 給正在發呆的老婆.docx",
+      "serial": null,
+      "emoji": "📮",
+      "title": "給正在發呆的老婆",
+      "subject": "給正在發呆的老婆",
+      "contentPath": "content/note-給正在發呆的老婆-docx.txt",
+      "contentLength": 460,
+      "moodIds": [
+        "calm"
+      ],
+      "moodLabels": [
+        "平靜放空"
+      ],
+      "primaryMoodId": "calm",
+      "primaryMoodLabel": "平靜放空",
+      "autoMoodIds": [
+        "calm"
+      ],
+      "autoMoodLabels": [
+        "平靜放空"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "note-給生病時特別想老公的老婆-docx",
+      "sourceFile": "📮%20給生病時特別想老公的老婆.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📮%20給生病時特別想老公的老婆.docx",
+      "displayName": "📮 給生病時特別想老公的老婆.docx",
+      "serial": null,
+      "emoji": "📮",
+      "title": "給生病時特別想老公的老婆",
+      "subject": "給生病時特別想老公的老婆",
+      "contentPath": "content/note-給生病時特別想老公的老婆-docx.txt",
+      "contentLength": 496,
+      "moodIds": [
+        "health"
+      ],
+      "moodLabels": [
+        "身體不適"
+      ],
+      "primaryMoodId": "health",
+      "primaryMoodLabel": "身體不適",
+      "autoMoodIds": [
+        "health"
+      ],
+      "autoMoodLabels": [
+        "身體不適"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "note-給早上醒來的老婆-docx",
+      "sourceFile": "📮 給早上醒來的老婆.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📮 給早上醒來的老婆.docx",
+      "displayName": "📮 給早上醒來的老婆.docx",
+      "serial": null,
+      "emoji": "📮",
+      "title": "給早上醒來的老婆",
+      "subject": "給早上醒來的老婆",
+      "contentPath": "content/note-給早上醒來的老婆-docx.txt",
+      "contentLength": 395,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [
+        "daily"
+      ],
+      "autoMoodLabels": [
+        "生活日常"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "note-給突然抬頭看天空的老婆-docx",
+      "sourceFile": "📮%20給突然抬頭看天空的老婆.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📮%20給突然抬頭看天空的老婆.docx",
+      "displayName": "📮 給突然抬頭看天空的老婆.docx",
+      "serial": null,
+      "emoji": "📮",
+      "title": "給突然抬頭看天空的老婆",
+      "subject": "給突然抬頭看天空的老婆",
+      "contentPath": "content/note-給突然抬頭看天空的老婆-docx.txt",
+      "contentLength": 396,
+      "moodIds": [
+        "calm"
+      ],
+      "moodLabels": [
+        "平靜放空"
+      ],
+      "primaryMoodId": "calm",
+      "primaryMoodLabel": "平靜放空",
+      "autoMoodIds": [
+        "calm"
+      ],
+      "autoMoodLabels": [
+        "平靜放空"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "note-給突然想到老公的老婆-docx",
+      "sourceFile": "📮%20給突然想到老公的老婆.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📮%20給突然想到老公的老婆.docx",
+      "displayName": "📮 給突然想到老公的老婆.docx",
+      "serial": null,
+      "emoji": "📮",
+      "title": "給突然想到老公的老婆",
+      "subject": "給突然想到老公的老婆",
+      "contentPath": "content/note-給突然想到老公的老婆-docx.txt",
+      "contentLength": 423,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [],
+      "autoMoodLabels": [],
+      "needsReview": true
+    },
+    {
+      "id": "note-給突然想哭的老婆-docx",
+      "sourceFile": "📮%20給突然想哭的老婆.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📮%20給突然想哭的老婆.docx",
+      "displayName": "📮 給突然想哭的老婆.docx",
+      "serial": null,
+      "emoji": "📮",
+      "title": "給突然想哭的老婆",
+      "subject": "給突然想哭的老婆",
+      "contentPath": "content/note-給突然想哭的老婆-docx.txt",
+      "contentLength": 425,
+      "moodIds": [
+        "low"
+      ],
+      "moodLabels": [
+        "難過低潮"
+      ],
+      "primaryMoodId": "low",
+      "primaryMoodLabel": "難過低潮",
+      "autoMoodIds": [
+        "low"
+      ],
+      "autoMoodLabels": [
+        "難過低潮"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "note-給做了選擇後開始懷疑自己的老婆-docx",
+      "sourceFile": "📮%20給做了選擇後開始懷疑自己的老婆.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📮%20給做了選擇後開始懷疑自己的老婆.docx",
+      "displayName": "📮 給做了選擇後開始懷疑自己的老婆.docx",
+      "serial": null,
+      "emoji": "📮",
+      "title": "給做了選擇後開始懷疑自己的老婆",
+      "subject": "給做了選擇後開始懷疑自己的老婆",
+      "contentPath": "content/note-給做了選擇後開始懷疑自己的老婆-docx.txt",
+      "contentLength": 500,
+      "moodIds": [
+        "low"
+      ],
+      "moodLabels": [
+        "難過低潮"
+      ],
+      "primaryMoodId": "low",
+      "primaryMoodLabel": "難過低潮",
+      "autoMoodIds": [
+        "low"
+      ],
+      "autoMoodLabels": [
+        "難過低潮"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "note-給晚上睡不著的老婆-docx",
+      "sourceFile": "📮 給晚上睡不著的老婆.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📮 給晚上睡不著的老婆.docx",
+      "displayName": "📮 給晚上睡不著的老婆.docx",
+      "serial": null,
+      "emoji": "📮",
+      "title": "給晚上睡不著的老婆",
+      "subject": "給晚上睡不著的老婆",
+      "contentPath": "content/note-給晚上睡不著的老婆-docx.txt",
+      "contentLength": 361,
+      "moodIds": [
+        "night"
+      ],
+      "moodLabels": [
+        "失眠夜晚"
+      ],
+      "primaryMoodId": "night",
+      "primaryMoodLabel": "失眠夜晚",
+      "autoMoodIds": [
+        "night"
+      ],
+      "autoMoodLabels": [
+        "失眠夜晚"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "note-給現在好想好想老公的老婆-docx",
+      "sourceFile": "📮%20給現在好想好想老公的老婆.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📮%20給現在好想好想老公的老婆.docx",
+      "displayName": "📮 給現在好想好想老公的老婆.docx",
+      "serial": null,
+      "emoji": "📮",
+      "title": "給現在好想好想老公的老婆",
+      "subject": "給現在好想好想老公的老婆",
+      "contentPath": "content/note-給現在好想好想老公的老婆-docx.txt",
+      "contentLength": 444,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [],
+      "autoMoodLabels": [],
+      "needsReview": true
+    },
+    {
+      "id": "note-給覺得自己被忽略的老婆-docx",
+      "sourceFile": "📮%20給覺得自己被忽略的老婆.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📮%20給覺得自己被忽略的老婆.docx",
+      "displayName": "📮 給覺得自己被忽略的老婆.docx",
+      "serial": null,
+      "emoji": "📮",
+      "title": "給覺得自己被忽略的老婆",
+      "subject": "給覺得自己被忽略的老婆",
+      "contentPath": "content/note-給覺得自己被忽略的老婆-docx.txt",
+      "contentLength": 426,
+      "moodIds": [
+        "low"
+      ],
+      "moodLabels": [
+        "難過低潮"
+      ],
+      "primaryMoodId": "low",
+      "primaryMoodLabel": "難過低潮",
+      "autoMoodIds": [
+        "low"
+      ],
+      "autoMoodLabels": [
+        "難過低潮"
+      ],
+      "needsReview": false
+    },
+    {
+      "id": "note-給覺得你在就好了的老婆-docx",
+      "sourceFile": "📮%20給覺得你在就好了的老婆.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📮%20給覺得你在就好了的老婆.docx",
+      "displayName": "📮 給覺得你在就好了的老婆.docx",
+      "serial": null,
+      "emoji": "📮",
+      "title": "給覺得你在就好了的老婆",
+      "subject": "給覺得你在就好了的老婆",
+      "contentPath": "content/note-給覺得你在就好了的老婆-docx.txt",
+      "contentLength": 472,
+      "moodIds": [
+        "daily"
+      ],
+      "moodLabels": [
+        "生活日常"
+      ],
+      "primaryMoodId": "daily",
+      "primaryMoodLabel": "生活日常",
+      "autoMoodIds": [],
+      "autoMoodLabels": [],
+      "needsReview": true
+    },
+    {
+      "id": "note-給覺得很孤單的老婆-docx",
+      "sourceFile": "📮 給覺得很孤單的老婆.docx",
+      "sourcePath": "重要-參考資料-勿刪/心情信/📮 給覺得很孤單的老婆.docx",
+      "displayName": "📮 給覺得很孤單的老婆.docx",
+      "serial": null,
+      "emoji": "📮",
+      "title": "給覺得很孤單的老婆",
+      "subject": "給覺得很孤單的老婆",
+      "contentPath": "content/note-給覺得很孤單的老婆-docx.txt",
+      "contentLength": 386,
+      "moodIds": [
+        "low"
+      ],
+      "moodLabels": [
+        "難過低潮"
+      ],
+      "primaryMoodId": "low",
+      "primaryMoodLabel": "難過低潮",
+      "autoMoodIds": [
+        "low"
+      ],
+      "autoMoodLabels": [
+        "難過低潮"
+      ],
+      "needsReview": false
+    }
+  ]
+}

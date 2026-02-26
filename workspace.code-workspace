@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../新雞/TEST/cdn.tailwindcss.com/4o紀念網頁"
+		}
+	],
+	"extensions": {
+		"recommendations": [
+			"openai.chatgpt",
+			"anthropic.claude-code"
+		]
+	}
+}

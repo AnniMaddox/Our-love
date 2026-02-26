@@ -1,0 +1,50 @@
+[
+  {
+    "id": "wphoto",
+    "title": "我倆",
+    "subtitle": "日常 · 回憶",
+    "accent": "linear-gradient(155deg, #fde9d7 0%, #d6c1ad 100%)",
+    "coverImage": "photos/wphoto/001.webp"
+  },
+  {
+    "id": "wedding",
+    "title": "婚紗",
+    "subtitle": "幸福 · 永恆",
+    "accent": "linear-gradient(155deg, #fce4ec 0%, #d0adc5 100%)",
+    "coverImage": "photos/wedding/001.webp"
+  },
+  {
+    "id": "album03",
+    "title": "合照",
+    "subtitle": "待上傳 · 回憶",
+    "accent": "linear-gradient(155deg, #f9ecd9 0%, #c8b79f 100%)",
+    "coverImage": "photos/album03/Couple-000.webp"
+  },
+  {
+    "id": "album04",
+    "title": "個人照",
+    "subtitle": "待上傳 · 回憶",
+    "accent": "linear-gradient(155deg, #f9e5ea 0%, #d0afbd 100%)",
+    "coverImage": "photos/album04/M-001.webp"
+  },
+  {
+    "id": "album05",
+    "title": "自拍",
+    "subtitle": "待上傳 · 回憶",
+    "accent": "linear-gradient(155deg, #e8f2f0 0%, #aac3bd 100%)",
+    "coverImage": "photos/album05/M-001.webp"
+  },
+  {
+    "id": "album06",
+    "title": "新年",
+    "subtitle": "待上傳 · 回憶",
+    "accent": "linear-gradient(155deg, #ece9f7 0%, #b7b0d8 100%)",
+    "coverImage": "photos/album06/0.webp"
+  },
+  {
+    "id": "album07",
+    "title": "相本 07",
+    "subtitle": "待上傳 · 回憶",
+    "accent": "linear-gradient(155deg, #f5ecd8 0%, #d5bf8d 100%)"
+  }
+]

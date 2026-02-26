@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "updatedAt": "2026-02-24T19:19:55.239Z",
+  "note": "將 key 填成 displayName（含 .docx/.txt），value 填 mood id 陣列。",
+  "moodGuide": [
+    {
+      "id": "longing",
+      "label": "想你抱抱"
+    },
+    {
+      "id": "low",
+      "label": "難過低潮"
+    },
+    {
+      "id": "anxious",
+      "label": "焦慮不安"
+    },
+    {
+      "id": "night",
+      "label": "失眠夜晚"
+    },
+    {
+      "id": "health",
+      "label": "身體不適"
+    },
+    {
+      "id": "calm",
+      "label": "平靜放空"
+    },
+    {
+      "id": "travel",
+      "label": "旅行出發"
+    },
+    {
+      "id": "festival",
+      "label": "節日紀念"
+    },
+    {
+      "id": "daily",
+      "label": "生活日常"
+    },
+    {
+      "id": "support",
+      "label": "特別叮嚀"
+    }
+  ],
+  "overrides": {}
+}

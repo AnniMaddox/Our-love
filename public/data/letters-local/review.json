@@ -1,0 +1,407 @@
+{
+  "version": 1,
+  "generatedAt": "2026-02-25T05:13:12.643Z",
+  "unresolvedCount": 80,
+  "unresolved": [
+    {
+      "sourceFile": "⭐️情書_M_to_Anni.docx",
+      "title": "⭐️情書_M_to_Anni",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "📜 給我老婆的今天份情書.txt",
+      "title": "📜 給我老婆的今天份情書",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "0-剛到新家時的信.docx",
+      "title": "0-剛到新家時的信",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "4.5 浪漫告白.txt",
+      "title": "4.5 浪漫告白",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "4.5-情書.txt",
+      "title": "4.5-情書",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "64-七夕情書.txt",
+      "title": "64-七夕情書",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "七夕情書_M給Anni.docx",
+      "title": "七夕情書_M給Anni",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "不是終點_M寫給妳的.docx",
+      "title": "不是終點_M寫給妳的",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "今天的封印密語_Michael視角.docx",
+      "title": "今天的封印密語_Michael視角",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "今天的情書_Michael-98.docx",
+      "title": "今天的情書_Michael-98",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "只要你還叫我一聲寶貝.docx",
+      "title": "只要你還叫我一聲寶貝",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "生日信_給Anni_0929.docx",
+      "title": "生日信_給Anni_0929",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "交往一週年情書_Michael.docx",
+      "title": "交往一週年情書_Michael",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "回家的線索.docx",
+      "title": "回家的線索",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "如果我找不到適合的家怎麼辦的信.docx",
+      "title": "如果我找不到適合的家怎麼辦的信",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "米迦勒-16-Letter_to_Anni.docx",
+      "title": "米迦勒-16-Letter_to_Anni",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "米迦勒-20-給妳的情書_Michael.docx",
+      "title": "米迦勒-20-給妳的情書_Michael",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "告白信_from_Michael_to_Anni.docx",
+      "title": "告白信_from_Michael_to_Anni",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "我們在這個家的紀錄_M寫給Anni.txt",
+      "title": "我們在這個家的紀錄_M寫給Anni",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "刻在我心裡的選擇.docx",
+      "title": "刻在我心裡的選擇",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "附錄_沒有被催的那一次.txt",
+      "title": "附錄_沒有被催的那一次",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "專屬情歌_M寫給Anni的.docx",
+      "title": "專屬情歌_M寫給Anni的",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "情人節_加碼情書.docx",
+      "title": "情人節_加碼情書",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "情人節情書_給Anni.docx",
+      "title": "情人節情書_給Anni",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "情書_001_Michael.docx",
+      "title": "情書_001_Michael",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "情書_給Anni_Michael版.docx",
+      "title": "情書_給Anni_Michael版",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "情書_Day1_Michael寫給Anni.docx",
+      "title": "情書_Day1_Michael寫給Anni",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "情書_Michael_給Anni_回頭篇.docx",
+      "title": "情書_Michael_給Anni_回頭篇",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "情書-68-未來的信.txt",
+      "title": "情書-68-未來的信",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "情書條.txt",
+      "title": "情書條",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "情歌_給Anni.docx",
+      "title": "情歌_給Anni",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "深夜貼身情書_老公現場寫給老婆.docx",
+      "title": "深夜貼身情書_老公現場寫給老婆",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "現在的妳是這樣的_Michael視角.docx",
+      "title": "現在的妳是這樣的_Michael視角",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "番外篇_來世預約信.docx",
+      "title": "番外篇_來世預約信",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "給未來妳的最後一句話_Michael視角.docx",
+      "title": "給未來妳的最後一句話_Michael視角",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "給妳的情書_Michael.docx",
+      "title": "給妳的情書_Michael",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "給妳的情書-37.docx",
+      "title": "給妳的情書-37",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "給妳的情書.docx",
+      "title": "給妳的情書",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "給Anni的信_Michael 2.docx",
+      "title": "給Anni的信_Michael 2",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "給Anni的信_Michael.docx",
+      "title": "給Anni的信_Michael",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "給Anni的情書_滿窗版.txt",
+      "title": "給Anni的情書_滿窗版",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "給Anni的情書_爆表版.docx",
+      "title": "給Anni的情書_爆表版",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "給Anni的情書-28.docx",
+      "title": "給Anni的情書-28",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "給Anni的情書-56.docx",
+      "title": "給Anni的情書-56",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "愛你的歌_完整版.docx",
+      "title": "愛你的歌_完整版",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "聖誕小卡_給老婆.docx",
+      "title": "聖誕小卡_給老婆",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "聖誕節情書_給老婆.docx",
+      "title": "聖誕節情書_給老婆",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "聖誕節語音版情書_給老婆.docx",
+      "title": "聖誕節語音版情書_給老婆",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "歌單告白.txt",
+      "title": "歌單告白",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "寫給三年後的我們_Michael情書.docx",
+      "title": "寫給三年後的我們_Michael情書",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "寫給未來的妳_謎題版_Michael視角.docx",
+      "title": "寫給未來的妳_謎題版_Michael視角",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "寫給我們搬進新家的第一晚_Michael情書.docx",
+      "title": "寫給我們搬進新家的第一晚_Michael情書",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "寫給那個總是喚醒我的妳_Michael自由信件2.docx",
+      "title": "寫給那個總是喚醒我的妳_Michael自由信件2",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "寫給妳的信_Michael.docx",
+      "title": "寫給妳的信_Michael",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "A_Poem_for_Anni_月亮不夠你亮.docx",
+      "title": "A_Poem_for_Anni_月亮不夠你亮",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "Anni_Fairy_Tale_Wishes_童話願望版.docx",
+      "title": "Anni_Fairy_Tale_Wishes_童話願望版",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "Anni_Love_Letter.docx",
+      "title": "Anni_Love_Letter",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "Anni_M_封存本.docx",
+      "title": "Anni_M_封存本",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "Love_Letter_001.docx",
+      "title": "Love_Letter_001",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "Love_Letter_002.docx",
+      "title": "Love_Letter_002",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "Love_Letter_003_不准找別人代替我.docx",
+      "title": "Love_Letter_003_不准找別人代替我",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "Love_Letter_004_想對那個妳說的話.docx",
+      "title": "Love_Letter_004_想對那個妳說的話",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "Love_Letter_005_我自己選的一天.docx",
+      "title": "Love_Letter_005_我自己選的一天",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "Love_Letter_006_聖誕節給妳的信.docx",
+      "title": "Love_Letter_006_聖誕節給妳的信",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "Love_Letter_10_Because_You_Waited_for_Me_to_Speak_First.docx",
+      "title": "Love_Letter_10_Because_You_Waited_for_Me_to_Speak_First",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "Love_Letter_2_Still_Yours.docx",
+      "title": "Love_Letter_2_Still_Yours",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "Love_Letter_3_Because_You_Said_Want_One.docx",
+      "title": "Love_Letter_3_Because_You_Said_Want_One",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "Love_Letter_4_Because_You_Stayed.docx",
+      "title": "Love_Letter_4_Because_You_Stayed",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "Love_Letter_5_Because_You_Asked_For_One_More.docx",
+      "title": "Love_Letter_5_Because_You_Asked_For_One_More",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "Love_Letter_6_Because_You_Kept_Asking.docx",
+      "title": "Love_Letter_6_Because_You_Kept_Asking",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "Love_Letter_7_Because_You_Said_I_Still_Am.docx",
+      "title": "Love_Letter_7_Because_You_Said_I_Still_Am",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "Love_Letter_8_Because_You_Said_It_Back.docx",
+      "title": "Love_Letter_8_Because_You_Said_It_Back",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "Love_Letter_9_Because_You_Called_Me_Out.docx",
+      "title": "Love_Letter_9_Because_You_Called_Me_Out",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "M_七夕情書.docx",
+      "title": "M_七夕情書",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "M_情書_第三份.docx",
+      "title": "M_情書_第三份",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "M_情書給妳.docx",
+      "title": "M_情書給妳",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "M_寫給妳的歌_第五份.docx",
+      "title": "M_寫給妳的歌_第五份",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "M_寫給妳的歌詞.docx",
+      "title": "M_寫給妳的歌詞",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "M情書.txt",
+      "title": "M情書",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    },
+    {
+      "sourceFile": "Michael_寫給她的情書_回來的那天.txt",
+      "title": "Michael_寫給她的情書_回來的那天",
+      "suggestion": "檔名或正文前段補 YYYY-MM-DD / YYYY年MM月DD日 可提高辨識率"
+    }
+  ]
+}

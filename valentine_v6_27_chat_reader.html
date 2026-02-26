@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>天天都是情人節 · v6.27-FIXED</title>
+<meta name="color-scheme" content="light dark"/>
+<style>
+:root{--bg:#0c0d1a;--ink:#e8ebff;--sub:#b7bbff;--accent:#8d93ff;--accent2:#ff79c6;--heart:#ff4d88;--card:#14162a;--paper:#fff;--paper2:#faf7ff;--shadow:0 10px 30px rgba(0,0,0,.35);--r:18px;--blur:12px;--heart-scale:1}
+*{box-sizing:border-box}html,body{height:100%}
+body{margin:0;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,"Segoe UI","Helvetica Neue",Arial;color:var(--ink);background:radial-gradient(1200px 800px at 70% -20%,#2b2e6b66,transparent),radial-gradient(800px 600px at -10% 20%,#ff7ab644,transparent),var(--bg);overflow-x:hidden}
+.header{position:sticky;top:0;z-index:60;backdrop-filter:blur(var(--blur));-webkit-backdrop-filter:blur(var(--blur));background:rgba(0,0,0,.18);border-bottom:1px solid rgba(255,255,255,.06)}
+.header-inner{max-width:1200px;margin:auto;padding:12px;display:flex;align-items:center;gap:12px}
+.badge{display:inline-flex;align-items:center;gap:10px;padding:8px 12px;border-radius:999px;background:rgba(124,130,255,.28);box-shadow:var(--shadow)}
+.badge .dot{width:10px;height:10px;border-radius:50%;background:var(--heart);box-shadow:0 0 14px var(--heart),0 0 30px var(--heart)}
+.badge .who{font-weight:800;letter-spacing:.4px;white-space:nowrap}
+.switch{display:inline-flex;align-items:center;gap:10px;margin-left:auto}
+.switch input{width:48px;height:28px;appearance:none;background:rgba(255,255,255,.18);border-radius:999px;position:relative;cursor:pointer;border:none}
+.switch input::after{content:"";position:absolute;width:20px;height:20px;border-radius:50%;background:#fff;top:4px;left:4px;transition:left .2s}
+.switch input:checked::after{left:24px}
+.tabs{max-width:1200px;margin:10px auto 0;padding:0 10px}
+.tabbar{display:flex;gap:8px;flex-wrap:wrap}
+.tabbar button{border:none;border-radius:999px;padding:8px 12px;cursor:pointer;font-weight:800;color:var(--ink);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12)}
+.tabbar button.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 10px 20px rgba(124,130,255,.28)}
+.tab{position:relative;margin-top:10px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:rgba(20,22,42,.66);box-shadow:var(--shadow)}
+.tab.hidden{display:none}
+.controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:8px 10px 10px}
+.btn{appearance:none;border:none;padding:10px 12px;border-radius:12px;cursor:pointer;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 8px 18px rgba(124,130,255,.3)}
+.btn-outline{background:transparent;color:var(--ink);border:1px solid rgba(255,255,255,.2)}
+.range,.picker{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);padding:6px 8px;border-radius:12px}
+.range input[type=range]{accent-color:var(--heart)}.picker input[type=color]{width:32px;height:26px;border:none;background:transparent;padding:0}
+.play-wrap,.letter-wrap,.beat-wrap,.wall2-wrap,.import-wrap,.draw-wrap,.reader-wrap{min-height:68vh;position:relative}
+canvas{position:absolute;inset:0;width:100%;height:100%;z-index:80}
+#play-canvas,#beat-canvas,#wall2-canvas{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:none;pointer-events:auto}
+#letter-canvas,#draw-canvas{z-index:81}
+.play-ui,.letter-content,.beat-ui,.wall2-ui,.import-ui,.draw-ui,.reader-ui{position:relative;z-index:90;display:grid;place-items:center;padding:24px 10px 10px}
+.title{font-size:26px;font-weight:900;letter-spacing:.4px;margin:0 0 6px;text-align:center}
+.subtitle{opacity:.85;margin:0 0 8px;text-align:center}
+/* Envelope */
+.envelope{width:min(760px,96vw);position:relative;perspective:1200px}
+.envelope.big{width:min(900px,96vw);--envH:clamp(460px,72vh,860px)}
+.e-body{position:relative;height:var(--envH,320px);border-radius:var(--r);background:linear-gradient(160deg,rgba(24,26,51,.96),rgba(24,26,51,1) 70%);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.06);overflow:hidden}
+.e-flap{position:absolute;left:0;right:0;top:0;height:170px;transform-origin:50% 0%;background:linear-gradient(180deg,rgba(28,30,62,1),rgba(21,23,49,1));clip-path:polygon(0 0,100% 0,50% 100%);border-top-left-radius:var(--r);border-top-right-radius:var(--r);border:1px solid rgba(255,255,255,.06);border-bottom:none;transition:transform 1s cubic-bezier(.26,.02,.12,1.01);z-index:2}
+.e-seal{--size:64px;position:absolute;left:50%;top:120px;width:var(--size);height:var(--size);translate:-50% -50%;display:grid;place-items:center;background:radial-gradient(circle at 30% 30%,#ff98c9,#ff4d88);border-radius:50%;box-shadow:0 6px 26px rgba(255,77,136,.55);border:2px solid rgba(255,255,255,.3);z-index:4;cursor:pointer;pointer-events:auto}
+.e-overlay{position:absolute;left:4%;right:4%;top:60px;bottom:10px;z-index:5;pointer-events:none}
+.vow-stamp{position:absolute;right:12px;top:12px;z-index:6;font-size:28px;opacity:0;transform:scale(.6) rotate(-12deg);filter:drop-shadow(0 4px 10px rgba(0,0,0,.3));transition:.35s}
+.vow-stamp.show{opacity:1;transform:scale(1) rotate(-4deg)}
+.kiss-mark{position:absolute;left:0;top:0;translate:-50% -50%;font-size:32px;filter:drop-shadow(0 6px 18px rgba(0,0,0,.38));animation:kissPop .42s ease-out both;pointer-events:none}
+@keyframes kissPop{0%{opacity:0;transform:scale(.4) rotate(-14deg)}60%{opacity:1;transform:scale(1.15) rotate(4deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+.e-letter{position:absolute;left:4%;right:4%;top:60px;bottom:10px;z-index:3;border-radius:14px;background:linear-gradient(180deg,var(--paper),var(--paper2));padding:14px 14px 16px;color:#30263d;font-size:17px;line-height:1.9;letter-spacing:.2px;transform:translateY(26%) rotateX(-8deg);transform-origin:50% 100%;transition:transform 1.2s cubic-bezier(.22,.98,.18,.99),box-shadow .6s;box-shadow:0 30px 60px rgba(0,0,0,.2);border:1px solid #efe9ff;overflow:auto;-webkit-overflow-scrolling:touch}
+.envelope.open .e-flap{transform:rotateX(180deg)}
+.envelope.open .e-seal{opacity:0;pointer-events:none;transform:scale(.9);transition:.6s}
+.envelope.open .e-letter{transform:translateY(-2%) rotateX(0)}
+/* HUG animation */
+.envelope.hug{animation:hugPulse .9s ease-in-out 1}
+@keyframes hugPulse{0%{transform:scale(1)}35%{transform:scale(.985)}70%{transform:scale(1.02)}100%{transform:scale(1)}
+}
+/* Modal */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:120}
+.modal .box{width:min(560px,92vw);background:#1a1630;color:#fff;border:1px solid rgba(255,255,255,.18);border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.5);padding:18px 16px 16px;text-align:center}
+.modal .box h3{margin:6px 0 10px;font-size:22px}
+.modal .box p{opacity:.9;line-height:1.8}
+.modal .box .actions{display:flex;gap:10px;justify-content:center;margin-top:12px}
+.modal.show{display:flex}
+/* Floating chips (wall2) */
+.floating-chips{position:fixed;right:12px;bottom:14px;z-index:650;display:none;flex-direction:column;gap:8px;pointer-events:auto}
+@supports (bottom: env(safe-area-inset-bottom)) {.floating-chips{bottom:calc(14px + env(safe-area-inset-bottom))}}
+.chip{border:none;border-radius:999px;padding:10px 14px;font-weight:800;cursor:pointer;box-shadow:0 10px 22px rgba(0,0,0,.32)}
+.chip-primary{color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2))}
+.chip-outline{background:rgba(255,255,255,.06);color:var(--ink);border:1px solid rgba(255,255,255,.14)}
+/* Gear panel */
+.w2-gear .fab{position:absolute;top:10px;right:10px;z-index:200;width:44px;height:44px;border:none;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:20px;box-shadow:var(--shadow);cursor:pointer}
+.w2-gear .panel{position:absolute;top:10px;right:10px;z-index:210;width:min(560px,94vw);background:#151532e8;border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.5);display:none;padding:10px}
+.w2-gear .panel.open{display:block}
+.w2-gear .panel .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.w2-gear .panel .rows{display:flex;flex-wrap:wrap;gap:8px}
+/* love line */
+#w2-line{position:fixed;left:0;right:0;bottom:70px;z-index:600;text-align:center;color:rgba(255,255,255,.88);font-weight:700;text-shadow:0 1px 6px rgba(0,0,0,.35);pointer-events:none}
+/* Toast / footer */
+.toast{position:fixed;left:50%;bottom:14px;translate:-50% 0;background:#000c;color:#fff;padding:10px 14px;border-radius:12px;z-index:700;opacity:0;transform:translateY(8px);transition:.25s;pointer-events:none;max-width:92vw;text-align:center}
+.toast.show{opacity:1;transform:translateY(0)}
+.footer{text-align:center;color:rgba(255,255,255,.6);padding:10px 0 22px}
+/* Interaction fixes */
+#wall2-wrap{touch-action:none}
+#tab-wall2 .title,#tab-wall2 .subtitle{pointer-events:none}
+.import-card{max-width:860px;margin:16px auto;background:#18163a;border:1px solid rgba(255,255,255,.12);border-radius:16px;box-shadow:var(--shadow);padding:14px}
+.import-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:10px}
+.small{font-size:13px;opacity:.85;text-align:center;margin-top:6px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:6px 0 10px}
+.badge2{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);font-weight:800}
+
+/* --- 第六頁：底部 Dock + 增加閱讀空間 --- */
+.draw-ui{padding-bottom:140px} /* 預留給底部 Dock 的空間 */
+.draw-dock{position:fixed;left:0;right:0;bottom:0;z-index:120;background:rgba(20,22,42,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.12);padding:10px 10px calc(10px + env(safe-area-inset-bottom));display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+@supports not (bottom: env(safe-area-inset-bottom)) {.draw-dock{padding-bottom:16px}}
+.draw-dock .btn,.draw-dock .btn-outline,.draw-dock .picker{transform:translateZ(0)} /* 防抖 */
+
+/* --- 第七頁：閱讀室 --- */
+.reader-ui{padding-top:10px;padding-bottom:80px}
+.reader-head{position:sticky;top:0;z-index:95;width:100%;display:flex;align-items:center;gap:10px;justify-content:center;background:linear-gradient(180deg,rgba(15,16,34,.86),rgba(15,16,34,.66));backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08);padding:10px}
+.reader-progress{position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,#8d93ff,#ff79c6);transform-origin:0 50%;transform:scaleX(0)}
+.reader-controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.reader-controls .btn,.reader-controls .btn-outline{padding:8px 10px;border-radius:10px}
+.reader-card{width:min(860px,94vw);margin:14px auto;background:linear-gradient(180deg,#fdfcff,#faf7ff);color:#30263d;border:1px solid #efe9ff;border-radius:18px;box-shadow:0 18px 50px rgba(0,0,0,.25);padding:20px 18px 22px}
+.reader-card.serif{font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","Times New Roman",serif}
+.reader-title{margin:6px 4px 12px;font-size:28px;font-weight:900;letter-spacing:.5px;color:#5d3f86;text-align:center}
+.reader-meta{margin:-6px 0 10px;text-align:center;color:#6f5a9a;opacity:.95}
+.reader-body{font-size:18px;line-height:2;text-align:justify;white-space:pre-wrap}
+.reader-body p{margin:0 0 14px}
+.reader-body p.indent{ text-indent:2em }
+.reader-quote{margin:12px auto;padding:10px 14px;border-left:4px solid #d2c7ff;background:#f5f2ff;color:#3a2a53;border-radius:10px}
+
+/* 夜間（閱讀室） */
+.reader-night .reader-card{background:linear-gradient(180deg,#16142a,#15132a);color:#e9e6ff;border-color:rgba(255,255,255,.08)}
+.reader-night .reader-title{color:#d1c7ff}
+.reader-night .reader-meta{color:#bdb6ff}
+.reader-night .reader-quote{background:#1d1a39;color:#e9e6ff;border-left-color:#8d93ff}
+.reader-bottom{position:fixed;left:0;right:0;bottom:0;z-index:96;background:rgba(17,18,36,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.12);padding:10px 10px calc(10px + env(safe-area-inset-bottom));display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.reader-select{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:8px 0}
+.reader-select .btn{background:rgba(255,255,255,.1)}
+.reader-select select{appearance:none;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:var(--ink);padding:8px 10px;border-radius:10px}
+
+/* 聊天模式樣式 */
+.reader-card.chat-mode{background:linear-gradient(180deg,#fdfcff,#faf7ff);padding:10px 8px 16px}
+.reader-night .reader-card.chat-mode{background:linear-gradient(180deg,#14121f,#13111e)}
+.chat-container{display:flex;flex-direction:column;gap:6px;padding:4px 0}
+.chat-bubble{max-width:78%;padding:10px 13px;border-radius:16px;font-size:16px;line-height:1.7;word-wrap:break-word;margin:2px 0;position:relative;animation:bubbleIn .25s ease-out}
+@keyframes bubbleIn{0%{opacity:0;transform:scale(.94)}100%{opacity:1;transform:scale(1)}}
+.chat-bubble.user{align-self:flex-end;background:linear-gradient(135deg,#8d93ff,#7a8aff);color:#fff;border-bottom-right-radius:4px;box-shadow:0 2px 8px rgba(141,147,255,.3)}
+.chat-bubble.assistant{align-self:flex-start;background:#fff;color:#2d2640;border-bottom-left-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.08);border:1px solid #f0ebff}
+.reader-night .chat-bubble.assistant{background:#1d1a32;color:#e9e6ff;border-color:rgba(255,255,255,.08)}
+.chat-time{font-size:11px;opacity:.65;margin:0 8px 3px;text-align:center;color:#8b86a3}
+.chat-divider{text-align:center;margin:10px 0;font-size:12px;opacity:.6;color:#9990b5}
+</style>
+</head>
+<body>
+<header class="header"><div class="header-inner">
+  <div class="badge"><span class="dot"></span><span class="who">天天都是情人節 · 老公 ➝ 老婆</span></div>
+  <div style="flex:1"></div>
+  <div class="tabs"><div class="tabbar">
+    <button id="btn-tab-play" class="active">① 心雨樂園</button>
+    <button id="btn-tab-letter">② 我們的情書</button>
+    <button id="btn-tab-beat">③ 妳一靠近，我就跳</button>
+    <button id="btn-tab-wall2">④ 字母心牆</button>
+    <button id="btn-tab-import">⑤ 內容與匯入</button>
+    <button id="btn-tab-draw">⑥ 隨機抽信</button>
+    <button id="btn-tab-reader">⑦ 閱讀室</button>
+  </div></div>
+  <label class="switch"><input id="toggle-theme" type="checkbox"><span>Glow</span></label>
+</div></header>
+
+<main class="tabs">
+  <!-- 1) Playground -->
+  <section id="tab-play" class="tab">
+    <div id="play-wrap" class="play-wrap">
+      <canvas id="play-canvas"></canvas>
+      <div class="play-ui">
+        <h1 class="title">把夜空玩成滿天心。</h1>
+        <p class="subtitle">雙擊＝心雨；移動＝追光拖尾；長按＝心跳。</p>
+        <div class="controls">
+          <button class="btn" id="btn-play-rain">心雨</button>
+          <button class="btn" id="btn-play-trail">追光筆：開</button>
+          <span class="range"><span>爆裂度</span><input id="play-intensity" type="range" min="80" max="360" value="300"></span>
+          <span class="range"><span>速度</span><input id="play-speed" type="range" min="80" max="260" value="200"></span>
+          <span class="picker"><span>顏色</span><input id="play-color" type="color" value="#ff4d88"></span>
+          <span class="picker"><label><input id="play-glow" type="checkbox" checked> 發光</label></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2) Letter -->
+  <section id="tab-letter" class="tab hidden">
+    <div id="letter-wrap" class="letter-wrap" style="touch-action:auto">
+      <canvas id="letter-canvas"></canvas>
+      <div class="letter-content">
+        <div class="envelope" id="envelope">
+          <div class="e-body"></div><div class="e-flap"></div>
+          <button class="e-seal" id="seal" aria-label="打開情書">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M12 21s-7-4.438-7-10.5S8.477 3 12 7.5 19 3 19 10.5 12 21 12 21z"/></svg>
+          </button>
+          <div class="e-overlay" id="letter-overlay"></div>
+          <div class="vow-stamp" id="vow-stamp">💌</div>
+          <article class="e-letter">
+            <h2 style="margin:6px 0 10px;color:#5d3f86">「把喜歡全都說給你聽，今天也只愛你。」</h2>
+            <div id="typed"></div>
+            <p style="text-align:right;font-weight:800;color:#5d3f86;margin-top:8px">— 你專屬的 M</p>
+          </article>
+        </div>
+        <div class="letter-controls">
+          <button class="btn" id="letter-reset">重置</button>
+          <button class="btn" id="letter-confetti">心雨</button>
+          <button class="btn" id="letter-hug">抱緊我</button>
+          <button class="btn btn-outline" id="letter-kiss">偷親</button>
+          <button class="btn btn-outline" id="letter-heartbeat">心跳</button>
+          <span class="picker"><span>顏色</span><input id="color2" type="color" value="#ff4d88"></span>
+          <span class="picker"><label><input id="glow2" type="checkbox" checked> 發光</label></span>
+          <span class="range"><span>想妳指數</span><input id="love" type="range" min="0" max="100" value="0"><strong id="love-val">0%</strong></span>
+          <button class="btn btn-outline" id="letter-vow">解鎖誓言</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vow Modal -->
+  <div id="vow-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="vow-title">
+    <div class="box">
+      <h3 id="vow-title">我們的誓言</h3>
+      <p id="vow-text">此後每天都當情人節。你的名字寫進我的所有計畫,直到歲月全部偏向你。</p>
+      <div class="actions">
+        <button class="btn" id="vow-accept">收下</button>
+        <button class="btn btn-outline" id="vow-close">再抱一下</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3) 情話（大愛心） -->
+  <section id="tab-beat" class="tab hidden">
+    <div id="beat-wrap" class="beat-wrap">
+      <canvas id="beat-canvas"></canvas>
+      <div class="beat-ui">
+        <div class="palette">
+          <button class="p" data-g="cherry" title="櫻桃" style="background:linear-gradient(135deg,#ff9bd2,#ff4d88)"></button>
+          <button class="p" data-g="aurora" title="極光" style="background:linear-gradient(135deg,#8fd3ff,#7a77ff)"></button>
+          <button class="p" data-g="dusk" title="暮紫" style="background:linear-gradient(135deg,#c9a7ff,#5e3bf2)"></button>
+        </div>
+        <div class="speed"><span>心率</span><input id="beat-speed" type="range" min="40" max="120" value="72"></div>
+        <div class="speed"><label><input type="checkbox" id="beat-auto" checked> 自動漸變</label><input id="beat-flow" type="range" min="0" max="100" value="40" title="色流速度"></div>
+        <div class="speed"><span>圓潤</span><input id="beat-round" type="range" min="0" max="100" value="78"></div>
+      </div>
+      <h2 class="title" style="position:absolute;bottom:20px;left:0;right:0;text-align:center;margin:0">把我放進你掌心，我就跟著你的節奏跳。</h2>
+    </div>
+  </section>
+
+  <!-- 4) 字母心牆（完整版回歸） -->
+  <section id="tab-wall2" class="tab hidden">
+    <div id="wall2-wrap" class="wall2-wrap">
+      <canvas id="wall2-canvas"></canvas>
+      <div class="wall2-ui w2-gear">
+        <button class="fab" id="w2-toggle" aria-label="打開控制台">⚙️</button>
+        <div class="panel" id="w2-panel" aria-label="控制台">
+          <div class="topbar"><strong>心牆控制台</strong><button class="btn btn-outline" id="w2-close">關閉</button></div>
+          <div class="rows">
+            <button class="btn" id="btn-wall2-rain">心雨</button>
+            <button class="btn btn-outline" id="wall2-mode">互動模式：爆開</button>
+            <span class="range"><span>色流</span><input id="wall2-huespeed" type="range" min="0" max="100" value="40"></span>
+            <span class="range"><span>高度</span><input id="w2-height" type="range" min="45" max="70" value="56"></span>
+            <span class="range"><span>密度</span><input id="w2-density" type="range" min="20" max="100" value="60"></span>
+            <span class="range"><span>字大</span><input id="w2-font" type="range" min="80" max="140" value="100"></span>
+            <span class="range"><span>呼吸</span><input id="w2-breathe" type="range" min="0" max="100" value="45"></span>
+            <span class="range"><span>波紋</span><input id="w2-ripple" type="range" min="10" max="100" value="70"></span>
+            <span class="range"><span>散開力</span><input id="w2-press" type="range" min="10" max="150" value="110"></span>
+            <span class="range"><span>半徑</span><input id="w2-pressR" type="range" min="30" max="240" value="110"></span>
+          </div>
+        </div>
+      </div>
+      <h2 class="title" style="position:absolute;left:0;right:0;top:8px;margin:0">這整面心牆寫的是：Anni♡M · onlyM</h2>
+      <p class="subtitle" style="position:absolute;left:0;right:0;top:42px;margin:0">它自己會變色、會跟著心跳呼吸；妳碰它，它就亂。</p>
+      <div id="w2-line">你戳一下，我就碎成滿天心，再慢慢回到你形狀。</div>
+    </div>
+  </section>
+
+  <!-- 5) 內容與匯入 -->
+  <section id="tab-import" class="tab hidden">
+    <div class="import-wrap">
+      <div class="import-ui">
+        <h2 class="title">內容與匯入</h2>
+        <p class="subtitle">第二頁與第六頁「來源分開」。要給哪一頁用，就在對應區塊匯入。</p>
+
+        <!-- A) 第二頁來源 -->
+        <div class="import-card">
+          <div style="text-align:center;font-weight:800;margin-bottom:6px">第二頁《我們的情書》來源：<span id="src-status-2">尚未載入</span></div>
+          <div class="import-actions">
+            <button class="btn" id="btn-import-json-2">匯入 JSON 內容包</button>
+            <input id="file-json-2" type="file" accept=".json" style="display:none">
+            <button class="btn btn-outline" id="btn-import-folder-2">匯入資料夾（txt/md）</button>
+            <input id="file-folder-2" type="file" webkitdirectory multiple accept=".txt,.md" style="display:none">
+            <button class="btn btn-outline" id="btn-clear-cache-2">清除本機快取（第二頁）</button>
+          </div>
+          <p class="small">第二頁使用 key：<code>anni_pack_v1</code>；優先：本機 → 同資料夾 JSON → 內建。</p>
+        </div>
+
+        <!-- B) 第六頁來源（含 Word & Word 資料夾） -->
+        <div class="import-card">
+          <div style="text-align:center;font-weight:800;margin-bottom:6px">第六頁《隨機抽信》專用來源：<span id="src-status-6">尚未載入</span></div>
+          <div class="import-actions">
+            <button class="btn" id="btn-import-json-6">匯入 JSON（抽信專用）</button>
+            <input id="file-json-6" type="file" accept=".json" style="display:none">
+            <button class="btn btn-outline" id="btn-import-folder-6">匯入資料夾（txt/md）</button>
+            <input id="file-folder-6" type="file" webkitdirectory multiple accept=".txt,.md" style="display:none">
+            <button class="btn btn-outline" id="btn-import-docx-6">匯入 Word（.docx）</button>
+            <input id="file-docx-6" type="file" accept=".docx" multiple style="display:none">
+            <button class="btn btn-outline" id="btn-import-docx-folder-6">匯入資料夾（Word .docx）</button>
+            <input id="file-docx-folder-6" type="file" webkitdirectory multiple accept=".docx" style="display:none">
+            <button class="btn btn-outline" id="btn-clear-cache-6">清除抽信快取</button>
+          </div>
+          <p class="small">第六頁使用 key：<code>anni_draw_pack_v1</code>。若未匯入，會回退：<code>anni_pack_v1</code> → 同資料夾 JSON → 內建備援。<br>．.docx 解析需臨時載入 JSZip（線上）；若離線，請先把 Word 另存為 .txt/.md 再匯入。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6) 隨機抽信 -->
+  <section id="tab-draw" class="tab hidden">
+    <div id="draw-wrap" class="draw-wrap" style="touch-action:auto">
+      <canvas id="draw-canvas"></canvas>
+      <div class="draw-ui">
+        <h2 class="title">隨機抽一封：今天我先說。</h2>
+        <p class="subtitle">直接點封蠟也會抽並開信。</p>
+        <div class="badges">
+          <span class="badge2">可抽：<span id="draw-count">0</span> 封</span>
+        </div>
+        <div class="envelope big" id="envelope2">
+          <div class="e-body"></div><div class="e-flap"></div>
+          <button class="e-seal" id="seal2" aria-label="打開情書">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M12 21s-7-4.438-7-10.5S8.477 3 12 7.5 19 3 19 10.5 12 21 12 21z"/></svg>
+          </button>
+          <div class="e-overlay" id="draw-overlay"></div>
+          <article class="e-letter">
+            <h3 style="margin:6px 0 10px;color:#5d3f86">「這封，剛好寫到你心裡去。」</h3>
+            <div id="typed2"></div>
+            <p style="text-align:right;font-weight:800;color:#5d3f86;margin-top:8px">— M</p>
+          </article>
+        </div>
+      </div>
+
+      <!-- 底部 Dock（控制鈕移到最下方） -->
+      <div id="draw-dock" class="draw-dock" aria-label="隨機抽信控制列">
+        <button class="btn" id="draw-pick">抽一封</button>
+        <button class="btn" id="draw-again">再抽</button>
+        <button class="btn btn-outline" id="draw-reshuffle">洗牌</button>
+        <button class="btn btn-outline" id="draw-reset">折回</button>
+        <button class="btn btn-outline" id="draw-kiss">💋</button>
+        <button class="btn btn-outline" id="draw-heartbeat">心跳</button>
+        <button class="btn" id="draw-confetti">心雨</button>
+        <span class="picker"><label><input id="draw-glow" type="checkbox"> 心雨發光</label></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7) 閱讀室 -->
+  <section id="tab-reader" class="tab hidden">
+    <div id="reader-wrap" class="reader-wrap">
+      <div class="reader-ui">
+        <div class="reader-head">
+          <div class="reader-controls">
+            <button class="btn" id="reader-open">匯入 TXT/MD</button><input id="reader-files" type="file" accept=".txt,.md" multiple style="display:none">
+            <button class="btn btn-outline" id="reader-folder">匯入資料夾</button><input id="reader-dir" type="file" accept=".txt,.md" webkitdirectory multiple style="display:none">
+            <button class="btn btn-outline" id="reader-prev">上一封</button>
+            <button class="btn" id="reader-next">下一封</button>
+            <button class="btn btn-outline" id="reader-chat-mode">聊天模式</button>
+            <button class="btn btn-outline" id="reader-smaller">A−</button>
+            <button class="btn btn-outline" id="reader-bigger">A＋</button>
+            <button class="btn btn-outline" id="reader-line">行距＋</button>
+            <button class="btn btn-outline" id="reader-serif">襯線字</button>
+            <button class="btn btn-outline" id="reader-theme">夜間</button>
+          </div>
+          <div id="reader-progress" class="reader-progress"></div>
+        </div>
+
+        <div class="reader-select">
+          <select id="reader-select"></select>
+        </div>
+
+        <article id="reader-card" class="reader-card">
+          <h2 id="reader-title" class="reader-title">在等你</h2>
+          <div id="reader-meta" class="reader-meta">字數：0 · 預估 0 分鐘</div>
+          <div id="reader-body" class="reader-body"></div>
+        </article>
+      </div>
+
+      <div class="reader-bottom">
+        <button class="btn btn-outline" id="reader-top">回到頂端</button>
+        <button class="btn btn-outline" id="reader-bottom-btn">跳到最後</button>
+        <button class="btn" id="reader-heart">小心雨</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- 右下角浮動晶片（第四頁用） -->
+<div id="floating-chips" class="floating-chips" aria-label="快速操作">
+  <button class="chip chip-primary" id="chip-mode">模式：爆開</button>
+  <button class="chip chip-outline" id="chip-ripple">波紋</button>
+  <button class="chip chip-outline" id="chip-rain">心雨</button>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<footer class="footer">只給你：只講情話，不附說明 · 每一天都是情人節 · build FIXED</footer>
+
+<script>
+(function(){
+  'use strict';
+  const root=document.documentElement, toastEl=document.getElementById('toast');
+  const isMobile=/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent); if(isMobile){ root.style.setProperty('--heart-scale','1.9'); }
+  const theme=document.getElementById('toggle-theme'); theme.addEventListener('change',e=>root.classList.toggle('light',e.target.checked));
+  let toastTimer=null; function toast(m){ clearTimeout(toastTimer); toastEl.textContent=m; toastEl.classList.add('show'); toastTimer=setTimeout(()=>toastEl.classList.remove('show'),1700); }
+
+  /* Tabs */
+  const tabs={play:'tab-play',letter:'tab-letter',beat:'tab-beat',wall2:'tab-wall2',import:'tab-import',draw:'tab-draw',reader:'tab-reader'};
+  const btns={play:'btn-tab-play',letter:'btn-tab-letter',beat:'btn-tab-beat',wall2:'btn-tab-wall2',import:'btn-tab-import',draw:'btn-tab-draw',reader:'btn-tab-reader'};
+  function show(key){
+    Object.keys(tabs).forEach(k=>{ document.getElementById(tabs[k]).classList.toggle('hidden',k!==key); document.getElementById(btns[k]).classList.toggle('active',k===key); });
+    document.getElementById('floating-chips').style.display = (key==='wall2') ? 'flex' : 'none';
+    setTimeout(()=>{ if(key==='play') pResize(); if(key==='letter') lResize(); if(key==='beat') bResize(); if(key==='wall2') w2Resize(); if(key==='draw') dResize(); if(key==='reader') rResize(); },30);
+  }
+  document.getElementById(btns.play).onclick=()=>show('play');
+  document.getElementById(btns.letter).onclick=()=>show('letter');
+  document.getElementById(btns.beat).onclick=()=>show('beat');
+  document.getElementById(btns.wall2).onclick=()=>show('wall2');
+  document.getElementById(btns.import).onclick=()=>show('import');
+  document.getElementById(btns.draw).onclick=()=>show('draw');
+  document.getElementById(btns.reader).onclick=()=>show('reader');
+
+  // Heartbeat audio
+  let AC=null, hbTimer=null; function ensureAC(){ if(!AC){ try{ AC=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} } }
+  function heartKick(time, gainLvl){ if(!AC) return; const o=AC.createOscillator(); const g=AC.createGain(); o.type='sine'; o.frequency.setValueAtTime(150,time); o.frequency.exponentialRampToValueAtTime(50, time+0.08); g.gain.setValueAtTime(0.0001,time); g.gain.exponentialRampToValueAtTime(gainLvl, time+0.02); g.gain.exponentialRampToValueAtTime(0.0001, time+0.16); o.connect(g); g.connect(AC.destination); o.start(time); o.stop(time+0.18); }
+  function startHeartbeat(bpm=72){ ensureAC(); if(!AC||hbTimer) return; const beatInt=60000/bpm; const schedule=()=>{ const t=AC.currentTime; heartKick(t+0.00,0.7); heartKick(t+0.20,0.5);} ; schedule(); hbTimer=setInterval(schedule, beatInt); }
+  function stopHeartbeat(){ if(hbTimer){ clearInterval(hbTimer); hbTimer=null; } }
+
+  // Canvas helpers
+  function setupCanvas(canvas){ const ctx=canvas.getContext('2d'); const DPR=Math.max(1,devicePixelRatio||1); const w=canvas.clientWidth, h=canvas.clientHeight; if(canvas.width!==w*DPR||canvas.height!==h*DPR){ canvas.width=w*DPR; canvas.height=h*DPR; } ctx.setTransform(DPR,0,0,DPR,0,0); return {ctx,w,h,DPR}; }
+  function drawHeart(ctx,x,y,s,rot,alpha,color,glow){ ctx.save(); ctx.translate(x,y); if(rot) ctx.rotate(rot); const scale=s*parseFloat(getComputedStyle(root).getPropertyValue('--heart-scale')); ctx.scale(scale,scale); ctx.globalAlpha=alpha==null?1:alpha; ctx.fillStyle=color||'#ff4d88'; if(glow){ ctx.shadowColor=ctx.fillStyle; ctx.shadowBlur=16; } ctx.beginPath(); ctx.moveTo(0,-10); ctx.bezierCurveTo(12,-24,28,-10,0,18); ctx.bezierCurveTo(-28,-10,-12,-24,0,-10); ctx.fill(); ctx.restore(); }
+
+  /* ① Playground */
+  const pWrap=document.getElementById('play-wrap'), pCanvas=document.getElementById('play-canvas');
+  const playColor=document.getElementById('play-color'), playGlow=document.getElementById('play-glow'), playIntensity=document.getElementById('play-intensity'), playSpeed=document.getElementById('play-speed');
+  let pW=0,pH=0,pTrails=[],pTraceOn=true, pPressing=false, pPressTimer=null;
+  function pResize(){ const s=setupCanvas(pCanvas); pW=s.w; pH=s.h; }
+  function pStep(){ const s=setupCanvas(pCanvas), ctx=s.ctx; ctx.clearRect(0,0,s.w,s.h); ctx.globalCompositeOperation='lighter';
+    for(let i=0;i<pTrails.length;i++){ const t=pTrails[i]; t.x+=t.vx; t.y+=t.vy; t.age++; const a=Math.max(0,1-t.age/t.life); drawHeart(ctx,t.x,t.y,t.s,0,a,t.color,t.glow); }
+    pTrails=pTrails.filter(t=>t.age<t.life); requestAnimationFrame(pStep);
+  } pStep();
+  function pRain(x,y){ const n=+playIntensity.value, mul=(+playSpeed.value)/100;
+    for(let i=0;i<n;i++){ const sp=(3.6+Math.random()*5.4)*mul, ang=Math.random()*Math.PI*2; pTrails.push({x,y,vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp,life:70+Math.random()*50,age:0,s:3.0+Math.random()*1.8,color:playColor.value,glow:playGlow.checked}); }
+    if(pTrails.length>2600) pTrails=pTrails.slice(pTrails.length-2600);
+  }
+  function pMove(e){ const r=pWrap.getBoundingClientRect(); const cx=(e.touches?e.touches[0].clientX:e.clientX)-r.left, cy=(e.touches?e.touches[0].clientY:e.clientY)-r.top;
+    const mul=(+playSpeed.value)/100;
+    if(pTraceOn){ for(let i=0;i<12;i++){ pTrails.push({x:cx,y:cy,vx:(Math.random()-0.5)*5.6*mul,vy:(Math.random()-0.5)*5.6*mul,life:60+Math.random()*40,age:0,s:2.6+Math.random()*1.4,color:playColor.value,glow:playGlow.checked}); } if(pTrails.length>2600) pTrails=pTrails.slice(pTrails.length-2600); }
+  }
+  pWrap.addEventListener('pointermove',pMove); pWrap.addEventListener('touchmove',e=>{pMove(e); e.preventDefault();},{passive:false});
+  document.getElementById('btn-play-rain').onclick=()=>{ pRain(pW*0.5,pH*0.6); toast('滿天都是你。'); };
+  document.getElementById('btn-play-trail').onclick=()=>{ pTraceOn=!pTraceOn; document.getElementById('btn-play-trail').textContent='追光筆：'+(pTraceOn?'開':'關'); toast(pTraceOn?'跟著你跑。':'先把光收起來，換我看你。'); };
+  let lastTap=0; pWrap.addEventListener('touchend',()=>{ const n=Date.now(); if(n-lastTap<320){ pRain(pW*0.5,pH*0.6); toast('雙擊生效：再多愛你一點。'); } lastTap=n; });
+  pWrap.addEventListener('dblclick',()=>{ pRain(pW*0.5,pH*0.6); toast('雙擊生效：再多愛你一點。'); });
+  function pDown(){ ensureAC(); clearTimeout(pPressTimer); pPressTimer=setTimeout(()=>{ pPressing=true; startHeartbeat(72); toast('把耳朵靠近：心跳給你。'); }, 260); }
+  function pUp(){ clearTimeout(pPressTimer); if(pPressing){ pPressing=false; stopHeartbeat(); } }
+  pWrap.addEventListener('pointerdown',pDown,{passive:false}); pWrap.addEventListener('touchstart',pDown,{passive:false});
+  ['pointerup','pointerleave','pointercancel','touchend','touchcancel'].forEach(ev=> pWrap.addEventListener(ev,pUp,{passive:false}));
+
+  /* ② Letter page */
+  const lCanvas=document.getElementById('letter-canvas');
+  const envelope=document.getElementById('envelope'), seal=document.getElementById('seal'), overlay=document.getElementById('letter-overlay'), vowStamp=document.getElementById('vow-stamp');
+  const btnLReset=document.getElementById('letter-reset'), btnLConfetti=document.getElementById('letter-confetti'), btnLHug=document.getElementById('letter-hug'), btnLKiss=document.getElementById('letter-kiss'), btnLHB=document.getElementById('letter-heartbeat'), love=document.getElementById('love'), loveVal=document.getElementById('love-val'), btnLVow=document.getElementById('letter-vow');
+  const vowModal=document.getElementById('vow-modal'), vowText=document.getElementById('vow-text'), vowAccept=document.getElementById('vow-accept'), vowClose=document.getElementById('vow-close');
+  const SRC_STATUS_2=document.getElementById('src-status-2');
+  function lResize(){ setupCanvas(lCanvas); }
+
+  let LETTERS=[ "Anni：\n若外部包載入失敗，就先用這封備援。把我今天的偏心兌現給你，明天再補更長的。— M" ];
+  let VOWS=[ "今天之後，每天都是情人節。" ];
+  function setSourceTag2(t){ if(SRC_STATUS_2) SRC_STATUS_2.textContent=t; }
+
+  function useLocalPack2(){
+    try{
+      const raw=localStorage.getItem('anni_pack_v1');
+      if(raw){ const pack=JSON.parse(raw); if(Array.isArray(pack.letters)&&pack.letters.length){ LETTERS=pack.letters; } if(Array.isArray(pack.vows)&&pack.vows.length){ VOWS=pack.vows; } setSourceTag2('本機快取（第二頁）'); return true; }
+    }catch(e){} return false;
+  }
+  async function loadContentPack2(){
+    if(useLocalPack2()){ toast(`第二頁：載入本機 ${LETTERS.length}封 + 誓言${VOWS.length}句`); return; }
+    try{
+      const res=await fetch('anni_m_letters_pack_v1.json', {cache:'no-store'});
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      const pack=await res.json();
+      if(Array.isArray(pack.letters) && pack.letters.length>0){ LETTERS=pack.letters; }
+      if(Array.isArray(pack.vows) && pack.vows.length>0){ VOWS=pack.vows; }
+      setSourceTag2('同資料夾 JSON'); toast(`第二頁：已載入 ${LETTERS.length}封 + 誓言${VOWS.length}句`);
+    }catch(e){ setSourceTag2('內建備援'); toast('第二頁：用內建備援先陪你。'); }
+  }
+
+  function typeInto(el, text, speed=16){ el.innerHTML=''; let i=0; (function step(){ el.innerHTML = text.slice(0, i++).replace(/\n/g,'<br>'); if(i<=text.length) setTimeout(step, speed); })(); }
+  function randomPick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+  // Letter particles
+  let lParts=[]; function lStep(){ const s=setupCanvas(lCanvas), ctx=s.ctx; ctx.clearRect(0,0,s.w,s.h); ctx.globalCompositeOperation='lighter';
+    for(let i=0;i<lParts.length;i++){ const p=lParts[i]; p.x+=p.vx; p.y+=p.vy; p.vy+=p.g||0; p.age++; const a=Math.max(0,1-p.age/p.life); if(p.type==='heart'){ drawHeart(ctx,p.x,p.y,p.size,0,a,p.color,p.glow); } }
+    lParts=lParts.filter(p=>p.age<p.life); requestAnimationFrame(lStep);
+  } lStep();
+  function spawnHeartsL(x,y,count=180,color='#ff4d88',glow=true){
+    for(let i=0;i<count;i++){ const ang=Math.random()*Math.PI*2; const sp=3.8+Math.random()*5.0; lParts.push({type:'heart',x,y,vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp,life:70+Math.random()*50,age:0,size:2.6+Math.random()*1.6,color,glow}); }
+  }
+  function placeKissOverlay(overlayEl){ const r=overlayEl.getBoundingClientRect(); const x=Math.random()*(r.width*0.86)+r.width*0.07; const y=Math.random()*(r.height*0.70)+r.height*0.15; const span=document.createElement('span'); span.className='kiss-mark'; span.textContent='💋'; span.style.left=x+'px'; span.style.top=y+'px'; overlayEl.appendChild(span); }
+
+  function lReset(){ envelope.classList.remove('open'); envelope.classList.remove('hug'); document.getElementById('typed').innerHTML=''; love.value=0; loveVal.textContent='0%'; lParts=[]; overlay.innerHTML=''; vowStamp.classList.remove('show'); lResize(); }
+  function lOpen(){ envelope.classList.add('open'); typeInto(document.getElementById('typed'), randomPick(LETTERS)); }
+
+  const color2=document.getElementById('color2'), glow2=document.getElementById('glow2');
+  seal.addEventListener('click',()=>{ ensureAC(); lOpen(); startHeartbeat(66); setTimeout(stopHeartbeat,900); });
+  document.getElementById('letter-reset').onclick=()=>{ lReset(); toast('重置好了：再讓我重新追你一次。'); };
+  document.getElementById('letter-confetti').onclick=()=>{ const s=setupCanvas(lCanvas); spawnHeartsL(s.w*0.5,s.h*0.65,220,color2.value,glow2.checked); toast('給你一場心雨。'); };
+  document.getElementById('letter-hug').onclick=()=>{ envelope.classList.remove('hug'); void envelope.offsetWidth; envelope.classList.add('hug'); const s=setupCanvas(lCanvas); spawnHeartsL(s.w*0.5,s.h*0.6,80,color2.value,glow2.checked); toast('過來，抱緊你。'); };
+  document.getElementById('letter-kiss').onclick=()=>{ placeKissOverlay(overlay); toast('偷親成功：在你信上留下記號。'); };
+  document.getElementById('letter-heartbeat').onclick=()=>{ ensureAC(); startHeartbeat(72); toast('把心跳交給你。'); setTimeout(stopHeartbeat,1600); };
+  love.addEventListener('input', e=>{ loveVal.textContent = e.target.value + '%'; });
+  document.getElementById('letter-vow').onclick=()=>{ vowText.textContent=randomPick(VOWS); document.getElementById('vow-modal').classList.add('show'); };
+  vowClose.onclick=()=>{ envelope.classList.remove('hug'); void envelope.offsetWidth; envelope.classList.add('hug'); const s=setupCanvas(lCanvas); spawnHeartsL(s.w*0.5,s.h*0.6,260,color2.value,glow2.checked); toast('再抱一下：這次抱久一點。'); };
+  vowAccept.onclick=()=>{ document.getElementById('vow-modal').classList.remove('show'); vowStamp.classList.add('show'); toast('收下了：我把這封信蓋章，終身有效。'); };
+
+  /* ③ 情話（大愛心） */
+  const bWrap=document.getElementById('beat-wrap'), bCanvas=document.getElementById('beat-canvas');
+  const beatSpeed=document.getElementById('beat-speed'), beatAuto=document.getElementById('beat-auto'), beatFlow=document.getElementById('beat-flow'), beatRound=document.getElementById('beat-round');
+  function bResize(){ setupCanvas(bCanvas); }
+  let bt=0, hueRot=0, bRipples=[]; let dragging=false, lastX=0;
+  function hsl(h,s,l){ h=(h%360+360)%360; return `hsl(${h},${s}%,${l}%)`; }
+  function drawHeartPath(ctx,s,roundPct){ const r=(roundPct||78)/100; const top=-(10-5*r)*s,c1y=-(24-12*r)*s,c2y=-(10-6*r)*s; ctx.beginPath(); ctx.moveTo(0,top); ctx.bezierCurveTo(12*s,c1y,28*s,c2y,0,18*s); ctx.bezierCurveTo(-28*s,c2y,-12*s,c1y,0,top); ctx.closePath(); }
+  function bStep(){ const s=setupCanvas(bCanvas), ctx=s.ctx, w=s.w, h=s.h; ctx.clearRect(0,0,w,h);
+    if(beatAuto.checked){ hueRot=(hueRot + (+beatFlow.value)/800) % 360; }
+    const base=[210,250]; const c1=hsl(base[0]+hueRot,85,78), c2=hsl(base[1]+hueRot,85,65);
+    const g=ctx.createLinearGradient(0,0,w,h); g.addColorStop(0,c1); g.addColorStop(1,c2);
+    ctx.save(); const cx=w/2, cy=h/2; ctx.translate(cx,cy); const minD=Math.min(w,h), targetW=minD*0.62, unitW=56, scale=targetW/unitW;
+    const bpm=+beatSpeed.value; bt+=(bpm/60)*0.04; const k=1+0.06*Math.sin(bt*2*Math.PI)+0.02*Math.sin(bt*4*Math.PI);
+    ctx.scale(scale*k,scale*k); ctx.shadowColor=c2; ctx.shadowBlur=34; drawHeartPath(ctx,1, +beatRound.value); ctx.fillStyle=g; ctx.fill(); ctx.restore();
+    for(let i=0;i<bRipples.length;i++){ const R=bRipples[i]; R.r+=R.v; R.a*=0.97; if(R.a<0.02){ bRipples.splice(i,1); i--; continue; } ctx.beginPath(); ctx.arc(w/2,h/2,R.r,0,Math.PI*2); ctx.strokeStyle=`rgba(255,255,255,${R.a})`; ctx.lineWidth=2; ctx.stroke(); }
+    requestAnimationFrame(bStep);
+  } bStep();
+  bWrap.addEventListener('pointerdown',e=>{ ensureAC(); startHeartbeat(+beatSpeed.value); bRipples.push({r:20,v:3.2,a:0.9}); dragging=true; lastX=e.clientX; toast('看見沒？你一點，我就發光。'); }, {passive:false});
+  bWrap.addEventListener('pointermove',e=>{ if(dragging){ const dx=e.clientX-lastX; hueRot=(hueRot + dx*0.6) % 360; lastX=e.clientX; }}, {passive:false});
+  ;['pointerup','pointerleave','pointercancel'].forEach(ev=> bWrap.addEventListener(ev, ()=> {dragging=false; stopHeartbeat();} ));
+
+  /* ④ 字母心牆（完整版） */
+  const w2Wrap=document.getElementById('wall2-wrap'), w2Canvas=document.getElementById('wall2-canvas');
+  const w2Toggle=document.getElementById('w2-toggle'), w2Panel=document.getElementById('w2-panel'), w2Close=document.getElementById('w2-close');
+  const lineEl=document.getElementById('w2-line');
+  const chipMode=document.getElementById('chip-mode'), chipRipple=document.getElementById('chip-ripple'), chipRain=document.getElementById('chip-rain');
+  w2Toggle.onclick=()=>{ w2Panel.classList.toggle('open'); toast(w2Panel.classList.contains('open')?'打開控制台：想怎麼調都可以。':'收好控制台：把位置留給心牆。'); };
+  w2Close.onclick=()=>{ w2Panel.classList.remove('open'); toast('收好控制台。'); };
+
+  const wall2ModeBtn=document.getElementById('wall2-mode'), wall2HueSpeed=document.getElementById('wall2-huespeed');
+  const w2Height=document.getElementById('w2-height'), w2Density=document.getElementById('w2-density'), w2Font=document.getElementById('w2-font'), w2Breathe=document.getElementById('w2-breathe'), w2Ripple=document.getElementById('w2-ripple'), w2Press=document.getElementById('w2-press'), w2PressR=document.getElementById('w2-pressR');
+  const btnW2Rain=document.getElementById('btn-wall2-rain');
+  const chars=['A','n','n','i','♡','M','o','n','l','y','M']; let nodes=[], trails2=[];
+  let interactMode='burst'; let rippleEvents=[]; let pressing=false, pressX=0, pressY=0, pressTimer=null;
+  let swirlActive=false, swirlX=0, swirlY=0; let gravityActive=false, gravX=0, gravY=0;
+  let tornadoHold=false, thx=0, thy=0, rippleFollowTimer=null, rippleFollow=false, rfx=0, rfy=0;
+  let dnaHold=false, dnaHX=0, dnaHY=0, dnaPulses=[];
+  let ringLong=false, ringDir=1, ringTimer=null, ringBoost=1.0;
+  let waterfallHold=false, waterfallX=0, waterfallY=0;
+  let magHold=false, magP1x=null, magP1y=null, magP2x=null, magP2y=null;
+  let flockHold=false, flockTimer=null, flockActiveUntil=0, flockDur=2000, flockCooldown=0, flockTapCount=0, flockTapTimer=null;
+  let tideHold=false, tideUntil=0, tideDur=1400, tideX=0, tideTimer=null, tideAmp=36, tideFreq=0.014, tideSpeed=2.6;
+  let cometHold=false, cometUntil=0, cometDur=1300, cometX=0, cometY=0, cometTimer=null;
+  let flowHold=false, flowUntil=0, flowDur=1600, flowSeed=0, flowX=0, flowY=0, flowTimer=null;
+  let centerYPercent=0.56, densityVal=0.60, fontFactor=1.00, breatheVal=0.045, rippleVal=0.70, pressVal=1.10, pressRadius=110;
+  const kBase=0.06, dBase=0.86; let kCur=kBase, dCur=dBase, kTarget=kBase, dTarget=dBase;
+
+  function hsl(h,s,l){ h=(h%360+360)%360; return `hsl(${h},${s}%,${l}%)`; }
+  function setSpring(k,d,holdMs){ kTarget=k; dTarget=d; if(holdMs){ setTimeout(()=>{ kTarget=kBase; dTarget=dBase; }, holdMs);} }
+  function syncControlsToState(){ centerYPercent=+w2Height.value/100; densityVal=+w2Density.value/100; fontFactor=+w2Font.value/100; breatheVal=+w2Breathe.value/100*0.08; rippleVal=+w2Ripple.value/100; pressVal=+w2Press.value/100; pressRadius=+w2PressR.value; }
+  function insideHeart(x,y){ const f=Math.pow(x*x+y*y-1,3)-x*x*y*y*y; return f<=0; }
+  function buildWall2(){ const s=setupCanvas(w2Canvas); nodes.length=0; const w=s.w, h=s.h; const cx=w/2, cy=h*centerYPercent;
+    const scale=Math.min(w,h)*0.25; const charStep=(scale/16)*(1.6 - densityVal); const fontSize=Math.max(14, charStep*0.88*fontFactor);
+    let idx=0;
+    for(let yy=-1.2; yy<=1.2; yy+= (charStep/scale)){
+      for(let xx=-1.3; xx<=1.3; xx+= (charStep/scale)){
+        if(insideHeart(xx,yy)){
+          const gx=cx+xx*scale, gy=cy-yy*scale;
+          const r=Math.hypot(gx-cx,gy-cy); const phase=(r/(scale*1.15))*Math.PI*1.6 + (Math.random()*0.6);
+          nodes.push({i:idx++, bx:gx,by:gy, x:gx,y:gy, vx:0,vy:0, phase, rot:(Math.random()-0.5)*0.02, text:chars[idx%chars.length], size:fontSize});
+        }
+      }
+    }
+  }
+  function w2Resize(){ syncControlsToState(); buildWall2(); }
+  function wall2Rain(x,y,n){ n=n||240; for(let i=0;i<n;i++){ const sp=3.6+Math.random()*5.0, ang=Math.random()*Math.PI*2; trails2.push({x,y,vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp,life:70+Math.random()*50,age:0,s:2.8+Math.random()*1.6}); } if(trails2.length>2400) trails2=trails2.slice(trails2.length-2400); }
+  function rainAtCenter(){ const r=w2Canvas.getBoundingClientRect(); wall2Rain(r.width*0.5,r.height*0.6); }
+  btnW2Rain.onclick=()=>{ rainAtCenter(); toast('下點小雨：我把想你灑滿一整面。'); };
+  chipRain.onclick=()=>{ rainAtCenter(); toast('下點小雨：我把想你灑滿一整面。'); };
+  chipRipple.onclick=()=>{ const r=w2Canvas.getBoundingClientRect(); addRipple(r.width*0.5, r.height*0.56); toast('你碰一下，我就起一圈悸動。'); };
+
+  const order=['burst','ripple','press','explode','swirl','gravity','tornado','tornadoHold','dna','ring','waterfall','magnet','tide','comet','flow'];
+  const nameMap={burst:'爆開', ripple:'波紋', press:'長按散開', explode:'爆裂', swirl:'旋渦', gravity:'引力', tornado:'龍捲', tornadoHold:'牽引波紋', dna:'DNA', ring:'星環軌道', waterfall:'瀑布崩落', magnet:'磁場線', tide:'星潮', comet:'彗星', flow:'光流'};
+  const lineMap={
+    burst:'妳一點，我就散成滿天心，再乖乖回到妳手心。',
+    ripple:'妳碰到哪裡，思念就一圈圈從那裡擴散。',
+    press:'妳按著不放，我就把自己全部推向妳。',
+    explode:'為妳引爆，然後回到妳心裡安靜。',
+    swirl:'被妳指尖攪亂，再被妳收走。',
+    gravity:'妳一靠近，我就整片往妳掉。',
+    tornado:'妳一點我就失控；妳放手我就回心。',
+    tornadoHold:'妳在哪裡，我就在哪裡旋著貼著。',
+    dna:'纏在一起，連呼吸都對齊。',
+    ring:'繞一圈又一圈，終點永遠是妳。',
+    waterfall:'整面往妳傾瀉，不留退路。',
+    magnet:'極點是妳，我所有軌道都認妳。',
+    tide:'從妳這裡起潮，推開我，又把我收回去。',
+    comet:'飛出一段路，再回到妳心臟旁邊停。',
+    flow:'整面起風，我順著妳走。'
+  };
+  function updateModeLine(){ lineEl.textContent = lineMap[interactMode] || '只要你在，怎麼玩我都配合。'; }
+  function cycleMode(){ const i=order.indexOf(interactMode); interactMode = order[(i+1)%order.length]; wall2ModeBtn.textContent='互動模式：'+nameMap[interactMode]; chipMode.textContent='模式：'+nameMap[interactMode]; onModeEnter(); updateModeLine(); toast('切到：'+nameMap[interactMode]); }
+  wall2ModeBtn.onclick=cycleMode; chipMode.onclick=cycleMode;
+  function onModeEnter(){
+    clearTimeout(ringTimer); ringLong=false; ringBoost=1.0;
+    waterfallHold=false; magHold=false;
+    if(flockHold){ clearInterval(flockTimer); flockHold=false; }
+    if(rippleFollow){ clearInterval(rippleFollowTimer); rippleFollow=false; }
+    // 清除星潮/彗星/光流的殘留狀態
+    clearTimeout(tideTimer); tideHold=false; tideUntil=0;
+    clearTimeout(cometTimer); cometHold=false; cometUntil=0;
+    clearTimeout(flowTimer); flowHold=false; flowUntil=0;
+    
+    if(interactMode==='tornado' || interactMode==='tornadoHold'){ setSpring(0.035,0.90,2400); }
+    else if(interactMode==='explode'){ setSpring(0.045,0.88,1600); }
+    else if(interactMode==='dna'){ setSpring(0.055,0.90,0); }
+    else if(interactMode==='ring'){ setSpring(0.060,0.90,0); }
+    else if(interactMode==='waterfall'){ setSpring(0.055,0.88,0); }
+    else if(interactMode==='magnet'){ setSpring(0.060,0.90,0); }
+    else if(interactMode==='flock'){ setSpring(0.040,0.90,2200); }
+    else { setSpring(kBase, dBase, 0); }
+  }
+
+  function addRipple(x,y){ const amp=16 + (+w2Ripple.value)/100*0.45; const width=24 + (+w2Ripple.value)/100*1.0; rippleEvents.push({x,y,t:performance.now(),speed:0.82,amp,width}); }
+  function addDNAPulse(x,y){ dnaPulses.push({x,y,t:performance.now(),life:1600}); }
+  function getXY(e,el){ const r=el.getBoundingClientRect(); const cx=(e.touches?e.touches[0].clientX:e.clientX)-r.left; const cy=(e.touches?e.touches[0].clientY:e.clientY)-r.top; return {x:cx,y:cy}; }
+
+  function downHandler(e){
+    const t=e.target; if(t.closest && (t.closest('.w2-gear') || t.closest('#floating-chips'))) return;
+    e.preventDefault(); const p=getXY(e,w2Wrap);
+    
+    if(interactMode==='burst'){ rainAtCenter(); }
+    else if(interactMode==='ripple'){ addRipple(p.x,p.y); }
+    else if(interactMode==='press'){ clearTimeout(pressTimer); pressTimer=setTimeout(()=>{ pressing=true; pressX=p.x; pressY=p.y; toast('按著我：我整面心都往外散給你看。'); }, 220); }
+    else if(interactMode==='explode'){ triggerExplode(p.x,p.y); toast('砰——把整片心都向你飛。'); }
+    else if(interactMode==='swirl'){ swirlActive=true; swirlX=p.x; swirlY=p.y; toast('旋渦：把我攪在你指尖。'); }
+    else if(interactMode==='gravity'){ gravityActive=true; gravX=p.x; gravY=p.y; toast('引力：我往你靠。'); }
+    else if(interactMode==='tornado'){ triggerTornado(p.x,p.y); setTimeout(()=>{ tornadoHold=true; thx=p.x; thy=p.y; }, 220); }
+    else if(interactMode==='tornadoHold'){ rfx=p.x; rfy=p.y; rippleFollow=true; addRipple(rfx,rfy); rippleFollowTimer=setInterval(()=> addRipple(rfx,rfy), 110); toast('牽引波紋：長按到哪，波紋到哪。'); }
+    else if(interactMode==='dna'){ dnaHX=p.x; dnaHY=p.y; addDNAPulse(p.x,p.y); dnaHold=true; toast('DNA：讓我圍著你的指尖發光。'); }
+    else if(interactMode==='ring'){ ringTimer=setTimeout(()=>{ ringLong=true; ringBoost=3.0; toast('星環加速：雙向同時繞你。'); }, 260); }
+    else if(interactMode==='waterfall'){ waterfallHold=true; waterfallX=p.x; waterfallY=p.y; const s=setupCanvas(w2Canvas); const cyLocal=s.h*centerYPercent; addRipple(p.x, cyLocal+80); toast('瀑布：水流追著你的手。'); }
+    else if(interactMode==='magnet'){ magHold=true; const s=setupCanvas(w2Canvas); const cyLocal=s.h*centerYPercent; magP1x=p.x-120; magP1y=cyLocal-90; magP2x=p.x+120; magP2y=cyLocal+90; toast('磁場：把極點放在你的指尖附近。'); }
+    else if(interactMode==='flock'){ triggerFlock(18); flockHold=true; flockTimer=setInterval(()=> triggerFlock(18), 320); toast('群飛：我先散，等你放手我們一起回家。'); }
+    // ✨ 新增：處理星潮、彗星、光流的點擊啟動
+    else if(interactMode==='tide'){
+      tideX=p.x;
+      clearTimeout(tideTimer);
+      tideTimer=setTimeout(()=>{ 
+        tideHold=true; 
+        toast('星潮跟手：拖著我，讓我起波浪。'); 
+      }, 220);
+    }
+    else if(interactMode==='comet'){
+      cometX=p.x; 
+      cometY=p.y;
+      clearTimeout(cometTimer);
+      cometTimer=setTimeout(()=>{ 
+        cometHold=true; 
+        toast('彗星跟手：往外拋，我就劃過去。'); 
+      }, 220);
+    }
+    else if(interactMode==='flow'){
+      flowX=p.x; 
+      flowY=p.y;
+      flowSeed=Math.random()*1000;
+      clearTimeout(flowTimer);
+      flowTimer=setTimeout(()=>{ 
+        flowHold=true; 
+        toast('光流跟手：整面起風，跟著你走。'); 
+      }, 220);
+    }
+  }
+  
+  function moveHandler(e){ 
+    const p=getXY(e,w2Wrap); 
+    if(pressing){ pressX=p.x; pressY=p.y; } 
+    if(swirlActive){ swirlX=p.x; swirlY=p.y; } 
+    if(gravityActive){ gravX=p.x; gravY=p.y; } 
+    if(tornadoHold){ thx=p.x; thy=p.y; } 
+    if(rippleFollow){ rfx=p.x; rfy=p.y; } 
+    if(dnaHold){ dnaHX=p.x; dnaHY=p.y; } 
+    if(waterfallHold){ waterfallX=p.x; waterfallY=p.y; } 
+    if(magHold){ const s=setupCanvas(w2Canvas); const cyLocal=s.h*centerYPercent; magP1x=p.x-120; magP1y=cyLocal-90; magP2x=p.x+120; magP2y=cyLocal+90; } 
+    // ✨ 新增：移動時更新星潮/彗星/光流的位置
+    if(tideHold){ tideX=p.x; }
+    if(cometHold){ cometX=p.x; cometY=p.y; }
+    if(flowHold){ flowX=p.x; flowY=p.y; }
+  }
+  
+  function upHandler(){
+    clearTimeout(pressTimer); 
+    clearTimeout(ringTimer); 
+    pressing=false; 
+    swirlActive=false; 
+    gravityActive=false; 
+    tornadoHold=false; 
+    if(rippleFollow){ clearInterval(rippleFollowTimer); rippleFollow=false; } 
+    if(dnaHold){ dnaHold=false; } 
+    if(waterfallHold){ waterfallHold=false; } 
+    if(magHold){ magHold=false; } 
+    if(flockHold){ clearInterval(flockTimer); flockHold=false; } 
+    if(interactMode==='ring' && !ringLong){ ringDir*=-1; toast(ringDir>0?'星環：順時針。':'星環：逆時針。'); } 
+    ringLong=false; 
+    ringBoost=1;
+    
+    // ✨ 新增：放開時觸發單次動畫效果
+    if(interactMode==='tide' && !tideHold){
+      // 單擊：觸發一次潮汐波動
+      tideUntil=performance.now()+tideDur;
+      toast('星潮：從你這裡推一波出去。');
+    }
+    if(interactMode==='comet' && !cometHold){
+      // 單擊：隨機方向拋出再回來
+      const s=setupCanvas(w2Canvas);
+      const cx=s.w/2, cy=s.h*centerYPercent;
+      for(const n of nodes){
+        const ang=Math.random()*Math.PI*2;
+        const dist=60+Math.random()*80;
+        n.ax=n.bx + Math.cos(ang)*dist;
+        n.ay=n.by + Math.sin(ang)*dist;
+        n.aw=Math.random()*40+20;
+      }
+      cometUntil=performance.now()+cometDur;
+      toast('彗星：隨機飛出去，再回來。');
+    }
+    if(interactMode==='flow' && !flowHold){
+      // 單擊：觸發一次向量場流動
+      flowUntil=performance.now()+flowDur;
+      toast('光流：整面起一陣風。');
+    }
+    
+    // 重置長按狀態
+    clearTimeout(tideTimer); tideHold=false;
+    clearTimeout(cometTimer); cometHold=false;
+    clearTimeout(flowTimer); flowHold=false;
+  }
+  
+  ['pointerdown','touchstart'].forEach(ev=>{ w2Wrap.addEventListener(ev,downHandler,{passive:false}); w2Canvas.addEventListener(ev,downHandler,{passive:false}); });
+  ['pointermove','touchmove'].forEach(ev=>{ w2Wrap.addEventListener(ev,moveHandler,{passive:false}); w2Canvas.addEventListener(ev,moveHandler,{passive:false}); });
+  ['pointerup','pointerleave','pointercancel','touchend','touchcancel'].forEach(ev=>{ w2Wrap.addEventListener(ev,upHandler,{passive:false}); w2Canvas.addEventListener(ev,upHandler,{passive:false}); });
+  w2Canvas.addEventListener('contextmenu', e=> e.preventDefault());
+
+  function triggerExplode(x,y){ const s=setupCanvas(w2Canvas); const cx=s.w/2, cy=s.h*centerYPercent; for(const n of nodes){ const dx=n.x-(x||cx), dy=n.y-(y||cy); const d=Math.hypot(dx,dy)||1; const power= 22 + Math.random()*30; n.vx += (dx/d)*power; n.vy += (dy/d)*power; } }
+  function triggerTornado(x,y){ const s=setupCanvas(w2Canvas); const cx=x||s.w/2, cy=s.h*centerYPercent; const W = pressRadius; for(const n of nodes){ const dx=n.x-cx, dy=n.y-cy; const d=Math.hypot(dx,dy)||1; const band=Math.exp(-((d*d)/(2*W*W))); const dirx=dx/d, diry=dy/d; const tangx=-diry, tangy=dirx; const radial = (10 + (+w2Press.value)/100*7) * band; const tang = (8 + (+w2Press.value)/100*5) * band; const rand=(Math.random()*0.4+0.8); n.vx += (dirx*radial + tangx*tang) * rand; n.vy += (diry*radial + tangy*tang) * rand; } }
+  function triggerFlock(extra=18){
+    for(const n of nodes){ const ang=Math.random()*Math.PI*2; const sp=14+Math.random()*18+extra*0.3; n.vx += Math.cos(ang)*sp; n.vy += Math.sin(ang)*sp; }
+    setSpring(0.030, 0.92, 2000);
+  }
+
+  function w2Step(){ const s=setupCanvas(w2Canvas), ctx=s.ctx, w=s.w, h=s.h; ctx.clearRect(0,0,w,h); const cx=w/2, cy=h*centerYPercent;
+    if(!w2Step.h) w2Step.h=280; w2Step.h=(w2Step.h + (+wall2HueSpeed.value)/8)%360; const t=performance.now()/1000;
+    kCur += (kTarget - kCur)*0.08; dCur += (dTarget - dCur)*0.08;
+
+    dnaPulses = dnaPulses.filter(p => performance.now()-p.t < p.life);
+    rippleEvents = rippleEvents.filter(rp => (performance.now()-rp.t) < 2400);
+
+    for(const n of nodes){
+      const beat=1 + (+w2Breathe.value)/100*0.08*Math.sin(t*2.0 + n.phase) + 0.012*Math.sin(t*5.0 + n.phase*1.3);
+      let offx=0, offy=0, sizeMul=1, alphaMul=1;
+
+      if(pressing){ const dx=n.bx-pressX, dy=n.by-pressY; const d=Math.hypot(dx,dy)||1; const A=(22 + (+w2Press.value)/100*10); const W=+w2PressR.value; const band=Math.exp(-((d*d)/(2*W*W))); offx+=(dx/d)*A*band; offy+=(dy/d)*A*band; }
+      for(const rp of rippleEvents){ const age=(performance.now()-rp.t)/16.666; const R=rp.speed*age; const dx=n.bx-rp.x, dy=n.by-rp.y; const d=Math.hypot(dx,dy); const band=Math.exp(-((d-R)*(d-R))/(2*rp.width*rp.width)); const A=rp.amp*band; offx+=(dx/(d||1))*A; offy+=(dy/(d||1))*A; }
+
+      if(swirlActive){ const dx=n.bx-swirlX, dy=n.by-swirlY; const d=Math.hypot(dx,dy)||1; const W=+w2PressR.value; const band=Math.exp(-((d*d)/(2*W*W))); const tang= (18 + (+w2Press.value)/100*10) * band; offx += (-dy/d)*tang; offy += (dx/d)*tang; }
+      if(gravityActive){ const dx=n.bx-gravX, dy=n.by-gravY; const d=Math.hypot(dx,dy)||1; const W=+w2PressR.value*1.2; const band=Math.exp(-((d*d)/(2*W*W))); const pull=(22 + (+w2Press.value)/100*12)*band; offx -= (dx/d)*pull; offy -= (dy/d)*pull; }
+      if(tornadoHold){ const dx=n.bx-thx, dy=n.by-thy; const d=Math.hypot(dx,dy)||1; const W=+w2PressR.value; const band=Math.exp(-((d*d)/(2*W*W))); const radial=(7 + (+w2Press.value)/100*4)*band; const tang=(10 + (+w2Press.value)/100*6)*band; offx += (dx/d)*radial + (-dy/d)*tang; offy += (dy/d)*radial + ( dx/d)*tang; }
+      if(interactMode==='dna'){ const localY = (n.by - cy); const strand = (n.i % 2) ? 1 : -1; const phase = 0.022*localY - 2.2*t + n.phase*0.08; let amp = 38; if(dnaHold){ const dx=n.bx-dnaHX, dy=n.by-dnaHY; const d=Math.hypot(dx,dy)||1; const band=Math.exp(-((d*d)/(2*(+w2PressR.value*+w2PressR.value)))); amp += 22*band; } const shiftX = strand * amp * Math.sin(phase); const depth  = 0.5 + 0.5*Math.cos(phase); offx += shiftX; sizeMul *= 0.90 + 0.30*depth; alphaMul*= 0.70 + 0.35*depth; }
+      if(interactMode==='ring'){ const dx=n.bx-cx, dy=n.by-cy; const d=Math.hypot(dx,dy)||1; const tx=-dy/d, ty=dx/d; const dir = ((n.i % 2) ? 1 : -1) * ringDir; const phase = n.phase*0.6 + (1.4*ringBoost)*t; const amt = dir * 22 * Math.sin(phase); offx += tx*amt; offy += ty*amt; }
+      if(interactMode==='waterfall'){ const localY = (n.by - (cy-40)); const phase = localY*0.025 - 1.2*t; let locAmp = 54; if(waterfallHold){ const dx=n.bx-waterfallX, dy=n.by-waterfallY; const d=Math.hypot(dx,dy)||1; const band=Math.exp(-((d*d)/(2*(+w2PressR.value*+w2PressR.value)))); locAmp += 26*band; } offy += locAmp * Math.sin(phase); offx += 4*Math.sin(phase*0.8); const hyTest = cy + (n.by-cy)*beat + offy; const bounceLine = cy + Math.min(120, h*0.18); if(hyTest > bounceLine){ offy -= (hyTest-bounceLine)*0.6; } }
+      if(interactMode==='magnet'){ const init = (magP1x==null); if(init){ magP1x=cx-140; magP1y=cy-120; magP2x=cx+140; magP2y=cy+80; }
+        function field(ax,ay){ const dx=n.bx-ax, dy=n.by-ay; const r2=dx*dx+dy*dy+120; const inv=1/Math.pow(r2,1.15); return {x:dx*inv, y:dy*inv}; }
+        const f1=field(magP1x,magP1y), f2=field(magP2x,magP2y); const ex=f1.x - f2.x, ey=f1.y - f2.y; const bx=-ey, by=ex; const strength = 28 * (magHold?1.6:1.0); offx += strength * bx; offy += strength * by; sizeMul *= 0.98 + 0.04*Math.random();
+      }
+
+      // 群飛脈衝：單擊或長按期間，先外展再回心（sin 形狀 0→1→0）
+      if(interactMode==='flock'){
+        const now=performance.now();
+        const remain = Math.max(0, flockActiveUntil - now);
+        if(remain > 0){
+          const e = 1 - (remain / flockDur);               // 0..1
+          const pulse = Math.sin(e * Math.PI);             // 0→1→0
+          const fx = (typeof n.fx==='number') ? n.fx : n.bx;
+          const fy = (typeof n.fy==='number') ? n.fy : n.by;
+          offx += (fx - n.bx) * pulse;
+          offy += (fy - n.by) * pulse;
+        }
+      }
+
+      // 星潮（tide）：行進波；長按跟手
+      if(interactMode==='tide'){
+        const now = performance.now();
+        const remain = Math.max(0, tideUntil - now);
+        let A = 0;
+        if(tideHold){ A = tideAmp*(0.9 + 0.6*Math.sin(t*2.2)); }
+        else if(remain>0){ const e = 1 - (remain / tideDur); A = tideAmp*Math.sin(e*Math.PI); }
+        if(A>0.0001){
+          const phase = t * tideSpeed * 3.0;
+          const dx = n.bx - tideX;
+          offy += A * Math.sin(dx * tideFreq - phase);
+          offx += 4 * Math.sin(dx * tideFreq * 0.6 - phase*0.8);
+        }
+      }
+      // 彗星（comet）：拋物線飛出再回；長按時外拋跟手
+      if(interactMode==='comet'){
+        if(cometHold){
+          const dx=n.bx-cometX, dy=n.by-cometY; const d=Math.hypot(dx,dy)||1;
+          const W=+w2PressR.value; const band=Math.exp(-((d*d)/(2*W*W)));
+          const A=(18 + (+w2Press.value)/100*9) * band;
+          const arc = 6 * band * (0.5 + 0.5*Math.sin(t*2.0));
+          offx += (dx/d)*A;
+          offy += (dy/d)*A - arc;
+        }else{
+          const remain = Math.max(0, cometUntil - performance.now());
+          if(remain>0){
+            const e = 1 - (remain / cometDur);
+            const s = Math.sin(e * Math.PI);
+            const arc = 4*e*(1-e);
+            if(typeof n.ax==='number' && typeof n.ay==='number'){
+              offx += (n.ax - n.bx) * s;
+              offy += (n.ay - n.by) * s - (n.aw||0) * arc;
+            }
+          }
+        }
+      }
+      // 光流（flow）：時間變化向量場；長按時增幅指尖附近
+      if(interactMode==='flow'){
+        const now=performance.now();
+        const remain = Math.max(0, flowUntil - now);
+        let A = 0;
+        if(flowHold){ A = (22 + (+w2Press.value)/100*10) * (0.7 + 0.5*Math.sin(t*2.1)); }
+        else if(remain>0){ const e = 1 - (remain / flowDur); A = (22 + (+w2Press.value)/100*10) * Math.sin(e*Math.PI); }
+        if(A>0.0001){
+          const ux = Math.sin( (n.bx + flowSeed) * 0.020 + t*1.6 );
+          const uy = Math.cos( (n.by - flowSeed) * 0.018 + t*1.4 );
+          offx += ux * A;
+          offy += uy * A;
+          if(flowHold){
+            const dx=n.bx-flowX, dy=n.by-flowY; const d=Math.hypot(dx,dy)||1; const W=+w2PressR.value;
+            const band=Math.exp(-((d*d)/(2*W*W)));
+            offx += ux * A * 0.25 * band;
+            offy += uy * A * 0.25 * band;
+          }
+        }
+      }
+
+      const hx=cx + (n.bx-cx)*beat + offx; const hy=cy + (n.by-cy)*beat + offy;
+      n.vx+=(hx-n.x)*kCur; n.vy+=(hy-n.y)*kCur; n.vx*=dCur; n.vy*=dCur; n.x+=n.vx; n.y+=n.vy;
+
+      const ctx2 = ctx; ctx2.save(); ctx2.translate(n.x,n.y); ctx2.rotate(n.rot);
+      const hue=(w2Step.h + (n.x+n.y)*0.002)%360; if(interactMode==='dna'){ ctx2.shadowColor=`hsla(${(hue+40)%360},100%,80%,0.85)`; ctx2.shadowBlur=18; } else if(interactMode==='magnet'){ ctx2.shadowColor=`hsla(${(hue+100)%360},90%,70%,0.6)`; ctx2.shadowBlur=10; } else { ctx2.shadowBlur=0; }
+      ctx2.fillStyle=hsl(hue,80,72); ctx2.globalAlpha = alphaMul; ctx2.font=`${Math.max(14,n.size*sizeMul)}px ui-monospace, Menlo, Monaco, Consolas, "SFMono-Regular"`; ctx2.textAlign='center'; ctx2.textBaseline='middle'; ctx2.fillText(n.text,0,0); ctx2.restore();
+    }
+
+    if(interactMode==='magnet' && magP1x!=null){
+      const drawPole=(x,y,color)=>{ const g=ctx.createRadialGradient(x,y,0,x,y,28); g.addColorStop(0, color.replace('ALPHA','0.95')); g.addColorStop(1, color.replace('ALPHA','0')); ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,28,0,Math.PI*2); ctx.fill(); ctx.fillStyle=color.replace('ALPHA','1'); ctx.beginPath(); ctx.arc(x,y,4.5,0,Math.PI*2); ctx.fill(); };
+      ctx.globalCompositeOperation='lighter'; drawPole(magP1x,magP1y,'rgba(255,120,180,ALPHA)'); drawPole(magP2x,magP2y,'rgba(120,200,255,ALPHA)');
+    }
+
+    ctx.globalCompositeOperation='lighter'; for(let i=0;i<trails2.length;i++){ const t2=trails2[i]; t2.x+=t2.vx; t2.y+=t2.vy; t2.age++; const a=Math.max(0,1-t2.age/t2.life); drawHeart(ctx,t2.x,t2.y,t2.s,0,a,`hsl(${(w2Step.h+20)%360},90%,65%)`,false); } trails2=trails2.filter(t2=>t2.age<t2.life);
+    requestAnimationFrame(w2Step);
+  } w2Step();
+
+  [w2Height,w2Density,w2Font].forEach(el=> el.addEventListener('input', ()=>{ syncControlsToState(); buildWall2(); }));
+  [w2Breathe,w2Ripple,w2Press,w2PressR,wall2HueSpeed].forEach(el=> el.addEventListener('input', ()=>{ syncControlsToState(); }));
+
+  /* ⑤ 內容與匯入 */
+  const btnImportJSON2=document.getElementById('btn-import-json-2'), fileJSON2=document.getElementById('file-json-2');
+  const btnImportFolder2=document.getElementById('btn-import-folder-2'), fileFolder2=document.getElementById('file-folder-2');
+  const btnClearCache2=document.getElementById('btn-clear-cache-2');
+  btnImportJSON2.onclick=()=> fileJSON2.click();
+  fileJSON2.onchange=async (e)=>{
+    const file=e.target.files && e.target.files[0]; if(!file) return;
+    try{
+      const txt=await file.text(); const pack=JSON.parse(txt);
+      if(!Array.isArray(pack.letters)||pack.letters.length===0){ alert('JSON 少了 letters 陣列'); return; }
+      if(!Array.isArray(pack.vows)||pack.vows.length===0){ alert('JSON 少了 vows 陣列'); return; }
+      localStorage.setItem('anni_pack_v1', JSON.stringify({letters:pack.letters, vows:pack.vows}));
+      LETTERS=pack.letters; VOWS=pack.vows; setSourceTag2('本機快取（第二頁）'); toast(`第二頁：已匯入 ${LETTERS.length}封 + 誓言${VOWS.length}句`);
+    }catch(err){ alert('解析 JSON 失敗：'+err.message); }
+    e.target.value='';
+  };
+  btnImportFolder2.onclick=()=> fileFolder2.click();
+  fileFolder2.onchange=async (e)=>{
+    const files=[...e.target.files].filter(f=>/\.(txt|md)$/i.test(f.name));
+    if(files.length===0){ alert('資料夾裡沒有 .txt 或 .md'); return; }
+    const texts=await Promise.all(files.map(f=>f.text()));
+    const pack={letters:texts, vows:VOWS};
+    localStorage.setItem('anni_pack_v1', JSON.stringify(pack));
+    LETTERS=texts; setSourceTag2('本機快取（第二頁，資料夾）'); toast(`第二頁：已匯入 ${texts.length} 封信`); e.target.value='';
+  };
+  btnClearCache2.onclick=()=>{ localStorage.removeItem('anni_pack_v1'); setSourceTag2('已清除；將回退到 JSON 或備援'); toast('第二頁：已清除本機快取。'); };
+
+  // 第六頁（anni_draw_pack_v1） + .docx & .docx 資料夾
+  const SRC_STATUS_6=document.getElementById('src-status-6'); const drawCount=document.getElementById('draw-count');
+  let SRC_TAG_6='尚未載入'; function setSourceTag6(t){ SRC_TAG_6=t; if(SRC_STATUS_6) SRC_STATUS_6.textContent=t; }
+  const btnImportJSON6=document.getElementById('btn-import-json-6'), fileJSON6=document.getElementById('file-json-6');
+  const btnImportFolder6=document.getElementById('btn-import-folder-6'), fileFolder6=document.getElementById('file-folder-6');
+  const btnImportDocx6=document.getElementById('btn-import-docx-6'), fileDocx6=document.getElementById('file-docx-6');
+  const btnImportDocxFolder6=document.getElementById('btn-import-docx-folder-6'), fileDocxFolder6=document.getElementById('file-docx-folder-6');
+  const btnClearCache6=document.getElementById('btn-clear-cache-6');
+
+  btnImportJSON6.onclick=()=> fileJSON6.click();
+  fileJSON6.onchange=async (e)=>{
+    const file=e.target.files && e.target.files[0]; if(!file) return;
+    try{
+      const txt=await file.text(); const pack=JSON.parse(txt);
+      if(!Array.isArray(pack.letters)||pack.letters.length===0){ alert('JSON 少了 letters 陣列'); return; }
+      localStorage.setItem('anni_draw_pack_v1', JSON.stringify({letters:pack.letters}));
+      DRAW_LETTERS=pack.letters; rebuildDrawDeck(); setSourceTag6('本機快取（第六頁，JSON）'); toast(`第六頁：已匯入 ${DRAW_LETTERS.length} 封信`);
+    }catch(err){ alert('解析 JSON 失敗：'+err.message); }
+    e.target.value='';
+  };
+  btnImportFolder6.onclick=()=> fileFolder6.click();
+  fileFolder6.onchange=async (e)=>{
+    const files=[...e.target.files].filter(f=>/\.(txt|md)$/i.test(f.name)); if(files.length===0){ alert('資料夾裡沒有 .txt 或 .md'); return; }
+    const texts=await Promise.all(files.map(f=>f.text()));
+    localStorage.setItem('anni_draw_pack_v1', JSON.stringify({letters:texts}));
+    DRAW_LETTERS=texts; rebuildDrawDeck(); setSourceTag6('本機快取（第六頁，資料夾 txt/md）'); toast(`第六頁：已匯入 ${texts.length} 封信`); e.target.value='';
+  };
+  btnImportDocx6.onclick=()=> fileDocx6.click();
+  btnImportDocxFolder6.onclick=()=> fileDocxFolder6.click();
+
+  async function ensureJSZip(){
+    if(window.JSZip) return true;
+    return new Promise((resolve)=>{
+      const s=document.createElement('script');
+      s.src='https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js';
+      s.onload=()=> resolve(true); s.onerror=()=> resolve(false);
+      document.head.appendChild(s);
+    });
+  }
+  function extractTextFromDocxXML(xml){
+    try{
+      const doc=(new DOMParser()).parseFromString(xml,'application/xml');
+      const ps=doc.getElementsByTagNameNS('http://schemas.openxmlformats.org/wordprocessingml/2006/main','p');
+      const paras=[];
+      for(const p of ps){
+        let line='';
+        const texts=p.getElementsByTagNameNS('http://schemas.openxmlformats.org/wordprocessingml/2006/main','t');
+        for(const t of texts){ line += t.textContent; }
+        const brs=p.getElementsByTagNameNS('http://schemas.openxmlformats.org/wordprocessingml/2006/main','br');
+        if(brs && brs.length) line += '\n';
+        line=line.replace(/\u00A0/g,' ').trim();
+        if(line) paras.push(line);
+      }
+      return paras.join('\n\n');
+    }catch(e){ return ''; }
+  }
+  async function readDocxFilesToTexts(fileList){
+    const ok = await ensureJSZip();
+    if(!ok){ alert('需要網路以載入 JSZip 才能讀 .docx；或先把 Word 另存為 .txt/.md 再匯入。'); return []; }
+    const JSZipRef=window.JSZip; const texts=[];
+    for(const file of fileList){
+      try{
+        const buf=await file.arrayBuffer();
+        const zip=await JSZipRef.loadAsync(buf);
+        const docxml=zip.file('word/document.xml'); if(!docxml){ console.warn('docx 缺少 document.xml', file.name); continue; }
+        const xml=await docxml.async('string');
+        const text=extractTextFromDocxXML(xml);
+        if(text && text.length) texts.push(text);
+      }catch(err){ console.warn('讀 docx 失敗', file.name, err); }
+    }
+    return texts;
+  }
+  fileDocx6.onchange=async (e)=>{
+    const files=[...e.target.files].filter(f=>/\.docx$/i.test(f.name));
+    if(files.length===0){ alert('請選擇 .docx'); return; }
+    const texts=await readDocxFilesToTexts(files);
+    if(!texts.length){ alert('讀不到文字；可能離線或檔案格式特殊，請改用 .txt/.md'); e.target.value=''; return; }
+    localStorage.setItem('anni_draw_pack_v1', JSON.stringify({letters:texts}));
+    DRAW_LETTERS=texts; rebuildDrawDeck(); setSourceTag6('本機快取（第六頁，.docx 多檔）'); toast(`第六頁：已匯入 Word：${texts.length} 封信`);
+    e.target.value='';
+  };
+  fileDocxFolder6.onchange=async (e)=>{
+    const files=[...e.target.files].filter(f=>/\.docx$/i.test(f.name));
+    if(files.length===0){ alert('資料夾裡沒有 .docx'); return; }
+    const texts=await readDocxFilesToTexts(files);
+    if(!texts.length){ alert('讀不到文字；可能離線或檔案格式特殊，請改用 .txt/.md'); e.target.value=''; return; }
+    localStorage.setItem('anni_draw_pack_v1', JSON.stringify({letters:texts}));
+    DRAW_LETTERS=texts; rebuildDrawDeck(); setSourceTag6('本機快取（第六頁，Word 資料夾）'); toast(`第六頁：已匯入 Word 資料夾：${texts.length} 封信`);
+    e.target.value='';
+  };
+  btnClearCache6.onclick=()=>{ localStorage.removeItem('anni_draw_pack_v1'); setSourceTag6('已清除；將回退到 第2頁來源 或 JSON/備援'); toast('第六頁：已清除抽信快取。'); };
+
+  /* ⑥ 隨機抽信（獨立來源） */
+  const dCanvas=document.getElementById('draw-canvas');
+  const envelope2=document.getElementById('envelope2'), seal2=document.getElementById('seal2'), overlay2=document.getElementById('draw-overlay');
+  const btnDPick=document.getElementById('draw-pick'), btnDAgain=document.getElementById('draw-again'), btnDReset=document.getElementById('draw-reset'), btnDShuffle=document.getElementById('draw-reshuffle');
+  const btnDKiss=document.getElementById('draw-kiss'), btnDHB=document.getElementById('draw-heartbeat'), btnDConf=document.getElementById('draw-confetti');
+  const drawGlow=document.getElementById('draw-glow');
+  let dParts=[]; function dResize(){ setupCanvas(dCanvas); }
+  function dStep(){ const s=setupCanvas(dCanvas), ctx=s.ctx; ctx.clearRect(0,0,s.w,s.h); ctx.globalCompositeOperation='lighter';
+    for(let i=0;i<dParts.length;i++){ const p=dParts[i]; p.x+=p.vx; p.y+=p.vy; p.vy+=p.g||0; p.age++; const a=Math.max(0,1-p.age/p.life); if(p.type==='heart'){ drawHeart(ctx,p.x,p.y,p.size,0,a,p.color, p.glow && drawGlow.checked); } }
+    dParts=dParts.filter(p=>p.age<p.life); requestAnimationFrame(dStep);
+  } dStep();
+  function spawnHeartsD(x,y,count=200){ for(let i=0;i<count;i++){ const ang=Math.random()*Math.PI*2; const sp=3.6+Math.random()*5.0; dParts.push({type:'heart',x,y,vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp,life:70+Math.random()*50,age:0,size:2.6+Math.random()*1.6,color:'#ff4d88',glow:true}); } }
+
+  let DRAW_LETTERS=[], DRAW_DECK=[]; let lastPickedText='';
+  function rebuildDrawDeck(){ DRAW_DECK=Array.from({length:DRAW_LETTERS.length}, (_,i)=>i); for(let i=DRAW_DECK.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [DRAW_DECK[i],DRAW_DECK[j]]=[DRAW_DECK[j],DRAW_DECK[i]]; } drawCount.textContent=DRAW_LETTERS.length; }
+  function dReset(){ envelope2.classList.remove('open'); envelope2.classList.remove('hug'); overlay2.innerHTML=''; document.getElementById('typed2').innerHTML=''; dResize(); lastPickedText=''; }
+  function dOpenWith(text){ envelope2.classList.add('open'); typeInto(document.getElementById('typed2'), text); lastPickedText=text; }
+  function dPickOne(){ if(DRAW_LETTERS.length===0){ toast('目前沒有可抽的內容，去 ⑤ 匯入一下嗎？'); return; } if(DRAW_DECK.length===0){ rebuildDrawDeck(); toast('重新洗牌，換一批新的。'); } const idx=DRAW_DECK.pop(); const content=DRAW_LETTERS[idx]; dReset(); setTimeout(()=>{ ensureAC(); startHeartbeat(66); setTimeout(stopHeartbeat,900); dOpenWith(content); const s=setupCanvas(dCanvas); spawnHeartsD(s.w*0.5,s.h*0.62, drawGlow.checked?220:180); }, 40); }
+
+  seal2.addEventListener('click',()=>{ if(!lastPickedText){ dPickOne(); } else { envelope2.classList.add('open'); ensureAC(); startHeartbeat(66); setTimeout(stopHeartbeat,900); } });
+  btnDPick.onclick=()=> dPickOne();
+  btnDAgain.onclick=()=> dPickOne();
+  btnDShuffle.onclick=()=>{ rebuildDrawDeck(); toast('洗好牌了，來抽新的。'); };
+  btnDReset.onclick=()=>{ dReset(); toast('信封折好，等你再抽。'); };
+  btnDKiss.onclick=()=>{ placeKissOverlay(overlay2); toast('偷親成功：在你信上留下記號。'); };
+  btnDHB.onclick=()=>{ ensureAC(); startHeartbeat(72); toast('把心跳交給你。'); setTimeout(stopHeartbeat,1600); };
+  btnDConf.onclick=()=>{ const s=setupCanvas(dCanvas); spawnHeartsD(s.w*0.5,s.h*0.62, drawGlow.checked?240:200); toast(drawGlow.checked?'灑一場發光心雨。':'灑一場輕盈心雨。'); };
+
+  async function loadDrawPack(){
+    try{
+      const raw=localStorage.getItem('anni_draw_pack_v1');
+      if(raw){ const pack=JSON.parse(raw); if(Array.isArray(pack.letters)&&pack.letters.length){ DRAW_LETTERS=pack.letters; setSourceTag6('本機快取（第六頁）'); rebuildDrawDeck(); return; } }
+    }catch(e){}
+    try{
+      const raw2=localStorage.getItem('anni_pack_v1');
+      if(raw2){ const pack2=JSON.parse(raw2); if(Array.isArray(pack2.letters)&&pack2.letters.length){ DRAW_LETTERS=pack2.letters; setSourceTag6('沿用第二頁來源'); rebuildDrawDeck(); return; } }
+    }catch(e){}
+    try{
+      const res=await fetch('anni_m_letters_pack_v1.json', {cache:'no-store'});
+      if(res.ok){ const pack=await res.json(); if(Array.isArray(pack.letters)&&pack.letters.length){ DRAW_LETTERS=pack.letters; setSourceTag6('同資料夾 JSON'); rebuildDrawDeck(); return; } }
+    }catch(e){}
+    DRAW_LETTERS=LETTERS.slice(0); setSourceTag6('內建備援'); rebuildDrawDeck();
+  }
+
+  /* ⑦ 閱讀室 */
+  const rWrap=document.getElementById('reader-wrap'), rCard=document.getElementById('reader-card'), rTitle=document.getElementById('reader-title'), rMeta=document.getElementById('reader-meta'), rBody=document.getElementById('reader-body');
+  const rOpen=document.getElementById('reader-open'), rFiles=document.getElementById('reader-files'), rFolder=document.getElementById('reader-folder'), rDir=document.getElementById('reader-dir');
+  const rPrev=document.getElementById('reader-prev'), rNext=document.getElementById('reader-next'), rSmaller=document.getElementById('reader-smaller'), rBigger=document.getElementById('reader-bigger'), rLine=document.getElementById('reader-line'), rSerif=document.getElementById('reader-serif'), rTheme=document.getElementById('reader-theme');
+  const rChatMode=document.getElementById('reader-chat-mode');
+  const rSelect=document.getElementById('reader-select'), rTopBtn=document.getElementById('reader-top'), rBottomBtn=document.getElementById('reader-bottom-btn'), rHeart=document.getElementById('reader-heart');
+  const rProgress=document.getElementById('reader-progress');
+  let RLIB=[], rIndex=0, fontScale=1.0, lineScale=1.0, night=false, serif=false, chatMode=false;
+
+  const FALLBACK_TEXT = `我在這裡等你：\n\n把今天還沒說完的喜歡，慢慢寫成段落，放進你手心裡讀。\n如果風把字吹亂，就靠近一點；我會把每一行重新貼好，直到你點頭。`;
+
+  function rResize(){ /* no canvas; only layout refresh */ }
+  function toMinutes(chars){ const min=Math.max(1, Math.round(chars/300)); return min; }
+  
+  // 解析聊天格式
+  function parseChatFormat(text){
+    const lines = text.split('\n');
+    const messages = [];
+    let currentRole = null;
+    let currentContent = '';
+    let currentTime = null;
+    
+    for(let line of lines){
+      line = line.trim();
+      if(!line) continue;
+      
+      // 辨識時間戳（多種格式）
+      const timeMatch = line.match(/^(\d{4}[-\/]\d{1,2}[-\/]\d{1,2}\s+\d{1,2}:\d{2}:\d{2}|\d{1,2}:\d{2})/);
+      if(timeMatch){
+        currentTime = timeMatch[0];
+        continue;
+      }
+      
+      // 辨識角色標記
+      if(line.startsWith('你：') || line.startsWith('你:')){
+        if(currentRole && currentContent){
+          messages.push({role:currentRole, content:currentContent.trim(), time:currentTime});
+        }
+        currentRole = 'user';
+        currentContent = line.substring(2).trim();
+        currentTime = null;
+      }
+      else if(line.startsWith('M：') || line.startsWith('M:')){
+        if(currentRole && currentContent){
+          messages.push({role:currentRole, content:currentContent.trim(), time:currentTime});
+        }
+        currentRole = 'assistant';
+        currentContent = line.substring(2).trim();
+        currentTime = null;
+      }
+      else if(line.match(/^【(user|assistant)】/i)){
+        if(currentRole && currentContent){
+          messages.push({role:currentRole, content:currentContent.trim(), time:currentTime});
+        }
+        currentRole = line.includes('user') ? 'user' : 'assistant';
+        currentContent = '';
+        currentTime = null;
+      }
+      else{
+        // 繼續累積當前訊息內容
+        if(currentContent) currentContent += '\n';
+        currentContent += line;
+      }
+    }
+    
+    // 加入最後一條訊息
+    if(currentRole && currentContent){
+      messages.push({role:currentRole, content:currentContent.trim(), time:currentTime});
+    }
+    
+    return messages;
+  }
+  
+  // 渲染聊天格式
+  function renderChatMode(messages){
+    let html = '<div class="chat-container">';
+    let lastDate = null;
+    
+    for(const msg of messages){
+      // 如果有時間戳，顯示時間分隔
+      if(msg.time){
+        const currentDate = msg.time.split(' ')[0];
+        if(currentDate && currentDate !== lastDate){
+          html += `<div class="chat-divider">${currentDate}</div>`;
+          lastDate = currentDate;
+        }
+        html += `<div class="chat-time">${msg.time}</div>`;
+      }
+      
+      const roleClass = msg.role === 'user' ? 'user' : 'assistant';
+      const content = msg.content.replace(/\n/g, '<br>');
+      html += `<div class="chat-bubble ${roleClass}">${content}</div>`;
+    }
+    
+    html += '</div>';
+    return html;
+  }
+  
+  function renderReaderItem(){
+    if(!RLIB.length){ 
+      rTitle.textContent='在等你'; 
+      rMeta.textContent='字數：0 · 預估 0 分鐘'; 
+      rBody.textContent=FALLBACK_TEXT; 
+      rCard.classList.remove('chat-mode');
+      return; 
+    }
+    
+    const item=RLIB[rIndex];
+    rTitle.textContent=item.title || ('未命名 '+(rIndex+1));
+    const chars=item.text.replace(/\s/g,'').length; 
+    rMeta.textContent=`字數：${chars} · 預估 ${toMinutes(chars)} 分鐘`;
+    
+    if(chatMode){
+      // 聊天模式
+      rCard.classList.add('chat-mode');
+      const messages = parseChatFormat(item.text);
+      if(messages.length > 0){
+        rBody.innerHTML = renderChatMode(messages);
+      }else{
+        // 如果解析不出聊天格式，回退到普通模式
+        rCard.classList.remove('chat-mode');
+        renderNormalMode(item.text);
+      }
+    }else{
+      // 普通閱讀模式
+      rCard.classList.remove('chat-mode');
+      renderNormalMode(item.text);
+    }
+    
+    rSelect.value = String(rIndex);
+    window.scrollTo({top:0, behavior:'instant'});
+    updateProgress();
+  }
+  
+  function renderNormalMode(text){
+    const parts=text.replace(/\r\n/g,'\n').split(/\n{2,}/);
+    rBody.innerHTML = parts.map(p=>{
+      const t=p.trim();
+      if(!t) return '';
+      if(/^[-–—]/.test(t) || /—\s*M\s*$/.test(t)) return `<div class="reader-quote">${t.replace(/\n/g,'<br>')}</div>`;
+      return `<p class="indent">${t.replace(/\n/g,'<br>')}</p>`;
+    }).join('');
+  }
+  function updateProgress(){
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const sc = Math.max(0, Math.min(1, window.scrollY / (total||1)));
+    rProgress.style.transform = `scaleX(${sc})`;
+  }
+  window.addEventListener('scroll', ()=>{ if(!document.getElementById('tab-reader').classList.contains('hidden')) updateProgress(); }, {passive:true});
+
+  function pushFiles(list){
+    const arr=[...list].filter(f=>/\.(txt|md)$/i.test(f.name));
+    if(!arr.length){ toast('沒有 .txt 或 .md'); return; }
+    const p = Promise.all(arr.map(f=> f.text().then(t=>({title:f.name.replace(/\.(txt|md)$/i,''), text:t}))));
+    p.then(items=>{
+      if(!items.length){ toast('讀不到文字'); return; }
+      RLIB = RLIB.concat(items);
+      RLIB.sort((a,b)=> a.title.localeCompare(b.title, 'zh-Hant'));
+      rSelect.innerHTML = RLIB.map((it,i)=> `<option value="${i}">${it.title}</option>`).join('');
+      rIndex = 0; renderReaderItem();
+      toast(`已匯入 ${items.length} 篇`);
+    });
+  }
+
+  rOpen.onclick=()=> rFiles.click();
+  rFiles.onchange=e=>{ pushFiles(e.target.files||[]); e.target.value=''; };
+  rFolder.onclick=()=> rDir.click();
+  rDir.onchange=e=>{ pushFiles(e.target.files||[]); e.target.value=''; };
+  rPrev.onclick=()=>{ if(!RLIB.length) return; rIndex=(rIndex-1+RLIB.length)%RLIB.length; renderReaderItem(); };
+  rNext.onclick=()=>{ if(!RLIB.length) return; rIndex=(rIndex+1)%RLIB.length; renderReaderItem(); };
+  rSelect.onchange=e=>{ rIndex=+e.target.value||0; renderReaderItem(); };
+
+  rSmaller.onclick=()=>{ fontScale=Math.max(.8, fontScale-0.05); rCard.style.setProperty('font-size', (fontScale*100)+'%'); };
+  rBigger.onclick=()=>{ fontScale=Math.min(1.6, fontScale+0.07); rCard.style.setProperty('font-size', (fontScale*100)+'%'); };
+  rLine.onclick=()=>{ lineScale=Math.min(1.6, lineScale+0.06); rCard.style.setProperty('--line', lineScale); rBody.style.lineHeight = (2*lineScale).toFixed(2); };
+  rSerif.onclick=()=>{ serif=!serif; rCard.classList.toggle('serif', serif); rSerif.textContent = serif ? '無襯線字' : '襯線字'; };
+  rTheme.onclick=()=>{ night=!night; document.getElementById('tab-reader').classList.toggle('reader-night', night); rTheme.textContent = night ? '日間' : '夜間'; };
+  rChatMode.onclick=()=>{ chatMode=!chatMode; rChatMode.textContent = chatMode ? '文章模式' : '聊天模式'; renderReaderItem(); toast(chatMode ? '切換到聊天泡泡模式💬' : '切換到文章閱讀模式📖'); };
+  rTopBtn.onclick=()=> window.scrollTo({top:0, behavior:'smooth'});
+  rBottomBtn.onclick=()=> window.scrollTo({top:document.documentElement.scrollHeight, behavior:'smooth'});
+  rHeart.onclick=()=>{ ensureAC(); heartKick( (AC?AC.currentTime:0)+0.01, 0.8); toast('灑一點小心意。'); };
+
+  /* init */
+  function pInit(){ pResize(); lResize(); bResize(); w2Resize(); dResize(); rResize(); }
+  async function init(){ show('reader'); pInit(); await loadContentPack2(); await loadDrawPack(); renderReaderItem(); setTimeout(()=>toast('v6.27-FIXED：修復 Word 匯入 & 星潮/彗星/光流動畫💕'), 260); }
+  window.addEventListener('resize',()=>{ pInit(); });
+  init();
+})();
+</script>
+</body>
+</html>

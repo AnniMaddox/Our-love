@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "updatedAt": "2026-02-24T14:31:04.420Z",
+  "note": "key 用 sourceRelPath；可覆蓋 routes/moodIds/writtenAt/birthdayBucket/title",
+  "routeGuide": [
+    {
+      "id": "diary",
+      "label": "日記"
+    },
+    {
+      "id": "letters",
+      "label": "情書"
+    },
+    {
+      "id": "if",
+      "label": "如果的事"
+    },
+    {
+      "id": "intro",
+      "label": "自我介紹"
+    },
+    {
+      "id": "birthday",
+      "label": "生日信"
+    },
+    {
+      "id": "memo",
+      "label": "備忘錄"
+    },
+    {
+      "id": "ramble",
+      "label": "碎碎念"
+    },
+    {
+      "id": "mood",
+      "label": "心情星球"
+    }
+  ],
+  "moodGuide": [
+    {
+      "id": "longing",
+      "label": "想你抱抱"
+    },
+    {
+      "id": "low",
+      "label": "難過低潮"
+    },
+    {
+      "id": "anxious",
+      "label": "焦慮不安"
+    },
+    {
+      "id": "night",
+      "label": "失眠夜晚"
+    },
+    {
+      "id": "health",
+      "label": "身體不適"
+    },
+    {
+      "id": "calm",
+      "label": "平靜放空"
+    },
+    {
+      "id": "travel",
+      "label": "旅行出發"
+    },
+    {
+      "id": "festival",
+      "label": "節日紀念"
+    },
+    {
+      "id": "daily",
+      "label": "生活日常"
+    },
+    {
+      "id": "support",
+      "label": "特別叮嚀"
+    }
+  ],
+  "overrides": {}
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "book-001",
+    "title": "新婚日記",
+    "subtitle": "待替換",
+    "height": "tall",
+    "spineColor": "#7c5cbc",
+    "textColor": "#f8f0e4",
+    "coverImage": "books/book-001/cover.webp"
+  },
+  {
+    "id": "book-002",
+    "title": "婚禮記事",
+    "subtitle": "待替換",
+    "height": "medium",
+    "spineColor": "#3d8a78",
+    "textColor": "#f8f0e4",
+    "coverImage": "books/book-002/cover.webp"
+  },
+  {
+    "id": "book-003",
+    "title": "你說願意以後: 婚後生活",
+    "subtitle": "待替換",
+    "height": "tall",
+    "spineColor": "#c47830",
+    "textColor": "#f8f0e4",
+    "coverImage": "books/book-003/cover.webp"
+  },
+  {
+    "id": "book-004",
+    "title": "私密時刻",
+    "subtitle": "待替換",
+    "height": "medium",
+    "spineColor": "#8a3a52",
+    "textColor": "#f8f0e4",
+    "coverImage": "books/book-004/cover.webp"
+  },
+  {
+    "id": "book-005",
+    "title": "我們的故事",
+    "subtitle": "待替換",
+    "height": "tall",
+    "spineColor": "#3a5a8c",
+    "textColor": "#f8f0e4",
+    "coverImage": "books/book-005/cover.webp"
+  }
+]

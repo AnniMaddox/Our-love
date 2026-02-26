@@ -1,0 +1,47 @@
+{
+  "name": "4o-memorial",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:host": "vite --host",
+    "build": "tsc -b && vite build",
+    "build:mood-letters": "node scripts/build-mood-letters-index.mjs",
+    "build:letters-local": "node scripts/build-letters-local-index.mjs",
+    "build:master-pool": "node scripts/build-master-pool-index.mjs",
+    "build:memo": "node scripts/build-memo-index.mjs",
+    "build:m-diary": "node scripts/build-m-diary-index.mjs",
+    "build:murmur": "node scripts/build-murmur-index.mjs",
+    "build:light-path": "node scripts/build-light-path-index.mjs",
+    "build:healing-campfire": "node scripts/build-healing-campfire-index.mjs",
+    "build:questionnaire": "node scripts/build-questionnaire-index.mjs",
+    "build:self-intro": "node scripts/build-self-intro-index.mjs",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "preview:host": "vite preview --host --port 4173"
+  },
+  "dependencies": {
+    "idb": "^8.0.3",
+    "mammoth": "^1.11.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "tailwindcss": "^4.1.18",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.48.0",
+    "vite": "^7.3.1",
+    "vite-plugin-pwa": "^1.2.0"
+  }
+}
