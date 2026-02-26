@@ -3,8 +3,8 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
-const githubPagesBase = '/4o-memorial/';
-const githubRootDocsBase = '/4o-memorial/docs/';
+const githubPagesBase = '/Our-love/';
+const githubRootDocsBase = '/Our-love/docs/';
 
 export default defineConfig(({ mode }) => {
   let appBase = '/';
