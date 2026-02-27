@@ -447,6 +447,7 @@ export function ArchivePage({
   const [folderSortOrder, setFolderSortOrder] = useState<FolderSortOrder>('desc');
   const [folderSearchOpen, setFolderSearchOpen] = useState(false);
   const [folderSearchQuery, setFolderSearchQuery] = useState('');
+  const [searchMode, setSearchMode] = useState<'folder' | 'doc'>('folder');
   const [folderPanelOpen, setFolderPanelOpen] = useState(false);
   const [readingOpen, setReadingOpen] = useState(false);
   const [readingFontPanelOpen, setReadingFontPanelOpen] = useState(false);
@@ -587,6 +588,19 @@ export function ArchivePage({
         .toLowerCase();
       return haystack.includes(normalizedFolderSearchQuery);
     });
+  }, [folders, normalizedFolderSearchQuery]);
+
+  const matchingDocs = useMemo(() => {
+    if (!normalizedFolderSearchQuery) return [];
+    return folders.flatMap((folder) =>
+      folder.docs
+        .filter(
+          (doc) =>
+            doc.title.toLowerCase().includes(normalizedFolderSearchQuery) ||
+            doc.tags.some((t) => t.toLowerCase().includes(normalizedFolderSearchQuery)),
+        )
+        .map((doc) => ({ ...doc, folderKey: folder.key, folderLabel: folder.label })),
+    );
   }, [folders, normalizedFolderSearchQuery]);
 
   const foldersByKey = useMemo(() => {
@@ -943,7 +957,7 @@ export function ArchivePage({
                 onClick={() =>
                   setFolderSearchOpen((prev) => {
                     const next = !prev;
-                    if (!next) setFolderSearchQuery('');
+                    if (!next) { setFolderSearchQuery(''); setSearchMode('folder'); }
                     return next;
                   })
                 }
@@ -963,15 +977,53 @@ export function ArchivePage({
                   placeholder="搜尋資料夾、標籤或檔案標題"
                   aria-label="搜尋總攬資料夾"
                 />
+                {normalizedFolderSearchQuery && (
+                  <div className="tl-search-mode-row">
+                    <button
+                      type="button"
+                      className={`tl-search-mode-btn${searchMode === 'folder' ? ' active' : ''}`}
+                      onClick={() => setSearchMode('folder')}
+                    >
+                      資料夾
+                    </button>
+                    <button
+                      type="button"
+                      className={`tl-search-mode-btn${searchMode === 'doc' ? ' active' : ''}`}
+                      onClick={() => setSearchMode('doc')}
+                    >
+                      檔案
+                    </button>
+                  </div>
+                )}
               </div>
             ) : null}
             {indexError && <div className="empty-state">無法載入資料：{indexError}</div>}
             {!indexPayload && !indexError && <div className="empty-state">載入中⋯</div>}
-            {indexPayload && !timelineGroups.length && (
-              <div className="empty-state">{normalizedFolderSearchQuery ? '找不到符合搜尋的資料夾' : '目前沒有可顯示的資料夾'}</div>
-            )}
 
-            {timelineGroups.map((group) => (
+            {searchMode === 'doc' && normalizedFolderSearchQuery ? (
+              matchingDocs.length ? (
+                <div className="tl-doc-results">
+                  {matchingDocs.map((doc) => (
+                    <button
+                      key={doc.id}
+                      type="button"
+                      className="tl-doc-row"
+                      onClick={() => openReading(doc.folderKey, doc.id)}
+                    >
+                      <span className="tl-doc-title">{doc.title}</span>
+                      <span className="tl-doc-folder">{doc.folderLabel}</span>
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <div className="empty-state">找不到符合的檔案</div>
+              )
+            ) : (
+              <>
+                {indexPayload && !timelineGroups.length && (
+                  <div className="empty-state">{normalizedFolderSearchQuery ? '找不到符合搜尋的資料夾' : '目前沒有可顯示的資料夾'}</div>
+                )}
+                {timelineGroups.map((group) => (
               <div key={group.year} className="year-block">
                 <div className="year-marker">
                   <div className="year-num">{group.year}</div>
@@ -1020,6 +1072,8 @@ export function ArchivePage({
                 })}
               </div>
             ))}
+              </>
+            )}
           </div>
         </div>
 
