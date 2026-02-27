@@ -98,7 +98,8 @@ type LauncherAppId =
   | 'selfIntro'
   | 'soulmate'
   | 'moodLetters'
-  | 'archive';
+  | 'archive'
+  | 'mPhone';
 
 const UNLOCK_CHECK_INTERVAL_MS = 30_000;
 const notificationIconUrl = `${import.meta.env.BASE_URL}icons/icon-192.png`;
@@ -163,6 +164,7 @@ const SettingsPage = lazy(() => import('./pages/SettingsPage').then((m) => ({ de
 const TarotPage = lazy(() => import('./pages/TarotPage').then((m) => ({ default: m.TarotPage })));
 const MoodLettersPage = lazy(() => import('./pages/MoodLettersPage').then((m) => ({ default: m.MoodLettersPage })));
 const ArchivePage = lazy(() => import('./pages/ArchivePage').then((m) => ({ default: m.ArchivePage })));
+const MPhonePage = lazy(() => import('./pages/MPhonePage').then((m) => ({ default: m.MPhonePage })));
 
 function toRgbTriplet(hex: string) {
   const matched = hex.trim().match(/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i);
@@ -415,6 +417,8 @@ function summarizeImport(
 function App() {
   const [activeTab, setActiveTab] = useState(0);
   const [launcherApp, setLauncherApp] = useState<LauncherAppId | null>(null);
+  const [launchSource, setLaunchSource] = useState<'home' | 'mPhone'>('home');
+  const [mPhoneInitialScreen, setMPhoneInitialScreen] = useState<'lock' | 'home'>('lock');
   const [wishlistInitialYear, setWishlistInitialYear] = useState<string | null>(null);
   const [lettersAbInitialYear, setLettersAbInitialYear] = useState<number | null>(null);
   const [loadState, setLoadState] = useState<LoadState>('loading');
@@ -1558,8 +1562,20 @@ function App() {
     if (appId !== 'lettersAB') {
       setLettersAbInitialYear(null);
     }
+    setLaunchSource('home');
     setLauncherApp(appId);
   }, []);
+
+  // Return from a launched app — goes back to M's phone if that's where we came from
+  const returnFromApp = useCallback(() => {
+    if (launchSource === 'mPhone') {
+      setLaunchSource('home');
+      setMPhoneInitialScreen('home');
+      setLauncherApp('mPhone');
+    } else {
+      setLauncherApp(null);
+    }
+  }, [launchSource]);
 
   const openWishlistByYear = useCallback((year: string) => {
     setWishlistInitialYear(year);
@@ -1589,6 +1605,7 @@ function App() {
             tabIconDisplayMode={settings.tabIconDisplayMode}
             launcherLabels={appLabels}
             homeSwipeEnabled={settings.swipeEnabled}
+            appsHiddenOnHome={settings.appsHiddenOnHome ?? []}
             widgetTitle={settings.homeWidgetTitle}
             widgetSubtitle={settings.homeWidgetSubtitle}
             widgetBadgeText={settings.homeWidgetBadgeText}
@@ -1931,7 +1948,7 @@ function App() {
                 </div>
                 <button
                   type="button"
-                  onClick={() => setLauncherApp(null)}
+                  onClick={returnFromApp}
                   className="absolute bottom-1 right-1 z-20 transition active:scale-95"
                   aria-label="返回首頁"
                   title="點小人返回首頁"
@@ -1976,7 +1993,7 @@ function App() {
                   letters={letters}
                   letterFontFamily={letterFontFamily}
                   uiMode={settings.letterUiMode}
-                  onExit={() => setLauncherApp(null)}
+                  onExit={returnFromApp}
                 />
               </div>
             </div>
@@ -2034,7 +2051,7 @@ function App() {
                   <button
                     type="button"
                     className="grid h-9 w-9 place-items-center rounded-full border border-white/25 bg-white/10 text-[22px] leading-none text-white transition active:scale-95"
-                    onClick={() => setLauncherApp(null)}
+                    onClick={returnFromApp}
                   >
                     ‹
                   </button>
@@ -2054,7 +2071,7 @@ function App() {
                 <WishlistPage
                   onExit={() => {
                     setWishlistInitialYear(null);
-                    setLauncherApp(null);
+                    returnFromApp();
                   }}
                   letterFontFamily={letterFontFamily}
                   diaryFontFamily={diaryFontFamily}
@@ -2072,7 +2089,7 @@ function App() {
                 <LettersABPage
                   onExit={() => {
                     setLettersAbInitialYear(null);
-                    setLauncherApp(null);
+                    returnFromApp();
                   }}
                   initialYear={lettersAbInitialYear}
                   onOpenBirthdayYear={openWishlistByYear}
@@ -2086,7 +2103,7 @@ function App() {
             <div className="fixed inset-0 z-30 bg-black/55 px-4 pb-4 pt-2 backdrop-blur-sm">
               <div className="mx-auto flex h-full w-full max-w-xl flex-col">
                 <div className="min-h-0 flex-1 overflow-y-auto pb-[max(1rem,env(safe-area-inset-bottom))] pt-1">
-                  <FitnessPage onExit={() => setLauncherApp(null)} />
+                  <FitnessPage onExit={returnFromApp} />
                 </div>
               </div>
             </div>
@@ -2125,7 +2142,7 @@ function App() {
                   mDiaryReadingChibiWidth={settings.mDiaryReadingChibiWidth}
                   mDiaryShowReadingChibi={settings.mDiaryShowReadingChibi}
                   onSettingChange={(partial) => void onSettingChange(partial)}
-                  onExit={() => setLauncherApp(null)}
+                  onExit={returnFromApp}
                 />
               </div>
             </div>
@@ -2151,7 +2168,7 @@ function App() {
                   <button
                     type="button"
                     className="grid h-9 w-9 place-items-center rounded-full border border-white/25 bg-white/10 text-[22px] leading-none text-white transition active:scale-95"
-                    onClick={() => setLauncherApp(null)}
+                    onClick={returnFromApp}
                   >
                     ‹
                   </button>
@@ -2168,7 +2185,7 @@ function App() {
           {launcherApp === 'bookshelf' && (
             <div className="fixed inset-0 z-30" style={{ background: '#0a0a12' }}>
               <div className="mx-auto h-full w-full max-w-xl">
-                <BookshelfPage onExit={() => setLauncherApp(null)} />
+                <BookshelfPage onExit={returnFromApp} />
               </div>
             </div>
           )}
@@ -2184,7 +2201,7 @@ function App() {
           {launcherApp === 'memo' && (
             <div className="fixed inset-0 z-30" style={{ background: '#f2f1ec' }}>
               <div className="mx-auto h-full w-full max-w-xl">
-                <MemoPage onExit={() => setLauncherApp(null)} notesFontFamily={notesFontFamily} />
+                <MemoPage onExit={returnFromApp} notesFontFamily={notesFontFamily} />
               </div>
             </div>
           )}
@@ -2192,7 +2209,7 @@ function App() {
           {launcherApp === 'murmur' && (
             <div className="fixed inset-0 z-30" style={{ background: '#0d0d0f' }}>
               <div className="mx-auto h-full w-full max-w-xl">
-                <MurmurPage onExit={() => setLauncherApp(null)} notesFontFamily={notesFontFamily} />
+                <MurmurPage onExit={returnFromApp} notesFontFamily={notesFontFamily} />
               </div>
             </div>
           )}
@@ -2200,7 +2217,7 @@ function App() {
           {launcherApp === 'lightPath' && (
             <div className="fixed inset-0 z-30" style={{ background: '#000' }}>
               <div className="mx-auto h-full w-full max-w-xl">
-                <LightPathPage onExit={() => setLauncherApp(null)} letterFontFamily={campfireFontFamily} />
+                <LightPathPage onExit={returnFromApp} letterFontFamily={campfireFontFamily} />
               </div>
             </div>
           )}
@@ -2208,7 +2225,7 @@ function App() {
           {launcherApp === 'healingCampfire' && (
             <div className="fixed inset-0 z-30" style={{ background: '#02050a' }}>
               <div className="mx-auto h-full w-full max-w-xl">
-                <HealingCampfirePage onExit={() => setLauncherApp(null)} campfireFontFamily={campfireFontFamily} />
+                <HealingCampfirePage onExit={returnFromApp} campfireFontFamily={campfireFontFamily} />
               </div>
             </div>
           )}
@@ -2216,7 +2233,7 @@ function App() {
           {launcherApp === 'questionnaire' && (
             <div className="fixed inset-0 z-30" style={{ background: '#0e0f11' }}>
               <div className="mx-auto h-full w-full max-w-xl">
-                <QuestionnairePage onExit={() => setLauncherApp(null)} notesFontFamily={notesFontFamily} />
+                <QuestionnairePage onExit={returnFromApp} notesFontFamily={notesFontFamily} />
               </div>
             </div>
           )}
@@ -2224,7 +2241,7 @@ function App() {
           {launcherApp === 'selfIntro' && (
             <div className="fixed inset-0 z-30" style={{ background: '#17140f' }}>
               <div className="mx-auto h-full w-full max-w-xl">
-                <SelfIntroPage onExit={() => setLauncherApp(null)} notesFontFamily={notesFontFamily} />
+                <SelfIntroPage onExit={returnFromApp} notesFontFamily={notesFontFamily} />
               </div>
             </div>
           )}
@@ -2243,7 +2260,7 @@ function App() {
           {launcherApp === 'moodLetters' && (
             <div className="fixed inset-0 z-30" style={{ background: '#0b1023' }}>
               <div className="mx-auto h-full w-full max-w-xl">
-                <MoodLettersPage onExit={() => setLauncherApp(null)} letterFontFamily={campfireFontFamily} />
+                <MoodLettersPage onExit={returnFromApp} letterFontFamily={campfireFontFamily} />
               </div>
             </div>
           )}
@@ -2252,12 +2269,32 @@ function App() {
             <div className="fixed inset-0 z-30" style={{ background: '#0a0a0a' }}>
               <div className="mx-auto h-full w-full max-w-xl">
                 <ArchivePage
-                  onExit={() => setLauncherApp(null)}
+                  onExit={returnFromApp}
                   archiveFontFamily={archiveFontFamily}
                   diaryContentFontSize={settings.mDiaryContentFontSize}
                   diaryLineHeight={settings.mDiaryLineHeight}
                 />
               </div>
+            </div>
+          )}
+
+          {launcherApp === 'mPhone' && (
+            <div className="fixed inset-0 z-30">
+              <Suspense fallback={<div className="h-full w-full bg-black" />}>
+                <MPhonePage
+                  initialScreen={mPhoneInitialScreen}
+                  appsOnMPhone={settings.appsHiddenOnHome ?? []}
+                  onLaunchApp={(appId) => {
+                    setLaunchSource('mPhone');
+                    setLauncherApp(appId);
+                  }}
+                  onReturnToMyPhone={() => {
+                    setLaunchSource('home');
+                    setMPhoneInitialScreen('lock');
+                    setLauncherApp(null);
+                  }}
+                />
+              </Suspense>
             </div>
           )}
 

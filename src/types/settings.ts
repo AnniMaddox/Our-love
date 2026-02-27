@@ -292,6 +292,7 @@ export type AppSettings = {
   notesTextColor: string;
   chibiPoolSize: number;
   chibiPoolMode: ChibiPoolMode;
+  appsHiddenOnHome: string[];
 };
 
 export const DEFAULT_HOVER_TONE_WEIGHTS: HoverToneWeights = {
@@ -395,4 +396,5 @@ export const DEFAULT_SETTINGS: AppSettings = {
   notesTextColor: '#44403c',
   chibiPoolSize: 60,
   chibiPoolMode: 'i',
+  appsHiddenOnHome: ['diary','questionnaire','memo','murmur','self-intro','letters','album','bookshelf','tarot'],
 };

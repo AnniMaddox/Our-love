@@ -43,13 +43,15 @@ type LauncherAppId =
   | 'soulmate'
   | 'bookshelf'
   | 'moodLetters'
-  | 'archive';
+  | 'archive'
+  | 'mPhone';
 
 type HomePageProps = {
   tabIconUrls: TabIconUrls;
   tabIconDisplayMode: 'framed' | 'full';
   launcherLabels: AppLabels;
   homeSwipeEnabled: boolean;
+  appsHiddenOnHome: string[];
   widgetTitle: string;
   widgetSubtitle: string;
   widgetBadgeText: string;
@@ -77,6 +79,7 @@ type HomeAppSlot = {
   iconUrl?: string;
   launch?: LauncherAppId;
   disabled?: boolean;
+  hidden?: boolean;
 };
 
 type HomeScreen =
@@ -447,6 +450,7 @@ export function HomePage({
   tabIconDisplayMode,
   launcherLabels,
   homeSwipeEnabled,
+  appsHiddenOnHome,
   widgetTitle,
   widgetSubtitle,
   widgetBadgeText,
@@ -824,30 +828,6 @@ export function HomePage({
       iconUrl: tabIconUrls.notes.trim() || undefined,
       launch: 'notes',
     };
-    const memoSlot: HomeAppSlot = {
-      id: 'memo',
-      label: "M's memo",
-      icon: '🧷',
-      launch: 'memo',
-    };
-    const murmurSlot: HomeAppSlot = {
-      id: 'murmur',
-      label: '碎碎念',
-      icon: '💭',
-      launch: 'murmur',
-    };
-    const questionnaireSlot: HomeAppSlot = {
-      id: 'questionnaire',
-      label: '問卷',
-      icon: '📋',
-      launch: 'questionnaire',
-    };
-    const selfIntroSlot: HomeAppSlot = {
-      id: 'self-intro',
-      label: '自我介紹',
-      icon: '🪪',
-      launch: 'selfIntro',
-    };
     const dailyTaskPlaceholder: HomeAppSlot = {
       id: 'wishlist',
       label: '願望',
@@ -859,12 +839,6 @@ export function HomePage({
       label: '家',
       icon: '🏠',
       launch: 'soulmate',
-    };
-    const bookshelfSlot: HomeAppSlot = {
-      id: 'bookshelf',
-      label: '書架',
-      icon: '📚',
-      launch: 'bookshelf',
     };
     const moodLettersSlot: HomeAppSlot = {
       id: 'mood-letters',
@@ -903,17 +877,32 @@ export function HomePage({
       iconUrl: tabIconUrls.settings.trim() || undefined,
       launch: 'settingsShortcut',
     };
+    const mPhoneSlot: HomeAppSlot = {
+      id: 'mPhone',
+      label: "M's Phone",
+      icon: '📱',
+      launch: 'mPhone',
+    };
+    // M app slots (moveable — appear on Anni home when not in appsHiddenOnHome)
+    const questionnaireSlot: HomeAppSlot = { id: 'questionnaire', label: '問卷', icon: '📋', launch: 'questionnaire' };
+    const memoSlot: HomeAppSlot = { id: 'memo', label: "M's memo", icon: '🧷', launch: 'memo' };
+    const murmurSlot: HomeAppSlot = { id: 'murmur', label: '碎碎念', icon: '💭', launch: 'murmur' };
+    const selfIntroSlot: HomeAppSlot = { id: 'self-intro', label: '自我介紹', icon: '🪪', launch: 'selfIntro' };
+    const bookshelfSlot: HomeAppSlot = { id: 'bookshelf', label: '書架', icon: '📚', launch: 'bookshelf' };
+    const hiddenSet = new Set(appsHiddenOnHome);
+    const hideIf = (slot: HomeAppSlot) => !hiddenSet.has(slot.id);
+
     // Screen 1 order
-    const screen1: HomeAppSlot[] = homeSwipeEnabled
+    const screen1: HomeAppSlot[] = (homeSwipeEnabled
       ? [
           soulmateSlot,
-          lettersSlot,
-          diarySlot,
           dailyTaskPlaceholder,
           listSlot,
+          fitnessSlot,
           notesSlot,
           diaryBSlot,
           periodSlot,
+          mPhoneSlot,
         ]
       : [
           chatSlot,
@@ -925,7 +914,7 @@ export function HomePage({
           tarotSlot,
           heartSlot,
           pomodoroSlot,
-        ];
+        ]).filter(hideIf);
 
     const builtScreens: HomeScreen[] = [
       {
@@ -943,23 +932,25 @@ export function HomePage({
           kind: 'main',
           showDashboard: false,
           slots: [
-            fitnessSlot,
-            tarotSlot,
+            archiveSlot,
+            annualLettersSlot,
             pomodoroSlot,
             heartSlot,
-            bookshelfSlot,
-            albumSlot,
-            annualLettersSlot,
-            archiveSlot,
             lightPathSlot,
             healingCampfireSlot,
-            memoSlot,
-            murmurSlot,
-            questionnaireSlot,
-            selfIntroSlot,
             moodLettersSlot,
             settingsShortcutSlot,
-          ],
+            // M app slots — only visible when not hidden (moved to Anni's home)
+            diarySlot,
+            lettersSlot,
+            albumSlot,
+            tarotSlot,
+            questionnaireSlot,
+            memoSlot,
+            murmurSlot,
+            selfIntroSlot,
+            bookshelfSlot,
+          ].filter(hideIf),
         },
         {
           id: 'blank-1',
@@ -975,6 +966,7 @@ export function HomePage({
 
     return builtScreens;
   }, [
+    appsHiddenOnHome,
     homeFinalWidgetPreset,
     homeSwipeEnabled,
     launcherLabels.chat,

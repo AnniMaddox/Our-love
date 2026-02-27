@@ -1,0 +1,1070 @@
+/* ═══════════════════════════════════════
+   M Phone Page — complete stylesheet
+═══════════════════════════════════════ */
+
+/* ── ROOT ── */
+.mphone-root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  background: #050810;
+}
+
+/* ── WALLPAPER ── */
+.mphone-wallpaper {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+  z-index: 0;
+}
+
+.mphone-wallpaper-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.22);
+  z-index: 1;
+}
+
+/* ── GLASS UTILITY ── */
+.mphone-glass {
+  background: rgba(30, 30, 40, 0.55);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+/* ── DYNAMIC ISLAND ── */
+.mphone-dynamic-island {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 118px;
+  height: 34px;
+  background: #000;
+  border-radius: 20px;
+  z-index: 60;
+  pointer-events: none;
+}
+
+/* ── STATUS BAR ── */
+.mphone-status-bar {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 14px 22px 6px;
+  height: 50px;
+  flex-shrink: 0;
+  z-index: 20;
+}
+
+.mphone-sb-left,
+.mphone-sb-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mphone-sb-time {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.94);
+  letter-spacing: 0.2px;
+}
+
+.mphone-sb-signal {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.5px;
+}
+
+.mphone-sb-signal span {
+  width: 3px;
+  border-radius: 1px;
+  background: rgba(255, 255, 255, 0.9);
+}
+.mphone-sb-signal span:nth-child(1) { height: 4px; }
+.mphone-sb-signal span:nth-child(2) { height: 6.5px; }
+.mphone-sb-signal span:nth-child(3) { height: 9px; }
+.mphone-sb-signal span:nth-child(4) { height: 12px; }
+
+.mphone-sb-wifi {
+  width: 16px;
+  height: 13px;
+}
+
+.mphone-sb-battery {
+  position: relative;
+  width: 24px;
+  height: 12px;
+  border: 1.5px solid rgba(255, 255, 255, 0.72);
+  border-radius: 3.5px;
+}
+
+.mphone-sb-battery-fill {
+  position: absolute;
+  top: 1.5px;
+  left: 1.5px;
+  bottom: 1.5px;
+  width: 80%;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 1.5px;
+}
+
+.mphone-sb-battery-cap {
+  position: absolute;
+  right: -4.5px;
+  top: 2.5px;
+  width: 2.5px;
+  height: 7px;
+  background: rgba(255, 255, 255, 0.58);
+  border-radius: 0 1.5px 1.5px 0;
+}
+
+/* ── SCREENS ── */
+.mphone-screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.40s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.34s ease;
+  will-change: transform, opacity;
+}
+
+.mphone-screen.s-active {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 12;
+}
+
+.mphone-screen.s-exit-up {
+  transform: translateY(-56px) scale(1);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 11;
+}
+
+.mphone-screen.s-enter-below {
+  transform: translateY(40px) scale(0.975);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ═══════════════════════════
+   LOCK SCREEN
+═══════════════════════════ */
+.mphone-lock {
+  justify-content: flex-start;
+}
+
+.mphone-lock-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px 0;
+  min-height: 0;
+}
+
+/* Pushes music card to the bottom */
+.mphone-lock-spacer {
+  flex: 1;
+}
+
+/* ── Date + big time ── */
+.mphone-lock-hero {
+  text-align: center;
+  padding-top: 4px;
+}
+
+.mphone-lock-date {
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.82);
+  letter-spacing: 0.3px;
+  margin-bottom: 2px;
+}
+
+/* iOS-style large time — matches M's real lock screen */
+.mphone-lock-time {
+  font-size: clamp(88px, 24vw, 112px);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: -5px;
+  line-height: 1;
+  /* Subtle depth illusion */
+  text-shadow:
+    0 2px 24px rgba(0, 0, 0, 0.28),
+    0 0 60px rgba(255, 255, 255, 0.06);
+}
+
+/* ── Lock screen music card (iOS-style, no album art) ── */
+.mphone-lock-music {
+  border-radius: 20px;
+  padding: 14px 18px 12px;
+  flex-shrink: 0;
+}
+
+.mphone-lock-music-row1 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.mphone-lock-music-texts {
+  flex: 1;
+  min-width: 0;
+}
+
+.mphone-lock-music-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.96);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+
+.mphone-lock-music-artist {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.52);
+  margin-top: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mphone-lock-music-playbtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+  cursor: default;
+  padding-left: 2px;
+}
+
+/* Progress bar */
+.mphone-lock-music-progress-wrap {
+  margin-bottom: 12px;
+}
+
+.mphone-lock-music-bar {
+  position: relative;
+  height: 3.5px;
+  background: rgba(255, 255, 255, 0.20);
+  border-radius: 2px;
+  margin-bottom: 5px;
+}
+
+.mphone-lock-music-fill {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: 8%;   /* 0:22 of 5:26 ≈ 7% */
+  background: rgba(255, 255, 255, 0.82);
+  border-radius: 2px;
+}
+
+.mphone-lock-music-thumb {
+  position: absolute;
+  top: 50%;
+  left: 8%;
+  transform: translate(-50%, -50%);
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+}
+
+.mphone-lock-music-times {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.42);
+  letter-spacing: 0.2px;
+}
+
+/* Transport controls — 5 buttons: ☆ ⏮ ⏸ ⏭ 📡 */
+.mphone-lock-music-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2px;
+}
+
+.mphone-lock-music-ctrl {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  padding: 4px;
+  flex-shrink: 0;
+}
+
+.mphone-lock-music-ctrl--side {
+  color: rgba(255, 255, 255, 0.60);
+}
+
+.mphone-lock-music-ctrl--play {
+  color: white;
+}
+
+/* ── Footer: swipe hint + home indicator ── */
+.mphone-lock-footer {
+  padding: 10px 20px calc(env(safe-area-inset-bottom, 0px) + 10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.mphone-lock-swipe-hint {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 1.2px;
+  animation: mphoneHintPulse 2.8s ease-in-out infinite;
+}
+
+@keyframes mphoneHintPulse {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 0.70; }
+}
+
+/* ── HOME INDICATOR ── */
+.mphone-home-indicator {
+  width: 132px;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.26);
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════
+   NOTIFICATION CENTER
+═══════════════════════════ */
+.mphone-notif {
+  justify-content: flex-start;
+}
+
+/* Header: "通知中心" title + × close button */
+.mphone-notif-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 20px 12px;
+  flex-shrink: 0;
+}
+
+.mphone-notif-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.96);
+  letter-spacing: -0.3px;
+}
+
+.mphone-notif-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.16s;
+  flex-shrink: 0;
+}
+.mphone-notif-close:active { background: rgba(255, 255, 255, 0.28); }
+
+/* Scrollable notification list */
+.mphone-notif-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  padding: 0 14px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Notification cards */
+.mphone-notif-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: transform 0.16s ease, opacity 0.16s;
+  animation: mphoneNotifIn 0.36s ease both;
+}
+.mphone-notif-card:nth-child(2) { animation-delay: 0.04s; }
+.mphone-notif-card:nth-child(3) { animation-delay: 0.08s; }
+.mphone-notif-card:nth-child(4) { animation-delay: 0.12s; }
+.mphone-notif-card:nth-child(5) { animation-delay: 0.16s; }
+.mphone-notif-card:nth-child(6) { animation-delay: 0.20s; }
+.mphone-notif-card:nth-child(7) { animation-delay: 0.24s; }
+.mphone-notif-card:nth-child(8) { animation-delay: 0.28s; }
+.mphone-notif-card:nth-child(9) { animation-delay: 0.32s; }
+.mphone-notif-card:active { transform: scale(0.97); opacity: 0.82; }
+
+@keyframes mphoneNotifIn {
+  from { transform: translateY(16px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.mphone-notif-ico {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  flex-shrink: 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.28);
+}
+
+.mphone-notif-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.mphone-notif-app {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 2px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+
+.mphone-notif-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.92);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.mphone-notif-sub {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.42);
+  margin-top: 1px;
+}
+
+.mphone-notif-when {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.38);
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 1px;
+}
+
+/* Bottom: house button + home indicator */
+.mphone-notif-bottom {
+  padding: 8px 20px calc(env(safe-area-inset-bottom, 0px) + 10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.mphone-notif-home-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.16s, opacity 0.16s;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.mphone-notif-home-btn:active { transform: scale(0.91); opacity: 0.78; }
+
+/* ═══════════════════════════
+   HOME SCREEN
+═══════════════════════════ */
+.mphone-home {
+  justify-content: flex-start;
+}
+
+.mphone-home-pager {
+  flex: 1;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.mphone-home-pager::-webkit-scrollbar { display: none; }
+
+.mphone-home-page {
+  width: 100%;
+  flex-shrink: 0;
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 18px 6px;
+  gap: 12px;
+  overflow: hidden;
+}
+
+/* ── Home clock: same style as lock screen (no box, big text on wallpaper) ── */
+.mphone-home-clock {
+  width: 100%;
+  padding: 2px 4px 0;
+  text-align: center;
+  /* Intentionally no background, no border — just text over wallpaper */
+}
+
+.mphone-home-clock-date {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.72);
+  letter-spacing: 0.3px;
+  margin-bottom: 0;
+}
+
+.mphone-home-clock-time {
+  font-size: clamp(108px, 30vw, 136px);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.90);
+  letter-spacing: -5px;
+  line-height: 1;
+  text-shadow:
+    0 2px 20px rgba(0, 0, 0, 0.25),
+    0 0 50px rgba(255, 255, 255, 0.05);
+}
+
+/* ── Music widget (home page 2, compact glass card) ── */
+.mphone-music-widget {
+  width: 100%;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+}
+
+.mphone-music-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.mphone-music-app {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.48);
+  margin-bottom: 3px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.mphone-music-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.94);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mphone-music-artist {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.50);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mphone-music-play {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  flex-shrink: 0;
+  padding-left: 2px;
+}
+
+/* ── APP GRID ── */
+.mphone-app-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px 6px;
+  width: 100%;
+}
+
+.mphone-app-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.mphone-app-item:active .mphone-app-icon { transform: scale(0.86); }
+
+.mphone-app-icon {
+  width: clamp(52px, 14vw, 64px);
+  height: clamp(52px, 14vw, 64px);
+  border-radius: 22%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(17px, 4.5vw, 21px);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.18);
+  transition: transform 0.13s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+.mphone-app-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(175deg, rgba(255,255,255,0.16) 0%, transparent 55%);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.mphone-app-label {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 1px 5px rgba(0,0,0,0.55);
+  letter-spacing: 0.2px;
+  text-align: center;
+  max-width: 62px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.mphone-annisphone-icon {
+  background: linear-gradient(145deg, #ff9a9e, #fecfef) !important;
+}
+
+/* ── PAGE DOTS ── */
+.mphone-page-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 4px 0 2px;
+  flex-shrink: 0;
+}
+
+.mphone-page-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.mphone-page-dot.is-active {
+  background: rgba(255, 255, 255, 0.92);
+  transform: scale(1.1);
+}
+
+/* ── DOCK ── */
+.mphone-dock-wrap {
+  padding: 0 14px calc(env(safe-area-inset-bottom, 0px) + 6px);
+  flex-shrink: 0;
+}
+
+.mphone-dock {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 8px;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.16);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.mphone-dock-item .mphone-app-icon {
+  width: clamp(46px, 12.5vw, 58px);
+  height: clamp(46px, 12.5vw, 58px);
+  border-radius: 18px;
+  font-size: clamp(15px, 3.8vw, 18px);
+}
+
+/* ═══════════════════════════
+   CONFIRM OVERLAY
+═══════════════════════════ */
+.mphone-confirm-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: mphoneFadeIn 0.18s ease;
+}
+
+@keyframes mphoneFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.mphone-confirm-dialog {
+  width: 100%;
+  max-width: 296px;
+  border-radius: 22px;
+  padding: 26px 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: rgba(40, 40, 58, 0.88);
+  border: 1px solid rgba(255,255,255,0.16);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  animation: mphoneDialogIn 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes mphoneDialogIn {
+  from { transform: scale(0.88); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+.mphone-confirm-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.96);
+  text-align: center;
+  margin-bottom: 2px;
+}
+
+.mphone-confirm-sub {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.mphone-confirm-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.mphone-confirm-cancel,
+.mphone-confirm-ok {
+  flex: 1;
+  height: 46px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.16s;
+}
+.mphone-confirm-cancel {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.80);
+}
+.mphone-confirm-ok {
+  background: linear-gradient(135deg, rgba(255, 120, 120, 0.80), rgba(200, 60, 100, 0.80));
+  color: rgba(255, 255, 255, 0.96);
+}
+.mphone-confirm-cancel:active,
+.mphone-confirm-ok:active { opacity: 0.76; }
+
+/* ═══════════════════════════
+   SETTINGS OVERLAY
+═══════════════════════════ */
+.mphone-settings-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 110;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: mphoneFadeIn 0.18s ease;
+}
+
+.mphone-settings-sheet {
+  display: flex;
+  flex-direction: column;
+  max-height: 88%;
+  border-radius: 26px 26px 0 0;
+  background: rgba(22, 22, 32, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: none;
+  backdrop-filter: blur(36px) saturate(160%);
+  -webkit-backdrop-filter: blur(36px) saturate(160%);
+  animation: mphoneSheetIn 0.30s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@keyframes mphoneSheetIn {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+/* ── Settings header ── */
+.mphone-settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 14px;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mphone-settings-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.96);
+  letter-spacing: -0.3px;
+}
+
+.mphone-settings-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.mphone-settings-close:active { background: rgba(255, 255, 255, 0.24); }
+
+/* ── Scrollable body ── */
+.mphone-settings-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  padding: 0 0 env(safe-area-inset-bottom, 16px);
+}
+
+/* ── Section ── */
+.mphone-settings-section {
+  padding: 18px 18px 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.mphone-settings-section:last-child { border-bottom: none; }
+
+.mphone-settings-section-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.38);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* ── URL input row ── */
+.mphone-settings-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.mphone-settings-input {
+  flex: 1;
+  min-width: 0;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.90);
+  font-size: 13px;
+  padding: 0 12px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.15s;
+}
+.mphone-settings-input::placeholder { color: rgba(255, 255, 255, 0.28); }
+.mphone-settings-input:focus { border-color: rgba(255, 255, 255, 0.32); }
+
+.mphone-settings-input--sm {
+  height: 34px;
+  font-size: 12px;
+}
+
+.mphone-settings-btn {
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: inherit;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.mphone-settings-btn:active { background: rgba(255, 255, 255, 0.24); }
+
+.mphone-settings-btn--sm {
+  height: 34px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+/* ── Upload button (label acting as button) ── */
+.mphone-settings-upload-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-family: inherit;
+  transition: background 0.15s;
+  user-select: none;
+}
+.mphone-settings-upload-label:active { background: rgba(255, 255, 255, 0.14); }
+
+.mphone-settings-upload-label--sm {
+  height: 34px;
+  padding: 0 10px;
+  font-size: 12px;
+  margin-bottom: 0;
+}
+
+/* ── Clear button ── */
+.mphone-settings-clear-btn {
+  display: block;
+  width: 100%;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 80, 80, 0.14);
+  border: 1px solid rgba(255, 80, 80, 0.22);
+  color: rgba(255, 140, 140, 0.90);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 12px;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+.mphone-settings-clear-btn:active { background: rgba(255, 80, 80, 0.24); }
+
+.mphone-settings-clear-btn--sm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: 34px;
+  padding: 0 10px;
+  font-size: 12px;
+  margin-bottom: 0;
+}
+
+/* ── App icon rows ── */
+.mphone-settings-icon-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.mphone-settings-icon-preview {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.30);
+  overflow: hidden;
+}
+
+.mphone-settings-icon-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.mphone-settings-icon-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.80);
+  margin-bottom: 7px;
+}
+
+.mphone-settings-icon-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}

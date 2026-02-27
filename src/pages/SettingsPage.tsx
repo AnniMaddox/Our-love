@@ -76,6 +76,7 @@ type PanelKey =
   | 'labels'
   | 'tabIcons'
   | 'notification'
+  | 'mPhone'
   | 'imports'
   | 'hover'
   | 'tarot'
@@ -3158,6 +3159,60 @@ export function SettingsPage({
             <p className="text-xs text-stone-500">
               留空就用預設圖示。可貼網址或直接上傳圖片（會存成本機 data URL）。
             </p>
+          </div>
+        </SettingPanel>
+
+        <SettingPanel
+          icon="📱"
+          title="M 的手機"
+          subtitle="選擇移到 M 手機、從 Anni 首頁隱藏的 App"
+          isOpen={openPanel === 'mPhone'}
+          onToggle={() => togglePanel('mPhone')}
+        >
+          <div className="space-y-2">
+            <p className="mb-3 text-xs text-stone-500">
+              勾選後，App 會從 Anni 的首頁消失，改由 M 的手機開啟。
+            </p>
+            {[
+              { slotId: 'diary',            label: 'M日記',        icon: '📓' },
+              { slotId: 'questionnaire',    label: '問卷',         icon: '📋' },
+              { slotId: 'memo',             label: "M's memo",     icon: '🧷' },
+              { slotId: 'murmur',           label: '碎碎念',       icon: '💭' },
+              { slotId: 'self-intro',       label: '自我介紹',     icon: '🪪' },
+              { slotId: 'letters',          label: '情書',         icon: '💌' },
+              { slotId: 'album',            label: '相冊',         icon: '📷' },
+              { slotId: 'bookshelf',        label: '書架',         icon: '📚' },
+              { slotId: 'tarot',            label: '塔羅',         icon: '🔮' },
+              { slotId: 'wishlist',         label: '願望',         icon: '🌠' },
+              { slotId: 'list',             label: '清單',         icon: '🎴' },
+              { slotId: 'fitness',          label: '健身',         icon: '🏋️' },
+              { slotId: 'letters-ab',       label: '年度信件',     icon: '📜' },
+              { slotId: 'archive',          label: '總攬',         icon: '🗂' },
+              { slotId: 'light-path',       label: '留光給妳的路', icon: '✨' },
+              { slotId: 'healing-campfire', label: '治癒篝火',     icon: '🔥' },
+              { slotId: 'mood-letters',     label: '心情星球',     icon: '🫧' },
+            ].map(({ slotId, label, icon }) => (
+              <label
+                key={slotId}
+                className="flex items-center justify-between rounded-lg border border-stone-200 bg-stone-50 px-3 py-2"
+              >
+                <span className="flex items-center gap-2">
+                  <span>{icon}</span>
+                  <span>{label}</span>
+                </span>
+                <input
+                  type="checkbox"
+                  checked={(settings.appsHiddenOnHome ?? []).includes(slotId)}
+                  onChange={(event) => {
+                    const current = settings.appsHiddenOnHome ?? [];
+                    const next = event.target.checked
+                      ? [...current, slotId]
+                      : current.filter((id) => id !== slotId);
+                    onSettingChange({ appsHiddenOnHome: next });
+                  }}
+                />
+              </label>
+            ))}
           </div>
         </SettingPanel>
 
