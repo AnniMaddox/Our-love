@@ -1678,6 +1678,16 @@ function PreviewLetterDeskScene({
             >
               {letters.length}
             </p>
+            <p
+              style={{
+                marginTop: 6,
+                fontSize: 13,
+                letterSpacing: '0.06em',
+                color: isB ? 'rgba(80,50,20,0.5)' : 'rgba(220,210,255,0.6)',
+              }}
+            >
+              封思念，靜靜等妳
+            </p>
           </div>
         </>
       ) : (

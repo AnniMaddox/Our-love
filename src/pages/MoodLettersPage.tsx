@@ -1417,6 +1417,11 @@ export function MoodLettersPage({ onExit, letterFontFamily = '' }: MoodLettersPa
             />
           </div>
 
+          <div className="ml-list-count-block">
+            <span className="ml-list-count-num">{listedLetters.length}</span>
+            <span className="ml-list-count-sub">封思念，靜靜等妳</span>
+          </div>
+
           <div className="ml-list-body">
             {listedLetters.length ? (
               listedLetters.map((letter) => (

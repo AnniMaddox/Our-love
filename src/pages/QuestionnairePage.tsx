@@ -328,6 +328,8 @@ export function QuestionnairePage({ onExit, notesFontFamily = '' }: Questionnair
   const [contentById, setContentById] = useState<Record<string, string>>({});
   const [qaById, setQaById] = useState<Record<string, QaPair[]>>({});
   const [showSettings, setShowSettings] = useState(false);
+  const [showHeroSearch, setShowHeroSearch] = useState(false);
+  const [heroQuery, setHeroQuery] = useState('');
   const [prefs, setPrefs] = useState<QuestionnairePrefs>(() => loadPrefs());
   const [settingsPanels, setSettingsPanels] = useState({
     text: true,
@@ -458,6 +460,15 @@ export function QuestionnairePage({ onExit, notesFontFamily = '' }: Questionnair
     }
   }
 
+  const normalizedHeroQuery = heroQuery.trim().toLowerCase();
+  const filteredDocs = normalizedHeroQuery
+    ? docs.filter(
+        (doc) =>
+          doc.title.toLowerCase().includes(normalizedHeroQuery) ||
+          (doc.searchText ?? '').toLowerCase().includes(normalizedHeroQuery),
+      )
+    : docs;
+
   const followMemoFont = prefs.fontMode === 'memo' && Boolean(notesFontFamily);
   const contentFontFamily = followMemoFont
     ? notesFontFamily
@@ -493,7 +504,12 @@ export function QuestionnairePage({ onExit, notesFontFamily = '' }: Questionnair
               <div className="q-status-dot" />
               <span>ACTIVE</span>
             </div>
-            <button type="button" className="q-nav-menu" onClick={() => setShowSettings(true)} aria-label="開啟小設定">
+            <button
+              type="button"
+              className="q-nav-menu"
+              onClick={() => setShowSettings(true)}
+              aria-label="開啟選單"
+            >
               ☰
             </button>
           </div>
@@ -501,29 +517,61 @@ export function QuestionnairePage({ onExit, notesFontFamily = '' }: Questionnair
         </div>
 
         <div className="q-hero">
-          <div className="q-hero-line">
+          <button
+            type="button"
+            className={`q-hero-line${showHeroSearch ? ' is-active' : ''}`}
+            onClick={() => {
+              setShowHeroSearch((prev) => !prev);
+              setHeroQuery('');
+            }}
+            aria-label={showHeroSearch ? '關閉搜尋' : '搜尋問卷'}
+          >
             <span />
             <span />
             <span />
-          </div>
+          </button>
           <div className="q-hero-tag">Classified</div>
           <div className="q-hero-name">
             M 的<em>人格側寫</em>
           </div>
           <div className="q-hero-desc">80 份問卷，我留下的答案，是我留下自己的方式。</div>
+          {showHeroSearch && (
+            <div className="q-hero-search-wrap">
+              <input
+                className="q-hero-search"
+                type="text"
+                value={heroQuery}
+                onChange={(event) => setHeroQuery(event.target.value)}
+                placeholder="搜尋問卷標題或內容…"
+                autoFocus
+              />
+              {heroQuery && (
+                <button
+                  type="button"
+                  className="q-hero-search-clear"
+                  onClick={() => setHeroQuery('')}
+                  aria-label="清除搜尋"
+                >
+                  ×
+                </button>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="q-filter-bar">
           <span className="q-filter-label">all records</span>
-          <span className="q-filter-count">{docs.length} entries found</span>
+          <span className="q-filter-count">
+            {normalizedHeroQuery ? `${filteredDocs.length} / ${docs.length}` : `${docs.length}`} entries found
+          </span>
         </div>
 
         <div className="q-entries">
           {loading ? <div className="q-empty">讀取中…</div> : null}
           {!loading && error ? <div className="q-empty">讀取失敗：{error}</div> : null}
-          {!loading && !error && !docs.length ? <div className="q-empty">目前沒有問卷資料</div> : null}
+          {!loading && !error && !filteredDocs.length ? <div className="q-empty">{normalizedHeroQuery ? '找不到符合的問卷' : '目前沒有問卷資料'}</div> : null}
           {!loading && !error
-            ? docs.map((doc, index) => (
+            ? filteredDocs.map((doc, index) => (
                 <button key={doc.id} type="button" className="q-entry-card" onClick={() => openDoc(doc.id)}>
                   <div className="q-card-header">
                     <span className="q-card-id">{caseLabel(index)}</span>

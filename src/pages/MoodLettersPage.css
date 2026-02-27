@@ -825,6 +825,28 @@
   background: rgba(255, 255, 255, 0.12);
 }
 
+.ml-list-count-block {
+  text-align: center;
+  padding: 20px 16px 10px;
+}
+
+.ml-list-count-num {
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: -3px;
+  text-shadow: 0 2px 0 rgba(120, 100, 200, 0.25);
+}
+
+.ml-list-count-sub {
+  display: block;
+  font-size: 13px;
+  color: rgba(220, 210, 255, 0.65);
+  letter-spacing: 0.06em;
+  margin-top: 6px;
+}
+
 .ml-list-body {
   position: relative;
   z-index: 1;

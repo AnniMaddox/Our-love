@@ -563,6 +563,7 @@ export function SettingsPage({
   onRefresh,
 }: SettingsPageProps) {
   const [openPanel, setOpenPanel] = useState<PanelKey | null>('appearance');
+  const [letterListOpen, setLetterListOpen] = useState(false);
   const [diaryCoverUrlDraft, setDiaryCoverUrlDraft] = useState(settings.diaryCoverImageUrl);
   const [tarotGalleryUrlDraft, setTarotGalleryUrlDraft] = useState(settings.tarotGalleryImageUrl);
   const [homeWidgetTitleDraft, setHomeWidgetTitleDraft] = useState(settings.homeWidgetTitle);
@@ -3448,11 +3449,12 @@ export function SettingsPage({
               <p className="text-xs text-stone-400">iPhone 通常不支援資料夾匯入，建議用「匯入檔案」。</p>
             </div>
 
-            <div className="space-y-2 rounded-lg border border-stone-200 bg-stone-50 px-3 py-3">
-              <div className="flex items-center justify-between gap-2">
-                <p className="text-xs font-medium text-stone-600">已匯入清單（可單封刪除）</p>
-                <span className="text-[11px] text-stone-500">{letterEntriesForSettings.length} 封</span>
-              </div>
+            <SettingSubgroup
+              title="已匯入清單（可單封刪除）"
+              subtitle={`${letterEntriesForSettings.length} 封，展開可單封刪除`}
+              isOpen={letterListOpen}
+              onToggle={() => setLetterListOpen((prev) => !prev)}
+            >
               {letterEntriesForSettings.length ? (
                 <div className="max-h-44 overflow-y-auto rounded-md border border-stone-200 bg-white">
                   {letterEntriesForSettings.map((letter, index) => (
@@ -3481,7 +3483,7 @@ export function SettingsPage({
               ) : (
                 <p className="text-xs text-stone-400">目前沒有情書資料。</p>
               )}
-            </div>
+            </SettingSubgroup>
 
             <div className="border-t border-stone-100 pt-3">
               <button

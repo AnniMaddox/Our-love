@@ -687,7 +687,7 @@ export function WishlistPage({
   const overlayToneClass = CARD_TONE_CLASSES[Math.abs((overlayWish?.order ?? 0) % CARD_TONE_CLASSES.length)]!;
   void letterFontFamily;
   const uiFont = "var(--app-font-family, -apple-system, 'Helvetica Neue', system-ui, sans-serif)";
-  const contentFont = diaryFontFamily || "'Ma Shan Zheng', 'STKaiti', serif";
+  const contentFont = diaryFontFamily || "var(--app-font-family, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif)";
   const currentWishTitle = currentWish ? resolveWishTitle(currentWish) : '';
   const currentWishWhy = currentWish ? resolveWishWhy(currentWish) : '';
   const currentWishToYou = currentWish ? resolveWishToYou(currentWish) : '';

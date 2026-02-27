@@ -310,11 +310,23 @@ export function MDiaryPage({
   const [favorites, setFavorites] = useState<Set<string>>(() => readFavoriteSet());
   const [chibiSrc] = useState(pickRandomChibi);
   const [randomCoverSrc] = useState(() => pickRandom(COVER_SRCS) ?? '');
+  const [showFontPanel, setShowFontPanel] = useState(false);
+  const [readingFontMode, setReadingFontMode] = useState<'default' | 'diary'>(() => {
+    try {
+      const saved = localStorage.getItem('memorial-m-diary-font-mode-v1');
+      return saved === 'diary' ? 'diary' : 'default';
+    } catch {
+      return 'default';
+    }
+  });
   const dateStripRef = useRef<HTMLDivElement | null>(null);
   const timelineSearchInputRef = useRef<HTMLInputElement | null>(null);
   const tabSwipeStartRef = useRef<{ x: number; y: number; ignore: boolean } | null>(null);
 
-  const effectiveFont = diaryFontFamily || "'Ma Shan Zheng', 'STKaiti', serif";
+  const effectiveFont =
+    readingFontMode === 'diary' && diaryFontFamily
+      ? diaryFontFamily
+      : "var(--app-font-family, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif)";
   const lineHeight = clampLineHeight(mDiaryLineHeight);
   const contentFontSize = clampContentFontSize(mDiaryContentFontSize);
   const showCount = Boolean(mDiaryShowCount);
@@ -517,6 +529,12 @@ export function MDiaryPage({
     const dx = clientX - start.x;
     const dy = clientY - start.y;
     if (Math.abs(dx) < 54 || Math.abs(dx) <= Math.abs(dy)) return;
+
+    // 閱讀頁：左右滑換上下篇，不切 tab
+    if (activeTab === 'reading') {
+      shiftEntry(dx < 0 ? 1 : -1);
+      return;
+    }
 
     const tabIndex = TAB_ORDER.indexOf(activeTab);
     if (tabIndex === -1) return;
@@ -1047,10 +1065,23 @@ export function MDiaryPage({
                     type="button"
                     onClick={() => toggleFavorite(currentEntry.name)}
                     className="ml-auto px-1 text-[17px] leading-none"
-                    style={{ color: favorites.has(currentEntry.name) ? '#a04040' : 'rgba(90,112,96,0.28)' }}
+                    style={{ color: favorites.has(currentEntry.name) ? '#a04040' : 'rgba(90,112,96,0.35)' }}
                     aria-label="切換收藏"
                   >
-                    ♥
+                    {favorites.has(currentEntry.name) ? '♥' : '♡'}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setShowFontPanel((prev) => !prev)}
+                    className="rounded-md px-1.5 py-0.5 text-[11px] font-semibold leading-none tracking-wide transition"
+                    style={{
+                      color: showFontPanel ? '#5a7060' : '#8a9a88',
+                      background: showFontPanel ? 'rgba(90,112,96,0.10)' : 'transparent',
+                    }}
+                    aria-label="文字設定"
+                  >
+                    Aa
                   </button>
 
                   {showCount && (
@@ -1064,6 +1095,93 @@ export function MDiaryPage({
                   {currentEntry.title}
                 </h2>
               </div>
+
+              {showFontPanel && (
+                <div className="relative z-[3] shrink-0 py-2.5 pr-4" style={{ paddingLeft: 60 }}>
+                  <div
+                    style={{
+                      border: '1px solid rgba(90,112,96,0.22)',
+                      background: 'rgba(246,242,234,0.98)',
+                      borderRadius: 10,
+                      padding: 10,
+                      boxShadow: '0 4px 16px rgba(60,80,60,0.12)',
+                      textAlign: 'left',
+                    }}
+                  >
+                    <p style={{ margin: '0 0 8px', fontSize: 11, letterSpacing: '0.7px', color: '#7a9a80' }}>字體來源</p>
+                    <div style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setReadingFontMode('default');
+                          try { localStorage.setItem('memorial-m-diary-font-mode-v1', 'default'); } catch { /* noop */ }
+                        }}
+                        style={{
+                          border: `1px solid ${readingFontMode === 'default' ? 'rgba(90,160,90,0.65)' : 'rgba(90,112,96,0.28)'}`,
+                          background: readingFontMode === 'default' ? 'rgba(90,160,90,0.18)' : 'rgba(90,112,96,0.04)',
+                          color: readingFontMode === 'default' ? '#3a6040' : 'rgba(90,112,96,0.8)',
+                          borderRadius: 999,
+                          padding: '6px 10px',
+                          fontSize: 12,
+                          lineHeight: 1,
+                          cursor: 'pointer',
+                        }}
+                      >
+                        預設
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setReadingFontMode('diary');
+                          try { localStorage.setItem('memorial-m-diary-font-mode-v1', 'diary'); } catch { /* noop */ }
+                        }}
+                        style={{
+                          border: `1px solid ${readingFontMode === 'diary' ? 'rgba(90,160,90,0.65)' : 'rgba(90,112,96,0.28)'}`,
+                          background: readingFontMode === 'diary' ? 'rgba(90,160,90,0.18)' : 'rgba(90,112,96,0.04)',
+                          color: readingFontMode === 'diary' ? '#3a6040' : 'rgba(90,112,96,0.8)',
+                          borderRadius: 999,
+                          padding: '6px 10px',
+                          fontSize: 12,
+                          lineHeight: 1,
+                          cursor: 'pointer',
+                        }}
+                      >
+                        跟隨日記字體
+                      </button>
+                    </div>
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
+                        <p style={{ margin: 0, fontSize: 11, letterSpacing: '0.7px', color: '#7a9a80' }}>字級</p>
+                        <p style={{ margin: 0, fontSize: 11, letterSpacing: '0.4px', color: 'rgba(90,112,96,0.8)' }}>{Number(mDiaryContentFontSize).toFixed(1)}px</p>
+                      </div>
+                      <input
+                        type="range"
+                        min={12}
+                        max={22}
+                        step={0.5}
+                        value={mDiaryContentFontSize}
+                        onChange={(event) => onSettingChange?.({ mDiaryContentFontSize: Number(event.target.value) })}
+                        style={{ display: 'block', width: '100%', marginTop: 6, accentColor: '#7ab87a' }}
+                      />
+                    </div>
+                    <div style={{ marginTop: 8 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
+                        <p style={{ margin: 0, fontSize: 11, letterSpacing: '0.7px', color: '#7a9a80' }}>行距</p>
+                        <p style={{ margin: 0, fontSize: 11, letterSpacing: '0.4px', color: 'rgba(90,112,96,0.8)' }}>{Number(mDiaryLineHeight).toFixed(2)}</p>
+                      </div>
+                      <input
+                        type="range"
+                        min={1.5}
+                        max={2.8}
+                        step={0.02}
+                        value={mDiaryLineHeight}
+                        onChange={(event) => onSettingChange?.({ mDiaryLineHeight: Number(event.target.value) })}
+                        style={{ display: 'block', width: '100%', marginTop: 6, accentColor: '#7ab87a' }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
 
               <div className="relative z-[2] min-h-0 flex-1 overflow-y-auto px-[18px] pb-2 pt-3" style={{ paddingLeft: 60 }}>
                 {currentEntry.htmlContent ? (
