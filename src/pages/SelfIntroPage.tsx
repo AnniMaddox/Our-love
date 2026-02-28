@@ -793,7 +793,7 @@ export function SelfIntroPage({ onExit, notesFontFamily = '' }: SelfIntroPagePro
       <div className="si-list-screen" aria-hidden={isReading}>
         <header className="si-page-header">
           <button type="button" className="si-hd-back" onClick={onExit}>
-            ‹ 全部
+            ‹
           </button>
           <span className="si-hd-title">自我介紹</span>
           <div className="si-hd-right">

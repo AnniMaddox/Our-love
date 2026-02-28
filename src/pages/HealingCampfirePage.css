@@ -117,13 +117,19 @@
 }
 
 .healing-campfire-page .hc-back {
-  border: 0;
-  background: transparent;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 183, 77, 0.35);
+  background: rgba(255, 183, 77, 0.10);
   color: #ffb74d;
-  font-size: 23px;
+  font-size: 22px;
   line-height: 1;
   cursor: pointer;
-  padding: 2px 6px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .healing-campfire-page .hc-count {

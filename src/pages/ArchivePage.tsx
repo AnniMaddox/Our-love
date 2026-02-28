@@ -906,12 +906,12 @@ export function ArchivePage({
         <div className="tab-bar" style={{ background: activeTab === 'crystal' ? '#12102a' : '#f5f0e6' }}>
           <button
             type="button"
-            className={`tab-side-btn ${activeTab === 'crystal' ? 'dark' : ''}`}
+            className={`tab-side-btn exit ${activeTab === 'crystal' ? 'dark' : ''}`}
             onClick={onExit}
             aria-label="返回首頁"
             title="返回首頁"
           >
-            ‹
+            <span style={{ transform: 'translateY(-1px)', display: 'block' }}>‹</span>
           </button>
           <button
             type="button"

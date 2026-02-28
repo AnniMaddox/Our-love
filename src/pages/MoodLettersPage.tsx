@@ -1153,7 +1153,7 @@ export function MoodLettersPage({ onExit, letterFontFamily = '' }: MoodLettersPa
       <main className="ml-content">
         <header className="ml-topbar">
           <button type="button" className="ml-nav-btn" onClick={onExit} aria-label="返回首頁">
-            ‹
+            <span style={{ transform: 'translateY(-1px)', display: 'block' }}>‹</span>
           </button>
           <h1 className="ml-title">給現在的妳</h1>
           <div className="ml-top-actions">

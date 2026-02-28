@@ -33,6 +33,12 @@ h3 {
   box-sizing: border-box;
 }
 
+/* ── App exit slide-out animation ───────────────────────────────────────────── */
+@keyframes appExitRight {
+  from { transform: translateX(0); }
+  to   { transform: translateX(100%); }
+}
+
 /* ── Letter paper unfold animation ──────────────────────────────────────────── */
 @keyframes letter-paper-reveal {
   0% {

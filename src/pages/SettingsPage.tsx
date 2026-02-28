@@ -603,6 +603,11 @@ export function SettingsPage({
   type AppearancePanelKey = 'appearance' | 'wallpaper' | 'fontCenter' | 'labels' | 'tabIcons' | 'tarot' | 'home' | 'homeWidget';
   const [settingsRoute, setSettingsRoute] = useState<SettingsRoute>('main');
   const [appearanceRoute, setAppearanceRoute] = useState<'list' | AppearancePanelKey>('list');
+  const [closingMain, setClosingMain] = useState(false);
+  const handleBackToHome = () => {
+    setClosingMain(true);
+    setTimeout(() => { setClosingMain(false); onBack(); }, 210);
+  };
   const goToMain = () => { setSettingsRoute('main'); };
   const goToAppearance = () => { setSettingsRoute('appearance'); setAppearanceRoute('list'); };
   const goToPanel = (key: PanelKey) => { setSettingsRoute(key); };
@@ -1823,8 +1828,11 @@ export function SettingsPage({
       `}</style>
 
       {/* ═══ MAIN SETTINGS LIST (iOS) ═══ */}
-      <div className={`h-full overflow-y-auto ${settingsRoute === 'main' ? '' : 'hidden'}`}>
-        <IOSSubPageHeader title="設定" onBack={onBack} />
+      <div
+        className={`h-full overflow-y-auto ${settingsRoute === 'main' ? '' : 'hidden'}`}
+        style={closingMain ? { animation: 'slideOutToRight 210ms ease-in forwards' } : undefined}
+      >
+        <IOSSubPageHeader title="設定" onBack={handleBackToHome} />
         <div className="mx-auto max-w-xl px-4 pb-12 pt-2">
           <IOSProfileCard
             photoUrl={settings.profilePhotoUrl}

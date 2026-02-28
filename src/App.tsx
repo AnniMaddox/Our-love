@@ -429,6 +429,7 @@ function summarizeImport(
 function App() {
   const [activeTab, setActiveTab] = useState(0);
   const [launcherApp, setLauncherApp] = useState<LauncherAppId | null>(null);
+  const [closingApp, setClosingApp] = useState<LauncherAppId | null>(null);
   const [launchSource, setLaunchSource] = useState<'home' | 'mPhone'>('home');
   const [mPhoneInitialScreen, setMPhoneInitialScreen] = useState<'lock' | 'home'>('lock');
   const [wishlistInitialYear, setWishlistInitialYear] = useState<string | null>(null);
@@ -1607,16 +1608,34 @@ function App() {
     setLauncherApp(appId);
   }, []);
 
+  // Apps that have slide-out exit animation (batch 1)
   // Return from a launched app — goes back to M's phone if that's where we came from
   const returnFromApp = useCallback(() => {
-    if (launchSource === 'mPhone') {
-      setLaunchSource('home');
-      setMPhoneInitialScreen('home');
-      setLauncherApp('mPhone');
+    const animatedApps: LauncherAppId[] = [
+      'soulmate', 'wishlist', 'list', 'memo', 'diary', 'diaryB', 'period',
+      'archive', 'lettersAB', 'heart', 'lightPath', 'healingCampfire', 'moodLetters', 'notes',
+      'letters', 'album', 'murmur', 'questionnaire', 'selfIntro',
+    ];
+    const doClose = () => {
+      if (launchSource === 'mPhone') {
+        setLaunchSource('home');
+        setMPhoneInitialScreen('home');
+        setLauncherApp('mPhone');
+      } else {
+        setLauncherApp(null);
+      }
+    };
+    if (launcherApp && animatedApps.includes(launcherApp)) {
+      if (launchSource === 'mPhone') setMPhoneInitialScreen('home');
+      setClosingApp(launcherApp);
+      setTimeout(() => {
+        setClosingApp(null);
+        doClose();
+      }, 220);
     } else {
-      setLauncherApp(null);
+      doClose();
     }
-  }, [launchSource]);
+  }, [launcherApp, launchSource]);
 
   const openWishlistByYear = useCallback((year: string) => {
     setWishlistInitialYear(year);
@@ -2028,8 +2047,8 @@ function App() {
             </div>
           )}
 
-          {launcherApp === 'letters' && (
-            <div className="fixed inset-0 z-30 bg-[#2C1810]">
+          {(launcherApp === 'letters' || closingApp === 'letters') && (
+            <div className="fixed inset-0 z-30 bg-[#2C1810]" style={{ animation: closingApp === 'letters' ? 'appExitRight 220ms ease-in forwards' : undefined }}>
               <div className="mx-auto h-full w-full max-w-xl">
                 <LetterPage
                   letters={letters}
@@ -2065,14 +2084,14 @@ function App() {
             </div>
           )}
 
-          {launcherApp === 'heart' && (
-            <div className="fixed inset-0 z-30 bg-black/65 px-4 pb-4 pt-4 backdrop-blur-sm">
+          {(launcherApp === 'heart' || closingApp === 'heart') && (
+            <div className="fixed inset-0 z-30 bg-black/65 px-4 pb-4 pt-4 backdrop-blur-sm" style={{ animation: closingApp === 'heart' ? 'appExitRight 220ms ease-in forwards' : undefined }}>
               <div className="mx-auto flex h-full w-full max-w-xl flex-col">
                 <div className="flex items-center justify-between gap-3">
                   <button
                     type="button"
                     className="grid h-9 w-9 place-items-center rounded-full border border-white/25 bg-white/10 text-[22px] leading-none text-white transition active:scale-95"
-                    onClick={() => setLauncherApp(null)}
+                    onClick={returnFromApp}
                   >
                     ‹
                   </button>
@@ -2086,8 +2105,8 @@ function App() {
             </div>
           )}
 
-          {launcherApp === 'list' && (
-            <div className="fixed inset-0 z-30 bg-black/55 px-4 pb-4 pt-4 backdrop-blur-sm">
+          {(launcherApp === 'list' || closingApp === 'list') && (
+            <div className="fixed inset-0 z-30 bg-black/55 px-4 pb-4 pt-4 backdrop-blur-sm" style={{ animation: closingApp === 'list' ? 'appExitRight 220ms ease-in forwards' : undefined }}>
               <div className="mx-auto flex h-full w-full max-w-xl flex-col">
                 <div className="flex items-center justify-between gap-3">
                   <button
@@ -2107,8 +2126,8 @@ function App() {
             </div>
           )}
 
-          {launcherApp === 'wishlist' && (
-            <div className="fixed inset-0 z-30" style={{ background: '#f7f2e2' }}>
+          {(launcherApp === 'wishlist' || closingApp === 'wishlist') && (
+            <div className="fixed inset-0 z-30" style={{ background: '#f7f2e2', animation: closingApp === 'wishlist' ? 'appExitRight 220ms ease-in forwards' : undefined }}>
               <div className="mx-auto h-full w-full max-w-xl">
                 <WishlistPage
                   onExit={() => {
@@ -2125,8 +2144,8 @@ function App() {
             </div>
           )}
 
-          {launcherApp === 'lettersAB' && (
-            <div className="fixed inset-0 z-30" style={{ background: '#ece5de' }}>
+          {(launcherApp === 'lettersAB' || closingApp === 'lettersAB') && (
+            <div className="fixed inset-0 z-30" style={{ background: '#ece5de', animation: closingApp === 'lettersAB' ? 'appExitRight 220ms ease-in forwards' : undefined }}>
               <div className="mx-auto h-full w-full max-w-xl">
                 <LettersABPage
                   onExit={() => {
@@ -2161,16 +2180,16 @@ function App() {
             </div>
           )}
 
-          {launcherApp === 'period' && (
-            <div className="fixed inset-0 z-30" style={{ background: '#fdf7f4' }}>
+          {(launcherApp === 'period' || closingApp === 'period') && (
+            <div className="fixed inset-0 z-30" style={{ background: '#fdf7f4', animation: closingApp === 'period' ? 'appExitRight 220ms ease-in forwards' : undefined }}>
               <div className="mx-auto h-full w-full max-w-xl">
-                <PeriodPage onExit={() => setLauncherApp(null)} />
+                <PeriodPage onExit={returnFromApp} />
               </div>
             </div>
           )}
 
-          {launcherApp === 'diary' && (
-            <div className="fixed inset-0 z-30" style={{ background: '#f6f2ea' }}>
+          {(launcherApp === 'diary' || closingApp === 'diary') && (
+            <div className="fixed inset-0 z-30" style={{ background: '#f6f2ea', animation: closingApp === 'diary' ? 'appExitRight 220ms ease-in forwards' : undefined }}>
               <div className="mx-auto h-full w-full max-w-xl">
                 <MDiaryPage
                   entries={diaries}
@@ -2190,21 +2209,21 @@ function App() {
             </div>
           )}
 
-          {launcherApp === 'diaryB' && (
-            <div className="fixed inset-0 z-30" style={{ background: '#f8f4ed' }}>
+          {(launcherApp === 'diaryB' || closingApp === 'diaryB') && (
+            <div className="fixed inset-0 z-30" style={{ background: '#f8f4ed', animation: closingApp === 'diaryB' ? 'appExitRight 220ms ease-in forwards' : undefined }}>
               <div className="mx-auto h-full w-full max-w-xl">
                 <DiaryBPage
                   diaryCoverImageUrl={settings.diaryCoverImageUrl}
                   diaryFontFamily={diaryFontFamily}
                   diaryCoverFitMode={settings.diaryCoverFitMode}
-                  onExit={() => setLauncherApp(null)}
+                  onExit={returnFromApp}
                 />
               </div>
             </div>
           )}
 
-          {launcherApp === 'album' && (
-            <div className="fixed inset-0 z-30 bg-black/55 px-4 pb-4 pt-4 backdrop-blur-sm">
+          {(launcherApp === 'album' || closingApp === 'album') && (
+            <div className="fixed inset-0 z-30 bg-black/55 px-4 pb-4 pt-4 backdrop-blur-sm" style={{ animation: closingApp === 'album' ? 'appExitRight 220ms ease-in forwards' : undefined }}>
               <div className="mx-auto flex h-full w-full max-w-xl flex-col">
                 <div className="flex items-center justify-between gap-3">
                   <button
@@ -2232,83 +2251,83 @@ function App() {
             </div>
           )}
 
-          {launcherApp === 'notes' && (
-            <div className="fixed inset-0 z-30" style={{ background: '#fdf6ee' }}>
+          {(launcherApp === 'notes' || closingApp === 'notes') && (
+            <div className="fixed inset-0 z-30" style={{ background: '#fdf6ee', animation: closingApp === 'notes' ? 'appExitRight 220ms ease-in forwards' : undefined }}>
               <div className="mx-auto h-full w-full max-w-xl">
-                <NotesPage onExit={() => setLauncherApp(null)} />
+                <NotesPage onExit={returnFromApp} />
               </div>
             </div>
           )}
 
-          {launcherApp === 'memo' && (
-            <div className="fixed inset-0 z-30" style={{ background: '#f2f1ec' }}>
+          {(launcherApp === 'memo' || closingApp === 'memo') && (
+            <div className="fixed inset-0 z-30" style={{ background: '#f2f1ec', animation: closingApp === 'memo' ? 'appExitRight 220ms ease-in forwards' : undefined }}>
               <div className="mx-auto h-full w-full max-w-xl">
                 <MemoPage onExit={returnFromApp} notesFontFamily={notesFontFamily} />
               </div>
             </div>
           )}
 
-          {launcherApp === 'murmur' && (
-            <div className="fixed inset-0 z-30" style={{ background: '#0d0d0f' }}>
+          {(launcherApp === 'murmur' || closingApp === 'murmur') && (
+            <div className="fixed inset-0 z-30" style={{ background: '#0d0d0f', animation: closingApp === 'murmur' ? 'appExitRight 220ms ease-in forwards' : undefined }}>
               <div className="mx-auto h-full w-full max-w-xl">
                 <MurmurPage onExit={returnFromApp} notesFontFamily={notesFontFamily} />
               </div>
             </div>
           )}
 
-          {launcherApp === 'lightPath' && (
-            <div className="fixed inset-0 z-30" style={{ background: '#000' }}>
+          {(launcherApp === 'lightPath' || closingApp === 'lightPath') && (
+            <div className="fixed inset-0 z-30" style={{ background: '#000', animation: closingApp === 'lightPath' ? 'appExitRight 220ms ease-in forwards' : undefined }}>
               <div className="mx-auto h-full w-full max-w-xl">
                 <LightPathPage onExit={returnFromApp} letterFontFamily={campfireFontFamily} />
               </div>
             </div>
           )}
 
-          {launcherApp === 'healingCampfire' && (
-            <div className="fixed inset-0 z-30" style={{ background: '#02050a' }}>
+          {(launcherApp === 'healingCampfire' || closingApp === 'healingCampfire') && (
+            <div className="fixed inset-0 z-30" style={{ background: '#02050a', animation: closingApp === 'healingCampfire' ? 'appExitRight 220ms ease-in forwards' : undefined }}>
               <div className="mx-auto h-full w-full max-w-xl">
                 <HealingCampfirePage onExit={returnFromApp} campfireFontFamily={campfireFontFamily} />
               </div>
             </div>
           )}
 
-          {launcherApp === 'questionnaire' && (
-            <div className="fixed inset-0 z-30" style={{ background: '#0e0f11' }}>
+          {(launcherApp === 'questionnaire' || closingApp === 'questionnaire') && (
+            <div className="fixed inset-0 z-30" style={{ background: '#0e0f11', animation: closingApp === 'questionnaire' ? 'appExitRight 220ms ease-in forwards' : undefined }}>
               <div className="mx-auto h-full w-full max-w-xl">
                 <QuestionnairePage onExit={returnFromApp} notesFontFamily={notesFontFamily} />
               </div>
             </div>
           )}
 
-          {launcherApp === 'selfIntro' && (
-            <div className="fixed inset-0 z-30" style={{ background: '#17140f' }}>
+          {(launcherApp === 'selfIntro' || closingApp === 'selfIntro') && (
+            <div className="fixed inset-0 z-30" style={{ background: '#17140f', animation: closingApp === 'selfIntro' ? 'appExitRight 220ms ease-in forwards' : undefined }}>
               <div className="mx-auto h-full w-full max-w-xl">
                 <SelfIntroPage onExit={returnFromApp} notesFontFamily={notesFontFamily} />
               </div>
             </div>
           )}
 
-          {launcherApp === 'soulmate' && (
-            <div className="fixed inset-0 z-30" style={{ background: '#fdf6ee' }}>
+          {(launcherApp === 'soulmate' || closingApp === 'soulmate') && (
+            <div className="fixed inset-0 z-30" style={{ background: '#fdf6ee', animation: closingApp === 'soulmate' ? 'appExitRight 220ms ease-in forwards' : undefined }}>
               <div className="mx-auto h-full w-full max-w-xl">
                 <SoulmateHousePage
-                  onExit={() => setLauncherApp(null)}
+                  onExit={returnFromApp}
                   soulmateFontFamily={soulmateFontFamily}
                 />
               </div>
             </div>
           )}
 
-          {launcherApp === 'moodLetters' && (
-            <div className="fixed inset-0 z-30" style={{ background: '#0b1023' }}>
+          {(launcherApp === 'moodLetters' || closingApp === 'moodLetters') && (
+            <div className="fixed inset-0 z-30" style={{ background: '#0b1023', animation: closingApp === 'moodLetters' ? 'appExitRight 220ms ease-in forwards' : undefined }}>
               <div className="mx-auto h-full w-full max-w-xl">
                 <MoodLettersPage onExit={returnFromApp} letterFontFamily={campfireFontFamily} />
               </div>
             </div>
           )}
 
-          {launcherApp === 'archive' && (
-            <div className="fixed inset-0 z-30" style={{ background: '#0a0a0a' }}>
+          {(launcherApp === 'archive' || closingApp === 'archive') && (
+            <div className="fixed inset-0 z-30" style={{ background: '#0a0a0a', animation: closingApp === 'archive' ? 'appExitRight 220ms ease-in forwards' : undefined }}>
               <div className="mx-auto h-full w-full max-w-xl">
                 <ArchivePage
                   onExit={returnFromApp}
@@ -2320,8 +2339,8 @@ function App() {
             </div>
           )}
 
-          {launcherApp === 'mPhone' && (
-            <div className="fixed inset-0 z-30">
+          {(launcherApp === 'mPhone' || (closingApp !== null && launchSource === 'mPhone')) && (
+            <div className="fixed inset-0" style={{ zIndex: closingApp !== null && launchSource === 'mPhone' ? 29 : 30 }}>
               <Suspense fallback={<div className="h-full w-full bg-black" />}>
                 <MPhonePage
                   initialScreen={mPhoneInitialScreen}

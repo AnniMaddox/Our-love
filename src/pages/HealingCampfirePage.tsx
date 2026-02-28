@@ -493,7 +493,7 @@ export function HealingCampfirePage({ onExit, campfireFontFamily = '' }: Healing
       {!showRead ? (
         <header className="hc-header">
           <button type="button" className="hc-back" onClick={onExit} aria-label="返回">
-            ‹
+            <span style={{ transform: 'translateY(-1px)', display: 'block' }}>‹</span>
           </button>
           <span className="hc-count">篝火池 : {docs.length}封</span>
         </header>
