@@ -28,6 +28,7 @@ type ChatLogPageProps = {
     | 'chatBackgroundImageUrl'
     | 'chatBackgroundOverlay'
     | 'chatNightMode'
+    | 'chatContactNameSize'
   >;
   onSettingChange: (partial: Partial<AppSettings>) => void;
   onImportChatLogFiles: (files: File[]) => void;
@@ -777,7 +778,7 @@ export function ChatLogPage({
               <div className="min-w-0 flex-1">
                 <p
                   className="truncate"
-                  style={{ fontSize: 'var(--chat-contact-title-size, 17px)', lineHeight: 1.3, color: theme.titleColor }}
+                  style={{ fontSize: 'var(--chat-contact-title-size, 15px)', lineHeight: 1.3, color: theme.titleColor }}
                 >
                   {contactName}
                 </p>
@@ -910,6 +911,22 @@ export function ChatLogPage({
                   checked={settings.chatAppShowLabels}
                   onChange={(e) => onSettingChange({ chatAppShowLabels: e.target.checked })}
                   className="h-4 w-4 accent-stone-900"
+                />
+              </label>
+
+              <label className="mt-2 block space-y-1 rounded-xl border border-stone-200 bg-stone-50 px-3 py-2">
+                <span className="flex items-center justify-between text-xs text-stone-600">
+                  <span>聯絡人名稱大小</span>
+                  <span>{settings.chatContactNameSize}px</span>
+                </span>
+                <input
+                  type="range"
+                  min={11}
+                  max={24}
+                  step={1}
+                  value={settings.chatContactNameSize}
+                  onChange={(e) => onSettingChange({ chatContactNameSize: Number(e.target.value) })}
+                  className="w-full accent-stone-800"
                 />
               </label>
             </MePanel>
