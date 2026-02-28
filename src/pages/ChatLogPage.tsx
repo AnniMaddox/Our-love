@@ -27,6 +27,7 @@ type ChatLogPageProps = {
     | 'chatBackgroundColor'
     | 'chatBackgroundImageUrl'
     | 'chatBackgroundOverlay'
+    | 'chatNightMode'
   >;
   onSettingChange: (partial: Partial<AppSettings>) => void;
   onImportChatLogFiles: (files: File[]) => void;
@@ -267,6 +268,126 @@ function primaryAlias(value: string | undefined, fallback: string) {
   return aliases[0] ?? fallback;
 }
 
+// ===== Night mode theme =====
+
+function hexToRgb(hex: string): [number, number, number] {
+  const h = hex.replace('#', '');
+  const n = parseInt(h.length === 3 ? h.split('').map((c) => c + c).join('') : h, 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+}
+
+function darkenHex(hex: string, amount = 0.45): string {
+  try {
+    const [r, g, b] = hexToRgb(hex);
+    const d = (v: number) => Math.max(0, Math.round(v * (1 - amount)));
+    return `#${[d(r), d(g), d(b)].map((v) => v.toString(16).padStart(2, '0')).join('')}`;
+  } catch {
+    return hex;
+  }
+}
+
+type ChatTheme = {
+  night: boolean;
+  bg: string;
+  barBg: string;
+  barBorder: string;
+  titleColor: string;
+  subtitleColor: string;
+  btnBg: string;
+  btnBorder: string;
+  btnColor: string;
+  inputBg: string;
+  inputBorder: string;
+  inputText: string;
+  dividerColor: string;
+  listItemHover: string;
+  dateLabelColor: string;
+  floatBtnBg: string;
+  floatBtnBorder: string;
+  floatBtnColor: string;
+  drawerBg: string;
+  drawerBorder: string;
+  drawerTitleColor: string;
+  drawerSubColor: string;
+  drawerDivider: string;
+  bubbleVarStyle: CSSProperties;
+};
+
+function buildTheme(
+  night: boolean,
+  settings: Pick<
+    AppSettings,
+    | 'chatBackgroundColor'
+    | 'chatBackgroundImageUrl'
+    | 'chatBackgroundOverlay'
+    | 'chatUserBubbleColor'
+    | 'chatUserBubbleBorderColor'
+    | 'chatAiBubbleColor'
+    | 'chatAiBubbleBorderColor'
+  >,
+): ChatTheme {
+  if (night) {
+    return {
+      night: true,
+      bg: '#1c1c1e',
+      barBg: '#1c1c1e',
+      barBorder: 'rgba(255,255,255,0.1)',
+      titleColor: '#f2f2f7',
+      subtitleColor: '#8e8e93',
+      btnBg: '#2c2c2e',
+      btnBorder: 'rgba(255,255,255,0.12)',
+      btnColor: '#ebebf5',
+      inputBg: '#2c2c2e',
+      inputBorder: 'rgba(255,255,255,0.12)',
+      inputText: '#f2f2f7',
+      dividerColor: 'rgba(255,255,255,0.08)',
+      listItemHover: 'rgba(255,255,255,0.06)',
+      dateLabelColor: 'rgba(255,255,255,0.35)',
+      floatBtnBg: '#2c2c2e',
+      floatBtnBorder: 'rgba(255,255,255,0.12)',
+      floatBtnColor: '#ebebf5',
+      drawerBg: '#2c2c2e',
+      drawerBorder: 'rgba(255,255,255,0.08)',
+      drawerTitleColor: '#f2f2f7',
+      drawerSubColor: '#8e8e93',
+      drawerDivider: 'rgba(255,255,255,0.07)',
+      bubbleVarStyle: {
+        '--user-bubble-bg': darkenHex(settings.chatUserBubbleColor),
+        '--user-bubble-border': darkenHex(settings.chatUserBubbleBorderColor, 0.35),
+        '--ai-bubble-bg': darkenHex(settings.chatAiBubbleColor),
+        '--ai-bubble-border': darkenHex(settings.chatAiBubbleBorderColor, 0.35),
+      } as CSSProperties,
+    };
+  }
+  const bg = settings.chatBackgroundColor || '#efeff4';
+  return {
+    night: false,
+    bg,
+    barBg: bg,
+    barBorder: 'rgba(0,0,0,0.1)',
+    titleColor: '#1c1c1e',
+    subtitleColor: '#6b7280',
+    btnBg: 'rgba(255,255,255,0.85)',
+    btnBorder: 'rgba(0,0,0,0.12)',
+    btnColor: '#374151',
+    inputBg: 'rgba(255,255,255,0.85)',
+    inputBorder: 'rgba(0,0,0,0.14)',
+    inputText: '#374151',
+    dividerColor: 'rgba(0,0,0,0.07)',
+    listItemHover: 'rgba(0,0,0,0.04)',
+    dateLabelColor: 'rgba(0,0,0,0.35)',
+    floatBtnBg: 'rgba(255,255,255,0.92)',
+    floatBtnBorder: 'rgba(0,0,0,0.1)',
+    floatBtnColor: '#374151',
+    drawerBg: '#ffffff',
+    drawerBorder: 'rgba(0,0,0,0.06)',
+    drawerTitleColor: '#1c1c1e',
+    drawerSubColor: '#6b7280',
+    drawerDivider: 'rgba(0,0,0,0.06)',
+    bubbleVarStyle: {},
+  };
+}
+
 const CHAT_BACKGROUND_PRESETS = ['#efeff4', '#f6f1e7', '#eaf1f6', '#f4e9ef', '#eef3e6'] as const;
 
 function buildChatBackgroundStyle(settings: Pick<AppSettings, 'chatBackgroundColor' | 'chatBackgroundImageUrl' | 'chatBackgroundOverlay'>): CSSProperties {
@@ -471,10 +592,18 @@ export function ChatLogPage({
   const contactName = primaryAlias(defaultProfile?.leftNick, 'Michael');
   const contactSubtitle = defaultProfile ? `${primaryAlias(defaultProfile.rightNick, '你')} ♡` : '🥺 ❤️';
   const contactAvatar = defaultProfile?.leftAvatarDataUrl || defaultProfile?.rightAvatarDataUrl;
-  const chatBackgroundStyle = useMemo(
-    () => buildChatBackgroundStyle(settings),
-    [settings.chatBackgroundColor, settings.chatBackgroundImageUrl, settings.chatBackgroundOverlay],
+  const night = settings.chatNightMode;
+
+  const theme = useMemo(
+    () => buildTheme(night, settings),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [night, settings.chatBackgroundColor, settings.chatUserBubbleColor, settings.chatUserBubbleBorderColor, settings.chatAiBubbleColor, settings.chatAiBubbleBorderColor],
   );
+
+  const chatBackgroundStyle = useMemo((): CSSProperties => {
+    if (night) return { backgroundColor: theme.bg };
+    return buildChatBackgroundStyle(settings);
+  }, [night, theme.bg, settings.chatBackgroundColor, settings.chatBackgroundImageUrl, settings.chatBackgroundOverlay]);
 
   function updateDefaultProfile(profileId: string) {
     setDefaultProfileId(profileId);
@@ -566,6 +695,7 @@ export function ChatLogPage({
           onBindLogProfile?.(selectedLog.name, profileId);
         }}
         backgroundStyle={chatBackgroundStyle}
+        theme={theme}
         onBack={() => setSelectedLogName('')}
         onExit={onExit}
       />
@@ -574,13 +704,17 @@ export function ChatLogPage({
 
   return (
     <div className="mx-auto flex h-full w-full max-w-xl flex-col overflow-hidden" style={chatBackgroundStyle}>
-      <header className="shrink-0 border-b border-stone-200/70 bg-white/95 px-4 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))] backdrop-blur">
+      <header
+        className="shrink-0 px-4 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))]"
+        style={{ backgroundColor: theme.barBg, borderBottom: `1px solid ${theme.barBorder}` }}
+      >
         <div className="flex items-center justify-between gap-3">
           {onExit ? (
             <button
               type="button"
               onClick={onExit}
-              className="h-9 w-9 rounded-full border border-stone-300 bg-white text-xl leading-none text-stone-700 transition active:scale-95"
+              className="h-9 w-9 rounded-full text-xl leading-none transition active:scale-95"
+              style={{ background: theme.btnBg, border: `1px solid ${theme.btnBorder}`, color: theme.btnColor }}
               aria-label="返回"
               title="返回"
             >
@@ -589,63 +723,77 @@ export function ChatLogPage({
           ) : (
             <span className="h-9 w-9" />
           )}
-          <h1 className="font-normal tracking-wide text-stone-900" style={{ fontSize: 'var(--ui-header-title-size, 17px)' }}>
+          <h1 className="font-normal tracking-wide" style={{ fontSize: 'var(--ui-header-title-size, 17px)', color: theme.titleColor }}>
             {activeTab === 'messages' ? '消息' : activeTab === 'discover' ? '發現' : '我'}
           </h1>
-          <button
-            type="button"
-            onClick={openRandomLog}
-            disabled={!logs.length}
-            className="h-9 w-9 rounded-full border border-stone-300 bg-white text-xl leading-none text-stone-700 transition active:scale-95 disabled:opacity-40"
-            aria-label="隨機打開"
-            title="隨機打開"
-          >
-            ＋
-          </button>
+          {/* 月亮切換 + 隨機打開 */}
+          <div className="flex items-center gap-1.5">
+            <button
+              type="button"
+              onClick={() => onSettingChange({ chatNightMode: !night })}
+              className="h-9 w-9 rounded-full text-lg leading-none transition active:scale-95"
+              style={{ background: night ? '#3a3a3c' : theme.btnBg, border: `1px solid ${theme.btnBorder}`, color: night ? '#ffd60a' : theme.btnColor }}
+              aria-label={night ? '切換日間模式' : '切換夜間模式'}
+              title={night ? '日間模式' : '夜間模式'}
+            >
+              {night ? '☀' : '☽'}
+            </button>
+            <button
+              type="button"
+              onClick={openRandomLog}
+              disabled={!logs.length}
+              className="h-9 w-9 rounded-full text-xl leading-none transition active:scale-95 disabled:opacity-40"
+              style={{ background: theme.btnBg, border: `1px solid ${theme.btnBorder}`, color: theme.btnColor }}
+              aria-label="隨機打開"
+              title="隨機打開"
+            >
+              ＋
+            </button>
+          </div>
         </div>
       </header>
 
       <main className="min-h-0 flex-1 overflow-y-auto">
         {activeTab === 'messages' && (
-          <div className="bg-white">
+          <div style={{ backgroundColor: theme.barBg }}>
             {/* 聯絡人列表 — 扁平微信風格 */}
             <button
               type="button"
               onClick={openRandomLog}
               disabled={!logs.length}
-              className="flex w-full items-center gap-3 bg-white px-4 py-3 text-left transition active:bg-stone-50 disabled:opacity-40"
+              className="flex w-full items-center gap-3 px-4 py-3 text-left transition disabled:opacity-40"
+              style={{ backgroundColor: 'transparent' }}
             >
               {contactAvatar ? (
-                <img
-                  src={contactAvatar}
-                  alt=""
-                  className="h-14 w-14 rounded-xl object-cover"
-                />
+                <img src={contactAvatar} alt="" className="h-14 w-14 rounded-xl object-cover" />
               ) : (
-                <div className="grid h-14 w-14 place-items-center rounded-xl bg-stone-200 text-2xl text-stone-500">
+                <div
+                  className="grid h-14 w-14 place-items-center rounded-xl text-2xl"
+                  style={{ backgroundColor: theme.btnBg, color: theme.subtitleColor }}
+                >
                   💬
                 </div>
               )}
               <div className="min-w-0 flex-1">
                 <p
-                  className="truncate text-stone-900"
-                  style={{ fontSize: 'var(--chat-contact-title-size, 17px)', lineHeight: 1.3 }}
+                  className="truncate"
+                  style={{ fontSize: 'var(--chat-contact-title-size, 17px)', lineHeight: 1.3, color: theme.titleColor }}
                 >
                   {contactName}
                 </p>
                 <p
-                  className="mt-0.5 truncate text-stone-400"
-                  style={{ fontSize: 'var(--chat-contact-subtitle-size, 14px)', lineHeight: 1.3 }}
+                  className="mt-0.5 truncate"
+                  style={{ fontSize: 'var(--chat-contact-subtitle-size, 14px)', lineHeight: 1.3, color: theme.subtitleColor }}
                 >
                   {contactSubtitle}
                 </p>
               </div>
-              <span className="text-stone-300 text-lg">›</span>
+              <span style={{ color: theme.subtitleColor }} className="text-lg">›</span>
             </button>
-            <div className="mx-4 h-px bg-stone-100" />
+            <div className="mx-4 h-px" style={{ backgroundColor: theme.dividerColor }} />
 
             {!logs.length && (
-              <p className="px-4 py-8 text-center text-sm text-stone-400">
+              <p className="px-4 py-8 text-center text-sm" style={{ color: theme.subtitleColor }}>
                 請先到「我」分頁匯入對話紀錄
               </p>
             )}
@@ -1276,56 +1424,31 @@ export function ChatLogPage({
         )}
       </main>
 
-      <nav className="shrink-0 border-t border-stone-200 bg-white px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-2.5">
+      <nav
+        className="shrink-0 px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-2.5"
+        style={{ backgroundColor: theme.barBg, borderTop: `1px solid ${theme.barBorder}` }}
+      >
         <div className="grid grid-cols-3 gap-2">
-          <button
-            type="button"
-            onClick={() => setActiveTab('messages')}
-            className={`flex flex-col items-center rounded-xl px-2 py-1.5 transition ${
-              activeTab === 'messages' ? 'text-black' : 'text-stone-400'
-            } ${showNavLabels ? 'gap-1 text-xs' : 'gap-0 text-base'}`}
-            aria-label="消息"
-          >
-            <IconPreview
-              icon={settings.chatAppMessagesIcon}
-              fallback="💬"
-              imageClassName="h-6 w-6"
-              textClassName="text-2xl leading-none"
-            />
-            {showNavLabels && <span>消息</span>}
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab('discover')}
-            className={`flex flex-col items-center rounded-xl px-2 py-1.5 transition ${
-              activeTab === 'discover' ? 'text-black' : 'text-stone-400'
-            } ${showNavLabels ? 'gap-1 text-xs' : 'gap-0 text-base'}`}
-            aria-label="發現"
-          >
-            <IconPreview
-              icon={settings.chatAppDiscoverIcon}
-              fallback="✨"
-              imageClassName="h-6 w-6"
-              textClassName="text-2xl leading-none"
-            />
-            {showNavLabels && <span>發現</span>}
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab('me')}
-            className={`flex flex-col items-center rounded-xl px-2 py-1.5 transition ${
-              activeTab === 'me' ? 'text-black' : 'text-stone-400'
-            } ${showNavLabels ? 'gap-1 text-xs' : 'gap-0 text-base'}`}
-            aria-label="我"
-          >
-            <IconPreview
-              icon={settings.chatAppMeIcon}
-              fallback="👤"
-              imageClassName="h-6 w-6"
-              textClassName="text-2xl leading-none"
-            />
-            {showNavLabels && <span>我</span>}
-          </button>
+          {([
+            { tab: 'messages' as const, icon: settings.chatAppMessagesIcon, fallback: '💬', label: '消息' },
+            { tab: 'discover' as const, icon: settings.chatAppDiscoverIcon, fallback: '✨', label: '發現' },
+            { tab: 'me' as const, icon: settings.chatAppMeIcon, fallback: '👤', label: '我' },
+          ] as const).map(({ tab, icon, fallback, label }) => {
+            const active = activeTab === tab;
+            return (
+              <button
+                key={tab}
+                type="button"
+                onClick={() => setActiveTab(tab)}
+                className={`flex flex-col items-center rounded-xl px-2 py-1.5 transition ${showNavLabels ? 'gap-1 text-xs' : 'gap-0 text-base'}`}
+                style={{ color: active ? theme.titleColor : theme.subtitleColor }}
+                aria-label={label}
+              >
+                <IconPreview icon={icon} fallback={fallback} imageClassName="h-6 w-6" textClassName="text-2xl leading-none" />
+                {showNavLabels && <span>{label}</span>}
+              </button>
+            );
+          })}
         </div>
       </nav>
     </div>
@@ -1339,6 +1462,7 @@ function ChatReadView({
   selectedProfile,
   onSelectProfile,
   backgroundStyle,
+  theme,
   onBack,
   onExit,
 }: {
@@ -1348,6 +1472,7 @@ function ChatReadView({
   selectedProfile: ChatProfile | null;
   onSelectProfile: (id: string) => void;
   backgroundStyle: CSSProperties;
+  theme: ChatTheme;
   onBack: () => void;
   onExit?: () => void;
 }) {
@@ -1456,22 +1581,27 @@ function ChatReadView({
   return (
     <div className="relative mx-auto flex h-full w-full max-w-xl flex-col overflow-hidden" style={backgroundStyle}>
       {/* Header */}
-      <div className="shrink-0 border-b border-stone-200 bg-white px-3 pb-2 pt-[max(0.75rem,env(safe-area-inset-top))]">
+      <div
+        className="shrink-0 px-3 pb-2 pt-[max(0.75rem,env(safe-area-inset-top))]"
+        style={{ backgroundColor: theme.barBg, borderBottom: `1px solid ${theme.barBorder}` }}
+      >
         <div className="flex items-center justify-between gap-2">
           <button
             type="button"
             onClick={onBack}
-            className="h-9 w-9 rounded-full border border-stone-300 bg-white text-xl leading-none text-stone-700 transition active:scale-95"
+            className="h-9 w-9 rounded-full text-xl leading-none transition active:scale-95"
+            style={{ background: theme.btnBg, border: `1px solid ${theme.btnBorder}`, color: theme.btnColor }}
             aria-label="返回"
           >
             <span style={{ transform: 'translateY(-1px)', display: 'block' }}>‹</span>
           </button>
-          <p className="min-w-0 flex-1 truncate text-center text-sm font-medium text-stone-800">{displayName}</p>
+          <p className="min-w-0 flex-1 truncate text-center text-sm font-medium" style={{ color: theme.titleColor }}>{displayName}</p>
           {onExit ? (
             <button
               type="button"
               onClick={onExit}
-              className="h-9 w-9 rounded-full border border-stone-300 bg-white text-xl leading-none text-stone-700 transition active:scale-95"
+              className="h-9 w-9 rounded-full text-xl leading-none transition active:scale-95"
+              style={{ background: theme.btnBg, border: `1px solid ${theme.btnBorder}`, color: theme.btnColor }}
               aria-label="離開"
             >
               <span style={{ transform: 'translateY(-1px)', display: 'block' }}>×</span>
@@ -1483,18 +1613,25 @@ function ChatReadView({
       </div>
 
       {/* Messages */}
-      <div ref={scrollRef} id="chat-messages" className="min-h-0 flex-1 overflow-y-auto px-3 py-3">
+      <div ref={scrollRef} id="chat-messages" className="min-h-0 flex-1 overflow-y-auto px-3 py-3" style={theme.bubbleVarStyle}>
         {messages.length > 0 ? (
           <ChatBubbles
             messages={messages}
             profile={selectedProfile}
+            dateLabelColor={theme.dateLabelColor}
             onPressStart={handleBubblePressStart}
             onPressEnd={handleBubblePressEnd}
           />
         ) : (
-          <p className="rounded-2xl border border-stone-200 bg-white px-3 py-4 text-sm text-stone-500">
+          <p
+            className="rounded-2xl px-3 py-4 text-sm"
+            style={{ border: `1px solid ${theme.barBorder}`, backgroundColor: theme.btnBg, color: theme.subtitleColor }}
+          >
             無法解析為聊天格式，以下是原文：
-            <span className="mt-2 block whitespace-pre-wrap rounded-xl border border-stone-200 bg-white p-3 text-left text-xs text-stone-700">
+            <span
+              className="mt-2 block whitespace-pre-wrap rounded-xl p-3 text-left text-xs"
+              style={{ border: `1px solid ${theme.barBorder}`, backgroundColor: theme.inputBg, color: theme.inputText }}
+            >
               {log.content}
             </span>
           </p>
@@ -1507,7 +1644,8 @@ function ChatReadView({
           <button
             type="button"
             onClick={scrollToTop}
-            className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-600 shadow-md transition active:scale-95"
+            className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full shadow-md transition active:scale-95"
+            style={{ background: theme.floatBtnBg, border: `1px solid ${theme.floatBtnBorder}`, color: theme.floatBtnColor }}
             aria-label="回到頂部"
           >
             <ChevronUp />
@@ -1515,7 +1653,8 @@ function ChatReadView({
           <button
             type="button"
             onClick={scrollToBottom}
-            className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-600 shadow-md transition active:scale-95"
+            className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full shadow-md transition active:scale-95"
+            style={{ background: theme.floatBtnBg, border: `1px solid ${theme.floatBtnBorder}`, color: theme.floatBtnColor }}
             aria-label="回到底部"
           >
             <ChevronDown />
@@ -1524,13 +1663,17 @@ function ChatReadView({
       )}
 
       {/* Bottom bar */}
-      <div className="shrink-0 border-t border-stone-200 bg-white px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-3">
+      <div
+        className="shrink-0 px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-3"
+        style={{ backgroundColor: theme.barBg, borderTop: `1px solid ${theme.barBorder}` }}
+      >
         <div className="flex items-center gap-2">
           {/* + 加書籤 */}
           <button
             type="button"
             onClick={handleAddBookmarkAtTop}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-stone-300 bg-stone-50 text-xl text-stone-600 transition active:scale-95"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-xl transition active:scale-95"
+            style={{ background: theme.btnBg, border: `1px solid ${theme.btnBorder}`, color: theme.btnColor }}
             aria-label="新增書籤"
             title="新增書籤（當前位置）"
           >
@@ -1541,7 +1684,8 @@ function ChatReadView({
           <button
             type="button"
             onClick={() => setShowBookmarkDrawer(true)}
-            className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-stone-300 bg-stone-50 text-xl transition active:scale-95"
+            className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-xl transition active:scale-95"
+            style={{ background: theme.btnBg, border: `1px solid ${theme.btnBorder}` }}
             aria-label="書籤清單"
           >
             🔖
@@ -1559,7 +1703,8 @@ function ChatReadView({
                 <select
                   value={selectedProfileId}
                   onChange={(e) => onSelectProfile(e.target.value)}
-                  className="h-10 w-full appearance-none rounded-full border border-stone-300 bg-stone-50 pl-4 pr-8 text-sm text-stone-700"
+                  className="h-10 w-full appearance-none rounded-full pl-4 pr-8 text-sm"
+                  style={{ background: theme.inputBg, border: `1px solid ${theme.inputBorder}`, color: theme.inputText }}
                 >
                   <option value="">角色預設</option>
                   {chatProfiles.map((p) => (
@@ -1568,10 +1713,10 @@ function ChatReadView({
                     </option>
                   ))}
                 </select>
-                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs text-stone-500">▾</span>
+                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs" style={{ color: theme.subtitleColor }}>▾</span>
               </>
             ) : (
-              <div className="h-10 rounded-full border border-stone-300 bg-stone-50 px-4 text-sm leading-10 text-stone-400">
+              <div className="h-10 rounded-full px-4 text-sm leading-10" style={{ background: theme.inputBg, border: `1px solid ${theme.inputBorder}`, color: theme.subtitleColor }}>
                 尚未建立角色設定
               </div>
             )}
@@ -1595,28 +1740,29 @@ function ChatReadView({
       {showBookmarkDrawer && (
         <div className="absolute inset-0 z-20 flex flex-col justify-end">
           <div className="absolute inset-0 bg-black/40" onClick={() => setShowBookmarkDrawer(false)} />
-          <div className="relative z-10 flex max-h-[70%] flex-col rounded-t-3xl bg-white shadow-xl">
-            <div className="flex shrink-0 items-center justify-between border-b border-stone-100 px-5 pb-3 pt-4">
-              <h2 className="text-base font-medium text-stone-800">書籤</h2>
+          <div className="relative z-10 flex max-h-[70%] flex-col rounded-t-3xl shadow-xl" style={{ background: theme.drawerBg }}>
+            <div className="flex shrink-0 items-center justify-between px-5 pb-3 pt-4" style={{ borderBottom: `1px solid ${theme.drawerDivider}` }}>
+              <h2 className="text-base font-medium" style={{ color: theme.drawerTitleColor }}>書籤</h2>
               <button
                 type="button"
                 onClick={() => setShowBookmarkDrawer(false)}
-                className="flex h-7 w-7 items-center justify-center rounded-full bg-stone-100 text-sm text-stone-500"
+                className="flex h-7 w-7 items-center justify-center rounded-full text-sm"
+                style={{ background: theme.btnBg, color: theme.btnColor }}
               >
                 <span style={{ transform: 'translateY(-1px)', display: 'block' }}>×</span>
               </button>
             </div>
             <div className="min-h-0 flex-1 overflow-y-auto pb-[max(1.25rem,env(safe-area-inset-bottom))]">
               {bookmarks.length === 0 ? (
-                <p className="px-5 py-10 text-center text-sm text-stone-400">
+                <p className="px-5 py-10 text-center text-sm" style={{ color: theme.drawerSubColor }}>
                   還沒有書籤
                   <br />
                   <span className="text-xs">長按訊息泡泡 或 點 + 可新增</span>
                 </p>
               ) : (
-                <ul className="divide-y divide-stone-100">
+                <ul>
                   {bookmarks.map((bm) => (
-                    <li key={bm.id} className="flex items-center gap-3 px-5 py-3">
+                    <li key={bm.id} className="flex items-center gap-3 px-5 py-3" style={{ borderBottom: `1px solid ${theme.drawerDivider}` }}>
                       <button
                         type="button"
                         onClick={() => {
@@ -1625,8 +1771,8 @@ function ChatReadView({
                         }}
                         className="min-w-0 flex-1 text-left"
                       >
-                        <p className="truncate text-sm text-stone-800">{bm.label}</p>
-                        <p className="mt-0.5 truncate text-xs text-stone-400">{bm.preview}</p>
+                        <p className="truncate text-sm" style={{ color: theme.drawerTitleColor }}>{bm.label}</p>
+                        <p className="mt-0.5 truncate text-xs" style={{ color: theme.drawerSubColor }}>{bm.preview}</p>
                       </button>
                       <button
                         type="button"
@@ -1649,9 +1795,9 @@ function ChatReadView({
       {addingBookmark && (
         <div className="absolute inset-0 z-30 flex items-center justify-center px-6">
           <div className="absolute inset-0 bg-black/40" onClick={() => setAddingBookmark(null)} />
-          <div className="relative z-10 w-full max-w-sm rounded-2xl bg-white p-5 shadow-xl">
-            <h2 className="mb-1 text-base font-medium text-stone-800">新增書籤</h2>
-            <p className="mb-3 truncate text-xs text-stone-400">{addingBookmark.preview}</p>
+          <div className="relative z-10 w-full max-w-sm rounded-2xl p-5 shadow-xl" style={{ background: theme.drawerBg }}>
+            <h2 className="mb-1 text-base font-medium" style={{ color: theme.drawerTitleColor }}>新增書籤</h2>
+            <p className="mb-3 truncate text-xs" style={{ color: theme.drawerSubColor }}>{addingBookmark.preview}</p>
             <input
               type="text"
               value={bookmarkLabelDraft}
@@ -1661,21 +1807,24 @@ function ChatReadView({
                 if (e.key === 'Escape') setAddingBookmark(null);
               }}
               placeholder="書籤名稱（可留空）"
-              className="mb-3 w-full rounded-xl border border-stone-300 bg-stone-50 px-4 py-2.5 text-sm text-stone-800 outline-none focus:border-stone-500"
+              className="mb-3 w-full rounded-xl px-4 py-2.5 text-sm outline-none"
+              style={{ background: theme.inputBg, border: `1px solid ${theme.inputBorder}`, color: theme.inputText }}
               autoFocus
             />
             <div className="flex gap-2">
               <button
                 type="button"
                 onClick={confirmAddBookmark}
-                className="flex-1 rounded-xl bg-stone-900 py-2.5 text-sm text-white transition active:opacity-80"
+                className="flex-1 rounded-xl py-2.5 text-sm text-white transition active:opacity-80"
+                style={{ background: theme.night ? '#3a3a3c' : '#1c1c1e' }}
               >
                 新增
               </button>
               <button
                 type="button"
                 onClick={() => setAddingBookmark(null)}
-                className="flex-1 rounded-xl border border-stone-300 bg-white py-2.5 text-sm text-stone-600"
+                className="flex-1 rounded-xl py-2.5 text-sm transition active:opacity-80"
+                style={{ background: theme.btnBg, border: `1px solid ${theme.btnBorder}`, color: theme.btnColor }}
               >
                 取消
               </button>
@@ -1714,11 +1863,13 @@ function SendArrow() {
 function ChatBubbles({
   messages,
   profile,
+  dateLabelColor,
   onPressStart,
   onPressEnd,
 }: {
   messages: ChatMessage[];
   profile: ChatProfile | null;
+  dateLabelColor?: string;
   onPressStart?: (index: number, preview: string) => void;
   onPressEnd?: () => void;
 }) {
@@ -1736,7 +1887,7 @@ function ChatBubbles({
 
         return (
           <div key={`${i}-${msg.time ?? ''}`} data-msg-index={i}>
-            {dateDivider && <div className="my-3 text-center text-[11px] text-stone-400">{dateDivider}</div>}
+            {dateDivider && <div className="my-3 text-center text-[11px]" style={dateLabelColor ? { color: dateLabelColor } : undefined}>{dateDivider}</div>}
 
             <div className={`flex items-end gap-2 ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
               <div className="mb-4 shrink-0">
@@ -1767,7 +1918,7 @@ function ChatBubbles({
                     {msg.content}
                   </div>
                 </div>
-                {msg.time && <p className="px-1 text-[10px] text-stone-400">{msg.time.slice(11, 16)}</p>}
+                {msg.time && <p className="px-1 text-[10px]" style={dateLabelColor ? { color: dateLabelColor } : undefined}>{msg.time.slice(11, 16)}</p>}
               </div>
             </div>
           </div>

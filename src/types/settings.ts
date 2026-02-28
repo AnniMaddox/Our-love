@@ -265,6 +265,7 @@ export type AppSettings = {
   chatAppMeIcon: string;
   chatAppShowLabels: boolean;
   chatAppDefaultProfileId: string;
+  chatNightMode: boolean;
   customFontCssUrl: string;
   customFontFileUrl: string;
   customFontFamily: string;
@@ -376,6 +377,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   chatAppMeIcon: '👤',
   chatAppShowLabels: false,
   chatAppDefaultProfileId: '',
+  chatNightMode: false,
   customFontCssUrl: '',
   customFontFileUrl: '',
   customFontFamily: '',
