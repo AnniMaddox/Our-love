@@ -260,6 +260,9 @@ export type AppSettings = {
   chatBackgroundColor: string;
   chatBackgroundImageUrl: string;
   chatBackgroundOverlay: number;
+  chatReadBgColor: string;
+  chatReadBgImageUrl: string;
+  chatReadBgOverlay: number;
   chatAppMessagesIcon: string;
   chatAppDiscoverIcon: string;
   chatAppMeIcon: string;
@@ -372,6 +375,9 @@ export const DEFAULT_SETTINGS: AppSettings = {
   chatBackgroundColor: '#efeff4',
   chatBackgroundImageUrl: '',
   chatBackgroundOverlay: 0,
+  chatReadBgColor: '#efeff4',
+  chatReadBgImageUrl: '',
+  chatReadBgOverlay: 0,
   chatAppMessagesIcon: '💬',
   chatAppDiscoverIcon: '✨',
   chatAppMeIcon: '👤',

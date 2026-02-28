@@ -27,6 +27,9 @@ type ChatLogPageProps = {
     | 'chatBackgroundColor'
     | 'chatBackgroundImageUrl'
     | 'chatBackgroundOverlay'
+    | 'chatReadBgColor'
+    | 'chatReadBgImageUrl'
+    | 'chatReadBgOverlay'
     | 'chatNightMode'
     | 'chatContactNameSize'
   >;
@@ -391,16 +394,16 @@ function buildTheme(
 
 const CHAT_BACKGROUND_PRESETS = ['#efeff4', '#f6f1e7', '#eaf1f6', '#f4e9ef', '#eef3e6'] as const;
 
-function buildChatBackgroundStyle(settings: Pick<AppSettings, 'chatBackgroundColor' | 'chatBackgroundImageUrl' | 'chatBackgroundOverlay'>): CSSProperties {
-  const imageUrl = settings.chatBackgroundImageUrl.trim();
-  if (!imageUrl) {
-    return { backgroundColor: settings.chatBackgroundColor };
+function buildChatBackgroundStyle(bgColor: string, imageUrl: string, overlay: number): CSSProperties {
+  const url = imageUrl.trim();
+  if (!url) {
+    return { backgroundColor: bgColor };
   }
 
-  const overlayAlpha = Math.max(0, Math.min(0.9, settings.chatBackgroundOverlay / 100));
+  const overlayAlpha = Math.max(0, Math.min(0.9, overlay / 100));
   return {
-    backgroundColor: settings.chatBackgroundColor,
-    backgroundImage: `linear-gradient(rgba(255,255,255,${overlayAlpha}), rgba(255,255,255,${overlayAlpha})), url("${imageUrl}")`,
+    backgroundColor: bgColor,
+    backgroundImage: `linear-gradient(rgba(255,255,255,${overlayAlpha}), rgba(255,255,255,${overlayAlpha})), url("${url}")`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
@@ -503,7 +506,7 @@ export function ChatLogPage({
   const [searchInput, setSearchInput] = useState('');
   const [activeTab, setActiveTab] = useState<ChatHomeTab>('messages');
   const [openMePanel, setOpenMePanel] = useState<MePanelKey | null>('data');
-  const [chatBackgroundImageDraft, setChatBackgroundImageDraft] = useState(settings.chatBackgroundImageUrl);
+  const [chatReadBgImageDraft, setChatReadBgImageDraft] = useState(settings.chatReadBgImageUrl);
 
   const [showNewProfileEditor, setShowNewProfileEditor] = useState(false);
   const [newProfileDraft, setNewProfileDraft] = useState<ProfileDraft>(emptyProfileDraft);
@@ -536,8 +539,8 @@ export function ChatLogPage({
   }, [settings.chatAppDefaultProfileId]);
 
   useEffect(() => {
-    setChatBackgroundImageDraft(settings.chatBackgroundImageUrl);
-  }, [settings.chatBackgroundImageUrl]);
+    setChatReadBgImageDraft(settings.chatReadBgImageUrl);
+  }, [settings.chatReadBgImageUrl]);
 
   useEffect(() => {
     if (selectedLog) {
@@ -603,8 +606,8 @@ export function ChatLogPage({
 
   const chatBackgroundStyle = useMemo((): CSSProperties => {
     if (night) return { backgroundColor: theme.bg };
-    return buildChatBackgroundStyle(settings);
-  }, [night, theme.bg, settings.chatBackgroundColor, settings.chatBackgroundImageUrl, settings.chatBackgroundOverlay]);
+    return buildChatBackgroundStyle(settings.chatReadBgColor, settings.chatReadBgImageUrl, settings.chatReadBgOverlay);
+  }, [night, theme.bg, settings.chatReadBgColor, settings.chatReadBgImageUrl, settings.chatReadBgOverlay]);
 
   function updateDefaultProfile(profileId: string) {
     setDefaultProfileId(profileId);
@@ -626,14 +629,14 @@ export function ChatLogPage({
     reader.readAsDataURL(file);
   }
 
-  function uploadChatBackgroundImage(file: File | null | undefined) {
+  function uploadChatReadBgImage(file: File | null | undefined) {
     if (!file) return;
     const reader = new FileReader();
     reader.onload = () => {
       const dataUrl = typeof reader.result === 'string' ? reader.result : '';
       if (!dataUrl) return;
-      setChatBackgroundImageDraft(dataUrl);
-      onSettingChange({ chatBackgroundImageUrl: dataUrl });
+      setChatReadBgImageDraft(dataUrl);
+      onSettingChange({ chatReadBgImageUrl: dataUrl });
     };
     reader.readAsDataURL(file);
   }
@@ -1135,17 +1138,17 @@ export function ChatLogPage({
               openPanel={openMePanel}
               onToggle={toggleMePanel}
               title="閱讀背景"
-              subtitle="色票、圖片、透明度"
+              subtitle="對話視窗專屬背景，不影響首頁"
             >
               <div className="space-y-3">
                 <div className="flex flex-wrap gap-2">
                   {CHAT_BACKGROUND_PRESETS.map((color) => {
-                    const active = settings.chatBackgroundColor.toLowerCase() === color.toLowerCase();
+                    const active = settings.chatReadBgColor.toLowerCase() === color.toLowerCase();
                     return (
                       <button
                         key={color}
                         type="button"
-                        onClick={() => onSettingChange({ chatBackgroundColor: color })}
+                        onClick={() => onSettingChange({ chatReadBgColor: color })}
                         className={`h-7 w-7 rounded-full border transition active:scale-95 ${
                           active ? 'border-stone-900 ring-2 ring-stone-300' : 'border-stone-300'
                         }`}
@@ -1161,8 +1164,8 @@ export function ChatLogPage({
                   <span className="text-xs text-stone-600">自訂底色</span>
                   <input
                     type="color"
-                    value={settings.chatBackgroundColor}
-                    onChange={(event) => onSettingChange({ chatBackgroundColor: event.target.value })}
+                    value={settings.chatReadBgColor}
+                    onChange={(event) => onSettingChange({ chatReadBgColor: event.target.value })}
                     className="h-10 w-full rounded-md border border-stone-300"
                   />
                 </label>
@@ -1171,8 +1174,8 @@ export function ChatLogPage({
                   <span className="text-xs text-stone-600">背景圖片 URL</span>
                   <input
                     type="url"
-                    value={chatBackgroundImageDraft}
-                    onChange={(event) => setChatBackgroundImageDraft(event.target.value)}
+                    value={chatReadBgImageDraft}
+                    onChange={(event) => setChatReadBgImageDraft(event.target.value)}
                     placeholder="https://.../chat-bg.jpg"
                     className="w-full rounded-xl border border-stone-300 bg-white px-3 py-2 text-sm text-stone-700"
                   />
@@ -1181,7 +1184,7 @@ export function ChatLogPage({
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     type="button"
-                    onClick={() => onSettingChange({ chatBackgroundImageUrl: chatBackgroundImageDraft.trim() })}
+                    onClick={() => onSettingChange({ chatReadBgImageUrl: chatReadBgImageDraft.trim() })}
                     className="rounded-xl border border-stone-300 bg-white py-2 text-sm text-stone-700 transition active:scale-[0.99]"
                   >
                     套用圖片 URL
@@ -1193,7 +1196,7 @@ export function ChatLogPage({
                       accept="image/*"
                       className="hidden"
                       onChange={(event) => {
-                        uploadChatBackgroundImage(event.target.files?.[0]);
+                        uploadChatReadBgImage(event.target.files?.[0]);
                         event.currentTarget.value = '';
                       }}
                     />
@@ -1203,15 +1206,15 @@ export function ChatLogPage({
                 <label className="block space-y-1">
                   <span className="flex items-center justify-between text-xs text-stone-600">
                     <span>圖片遮罩</span>
-                    <span>{settings.chatBackgroundOverlay}%</span>
+                    <span>{settings.chatReadBgOverlay}%</span>
                   </span>
                   <input
                     type="range"
                     min={0}
                     max={90}
                     step={1}
-                    value={settings.chatBackgroundOverlay}
-                    onChange={(event) => onSettingChange({ chatBackgroundOverlay: Number(event.target.value) })}
+                    value={settings.chatReadBgOverlay}
+                    onChange={(event) => onSettingChange({ chatReadBgOverlay: Number(event.target.value) })}
                     className="w-full accent-stone-800"
                   />
                 </label>
@@ -1219,8 +1222,8 @@ export function ChatLogPage({
                 <button
                   type="button"
                   onClick={() => {
-                    setChatBackgroundImageDraft('');
-                    onSettingChange({ chatBackgroundImageUrl: '', chatBackgroundOverlay: 0 });
+                    setChatReadBgImageDraft('');
+                    onSettingChange({ chatReadBgImageUrl: '', chatReadBgOverlay: 0 });
                   }}
                   className="w-full rounded-xl border border-stone-300 bg-white py-2 text-sm text-stone-700 transition active:scale-[0.99]"
                 >
