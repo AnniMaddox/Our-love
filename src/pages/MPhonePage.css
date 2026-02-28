@@ -185,7 +185,7 @@
 }
 
 .mphone-lock-date {
-  font-size: 18px;
+  font-size: calc(18px * var(--mphone-font-scale, 1));
   font-weight: 400;
   color: rgba(255, 255, 255, 0.82);
   letter-spacing: 0.3px;
@@ -194,7 +194,7 @@
 
 /* iOS-style large time — matches M's real lock screen */
 .mphone-lock-time {
-  font-size: clamp(88px, 24vw, 112px);
+  font-size: calc(clamp(88px, 24vw, 112px) * var(--mphone-font-scale, 1));
   font-weight: 300;
   color: rgba(255, 255, 255, 0.92);
   letter-spacing: -5px;
@@ -560,7 +560,7 @@
 }
 
 .mphone-home-clock-date {
-  font-size: 16px;
+  font-size: calc(16px * var(--mphone-font-scale, 1));
   font-weight: 400;
   color: rgba(255, 255, 255, 0.72);
   letter-spacing: 0.3px;
@@ -568,7 +568,7 @@
 }
 
 .mphone-home-clock-time {
-  font-size: clamp(108px, 30vw, 136px);
+  font-size: calc(clamp(108px, 30vw, 136px) * var(--mphone-font-scale, 1));
   font-weight: 300;
   color: rgba(255, 255, 255, 0.90);
   letter-spacing: -5px;
@@ -680,7 +680,7 @@
 }
 
 .mphone-app-label {
-  font-size: 10px;
+  font-size: calc(10px * var(--mphone-font-scale, 1));
   color: rgba(255, 255, 255, 0.88);
   text-shadow: 0 1px 5px rgba(0,0,0,0.55);
   letter-spacing: 0.2px;

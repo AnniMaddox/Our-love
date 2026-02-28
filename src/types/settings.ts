@@ -327,6 +327,7 @@ export type AppSettings = {
   campfireFontUrl: string;
   mPhoneFontUrl: string;
   mPhoneFontUrlSlots: string[];
+  mPhoneFontScale: number;
   diaryCoverFitMode: DiaryCoverFitMode;
   mDiaryLineHeight: number;
   mDiaryContentFontSize: number;
@@ -437,6 +438,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   campfireFontUrl: '',
   mPhoneFontUrl: '',
   mPhoneFontUrlSlots: ['', '', ''],
+  mPhoneFontScale: 1,
   diaryCoverFitMode: 'cover',
   mDiaryLineHeight: 2.16,
   mDiaryContentFontSize: 14,

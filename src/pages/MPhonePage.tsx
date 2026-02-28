@@ -46,6 +46,7 @@ export type MPhonePageProps = {
   initialScreen?: 'lock' | 'home';
   appsOnMPhone?: string[]; // all slotIds currently on M's phone (= appsHiddenOnHome)
   mPhoneFontFamily?: string;
+  mPhoneFontScale?: number;
 };
 
 // ═══════════════════════════════════════
@@ -525,7 +526,7 @@ function MPhoneSettingsView({
 // MAIN COMPONENT
 // ═══════════════════════════════════════
 
-export function MPhonePage({ onLaunchApp, onReturnToMyPhone, initialScreen, appsOnMPhone, mPhoneFontFamily }: MPhonePageProps) {
+export function MPhonePage({ onLaunchApp, onReturnToMyPhone, initialScreen, appsOnMPhone, mPhoneFontFamily, mPhoneFontScale }: MPhonePageProps) {
   const [now, setNow] = useState(() => new Date());
   const [screen, setScreen] = useState<MPhoneScreen>(initialScreen ?? 'lock');
   const [homePageIdx, setHomePageIdx] = useState(0);
@@ -735,7 +736,10 @@ export function MPhonePage({ onLaunchApp, onReturnToMyPhone, initialScreen, apps
   return (
     <div
       className="mphone-root"
-      style={mPhoneFontFamily ? ({ '--mphone-font': `'${mPhoneFontFamily}', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif` } as CSSProperties) : undefined}
+      style={{
+        ...(mPhoneFontFamily ? { '--mphone-font': `'${mPhoneFontFamily}', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif` } : {}),
+        ...(mPhoneFontScale != null && mPhoneFontScale !== 1 ? { '--mphone-font-scale': String(mPhoneFontScale) } : {}),
+      } as CSSProperties}
     >
 
       {/* Wallpaper */}

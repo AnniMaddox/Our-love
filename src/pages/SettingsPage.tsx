@@ -3527,6 +3527,23 @@ export function SettingsPage({
               )}
             </div>
           </div>
+
+          <div className="mt-4 space-y-2">
+            <p className="text-xs font-medium text-stone-600">桌面字體大小</p>
+            <p className="text-xs text-stone-400">調整時鐘與 App 名稱的字體縮放（不影響 App 內文）</p>
+            <label className="block space-y-1">
+              <span className="text-xs text-stone-500">縮放：{Math.round((settings.mPhoneFontScale ?? 1) * 100)}%</span>
+              <input
+                type="range"
+                min={0.7}
+                max={1.3}
+                step={0.05}
+                value={settings.mPhoneFontScale ?? 1}
+                onChange={(e) => onSettingChange({ mPhoneFontScale: Number(e.target.value) })}
+                className="w-full"
+              />
+            </label>
+          </div>
         </SettingPanel>
 
         <SettingPanel

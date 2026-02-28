@@ -2346,6 +2346,7 @@ function App() {
                   initialScreen={mPhoneInitialScreen}
                   appsOnMPhone={settings.appsHiddenOnHome ?? []}
                   mPhoneFontFamily={mPhoneFontFamily}
+                  mPhoneFontScale={settings.mPhoneFontScale ?? 1}
                   onLaunchApp={(appId) => {
                     setLaunchSource('mPhone');
                     setLauncherApp(appId);
