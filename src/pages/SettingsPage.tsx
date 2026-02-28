@@ -7,6 +7,7 @@ import type { ChatProfile } from '../lib/chatDB';
 import type { StoredLetter } from '../lib/letterDB';
 import type { StoredMDiary } from '../lib/mDiaryDB';
 import { DEFAULT_SETTINGS, type AppLabelKey, type AppLabels, type AppSettings, type BackgroundMode, type TabIconKey, type TabIconUrls } from '../types/settings';
+import { IOSProfileCard, IOSSettingsGroup, IOSSettingsRow, IOSSubPageHeader } from '../components/IOSSettings';
 
 type SettingsPageProps = {
   settings: AppSettings;
@@ -60,6 +61,7 @@ type SettingsPageProps = {
   onReshuffleHoverPhrases: () => void;
   onReshuffleChibiPool: (mode?: AppSettings['chibiPoolMode']) => void;
   onRefresh: () => void;
+  onBack: () => void;
 };
 
 type AboutMBackupPart = 'mDiary' | 'letters' | 'chatLogs' | 'inbox' | 'soulmate' | 'other';
@@ -205,7 +207,7 @@ const HOME_FINAL_WIDGET_OPTIONS: Array<{
   hint: string;
 }> = [
   { value: 'vinylCounter', label: '唱片機', hint: '保留現在的唱片機外觀與控制鈕。' },
-  { value: 'polaroid', label: '拍力得', hint: '改成拍立得相機。' },
+  { value: 'polaroid', label: '拍立得', hint: '改成拍立得相機。' },
 ];
 const TAB_ICON_FALLBACK: Record<TabIconKey, string> = {
   home: '🏠',
@@ -505,28 +507,28 @@ type SettingSubgroupProps = {
   children: ReactNode;
 };
 
-function SettingPanel({ icon, title, subtitle, isOpen, onToggle, children }: SettingPanelProps) {
+function SettingPanel({ title, isOpen, onToggle, children }: SettingPanelProps) {
+  const [closing, setClosing] = useState(false);
+
+  function handleBack() {
+    setClosing(true);
+    setTimeout(() => {
+      onToggle();
+      setClosing(false);
+    }, 210);
+  }
+
+  if (!isOpen && !closing) return null;
   return (
-    <section className="overflow-hidden rounded-2xl border border-stone-700/80 bg-[#161b26] shadow-sm">
-      <button
-        type="button"
-        onClick={onToggle}
-        className="flex w-full items-center gap-3 px-4 py-3 text-left text-white transition hover:bg-white/5"
-      >
-        <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/12 text-lg">{icon}</span>
-        <span className="min-w-0 flex-1">
-          <span className="block text-sm">{title}</span>
-          <span className="block truncate text-xs text-stone-300">{subtitle}</span>
-        </span>
-        <span
-          className={`text-xl leading-none text-stone-300 transition-transform ${isOpen ? 'rotate-90' : ''}`}
-          aria-hidden="true"
-        >
-          ›
-        </span>
-      </button>
-      {isOpen && <div className="border-t border-stone-700/70 bg-white/95 p-4 text-sm text-stone-700">{children}</div>}
-    </section>
+    <div
+      className="absolute inset-0 z-10 flex flex-col overflow-y-auto bg-black"
+      style={{ animation: closing ? 'slideOutToRight 210ms ease-in forwards' : 'slideInFromRight 220ms ease-out' }}
+    >
+      <IOSSubPageHeader title={title} onBack={handleBack} />
+      <div className="mx-auto w-full max-w-xl flex-1 px-4 pb-12 pt-2">
+        <div className="rounded-2xl bg-[#1c1c1e] p-4 text-sm">{children}</div>
+      </div>
+    </div>
   );
 }
 
@@ -595,9 +597,20 @@ export function SettingsPage({
   onReshuffleHoverPhrases,
   onReshuffleChibiPool,
   onRefresh,
+  onBack,
 }: SettingsPageProps) {
-  const [openPanel, setOpenPanel] = useState<PanelKey | null>('appearance');
+  type SettingsRoute = 'main' | 'appearance' | 'familySharing' | PanelKey;
+  type AppearancePanelKey = 'appearance' | 'wallpaper' | 'fontCenter' | 'labels' | 'tabIcons' | 'tarot' | 'home' | 'homeWidget';
+  const [settingsRoute, setSettingsRoute] = useState<SettingsRoute>('main');
+  const [appearanceRoute, setAppearanceRoute] = useState<'list' | AppearancePanelKey>('list');
+  const goToMain = () => { setSettingsRoute('main'); };
+  const goToAppearance = () => { setSettingsRoute('appearance'); setAppearanceRoute('list'); };
+  const goToPanel = (key: PanelKey) => { setSettingsRoute(key); };
+  const goToAppearancePanel = (key: AppearancePanelKey) => { setAppearanceRoute(key); };
+
+  /* legacy — keep for subgroup toggle inside panels */
   const [letterListOpen, setLetterListOpen] = useState(false);
+  const [diaryListOpen, setDiaryListOpen] = useState(false);
   const [diaryCoverUrlDraft, setDiaryCoverUrlDraft] = useState(settings.diaryCoverImageUrl);
   const [tarotGalleryUrlDraft, setTarotGalleryUrlDraft] = useState(settings.tarotGalleryImageUrl);
   const [homeWidgetTitleDraft, setHomeWidgetTitleDraft] = useState(settings.homeWidgetTitle);
@@ -791,9 +804,6 @@ export function SettingsPage({
     };
   }, []);
 
-  function togglePanel(panel: PanelKey) {
-    setOpenPanel((current) => (current === panel ? null : panel));
-  }
 
   function toggleBackupGroup(group: 'aboutMe' | 'aboutM') {
     setOpenBackupGroup((current) => (current === group ? null : group));
@@ -1671,7 +1681,7 @@ export function SettingsPage({
       ),
     });
     setHomePolaroidStatus('已儲存');
-    emitActionToast({ kind: 'success', message: '拍力得句子已儲存' });
+    emitActionToast({ kind: 'success', message: '拍立得句子已儲存' });
     window.setTimeout(() => setHomePolaroidStatus(''), 1200);
   }
 
@@ -1800,19 +1810,111 @@ export function SettingsPage({
         : '外部字體（未存入字體預設）';
 
   return (
-    <div className="mx-auto w-full max-w-xl space-y-4 pb-24">
-      <header className="themed-header-panel rounded-2xl border p-4 shadow-sm">
-        <p className="text-xs uppercase tracking-[0.18em] text-stone-500">設定</p>
-        <h1 className="mt-1 text-2xl text-stone-900">控制中心</h1>
-      </header>
+    <div className="relative h-full w-full bg-black">
+      <style>{`
+        @keyframes slideInFromRight {
+          from { transform: translateX(100%); }
+          to { transform: translateX(0); }
+        }
+        @keyframes slideOutToRight {
+          from { transform: translateX(0); }
+          to { transform: translateX(100%); }
+        }
+      `}</style>
 
-      <div className="space-y-2">
+      {/* ═══ MAIN SETTINGS LIST (iOS) ═══ */}
+      <div className={`h-full overflow-y-auto ${settingsRoute === 'main' ? '' : 'hidden'}`}>
+        <IOSSubPageHeader title="設定" onBack={onBack} />
+        <div className="mx-auto max-w-xl px-4 pb-12 pt-2">
+          <IOSProfileCard
+            photoUrl={settings.profilePhotoUrl}
+            name={settings.profileName}
+            subtitle="個人檔案、設定"
+            onPhotoChange={(url) => onSettingChange({ profilePhotoUrl: url })}
+            onNameChange={(n) => onSettingChange({ profileName: n })}
+          >
+            <IOSSettingsRow
+              icon="👥"
+              iconBg="#30d158"
+              iconUrl={settings.mProfilePhotoUrl || undefined}
+              label="家人共享"
+              onTap={() => setSettingsRoute('familySharing')}
+              last
+            />
+          </IOSProfileCard>
+          <IOSSettingsGroup>
+            <IOSSettingsRow icon="🎨" iconBg="#bf5af2" label="外觀設定" onTap={goToAppearance} last />
+          </IOSSettingsGroup>
+          <IOSSettingsGroup label="資料與備份">
+            <IOSSettingsRow icon="📊" iconBg="#64d2ff" label="資料概況" onTap={() => goToPanel('overview')} />
+            <IOSSettingsRow icon="🗃️" iconBg="#ff9f0a" label="大備份" onTap={() => goToPanel('bigBackup')} last />
+          </IOSSettingsGroup>
+          <IOSSettingsGroup label="說明與 App">
+            <IOSSettingsRow icon="📚" iconBg="#5e5ce6" label="說明書" onTap={() => goToPanel('manuals')} />
+            <IOSSettingsRow icon="📱" iconBg="#30d158" label="M 的手機" onTap={() => goToPanel('mPhone')} />
+            <IOSSettingsRow icon="💌" iconBg="#ff375f" label="情書" onTap={() => goToPanel('letters')} />
+            <IOSSettingsRow icon="📓" iconBg="#ff9f0a" label="日記" onTap={() => goToPanel('diary')} last />
+          </IOSSettingsGroup>
+          <IOSSettingsGroup label="系統">
+            <IOSSettingsRow icon="🔔" iconBg="#ff375f" label="通知與操作" onTap={() => goToPanel('notification')} />
+            <IOSSettingsRow icon="📥" iconBg="#64d2ff" label="本機匯入" onTap={() => goToPanel('imports')} />
+            <IOSSettingsRow icon="💬" iconBg="#30d158" label="Hover 語氣" onTap={() => goToPanel('hover')} />
+            <IOSSettingsRow icon="🗨️" iconBg="#5e5ce6" label="對話紀錄" onTap={() => goToPanel('chatLogs')} />
+            <IOSSettingsRow icon="🛠️" iconBg="#8e8e93" label="手動操作" onTap={() => goToPanel('maintenance')} last />
+          </IOSSettingsGroup>
+        </div>
+      </div>
+
+      {/* ═══ FAMILY SHARING ═══ */}
+      {settingsRoute === 'familySharing' && (
+        <div className="absolute inset-0 z-10 overflow-y-auto bg-black" style={{ animation: 'slideInFromRight 220ms ease-out' }}>
+          <IOSSubPageHeader title="家人共享" onBack={goToMain} />
+          <div className="mx-auto max-w-xl px-4 pb-28">
+            <IOSProfileCard
+              photoUrl={settings.mProfilePhotoUrl}
+              name={settings.mProfileName}
+              subtitle="M 的檔案"
+              onPhotoChange={(url) => onSettingChange({ mProfilePhotoUrl: url })}
+              onNameChange={(n) => onSettingChange({ mProfileName: n })}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* ═══ APPEARANCE SETTINGS ═══ */}
+      {settingsRoute === 'appearance' && (
+        <div className="absolute inset-0 z-10 bg-black" style={{ animation: 'slideInFromRight 220ms ease-out' }}>
+          {/* Appearance list */}
+          <div className={`h-full overflow-y-auto ${appearanceRoute === 'list' ? '' : 'hidden'}`}>
+            <IOSSubPageHeader title="外觀設定" onBack={goToMain} />
+            <div className="mx-auto max-w-xl px-4 pb-12">
+              <IOSSettingsGroup label="視覺">
+                <IOSSettingsRow icon="🎨" iconBg="#bf5af2" label="外觀" onTap={() => goToAppearancePanel('appearance')} />
+                <IOSSettingsRow icon="🖼️" iconBg="#64d2ff" label="背景樣式" onTap={() => goToAppearancePanel('wallpaper')} />
+                <IOSSettingsRow icon="🔤" iconBg="#ff9f0a" label="字體中心" onTap={() => goToAppearancePanel('fontCenter')} last />
+              </IOSSettingsGroup>
+              <IOSSettingsGroup label="客製化">
+                <IOSSettingsRow icon="🏷️" iconBg="#30d158" label="入口名稱" onTap={() => goToAppearancePanel('labels')} />
+                <IOSSettingsRow icon="🧩" iconBg="#5e5ce6" label="自訂圖標" onTap={() => goToAppearancePanel('tabIcons')} />
+                <IOSSettingsRow icon="🃏" iconBg="#ff375f" label="塔羅" onTap={() => goToAppearancePanel('tarot')} last />
+              </IOSSettingsGroup>
+              <IOSSettingsGroup label="首頁">
+                <IOSSettingsRow icon="🏠" iconBg="#ff9f0a" label="首頁與信箱" onTap={() => goToAppearancePanel('home')} />
+                <IOSSettingsRow icon="🧩" iconBg="#64d2ff" label="首頁小組件" onTap={() => goToAppearancePanel('homeWidget')} last />
+              </IOSSettingsGroup>
+            </div>
+          </div>
+          {/* Appearance sub-pages — rendered as SettingPanel overlays */}
+        </div>
+      )}
+
+      {/* ═══ PANEL SUB-PAGES ═══ */}
         <SettingPanel
           icon="📊"
           title="資料概況"
           subtitle="目前信件與月曆數量"
-          isOpen={openPanel === 'overview'}
-          onToggle={() => togglePanel('overview')}
+          isOpen={settingsRoute === 'overview'}
+          onToggle={goToMain}
         >
           <dl className="grid grid-cols-2 gap-3">
             <div className="rounded-lg border border-stone-200 bg-stone-50 px-3 py-2">
@@ -1834,8 +1936,8 @@ export function SettingsPage({
           icon="🗃️"
           title="大備份"
           subtitle="關於我 / 關於M 分包匯入匯出"
-          isOpen={openPanel === 'bigBackup'}
-          onToggle={() => togglePanel('bigBackup')}
+          isOpen={settingsRoute === 'bigBackup'}
+          onToggle={goToMain}
         >
           <div className="space-y-3">
             <div className="rounded-lg border border-stone-200 bg-stone-50 px-3 py-2.5">
@@ -2064,8 +2166,8 @@ export function SettingsPage({
           icon="🎨"
           title="外觀"
           subtitle="主題色、字體比例與日曆外觀"
-          isOpen={openPanel === 'appearance'}
-          onToggle={() => togglePanel('appearance')}
+          isOpen={settingsRoute === 'appearance' && appearanceRoute === 'appearance'}
+          onToggle={() => setAppearanceRoute('list')}
         >
           <div className="space-y-3">
             <SettingSubgroup
@@ -2336,8 +2438,8 @@ export function SettingsPage({
           icon="🖼️"
           title="背景樣式"
           subtitle="漸層 / 圖片 / 動態桌布與特效"
-          isOpen={openPanel === 'wallpaper'}
-          onToggle={() => togglePanel('wallpaper')}
+          isOpen={settingsRoute === 'appearance' && appearanceRoute === 'wallpaper'}
+          onToggle={() => setAppearanceRoute('list')}
         >
           <div className="space-y-3">
             <div className="grid grid-cols-3 gap-2">
@@ -2612,8 +2714,8 @@ export function SettingsPage({
           icon="🔤"
           title="字體中心"
           subtitle="整站／情書／治癒篝火（含心情星球、留光）／日記／家 的字體集中管理"
-          isOpen={openPanel === 'fontCenter'}
-          onToggle={() => togglePanel('fontCenter')}
+          isOpen={settingsRoute === 'appearance' && appearanceRoute === 'fontCenter'}
+          onToggle={() => setAppearanceRoute('list')}
         >
           <div className="space-y-3">
             <SettingSubgroup
@@ -2899,8 +3001,8 @@ export function SettingsPage({
           icon="🏠"
           title="首頁與信箱"
           subtitle="首頁卡片文案 · 信箱標題"
-          isOpen={openPanel === 'home'}
-          onToggle={() => togglePanel('home')}
+          isOpen={settingsRoute === 'appearance' && appearanceRoute === 'home'}
+          onToggle={() => setAppearanceRoute('list')}
         >
           <div className="space-y-4">
             <div className="space-y-3 rounded-lg border border-stone-200 bg-stone-50 px-3 py-3">
@@ -2987,12 +3089,15 @@ export function SettingsPage({
 
             <div className="space-y-2 rounded-lg border border-stone-200 bg-stone-50 px-3 py-3">
               <p className="text-sm text-stone-800">想你的第 N 天起始日</p>
-              <input
-                type="date"
-                value={memorialStartDateDraft}
-                onChange={(e) => { setMemorialStartDateDraft(e.target.value); setHomeTextStatus(''); }}
-                className="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm"
-              />
+              <div className="overflow-hidden rounded-lg">
+                <input
+                  type="date"
+                  value={memorialStartDateDraft}
+                  onChange={(e) => { setMemorialStartDateDraft(e.target.value); setHomeTextStatus(''); }}
+                  className="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-800"
+                  style={{ maxWidth: '100%', boxSizing: 'border-box' }}
+                />
+              </div>
               <p className="text-xs text-stone-500">留空會顯示未設定（N 先顯示 1）。</p>
             </div>
 
@@ -3011,8 +3116,8 @@ export function SettingsPage({
           icon="🧩"
           title="首頁小組件"
           subtitle="唱片機位子的插件選擇"
-          isOpen={openPanel === 'homeWidget'}
-          onToggle={() => togglePanel('homeWidget')}
+          isOpen={settingsRoute === 'appearance' && appearanceRoute === 'homeWidget'}
+          onToggle={() => setAppearanceRoute('list')}
         >
           <div className="space-y-3">
             <div className="space-y-2 rounded-lg border border-stone-200 bg-stone-50 px-3 py-3">
@@ -3026,7 +3131,7 @@ export function SettingsPage({
                     setHomeWidgetStatus('');
                     setHomePolaroidStatus('');
                   }}
-                  className="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm"
+                  className="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-800"
                 >
                   {HOME_FINAL_WIDGET_OPTIONS.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -3044,13 +3149,13 @@ export function SettingsPage({
               <div className="space-y-2 rounded-lg border border-stone-200 bg-stone-50 px-3 py-3">
                 <label className="block space-y-1">
                   <span className="flex items-center justify-between gap-2">
-                    <span className="text-xs text-stone-600">拍力得句子（每行一句）</span>
+                    <span className="text-xs text-stone-600">拍立得句子（每行一句）</span>
                     <button
                       type="button"
                       onClick={applyHomePolaroidMessages}
                       className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-stone-300 bg-white text-sm text-stone-700 transition hover:bg-stone-100 active:scale-95"
-                      aria-label="儲存拍力得句子"
-                      title="儲存拍力得句子"
+                      aria-label="儲存拍立得句子"
+                      title="儲存拍立得句子"
                     >
                       <span aria-hidden="true">💾</span>
                     </button>
@@ -3086,8 +3191,8 @@ export function SettingsPage({
           icon="🏷️"
           title="入口名稱"
           subtitle="底部分頁與首頁入口可自訂"
-          isOpen={openPanel === 'labels'}
-          onToggle={() => togglePanel('labels')}
+          isOpen={settingsRoute === 'appearance' && appearanceRoute === 'labels'}
+          onToggle={() => setAppearanceRoute('list')}
         >
           <div className="space-y-3">
             {APP_LABEL_FIELDS.map((field) => (
@@ -3126,8 +3231,8 @@ export function SettingsPage({
           icon="🧩"
           title="自訂圖標"
           subtitle="底部分頁與首頁入口圖示（可用圖片網址）"
-          isOpen={openPanel === 'tabIcons'}
-          onToggle={() => togglePanel('tabIcons')}
+          isOpen={settingsRoute === 'appearance' && appearanceRoute === 'tabIcons'}
+          onToggle={() => setAppearanceRoute('list')}
         >
           <div className="space-y-3">
             <div className="rounded-lg border border-stone-200 bg-stone-50 px-3 py-2">
@@ -3244,8 +3349,8 @@ export function SettingsPage({
           icon="📱"
           title="M 的手機"
           subtitle="選擇移到 M 手機、從 Anni 首頁隱藏的 App"
-          isOpen={openPanel === 'mPhone'}
-          onToggle={() => togglePanel('mPhone')}
+          isOpen={settingsRoute === 'mPhone'}
+          onToggle={goToMain}
         >
           <div className="space-y-2">
             <p className="mb-3 text-xs text-stone-500">
@@ -3354,8 +3459,8 @@ export function SettingsPage({
           icon="🔔"
           title="通知與操作"
           subtitle="首頁桌面滑動、通知權限"
-          isOpen={openPanel === 'notification'}
-          onToggle={() => togglePanel('notification')}
+          isOpen={settingsRoute === 'notification'}
+          onToggle={goToMain}
         >
           <div className="space-y-3">
             <label className="flex items-center justify-between rounded-lg border border-stone-200 bg-stone-50 px-3 py-2">
@@ -3392,12 +3497,12 @@ export function SettingsPage({
           icon="📥"
           title="本機匯入"
           subtitle="EML 與月曆 JSON"
-          isOpen={openPanel === 'imports'}
-          onToggle={() => togglePanel('imports')}
+          isOpen={settingsRoute === 'imports'}
+          onToggle={goToMain}
         >
           <div className="space-y-3">
             <label className="block space-y-2">
-              <span>匯入 EML 信件</span>
+              <span className="text-stone-200">匯入 EML 信件</span>
               <input
                 type="file"
                 multiple
@@ -3413,7 +3518,7 @@ export function SettingsPage({
               />
             </label>
             <label className="block space-y-2">
-              <span>匯入月曆 JSON</span>
+              <span className="text-stone-200">匯入月曆 JSON</span>
               <input
                 type="file"
                 multiple
@@ -3449,8 +3554,8 @@ export function SettingsPage({
           icon="💬"
           title="Hover 語氣"
           subtitle="語氣權重與重抽"
-          isOpen={openPanel === 'hover'}
-          onToggle={() => togglePanel('hover')}
+          isOpen={settingsRoute === 'hover'}
+          onToggle={goToMain}
         >
           <div className="space-y-3">
             <div className="space-y-3 rounded-lg border border-stone-200 bg-stone-50 px-3 py-3">
@@ -3463,8 +3568,8 @@ export function SettingsPage({
               ].map((tone) => (
                 <label key={tone.key} className="block space-y-1">
                   <span className="flex items-center justify-between">
-                    <span>{tone.label}</span>
-                    <span className="text-xs text-stone-500">
+                    <span className="text-stone-800">{tone.label}</span>
+                    <span className="text-xs text-stone-600">
                       權重 {settings.hoverToneWeights[tone.key as keyof typeof settings.hoverToneWeights]}
                     </span>
                   </span>
@@ -3499,8 +3604,8 @@ export function SettingsPage({
           icon="🃏"
           title="塔羅"
           subtitle="閱覽室入口圖片 · 名稱字色與字級"
-          isOpen={openPanel === 'tarot'}
-          onToggle={() => togglePanel('tarot')}
+          isOpen={settingsRoute === 'appearance' && appearanceRoute === 'tarot'}
+          onToggle={() => setAppearanceRoute('list')}
         >
           <div className="space-y-3">
             <label className="block space-y-1">
@@ -3562,8 +3667,8 @@ export function SettingsPage({
           icon="💌"
           title="情書"
           subtitle="模式 · 匯入"
-          isOpen={openPanel === 'letters'}
-          onToggle={() => togglePanel('letters')}
+          isOpen={settingsRoute === 'letters'}
+          onToggle={goToMain}
         >
           <div className="space-y-4">
             {/* Count */}
@@ -3692,8 +3797,8 @@ export function SettingsPage({
           icon="📓"
           title="日記"
           subtitle="封面 · 匯入"
-          isOpen={openPanel === 'diary'}
-          onToggle={() => togglePanel('diary')}
+          isOpen={settingsRoute === 'diary'}
+          onToggle={goToMain}
         >
           <div className="space-y-4">
             <div className="rounded-lg border border-stone-200 bg-stone-50 px-3 py-3">
@@ -3808,11 +3913,12 @@ export function SettingsPage({
               <p className="text-xs text-stone-400">可放 txt / docx；同檔名會覆蓋舊版本。</p>
             </div>
 
-            <div className="space-y-2 rounded-lg border border-stone-200 bg-stone-50 px-3 py-3">
-              <div className="flex items-center justify-between gap-2">
-                <p className="text-xs font-medium text-stone-600">已匯入清單（可單篇刪除）</p>
-                <span className="text-[11px] text-stone-500">{diaryEntriesForSettings.length} 篇</span>
-              </div>
+            <SettingSubgroup
+              title="已匯入清單（可單篇刪除）"
+              subtitle={`${diaryEntriesForSettings.length} 篇，展開可單篇刪除`}
+              isOpen={diaryListOpen}
+              onToggle={() => setDiaryListOpen((prev) => !prev)}
+            >
               {diaryEntriesForSettings.length ? (
                 <div className="max-h-44 overflow-y-auto rounded-md border border-stone-200 bg-white">
                   {diaryEntriesForSettings.map((entry, index) => (
@@ -3841,7 +3947,7 @@ export function SettingsPage({
               ) : (
                 <p className="text-xs text-stone-400">目前沒有日記資料。</p>
               )}
-            </div>
+            </SettingSubgroup>
 
             <div className="border-t border-stone-100 pt-3">
               <button
@@ -3860,8 +3966,8 @@ export function SettingsPage({
           icon="🗨️"
           title="對話紀錄"
           subtitle="匯入 · 角色設定"
-          isOpen={openPanel === 'chatLogs'}
-          onToggle={() => togglePanel('chatLogs')}
+          isOpen={settingsRoute === 'chatLogs'}
+          onToggle={goToMain}
         >
           <div className="space-y-4">
             <div className="rounded-lg border border-stone-200 bg-stone-50 px-3 py-3">
@@ -4282,8 +4388,8 @@ export function SettingsPage({
           icon="📚"
           title="說明書"
           subtitle="總說明 + 書架 + 心情星球轉檔"
-          isOpen={openPanel === 'manuals'}
-          onToggle={() => togglePanel('manuals')}
+          isOpen={settingsRoute === 'manuals'}
+          onToggle={goToMain}
         >
           <div className="space-y-3">
             <div className="grid grid-cols-3 gap-2">
@@ -4293,7 +4399,7 @@ export function SettingsPage({
                   setGuideManualType('general');
                   setShowGuideModal(true);
                 }}
-                className="w-full rounded-xl bg-stone-900 py-2.5 text-center text-sm text-white transition active:opacity-80"
+                className="w-full rounded-xl border border-[#48484a] bg-[#2c2c2e] py-2.5 text-center text-sm text-white transition active:opacity-70"
               >
                 說明書 I
               </button>
@@ -4303,7 +4409,7 @@ export function SettingsPage({
                   setGuideManualType('bookshelf');
                   setShowGuideModal(true);
                 }}
-                className="w-full rounded-xl bg-stone-900 py-2.5 text-center text-sm text-white transition active:opacity-80"
+                className="w-full rounded-xl border border-[#48484a] bg-[#2c2c2e] py-2.5 text-center text-sm text-white transition active:opacity-70"
               >
                 說明書 II（書架）
               </button>
@@ -4313,7 +4419,7 @@ export function SettingsPage({
                   setGuideManualType('moodLetters');
                   setShowGuideModal(true);
                 }}
-                className="w-full rounded-xl bg-stone-900 py-2.5 text-center text-sm text-white transition active:opacity-80"
+                className="w-full rounded-xl border border-[#48484a] bg-[#2c2c2e] py-2.5 text-center text-sm text-white transition active:opacity-70"
               >
                 說明書 III（心情星球）
               </button>
@@ -4328,8 +4434,8 @@ export function SettingsPage({
           icon="🛠️"
           title="手動操作"
           subtitle="刷新資料與同步時間"
-          isOpen={openPanel === 'maintenance'}
-          onToggle={() => togglePanel('maintenance')}
+          isOpen={settingsRoute === 'maintenance'}
+          onToggle={goToMain}
         >
           <div className="space-y-3">
             <button
@@ -4344,7 +4450,6 @@ export function SettingsPage({
             </p>
           </div>
         </SettingPanel>
-      </div>
 
       {showGuideModal && (
         <div className="fixed inset-0 z-[120] flex items-end justify-center bg-black/45 p-3 sm:items-center sm:p-6">
@@ -4398,10 +4503,10 @@ export function SettingsPage({
               <button
                 type="button"
                 onClick={() => setShowGuideModal(false)}
-                className="grid h-8 w-8 place-items-center rounded-full border border-stone-300 bg-white text-xl leading-none text-stone-600"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-stone-300 bg-white text-xl leading-none text-stone-600"
                 aria-label="關閉說明書"
               >
-                ×
+                <span style={{ transform: 'translateY(-1px)' }}>×</span>
               </button>
             </div>
 

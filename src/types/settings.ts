@@ -339,6 +339,10 @@ export type AppSettings = {
   chibiPoolSize: number;
   chibiPoolMode: ChibiPoolMode;
   appsHiddenOnHome: string[];
+  profilePhotoUrl: string;
+  profileName: string;
+  mProfilePhotoUrl: string;
+  mProfileName: string;
 };
 
 export const DEFAULT_HOVER_TONE_WEIGHTS: HoverToneWeights = {
@@ -445,4 +449,8 @@ export const DEFAULT_SETTINGS: AppSettings = {
   chibiPoolSize: 60,
   chibiPoolMode: 'i',
   appsHiddenOnHome: ['diary','questionnaire','memo','murmur','self-intro','letters','album','bookshelf','tarot'],
+  profilePhotoUrl: '',
+  profileName: 'Anni',
+  mProfilePhotoUrl: '',
+  mProfileName: 'M',
 };

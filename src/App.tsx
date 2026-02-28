@@ -1756,6 +1756,7 @@ function App() {
                   return refreshData();
                 });
               }}
+              onBack={() => { setActiveTab(0); }}
             />
           </Suspense>
         ),
@@ -1968,7 +1969,7 @@ function App() {
             swipeEnabled={false}
             pages={pages.map((page) => ({ id: page.id, node: page.node }))}
           />
-          {!launcherApp && (
+          {!launcherApp && activeTab !== 3 && (
             <BottomTabs
               activeIndex={activeBottomTab}
               onSelect={onSelectBottomTab}
