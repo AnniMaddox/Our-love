@@ -88,7 +88,7 @@ type PanelKey =
   | 'maintenance';
 
 type AppearanceGroupKey = 'colorScale' | 'calendar' | 'chibi' | 'preset';
-type FontCenterGroupKey = 'preset' | 'scope' | 'usage' | 'size';
+type FontCenterGroupKey = 'preset' | 'scope' | 'usage' | 'size' | 'fontList';
 type FontSlotSettingKey = 'customFontUrlSlots' | 'letterFontUrlSlots' | 'diaryFontUrlSlots' | 'soulmateFontUrlSlots';
 type FontSlotNameSettingKey =
   | 'customFontUrlSlotNames'
@@ -655,6 +655,7 @@ export function SettingsPage({
   const [openBackupGroup, setOpenBackupGroup] = useState<'aboutMe' | 'aboutM' | null>('aboutMe');
   const [openAppearanceGroup, setOpenAppearanceGroup] = useState<AppearanceGroupKey | null>('colorScale');
   const [openFontCenterGroup, setOpenFontCenterGroup] = useState<FontCenterGroupKey | null>('preset');
+  const [copiedFontUrl, setCopiedFontUrl] = useState<string | null>(null);
   const [openChatBubbleGroup, setOpenChatBubbleGroup] = useState(false);
   const [openChatBackgroundGroup, setOpenChatBackgroundGroup] = useState(false);
   const [showGuideModal, setShowGuideModal] = useState(false);
@@ -820,6 +821,31 @@ export function SettingsPage({
 
   function toggleFontCenterGroup(group: FontCenterGroupKey) {
     setOpenFontCenterGroup((current) => (current === group ? null : group));
+  }
+
+  function copyToClipboard(text: string) {
+    const markCopied = () => {
+      setCopiedFontUrl(text);
+      setTimeout(() => setCopiedFontUrl((prev) => (prev === text ? null : prev)), 1500);
+    };
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(markCopied).catch(() => {
+        fallbackCopy(text, markCopied);
+      });
+    } else {
+      fallbackCopy(text, markCopied);
+    }
+  }
+
+  function fallbackCopy(text: string, onSuccess: () => void) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;pointer-events:none;';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try { document.execCommand('copy'); onSuccess(); } catch { /* ignore */ }
+    document.body.removeChild(ta);
   }
 
   function toggleFontApplyTarget(key: FontApplyTargetKey) {
@@ -3002,6 +3028,46 @@ export function SettingsPage({
                 </p>
               </div>
             </SettingSubgroup>
+
+            <SettingSubgroup
+              title="字體名稱對照"
+              subtitle="點「複製」可直接貼到上方 URL 欄"
+              isOpen={openFontCenterGroup === 'fontList'}
+              onToggle={() => toggleFontCenterGroup('fontList')}
+            >
+              <div className="space-y-2">
+                {([
+                  { name: '落日晚風', url: '/Our-love/fonts/250hm4.ttf' },
+                  { name: '美化1', url: '/Our-love/fonts/3f9siq.ttf' },
+                  { name: '玉蝴蝶', url: '/Our-love/fonts/4nyv50.ttf' },
+                  { name: '麗黑體', url: '/Our-love/fonts/5aue4h.ttf' },
+                  { name: '魚玄機', url: '/Our-love/fonts/7yd3ge.ttf' },
+                  { name: '相思豆', url: '/Our-love/fonts/c9xckj.ttf' },
+                  { name: '無花果', url: '/Our-love/fonts/cv6rav.ttf' },
+                  { name: '紙玫瑰', url: '/Our-love/fonts/cyao1b.ttf' },
+                  { name: '山茶玫瑰', url: '/Our-love/fonts/dxqz5r.ttf' },
+                  { name: '美化2', url: '/Our-love/fonts/egznwn.ttf' },
+                  { name: '美化3', url: '/Our-love/fonts/j25721.ttf' },
+                  { name: '美化4', url: '/Our-love/fonts/o6pz1x.ttf' },
+                  { name: '好看的', url: '/Our-love/fonts/op_ticket_885190757_1759210169032_qdqqd_0yhxd3.ttf' },
+                  { name: '近城遠山都是人間', url: '/Our-love/fonts/s6erm7.ttf' },
+                  { name: '柊黑體', url: '/Our-love/fonts/u1u7jm.ttf' },
+                  { name: '我見青山', url: '/Our-love/fonts/xam5rh.ttf' },
+                  { name: '不錯', url: '/Our-love/fonts/xh3zpo.ttf' },
+                ] as { name: string; url: string }[]).map(({ name, url }) => (
+                  <div key={url} className="flex items-center justify-between gap-2 rounded-lg border border-stone-200 bg-white px-3 py-2">
+                    <span className="text-sm text-stone-800">{name}</span>
+                    <button
+                      type="button"
+                      onClick={() => copyToClipboard(url)}
+                      className="shrink-0 rounded-md bg-stone-100 px-2 py-1 text-xs text-stone-600 transition active:bg-stone-200"
+                    >
+                      {copiedFontUrl === url ? '✓ 已複製' : '複製'}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </SettingSubgroup>
           </div>
         </SettingPanel>
 
@@ -4623,7 +4689,7 @@ export function SettingsPage({
                       </li>
                       <li>
                         上傳後，字體網址填：
-                        <code className="rounded bg-stone-200 px-1">https://annimaddox.github.io/Our-love/fonts/你的字體.ttf</code>
+                        <code className="rounded bg-stone-200 px-1">/Our-love/fonts/你的字體.ttf</code>
                       </li>
                       <li>同網域不受 CORS 限制，永遠穩定。</li>
                     </ul>
