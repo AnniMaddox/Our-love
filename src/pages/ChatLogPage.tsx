@@ -51,6 +51,36 @@ type ChatNavIconSettingKey = 'chatAppMessagesIcon' | 'chatAppDiscoverIcon' | 'ch
 
 type ProfileDraft = Omit<ChatProfile, 'id'>;
 
+// ===== Bookmark system =====
+
+type Bookmark = {
+  id: string;
+  messageIndex: number;
+  label: string;
+  preview: string;
+  createdAt: string;
+};
+
+function bookmarkStorageKey(logName: string) {
+  return `chat-bookmarks-v1-${logName}`;
+}
+
+function loadBookmarks(logName: string): Bookmark[] {
+  try {
+    const raw = localStorage.getItem(bookmarkStorageKey(logName));
+    if (!raw) return [];
+    return JSON.parse(raw) as Bookmark[];
+  } catch {
+    return [];
+  }
+}
+
+function persistBookmarks(logName: string, marks: Bookmark[]) {
+  localStorage.setItem(bookmarkStorageKey(logName), JSON.stringify(marks));
+}
+
+// ===== Utilities =====
+
 function emptyProfileDraft(): ProfileDraft {
   return {
     name: '',
@@ -554,7 +584,7 @@ export function ChatLogPage({
               aria-label="返回"
               title="返回"
             >
-              ‹
+              <span style={{ transform: 'translateY(-1px)', display: 'block' }}>‹</span>
             </button>
           ) : (
             <span className="h-9 w-9" />
@@ -577,45 +607,47 @@ export function ChatLogPage({
 
       <main className="min-h-0 flex-1 overflow-y-auto">
         {activeTab === 'messages' && (
-          <div className="space-y-3 px-3 py-3">
+          <div className="bg-white">
+            {/* 聯絡人列表 — 扁平微信風格 */}
             <button
               type="button"
               onClick={openRandomLog}
               disabled={!logs.length}
-              className="flex w-full items-center gap-3 rounded-2xl border border-stone-200 bg-white px-3 py-3 text-left shadow-sm transition active:scale-[0.99] disabled:opacity-40"
+              className="flex w-full items-center gap-3 bg-white px-4 py-3 text-left transition active:bg-stone-50 disabled:opacity-40"
             >
               {contactAvatar ? (
                 <img
                   src={contactAvatar}
                   alt=""
-                  className="h-16 w-16 rounded-2xl border border-stone-200 object-cover"
+                  className="h-14 w-14 rounded-xl object-cover"
                 />
               ) : (
-                <div className="grid h-16 w-16 place-items-center rounded-2xl border border-stone-200 bg-stone-100 text-2xl text-stone-500">
+                <div className="grid h-14 w-14 place-items-center rounded-xl bg-stone-200 text-2xl text-stone-500">
                   💬
                 </div>
               )}
               <div className="min-w-0 flex-1">
                 <p
                   className="truncate text-stone-900"
-                  style={{ fontSize: 'var(--chat-contact-title-size, 30px)', lineHeight: 1.1 }}
+                  style={{ fontSize: 'var(--chat-contact-title-size, 17px)', lineHeight: 1.3 }}
                 >
                   {contactName}
                 </p>
                 <p
-                  className="mt-1 text-stone-500"
-                  style={{ fontSize: 'var(--chat-contact-subtitle-size, 18px)', lineHeight: 1.2 }}
+                  className="mt-0.5 truncate text-stone-400"
+                  style={{ fontSize: 'var(--chat-contact-subtitle-size, 14px)', lineHeight: 1.3 }}
                 >
                   {contactSubtitle}
                 </p>
               </div>
-              <span className="text-2xl text-stone-400">›</span>
+              <span className="text-stone-300 text-lg">›</span>
             </button>
+            <div className="mx-4 h-px bg-stone-100" />
 
             {!logs.length && (
-              <div className="rounded-2xl border border-stone-200 bg-white px-4 py-8 text-center text-sm text-stone-500 shadow-sm">
+              <p className="px-4 py-8 text-center text-sm text-stone-400">
                 請先到「我」分頁匯入對話紀錄
-              </div>
+              </p>
             )}
           </div>
         )}
@@ -632,36 +664,36 @@ export function ChatLogPage({
               />
             </div>
 
-	            <div className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
-	              <ul className="divide-y divide-stone-100">
-	                {filteredLogs.map((log) => (
-	                  <li key={log.name}>
-	                    <div className="flex items-center gap-2 px-3 py-2">
-	                      <button
-	                        type="button"
-	                        onClick={() => openLog(log.name)}
-	                        className="flex min-w-0 flex-1 items-center justify-between gap-3 rounded-xl px-2 py-2 text-left transition active:bg-stone-100"
-	                      >
-	                        <span className="min-w-0 flex-1 truncate text-sm text-stone-800">{displayLogName(log.name)}</span>
-	                        <span className="text-xs text-stone-400">›</span>
-	                      </button>
-	                      <button
-	                        type="button"
-	                        onClick={() => {
-	                          const ok = window.confirm(`要刪除這份對話紀錄嗎？\n\n${displayLogName(log.name)}`);
-	                          if (!ok) return;
-	                          onDeleteChatLog(log.name);
-	                        }}
-	                        className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-rose-200 bg-rose-50 text-sm text-rose-600 transition active:scale-95"
-	                        aria-label={`刪除 ${displayLogName(log.name)}`}
-	                        title="刪除"
-	                      >
-	                        ✕
-	                      </button>
-	                    </div>
-	                  </li>
-	                ))}
-	              </ul>
+	          <div className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
+	            <ul className="divide-y divide-stone-100">
+	              {filteredLogs.map((log) => (
+	                <li key={log.name}>
+	                  <div className="flex items-center gap-2 px-3 py-2">
+	                    <button
+	                      type="button"
+	                      onClick={() => openLog(log.name)}
+	                      className="flex min-w-0 flex-1 items-center justify-between gap-3 rounded-xl px-2 py-2 text-left transition active:bg-stone-100"
+	                    >
+	                      <span className="min-w-0 flex-1 truncate text-sm text-stone-800">{displayLogName(log.name)}</span>
+	                      <span className="text-xs text-stone-400">›</span>
+	                    </button>
+	                    <button
+	                      type="button"
+	                      onClick={() => {
+	                        const ok = window.confirm(`要刪除這份對話紀錄嗎？\n\n${displayLogName(log.name)}`);
+	                        if (!ok) return;
+	                        onDeleteChatLog(log.name);
+	                      }}
+	                      className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-rose-200 bg-rose-50 text-sm text-rose-600 transition active:scale-95"
+	                      aria-label={`刪除 ${displayLogName(log.name)}`}
+	                      title="刪除"
+	                    >
+	                      ✕
+	                    </button>
+	                  </div>
+	                </li>
+	              ))}
+	            </ul>
               {!filteredLogs.length && (
                 <p className="px-4 py-6 text-center text-sm text-stone-400">沒有符合的紀錄</p>
               )}
@@ -1244,7 +1276,7 @@ export function ChatLogPage({
         )}
       </main>
 
-      <nav className="shrink-0 border-t border-stone-200 bg-white px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2">
+      <nav className="shrink-0 border-t border-stone-200 bg-white px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-2.5">
         <div className="grid grid-cols-3 gap-2">
           <button
             type="button"
@@ -1320,6 +1352,13 @@ function ChatReadView({
   onExit?: () => void;
 }) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const [showFloating, setShowFloating] = useState(false);
+  const [showBookmarkDrawer, setShowBookmarkDrawer] = useState(false);
+  const [bookmarks, setBookmarks] = useState<Bookmark[]>(() => loadBookmarks(log.name));
+  const [addingBookmark, setAddingBookmark] = useState<{ index: number; preview: string } | null>(null);
+  const [bookmarkLabelDraft, setBookmarkLabelDraft] = useState('');
 
   const displayName = displayLogName(log.name);
   const messages = useMemo(() => parseChatContent(log.content, selectedProfile), [log.content, selectedProfile]);
@@ -1330,8 +1369,93 @@ function ChatReadView({
     node.scrollTo({ top: node.scrollHeight });
   }, [log.name, selectedProfileId]);
 
+  useEffect(() => {
+    setBookmarks(loadBookmarks(log.name));
+  }, [log.name]);
+
+  function scrollToTop() {
+    scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function scrollToBottom() {
+    const node = scrollRef.current;
+    if (!node) return;
+    node.scrollTo({ top: node.scrollHeight, behavior: 'smooth' });
+  }
+
+  function scrollToMessage(index: number) {
+    const node = scrollRef.current;
+    if (!node) return;
+    const el = node.querySelector(`[data-msg-index="${index}"]`);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function getTopVisibleMessageIndex(): number {
+    const node = scrollRef.current;
+    if (!node) return 0;
+    const containerTop = node.getBoundingClientRect().top;
+    const bubbles = node.querySelectorAll('[data-msg-index]');
+    for (const bubble of bubbles) {
+      const rect = bubble.getBoundingClientRect();
+      if (rect.bottom > containerTop + 60) {
+        return Number(bubble.getAttribute('data-msg-index') ?? '0');
+      }
+    }
+    return 0;
+  }
+
+  function openAddBookmark(index: number, preview: string) {
+    setAddingBookmark({ index, preview });
+    setBookmarkLabelDraft('');
+  }
+
+  function handleAddBookmarkAtTop() {
+    const index = getTopVisibleMessageIndex();
+    const msg = messages[index];
+    const preview = msg ? msg.content.slice(0, 50) : '';
+    openAddBookmark(index, preview);
+  }
+
+  function confirmAddBookmark() {
+    if (!addingBookmark) return;
+    const label =
+      bookmarkLabelDraft.trim() || addingBookmark.preview.slice(0, 20) || `書籤 ${bookmarks.length + 1}`;
+    const newMark: Bookmark = {
+      id: `bm-${Date.now()}`,
+      messageIndex: addingBookmark.index,
+      label,
+      preview: addingBookmark.preview,
+      createdAt: new Date().toISOString(),
+    };
+    const next = [...bookmarks, newMark];
+    setBookmarks(next);
+    persistBookmarks(log.name, next);
+    setAddingBookmark(null);
+    emitActionToast({ kind: 'success', message: '書籤已新增' });
+  }
+
+  function deleteBookmark(id: string) {
+    const next = bookmarks.filter((b) => b.id !== id);
+    setBookmarks(next);
+    persistBookmarks(log.name, next);
+  }
+
+  function handleBubblePressStart(index: number, preview: string) {
+    longPressTimer.current = setTimeout(() => {
+      openAddBookmark(index, preview);
+    }, 500);
+  }
+
+  function handleBubblePressEnd() {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
+    }
+  }
+
   return (
-    <div className="mx-auto flex h-full w-full max-w-xl flex-col overflow-hidden" style={backgroundStyle}>
+    <div className="relative mx-auto flex h-full w-full max-w-xl flex-col overflow-hidden" style={backgroundStyle}>
+      {/* Header */}
       <div className="shrink-0 border-b border-stone-200 bg-white px-3 pb-2 pt-[max(0.75rem,env(safe-area-inset-top))]">
         <div className="flex items-center justify-between gap-2">
           <button
@@ -1339,20 +1463,18 @@ function ChatReadView({
             onClick={onBack}
             className="h-9 w-9 rounded-full border border-stone-300 bg-white text-xl leading-none text-stone-700 transition active:scale-95"
             aria-label="返回"
-            title="返回"
           >
-            ‹
+            <span style={{ transform: 'translateY(-1px)', display: 'block' }}>‹</span>
           </button>
-          <p className="min-w-0 flex-1 truncate text-center text-sm text-stone-700">{displayName}</p>
+          <p className="min-w-0 flex-1 truncate text-center text-sm font-medium text-stone-800">{displayName}</p>
           {onExit ? (
             <button
               type="button"
               onClick={onExit}
               className="h-9 w-9 rounded-full border border-stone-300 bg-white text-xl leading-none text-stone-700 transition active:scale-95"
               aria-label="離開"
-              title="離開"
             >
-              ×
+              <span style={{ transform: 'translateY(-1px)', display: 'block' }}>×</span>
             </button>
           ) : (
             <span className="h-9 w-9" />
@@ -1360,9 +1482,15 @@ function ChatReadView({
         </div>
       </div>
 
+      {/* Messages */}
       <div ref={scrollRef} id="chat-messages" className="min-h-0 flex-1 overflow-y-auto px-3 py-3">
         {messages.length > 0 ? (
-          <ChatBubbles messages={messages} profile={selectedProfile} />
+          <ChatBubbles
+            messages={messages}
+            profile={selectedProfile}
+            onPressStart={handleBubblePressStart}
+            onPressEnd={handleBubblePressEnd}
+          />
         ) : (
           <p className="rounded-2xl border border-stone-200 bg-white px-3 py-4 text-sm text-stone-500">
             無法解析為聊天格式，以下是原文：
@@ -1373,20 +1501,67 @@ function ChatReadView({
         )}
       </div>
 
-      <div className="shrink-0 border-t border-stone-200 bg-white px-2.5 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2.5">
+      {/* Floating scroll buttons */}
+      {showFloating && (
+        <div className="pointer-events-none absolute bottom-24 right-4 z-10 flex flex-col gap-2">
+          <button
+            type="button"
+            onClick={scrollToTop}
+            className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-600 shadow-md transition active:scale-95"
+            aria-label="回到頂部"
+          >
+            <ChevronUp />
+          </button>
+          <button
+            type="button"
+            onClick={scrollToBottom}
+            className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-600 shadow-md transition active:scale-95"
+            aria-label="回到底部"
+          >
+            <ChevronDown />
+          </button>
+        </div>
+      )}
+
+      {/* Bottom bar */}
+      <div className="shrink-0 border-t border-stone-200 bg-white px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-3">
         <div className="flex items-center gap-2">
-          <span className="inline-flex h-9 w-9 items-center justify-center text-[1.55rem] text-stone-700" aria-hidden="true">
-            ✉
-          </span>
+          {/* + 加書籤 */}
+          <button
+            type="button"
+            onClick={handleAddBookmarkAtTop}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-stone-300 bg-stone-50 text-xl text-stone-600 transition active:scale-95"
+            aria-label="新增書籤"
+            title="新增書籤（當前位置）"
+          >
+            <span style={{ transform: 'translateY(-1px)', display: 'block' }}>+</span>
+          </button>
+
+          {/* 🔖 書籤清單 */}
+          <button
+            type="button"
+            onClick={() => setShowBookmarkDrawer(true)}
+            className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-stone-300 bg-stone-50 text-xl transition active:scale-95"
+            aria-label="書籤清單"
+          >
+            🔖
+            {bookmarks.length > 0 && (
+              <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-rose-500 text-[10px] font-bold text-white">
+                {bookmarks.length > 9 ? '9+' : bookmarks.length}
+              </span>
+            )}
+          </button>
+
+          {/* 角色切換 */}
           <div className="relative min-w-0 flex-1">
             {chatProfiles.length > 0 ? (
               <>
                 <select
                   value={selectedProfileId}
                   onChange={(e) => onSelectProfile(e.target.value)}
-                  className="h-11 w-full appearance-none rounded-full border border-stone-300 bg-stone-50 pl-4 pr-8 text-base text-stone-700"
+                  className="h-10 w-full appearance-none rounded-full border border-stone-300 bg-stone-50 pl-4 pr-8 text-sm text-stone-700"
                 >
-                  <option value="">角色預設（點我切換）</option>
+                  <option value="">角色預設</option>
                   {chatProfiles.map((p) => (
                     <option key={p.id} value={p.id}>
                       {p.name}（{p.rightNick} / {p.leftNick}）
@@ -1396,26 +1571,163 @@ function ChatReadView({
                 <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs text-stone-500">▾</span>
               </>
             ) : (
-              <div className="h-11 rounded-full border border-stone-300 bg-stone-50 px-4 text-base leading-[2.75rem] text-stone-400">
+              <div className="h-10 rounded-full border border-stone-300 bg-stone-50 px-4 text-sm leading-10 text-stone-400">
                 尚未建立角色設定
               </div>
             )}
           </div>
-          <span className="inline-flex h-9 w-9 items-center justify-center text-[1.8rem] leading-none text-stone-700" aria-hidden="true">
-            +
-          </span>
+
+          {/* ▶ 懸浮鈕開關（LINE 風格藍色圓鈕） */}
+          <button
+            type="button"
+            onClick={() => setShowFloating((prev) => !prev)}
+            className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white shadow-sm transition active:scale-95 ${
+              showFloating ? 'bg-blue-600' : 'bg-blue-500'
+            }`}
+            aria-label="快速導航開關"
+          >
+            <SendArrow />
+          </button>
         </div>
       </div>
+
+      {/* Bookmark drawer */}
+      {showBookmarkDrawer && (
+        <div className="absolute inset-0 z-20 flex flex-col justify-end">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setShowBookmarkDrawer(false)} />
+          <div className="relative z-10 flex max-h-[70%] flex-col rounded-t-3xl bg-white shadow-xl">
+            <div className="flex shrink-0 items-center justify-between border-b border-stone-100 px-5 pb-3 pt-4">
+              <h2 className="text-base font-medium text-stone-800">書籤</h2>
+              <button
+                type="button"
+                onClick={() => setShowBookmarkDrawer(false)}
+                className="flex h-7 w-7 items-center justify-center rounded-full bg-stone-100 text-sm text-stone-500"
+              >
+                <span style={{ transform: 'translateY(-1px)', display: 'block' }}>×</span>
+              </button>
+            </div>
+            <div className="min-h-0 flex-1 overflow-y-auto pb-[max(1.25rem,env(safe-area-inset-bottom))]">
+              {bookmarks.length === 0 ? (
+                <p className="px-5 py-10 text-center text-sm text-stone-400">
+                  還沒有書籤
+                  <br />
+                  <span className="text-xs">長按訊息泡泡 或 點 + 可新增</span>
+                </p>
+              ) : (
+                <ul className="divide-y divide-stone-100">
+                  {bookmarks.map((bm) => (
+                    <li key={bm.id} className="flex items-center gap-3 px-5 py-3">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          scrollToMessage(bm.messageIndex);
+                          setShowBookmarkDrawer(false);
+                        }}
+                        className="min-w-0 flex-1 text-left"
+                      >
+                        <p className="truncate text-sm text-stone-800">{bm.label}</p>
+                        <p className="mt-0.5 truncate text-xs text-stone-400">{bm.preview}</p>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => deleteBookmark(bm.id)}
+                        className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-rose-200 bg-rose-50 text-xs text-rose-500"
+                        aria-label="刪除書籤"
+                      >
+                        ✕
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Add bookmark dialog */}
+      {addingBookmark && (
+        <div className="absolute inset-0 z-30 flex items-center justify-center px-6">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setAddingBookmark(null)} />
+          <div className="relative z-10 w-full max-w-sm rounded-2xl bg-white p-5 shadow-xl">
+            <h2 className="mb-1 text-base font-medium text-stone-800">新增書籤</h2>
+            <p className="mb-3 truncate text-xs text-stone-400">{addingBookmark.preview}</p>
+            <input
+              type="text"
+              value={bookmarkLabelDraft}
+              onChange={(e) => setBookmarkLabelDraft(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') confirmAddBookmark();
+                if (e.key === 'Escape') setAddingBookmark(null);
+              }}
+              placeholder="書籤名稱（可留空）"
+              className="mb-3 w-full rounded-xl border border-stone-300 bg-stone-50 px-4 py-2.5 text-sm text-stone-800 outline-none focus:border-stone-500"
+              autoFocus
+            />
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={confirmAddBookmark}
+                className="flex-1 rounded-xl bg-stone-900 py-2.5 text-sm text-white transition active:opacity-80"
+              >
+                新增
+              </button>
+              <button
+                type="button"
+                onClick={() => setAddingBookmark(null)}
+                className="flex-1 rounded-xl border border-stone-300 bg-white py-2.5 text-sm text-stone-600"
+              >
+                取消
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
-function ChatBubbles({ messages, profile }: { messages: ChatMessage[]; profile: ChatProfile | null }) {
+function ChevronUp() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="2.5,10.5 7.5,4.5 12.5,10.5" />
+    </svg>
+  );
+}
+
+function ChevronDown() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="2.5,4.5 7.5,10.5 12.5,4.5" />
+    </svg>
+  );
+}
+
+function SendArrow() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+    </svg>
+  );
+}
+
+function ChatBubbles({
+  messages,
+  profile,
+  onPressStart,
+  onPressEnd,
+}: {
+  messages: ChatMessage[];
+  profile: ChatProfile | null;
+  onPressStart?: (index: number, preview: string) => void;
+  onPressEnd?: () => void;
+}) {
   return (
     <div className="flex flex-col gap-1.5">
       {messages.map((msg, i) => {
         const isUser = msg.role === 'user';
         const avatarUrl = isUser ? profile?.rightAvatarDataUrl : profile?.leftAvatarDataUrl;
+        const preview = msg.content.slice(0, 50);
 
         const dateDivider =
           msg.time && (i === 0 || messages[i - 1]?.time?.slice(0, 10) !== msg.time.slice(0, 10))
@@ -1423,7 +1735,7 @@ function ChatBubbles({ messages, profile }: { messages: ChatMessage[]; profile: 
             : null;
 
         return (
-          <div key={`${i}-${msg.time ?? ''}`}>
+          <div key={`${i}-${msg.time ?? ''}`} data-msg-index={i}>
             {dateDivider && <div className="my-3 text-center text-[11px] text-stone-400">{dateDivider}</div>}
 
             <div className={`flex items-end gap-2 ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
@@ -1442,7 +1754,15 @@ function ChatBubbles({ messages, profile }: { messages: ChatMessage[]; profile: 
               </div>
 
               <div className={`flex max-w-[75%] flex-col gap-0.5 ${isUser ? 'items-end' : 'items-start'}`}>
-                <div className={`message-bubble ${isUser ? 'user' : 'ai'}`}>
+                <div
+                  className={`message-bubble ${isUser ? 'user' : 'ai'}`}
+                  onMouseDown={() => onPressStart?.(i, preview)}
+                  onMouseUp={() => onPressEnd?.()}
+                  onMouseLeave={() => onPressEnd?.()}
+                  onTouchStart={() => onPressStart?.(i, preview)}
+                  onTouchEnd={() => onPressEnd?.()}
+                  onTouchCancel={() => onPressEnd?.()}
+                >
                   <div className="content" style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
                     {msg.content}
                   </div>
