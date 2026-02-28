@@ -30,6 +30,10 @@ type ChatLogPageProps = {
     | 'chatReadBgColor'
     | 'chatReadBgImageUrl'
     | 'chatReadBgOverlay'
+    | 'chatNavBgColor'
+    | 'chatBodyBgColor'
+    | 'chatMsgFontSize'
+    | 'chatMsgLineHeight'
     | 'chatNightMode'
     | 'chatContactNameSize'
   >;
@@ -51,7 +55,7 @@ type ChatMessage = {
 };
 
 type ChatHomeTab = 'messages' | 'discover' | 'me';
-type MePanelKey = 'nav' | 'data' | 'defaultProfile' | 'bubble' | 'background' | 'profiles';
+type MePanelKey = 'nav' | 'data' | 'defaultProfile' | 'bubble' | 'background' | 'navBar' | 'bodyBg' | 'profiles';
 type ChatNavIconSettingKey = 'chatAppMessagesIcon' | 'chatAppDiscoverIcon' | 'chatAppMeIcon';
 
 type ProfileDraft = Omit<ChatProfile, 'id'>;
@@ -604,7 +608,10 @@ export function ChatLogPage({
     [night, settings.chatBackgroundColor, settings.chatUserBubbleColor, settings.chatUserBubbleBorderColor, settings.chatAiBubbleColor, settings.chatAiBubbleBorderColor],
   );
 
-  const chatBackgroundStyle = useMemo((): CSSProperties => {
+  const navBg = night ? theme.barBg : (settings.chatNavBgColor || theme.barBg);
+  const bodyBg = night ? theme.barBg : (settings.chatBodyBgColor || theme.barBg);
+
+  const chatReadViewBgStyle = useMemo((): CSSProperties => {
     if (night) return { backgroundColor: theme.bg };
     return buildChatBackgroundStyle(settings.chatReadBgColor, settings.chatReadBgImageUrl, settings.chatReadBgOverlay);
   }, [night, theme.bg, settings.chatReadBgColor, settings.chatReadBgImageUrl, settings.chatReadBgOverlay]);
@@ -698,8 +705,15 @@ export function ChatLogPage({
           setSelectedLogProfileId(profileId);
           onBindLogProfile?.(selectedLog.name, profileId);
         }}
-        backgroundStyle={chatBackgroundStyle}
+        backgroundStyle={chatReadViewBgStyle}
         theme={theme}
+        chatReadBgColor={settings.chatReadBgColor}
+        chatReadBgImageUrl={settings.chatReadBgImageUrl}
+        chatReadBgOverlay={settings.chatReadBgOverlay}
+        onChatReadBgChange={onSettingChange}
+        chatMsgFontSize={settings.chatMsgFontSize}
+        chatMsgLineHeight={settings.chatMsgLineHeight}
+        chatNavBgColor={settings.chatNavBgColor}
         onBack={() => setSelectedLogName('')}
         onExit={onExit}
       />
@@ -707,10 +721,10 @@ export function ChatLogPage({
   }
 
   return (
-    <div className="mx-auto flex h-full w-full max-w-xl flex-col overflow-hidden" style={chatBackgroundStyle}>
+    <div className="mx-auto flex h-full w-full max-w-xl flex-col overflow-hidden" style={{ backgroundColor: theme.barBg }}>
       <header
         className="shrink-0 px-4 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))]"
-        style={{ backgroundColor: theme.barBg, borderBottom: `1px solid ${theme.barBorder}` }}
+        style={{ backgroundColor: navBg, borderBottom: `1px solid ${theme.barBorder}` }}
       >
         <div className="flex items-center justify-between gap-3">
           {onExit ? (
@@ -757,9 +771,9 @@ export function ChatLogPage({
         </div>
       </header>
 
-      <main className="min-h-0 flex-1 overflow-y-auto">
+      <main className="min-h-0 flex-1 overflow-y-auto" style={{ backgroundColor: bodyBg }}>
         {activeTab === 'messages' && (
-          <div style={{ backgroundColor: theme.barBg }}>
+          <div style={{ backgroundColor: bodyBg }}>
             {/* 聯絡人列表 — 扁平微信風格 */}
             <button
               type="button"
@@ -1233,6 +1247,94 @@ export function ChatLogPage({
             </MePanel>
 
             <MePanel
+              panelKey="navBar"
+              openPanel={openMePanel}
+              onToggle={toggleMePanel}
+              title="導覽列底色"
+              subtitle="頂部標題列和底部分頁列的背景色"
+            >
+              <div className="space-y-3">
+                <div className="flex flex-wrap gap-2">
+                  {CHAT_BACKGROUND_PRESETS.map((color) => {
+                    const effective = settings.chatNavBgColor || theme.barBg;
+                    const active = effective.toLowerCase() === color.toLowerCase();
+                    return (
+                      <button
+                        key={color}
+                        type="button"
+                        onClick={() => onSettingChange({ chatNavBgColor: color })}
+                        className={`h-7 w-7 rounded-full border transition active:scale-95 ${active ? 'border-stone-900 ring-2 ring-stone-300' : 'border-stone-300'}`}
+                        style={{ background: color }}
+                        aria-label={`導覽列底色 ${color}`}
+                        title={color}
+                      />
+                    );
+                  })}
+                </div>
+                <label className="block space-y-1">
+                  <span className="text-xs text-stone-600">自訂顏色</span>
+                  <input
+                    type="color"
+                    value={settings.chatNavBgColor || theme.barBg}
+                    onChange={(e) => onSettingChange({ chatNavBgColor: e.target.value })}
+                    className="h-10 w-full rounded-md border border-stone-300"
+                  />
+                </label>
+                <button
+                  type="button"
+                  onClick={() => onSettingChange({ chatNavBgColor: '' })}
+                  className="w-full rounded-xl border border-stone-300 bg-white py-2 text-sm text-stone-700 transition active:scale-[0.99]"
+                >
+                  重設（跟隨主題色）
+                </button>
+              </div>
+            </MePanel>
+
+            <MePanel
+              panelKey="bodyBg"
+              openPanel={openMePanel}
+              onToggle={toggleMePanel}
+              title="頁籤內容底色"
+              subtitle="消息、發現、我 等頁籤的背景色"
+            >
+              <div className="space-y-3">
+                <div className="flex flex-wrap gap-2">
+                  {CHAT_BACKGROUND_PRESETS.map((color) => {
+                    const effective = settings.chatBodyBgColor || theme.barBg;
+                    const active = effective.toLowerCase() === color.toLowerCase();
+                    return (
+                      <button
+                        key={color}
+                        type="button"
+                        onClick={() => onSettingChange({ chatBodyBgColor: color })}
+                        className={`h-7 w-7 rounded-full border transition active:scale-95 ${active ? 'border-stone-900 ring-2 ring-stone-300' : 'border-stone-300'}`}
+                        style={{ background: color }}
+                        aria-label={`內容底色 ${color}`}
+                        title={color}
+                      />
+                    );
+                  })}
+                </div>
+                <label className="block space-y-1">
+                  <span className="text-xs text-stone-600">自訂顏色</span>
+                  <input
+                    type="color"
+                    value={settings.chatBodyBgColor || theme.barBg}
+                    onChange={(e) => onSettingChange({ chatBodyBgColor: e.target.value })}
+                    className="h-10 w-full rounded-md border border-stone-300"
+                  />
+                </label>
+                <button
+                  type="button"
+                  onClick={() => onSettingChange({ chatBodyBgColor: '' })}
+                  className="w-full rounded-xl border border-stone-300 bg-white py-2 text-sm text-stone-700 transition active:scale-[0.99]"
+                >
+                  重設（跟隨主題色）
+                </button>
+              </div>
+            </MePanel>
+
+            <MePanel
               panelKey="profiles"
               openPanel={openMePanel}
               onToggle={toggleMePanel}
@@ -1446,7 +1548,7 @@ export function ChatLogPage({
 
       <nav
         className="shrink-0 px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-2.5"
-        style={{ backgroundColor: theme.barBg, borderTop: `1px solid ${theme.barBorder}` }}
+        style={{ backgroundColor: navBg, borderTop: `1px solid ${theme.barBorder}` }}
       >
         <div className="grid grid-cols-3 gap-2">
           {([
@@ -1483,6 +1585,13 @@ function ChatReadView({
   onSelectProfile,
   backgroundStyle,
   theme,
+  chatReadBgColor,
+  chatReadBgImageUrl,
+  chatReadBgOverlay,
+  onChatReadBgChange,
+  chatMsgFontSize,
+  chatMsgLineHeight,
+  chatNavBgColor,
   onBack,
   onExit,
 }: {
@@ -1493,17 +1602,44 @@ function ChatReadView({
   onSelectProfile: (id: string) => void;
   backgroundStyle: CSSProperties;
   theme: ChatTheme;
+  chatReadBgColor: string;
+  chatReadBgImageUrl: string;
+  chatReadBgOverlay: number;
+  onChatReadBgChange: (patch: Partial<AppSettings>) => void;
+  chatMsgFontSize: number;
+  chatMsgLineHeight: number;
+  chatNavBgColor: string;
   onBack: () => void;
   onExit?: () => void;
 }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const readNavBg = theme.night ? theme.barBg : (chatNavBgColor || theme.barBg);
+
   const [showFloating, setShowFloating] = useState(false);
   const [showBookmarkDrawer, setShowBookmarkDrawer] = useState(false);
   const [bookmarks, setBookmarks] = useState<Bookmark[]>(() => loadBookmarks(log.name));
   const [addingBookmark, setAddingBookmark] = useState<{ index: number; preview: string } | null>(null);
   const [bookmarkLabelDraft, setBookmarkLabelDraft] = useState('');
+  const [showBgPicker, setShowBgPicker] = useState(false);
+  const [bgImageDraft, setBgImageDraft] = useState(chatReadBgImageUrl);
+
+  useEffect(() => {
+    setBgImageDraft(chatReadBgImageUrl);
+  }, [chatReadBgImageUrl]);
+
+  function uploadReadBgImage(file: File | null | undefined) {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = typeof reader.result === 'string' ? reader.result : '';
+      if (!dataUrl) return;
+      setBgImageDraft(dataUrl);
+      onChatReadBgChange({ chatReadBgImageUrl: dataUrl });
+    };
+    reader.readAsDataURL(file);
+  }
 
   const displayName = displayLogName(log.name);
   const messages = useMemo(() => parseChatContent(log.content, selectedProfile), [log.content, selectedProfile]);
@@ -1603,31 +1739,43 @@ function ChatReadView({
       {/* Header */}
       <div
         className="shrink-0 px-3 pb-2 pt-[max(0.75rem,env(safe-area-inset-top))]"
-        style={{ backgroundColor: theme.barBg, borderBottom: `1px solid ${theme.barBorder}` }}
+        style={{ backgroundColor: readNavBg, borderBottom: `1px solid ${theme.barBorder}` }}
       >
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
           <button
             type="button"
             onClick={onBack}
-            className="h-9 w-9 rounded-full text-xl leading-none transition active:scale-95"
+            className="h-9 w-9 shrink-0 rounded-full text-xl leading-none transition active:scale-95"
             style={{ background: theme.btnBg, border: `1px solid ${theme.btnBorder}`, color: theme.btnColor }}
             aria-label="返回"
           >
             <span style={{ transform: 'translateY(-1px)', display: 'block' }}>‹</span>
           </button>
-          <p className="min-w-0 flex-1 truncate text-center text-sm font-medium" style={{ color: theme.titleColor }}>{displayName}</p>
+          <p className="min-w-0 flex-1 truncate text-center text-sm font-medium" style={{ color: theme.titleColor }}>
+            {displayName}
+          </p>
+          <button
+            type="button"
+            onClick={() => setShowBgPicker(true)}
+            className="shrink-0 text-lg leading-none"
+            style={{ animation: 'chatHeartBounce 1.8s ease-in-out infinite' }}
+            aria-label="閱讀設定"
+            title="閱讀設定"
+          >
+            💗
+          </button>
           {onExit ? (
             <button
               type="button"
               onClick={onExit}
-              className="h-9 w-9 rounded-full text-xl leading-none transition active:scale-95"
+              className="h-9 w-9 shrink-0 rounded-full text-xl leading-none transition active:scale-95"
               style={{ background: theme.btnBg, border: `1px solid ${theme.btnBorder}`, color: theme.btnColor }}
               aria-label="離開"
             >
               <span style={{ transform: 'translateY(-1px)', display: 'block' }}>×</span>
             </button>
           ) : (
-            <span className="h-9 w-9" />
+            <span className="h-9 w-9 shrink-0" />
           )}
         </div>
       </div>
@@ -1639,6 +1787,8 @@ function ChatReadView({
             messages={messages}
             profile={selectedProfile}
             dateLabelColor={theme.dateLabelColor}
+            fontSize={chatMsgFontSize}
+            lineHeight={chatMsgLineHeight}
             onPressStart={handleBubblePressStart}
             onPressEnd={handleBubblePressEnd}
           />
@@ -1685,7 +1835,7 @@ function ChatReadView({
       {/* Bottom bar */}
       <div
         className="shrink-0 px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-3"
-        style={{ backgroundColor: theme.barBg, borderTop: `1px solid ${theme.barBorder}` }}
+        style={{ backgroundColor: readNavBg, borderTop: `1px solid ${theme.barBorder}` }}
       >
         <div className="flex items-center gap-2">
           {/* + 加書籤 */}
@@ -1811,6 +1961,172 @@ function ChatReadView({
         </div>
       )}
 
+      {/* Background picker drawer */}
+      {showBgPicker && (
+        <div className="absolute inset-0 z-20 flex flex-col justify-end">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setShowBgPicker(false)} />
+          <div className="relative z-10 flex max-h-[80%] flex-col rounded-t-3xl shadow-xl" style={{ background: theme.drawerBg }}>
+            <div className="flex shrink-0 items-center justify-between px-5 pb-3 pt-4" style={{ borderBottom: `1px solid ${theme.drawerDivider}` }}>
+              <h2 className="text-base font-medium" style={{ color: theme.drawerTitleColor }}>閱讀背景</h2>
+              <button
+                type="button"
+                onClick={() => setShowBgPicker(false)}
+                className="flex h-7 w-7 items-center justify-center rounded-full text-sm"
+                style={{ background: theme.btnBg, color: theme.btnColor }}
+              >
+                <span style={{ transform: 'translateY(-1px)', display: 'block' }}>×</span>
+              </button>
+            </div>
+            <div className="min-h-0 flex-1 overflow-y-auto px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-4">
+              <div className="space-y-4">
+                {/* ── 字體 ── */}
+                <div className="space-y-2">
+                  <p className="text-xs font-medium" style={{ color: theme.drawerTitleColor }}>文字</p>
+                  <label className="block space-y-1">
+                    <span className="flex items-center justify-between text-xs" style={{ color: theme.drawerSubColor }}>
+                      <span>字體大小</span>
+                      <span>{chatMsgFontSize}px</span>
+                    </span>
+                    <input
+                      type="range"
+                      min={11}
+                      max={22}
+                      step={1}
+                      value={chatMsgFontSize}
+                      onChange={(e) => onChatReadBgChange({ chatMsgFontSize: Number(e.target.value) })}
+                      className="w-full accent-rose-400"
+                    />
+                  </label>
+                  <label className="block space-y-1">
+                    <span className="flex items-center justify-between text-xs" style={{ color: theme.drawerSubColor }}>
+                      <span>行距</span>
+                      <span>{chatMsgLineHeight.toFixed(2)}</span>
+                    </span>
+                    <input
+                      type="range"
+                      min={1.2}
+                      max={2.4}
+                      step={0.05}
+                      value={chatMsgLineHeight}
+                      onChange={(e) => onChatReadBgChange({ chatMsgLineHeight: Number(e.target.value) })}
+                      className="w-full accent-rose-400"
+                    />
+                  </label>
+                </div>
+
+                <div className="h-px" style={{ background: theme.drawerDivider }} />
+
+                {/* ── 背景 ── */}
+                <div className="space-y-3">
+                  <p className="text-xs font-medium" style={{ color: theme.drawerTitleColor }}>閱讀背景</p>
+
+                  {/* Preset swatches */}
+                  <div className="flex flex-wrap gap-2">
+                    {CHAT_BACKGROUND_PRESETS.map((color) => {
+                      const active = chatReadBgColor.toLowerCase() === color.toLowerCase();
+                      return (
+                        <button
+                          key={color}
+                          type="button"
+                          onClick={() => onChatReadBgChange({ chatReadBgColor: color })}
+                          className={`h-8 w-8 rounded-full border-2 transition active:scale-95 ${active ? 'border-rose-400 ring-2 ring-rose-200' : 'border-stone-300'}`}
+                          style={{ background: color }}
+                          aria-label={`背景色 ${color}`}
+                          title={color}
+                        />
+                      );
+                    })}
+                  </div>
+
+                  {/* Custom color */}
+                  <label className="block space-y-1">
+                    <span className="text-xs" style={{ color: theme.drawerSubColor }}>自訂底色</span>
+                    <input
+                      type="color"
+                      value={chatReadBgColor}
+                      onChange={(e) => onChatReadBgChange({ chatReadBgColor: e.target.value })}
+                      className="h-10 w-full rounded-md border"
+                      style={{ borderColor: theme.drawerDivider }}
+                    />
+                  </label>
+
+                  {/* Image URL */}
+                  <label className="block space-y-1">
+                    <span className="text-xs" style={{ color: theme.drawerSubColor }}>背景圖片 URL</span>
+                    <input
+                      type="url"
+                      value={bgImageDraft}
+                      onChange={(e) => setBgImageDraft(e.target.value)}
+                      placeholder="https://.../bg.jpg"
+                      className="w-full rounded-xl px-3 py-2 text-sm outline-none"
+                      style={{ background: theme.inputBg, border: `1px solid ${theme.inputBorder}`, color: theme.inputText }}
+                    />
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => onChatReadBgChange({ chatReadBgImageUrl: bgImageDraft.trim() })}
+                      className="rounded-xl py-2.5 text-sm transition active:scale-[0.99]"
+                      style={{ background: theme.btnBg, border: `1px solid ${theme.btnBorder}`, color: theme.btnColor }}
+                    >
+                      套用 URL
+                    </button>
+                    <label className="flex cursor-pointer items-center justify-center rounded-xl py-2.5 text-sm transition active:opacity-80"
+                      style={{ background: theme.btnBg, border: `1px solid ${theme.btnBorder}`, color: theme.btnColor }}
+                    >
+                      從本機上傳
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          uploadReadBgImage(e.target.files?.[0]);
+                          e.currentTarget.value = '';
+                        }}
+                      />
+                    </label>
+                  </div>
+
+                  {/* Overlay slider */}
+                  {chatReadBgImageUrl && (
+                    <label className="block space-y-1">
+                      <span className="flex items-center justify-between text-xs" style={{ color: theme.drawerSubColor }}>
+                        <span>圖片遮罩</span>
+                        <span>{chatReadBgOverlay}%</span>
+                      </span>
+                      <input
+                        type="range"
+                        min={0}
+                        max={90}
+                        step={1}
+                        value={chatReadBgOverlay}
+                        onChange={(e) => onChatReadBgChange({ chatReadBgOverlay: Number(e.target.value) })}
+                        className="w-full accent-rose-400"
+                      />
+                    </label>
+                  )}
+
+                  {/* Remove image */}
+                  {chatReadBgImageUrl && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setBgImageDraft('');
+                        onChatReadBgChange({ chatReadBgImageUrl: '', chatReadBgOverlay: 0 });
+                      }}
+                      className="w-full rounded-xl py-2.5 text-sm text-rose-500 transition active:scale-[0.99]"
+                      style={{ background: theme.btnBg, border: `1px solid ${theme.drawerDivider}` }}
+                    >
+                      移除背景圖片
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Add bookmark dialog */}
       {addingBookmark && (
         <div className="absolute inset-0 z-30 flex items-center justify-center px-6">
@@ -1884,12 +2200,16 @@ function ChatBubbles({
   messages,
   profile,
   dateLabelColor,
+  fontSize,
+  lineHeight,
   onPressStart,
   onPressEnd,
 }: {
   messages: ChatMessage[];
   profile: ChatProfile | null;
   dateLabelColor?: string;
+  fontSize?: number;
+  lineHeight?: number;
   onPressStart?: (index: number, preview: string) => void;
   onPressEnd?: () => void;
 }) {
@@ -1934,7 +2254,7 @@ function ChatBubbles({
                   onTouchEnd={() => onPressEnd?.()}
                   onTouchCancel={() => onPressEnd?.()}
                 >
-                  <div className="content" style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+                  <div className="content" style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word', fontSize: fontSize ? `${fontSize}px` : undefined, lineHeight: lineHeight ?? undefined }}>
                     {msg.content}
                   </div>
                 </div>
