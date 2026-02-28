@@ -222,6 +222,17 @@ const TAB_ICON_FALLBACK: Record<TabIconKey, string> = {
   album: '📷',
   notes: '📝',
   settings: '⚙️',
+  wishlist: '🌠',
+  'letters-ab': '📜',
+  archive: '🗂',
+  'light-path': '✨',
+  'healing-campfire': '🔥',
+  'mood-letters': '🫧',
+  questionnaire: '📋',
+  memo: '🧷',
+  murmur: '💭',
+  'self-intro': '🪪',
+  bookshelf: '📚',
 };
 
 const TAB_ICON_LABELS: Array<{ key: TabIconKey; label: string }> = [
@@ -229,8 +240,8 @@ const TAB_ICON_LABELS: Array<{ key: TabIconKey; label: string }> = [
   { key: 'inbox', label: 'Inbox' },
   { key: 'calendar', label: 'Calendar' },
   { key: 'tarot', label: 'Tarot' },
-  { key: 'letters', label: 'Letters' },
-  { key: 'heart', label: 'MY LOVE' },
+  { key: 'letters', label: 'Letters 情書' },
+  { key: 'heart', label: 'MY LOVE 心牆' },
   { key: 'list', label: 'List 清單' },
   { key: 'fitness', label: 'Fitness 健身' },
   { key: 'pomodoro', label: 'Pomodoro 番茄鐘' },
@@ -239,6 +250,17 @@ const TAB_ICON_LABELS: Array<{ key: TabIconKey; label: string }> = [
   { key: 'album', label: 'Album 相冊' },
   { key: 'notes', label: 'Notes 便利貼' },
   { key: 'settings', label: 'Settings' },
+  { key: 'wishlist', label: '願望' },
+  { key: 'letters-ab', label: '年度信件' },
+  { key: 'archive', label: '總攬' },
+  { key: 'light-path', label: '留光給妳的路' },
+  { key: 'healing-campfire', label: '治癒篝火' },
+  { key: 'mood-letters', label: '心情星球' },
+  { key: 'questionnaire', label: '問卷' },
+  { key: 'memo', label: "M's memo" },
+  { key: 'murmur', label: '碎碎念' },
+  { key: 'self-intro', label: '自我介紹' },
+  { key: 'bookshelf', label: '書架' },
 ];
 
 const APP_LABEL_FIELDS: Array<{ key: AppLabelKey; label: string }> = [
@@ -257,6 +279,17 @@ const APP_LABEL_FIELDS: Array<{ key: AppLabelKey; label: string }> = [
   { key: 'diary', label: '首頁入口：日記' },
   { key: 'album', label: '首頁入口：相冊' },
   { key: 'notes', label: '首頁入口：便利貼' },
+  { key: 'wishlist', label: '首頁入口：願望' },
+  { key: 'letters-ab', label: '首頁入口：年度信件' },
+  { key: 'archive', label: '首頁入口：總攬' },
+  { key: 'light-path', label: '首頁入口：留光給妳的路' },
+  { key: 'healing-campfire', label: '首頁入口：治癒篝火' },
+  { key: 'mood-letters', label: '首頁入口：心情星球' },
+  { key: 'questionnaire', label: '首頁入口：問卷' },
+  { key: 'memo', label: "首頁入口：M's memo" },
+  { key: 'murmur', label: '首頁入口：碎碎念' },
+  { key: 'self-intro', label: '首頁入口：自我介紹' },
+  { key: 'bookshelf', label: '首頁入口：書架' },
 ];
 
 const ABOUT_M_PART_FIELDS: Array<{ key: AboutMBackupPart; label: string; hint: string }> = [
@@ -624,6 +657,7 @@ export function SettingsPage({
     const found = slots.findIndex((item) => item === appUrl);
     return found >= 0 ? found : null;
   });
+  const [mPhoneSlotIdx, setMPhoneSlotIdx] = useState(0);
   const [fontUsagePreviewTarget, setFontUsagePreviewTarget] = useState<FontApplyTargetKey>('app');
   const [fontApplyTargets, setFontApplyTargets] = useState<Record<FontApplyTargetKey, boolean>>({
     app: true,
@@ -1085,6 +1119,17 @@ export function SettingsPage({
       album: tabIconDrafts.album.trim(),
       notes: tabIconDrafts.notes.trim(),
       settings: tabIconDrafts.settings.trim(),
+      wishlist: tabIconDrafts.wishlist.trim(),
+      'letters-ab': tabIconDrafts['letters-ab'].trim(),
+      archive: tabIconDrafts.archive.trim(),
+      'light-path': tabIconDrafts['light-path'].trim(),
+      'healing-campfire': tabIconDrafts['healing-campfire'].trim(),
+      'mood-letters': tabIconDrafts['mood-letters'].trim(),
+      questionnaire: tabIconDrafts.questionnaire.trim(),
+      memo: tabIconDrafts.memo.trim(),
+      murmur: tabIconDrafts.murmur.trim(),
+      'self-intro': tabIconDrafts['self-intro'].trim(),
+      bookshelf: tabIconDrafts.bookshelf.trim(),
     };
 
     onSettingChange({ tabIconUrls: next });
@@ -1114,6 +1159,17 @@ export function SettingsPage({
       diary: labelDrafts.diary.trim(),
       album: labelDrafts.album.trim(),
       notes: labelDrafts.notes.trim(),
+      wishlist: labelDrafts.wishlist.trim(),
+      'letters-ab': labelDrafts['letters-ab'].trim(),
+      archive: labelDrafts.archive.trim(),
+      'light-path': labelDrafts['light-path'].trim(),
+      'healing-campfire': labelDrafts['healing-campfire'].trim(),
+      'mood-letters': labelDrafts['mood-letters'].trim(),
+      questionnaire: labelDrafts.questionnaire.trim(),
+      memo: labelDrafts.memo.trim(),
+      murmur: labelDrafts.murmur.trim(),
+      'self-intro': labelDrafts['self-intro'].trim(),
+      bookshelf: labelDrafts.bookshelf.trim(),
     };
 
     onSettingChange({ appLabels: next });
@@ -1363,6 +1419,17 @@ export function SettingsPage({
           album: typeof input.album === 'string' ? input.album.trim() : '',
           notes: typeof input.notes === 'string' ? input.notes.trim() : '',
           settings: typeof input.settings === 'string' ? input.settings.trim() : '',
+          wishlist: typeof input.wishlist === 'string' ? input.wishlist.trim() : '',
+          'letters-ab': typeof input['letters-ab'] === 'string' ? input['letters-ab'].trim() : '',
+          archive: typeof input.archive === 'string' ? input.archive.trim() : '',
+          'light-path': typeof input['light-path'] === 'string' ? input['light-path'].trim() : '',
+          'healing-campfire': typeof input['healing-campfire'] === 'string' ? input['healing-campfire'].trim() : '',
+          'mood-letters': typeof input['mood-letters'] === 'string' ? input['mood-letters'].trim() : '',
+          questionnaire: typeof input.questionnaire === 'string' ? input.questionnaire.trim() : '',
+          memo: typeof input.memo === 'string' ? input.memo.trim() : '',
+          murmur: typeof input.murmur === 'string' ? input.murmur.trim() : '',
+          'self-intro': typeof input['self-intro'] === 'string' ? input['self-intro'].trim() : '',
+          bookshelf: typeof input.bookshelf === 'string' ? input.bookshelf.trim() : '',
         };
       }
       if (source.tabIconDisplayMode === 'framed' || source.tabIconDisplayMode === 'full') {
@@ -1514,6 +1581,17 @@ export function SettingsPage({
           diary: typeof input.diary === 'string' ? input.diary.trim() : '',
           album: typeof input.album === 'string' ? input.album.trim() : '',
           notes: typeof input.notes === 'string' ? input.notes.trim() : '',
+          wishlist: typeof input.wishlist === 'string' ? input.wishlist.trim() : '',
+          'letters-ab': typeof input['letters-ab'] === 'string' ? input['letters-ab'].trim() : '',
+          archive: typeof input.archive === 'string' ? input.archive.trim() : '',
+          'light-path': typeof input['light-path'] === 'string' ? input['light-path'].trim() : '',
+          'healing-campfire': typeof input['healing-campfire'] === 'string' ? input['healing-campfire'].trim() : '',
+          'mood-letters': typeof input['mood-letters'] === 'string' ? input['mood-letters'].trim() : '',
+          questionnaire: typeof input.questionnaire === 'string' ? input.questionnaire.trim() : '',
+          memo: typeof input.memo === 'string' ? input.memo.trim() : '',
+          murmur: typeof input.murmur === 'string' ? input.murmur.trim() : '',
+          'self-intro': typeof input['self-intro'] === 'string' ? input['self-intro'].trim() : '',
+          bookshelf: typeof input.bookshelf === 'string' ? input.bookshelf.trim() : '',
         };
       }
 
@@ -3214,6 +3292,62 @@ export function SettingsPage({
               </label>
             ))}
           </div>
+
+          <div className="mt-4 space-y-2">
+            <p className="text-xs font-medium text-stone-600">桌面字體</p>
+            <p className="text-xs text-stone-400">套用到 M 手機的時鐘、日期、星期、APP 名稱</p>
+            <input
+              type="url"
+              placeholder="字體檔案網址（.ttf / .woff2 / ...）"
+              value={settings.mPhoneFontUrl}
+              onChange={(e) => onSettingChange({ mPhoneFontUrl: e.target.value })}
+              className="w-full rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-xs"
+            />
+            <div className="flex items-center gap-2">
+              <select
+                value={mPhoneSlotIdx}
+                onChange={(e) => setMPhoneSlotIdx(Number(e.target.value))}
+                className="rounded-lg border border-stone-200 bg-stone-50 px-2 py-1.5 text-xs"
+              >
+                {[0, 1, 2].map((i) => (
+                  <option key={i} value={i}>
+                    {`記憶 ${i + 1}${(settings.mPhoneFontUrlSlots ?? [])[i]?.trim() ? ' ✓' : ''}`}
+                  </option>
+                ))}
+              </select>
+              <button
+                type="button"
+                onClick={() => {
+                  const slot = (settings.mPhoneFontUrlSlots ?? [])[mPhoneSlotIdx]?.trim() ?? '';
+                  if (slot) onSettingChange({ mPhoneFontUrl: slot });
+                }}
+                className="rounded-lg border border-stone-200 bg-white px-2 py-1.5 text-xs text-stone-700"
+              >
+                載入
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  const slots = [...(settings.mPhoneFontUrlSlots ?? ['', '', ''])];
+                  while (slots.length < 3) slots.push('');
+                  slots[mPhoneSlotIdx] = settings.mPhoneFontUrl.trim();
+                  onSettingChange({ mPhoneFontUrlSlots: slots });
+                }}
+                className="rounded-lg bg-stone-900 px-2 py-1.5 text-xs text-white"
+              >
+                儲存到記憶
+              </button>
+              {settings.mPhoneFontUrl.trim() && (
+                <button
+                  type="button"
+                  onClick={() => onSettingChange({ mPhoneFontUrl: '' })}
+                  className="text-xs text-stone-400 underline"
+                >
+                  清除
+                </button>
+              )}
+            </div>
+          </div>
         </SettingPanel>
 
         <SettingPanel
@@ -4362,6 +4496,23 @@ export function SettingsPage({
                       <li>日記：M 日記、Anni 日記、願望內文。</li>
                       <li>願望標題/頁籤、日記 M/B 標題/頁籤、經期日記標題/頁籤：全站字體。</li>
                       <li>家頁：只影響「家」閱讀頁。</li>
+                      <li>M 的手機桌面字體：在「M 的手機」設定區塊最下方，獨立設定。</li>
+                    </ul>
+                  </section>
+
+                  <section className="space-y-2">
+                    <h4 className="text-sm text-stone-900">字體上傳建議</h4>
+                    <ul className="list-disc space-y-1 pl-5 text-xs text-stone-600">
+                      <li>外部免費空間（如 catbox）不穩定，可能因 CORS 限制導致字體無法載入。</li>
+                      <li>
+                        <strong>推薦做法：</strong>把字體檔（.ttf / .woff2）放到本倉庫的{' '}
+                        <code className="rounded bg-stone-200 px-1">public/fonts/</code> 資料夾。
+                      </li>
+                      <li>
+                        上傳後，字體網址填：
+                        <code className="rounded bg-stone-200 px-1">https://annimaddox.github.io/Our-love/fonts/你的字體.ttf</code>
+                      </li>
+                      <li>同網域不受 CORS 限制，永遠穩定。</li>
                     </ul>
                   </section>
 

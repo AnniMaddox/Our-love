@@ -830,8 +830,9 @@ export function HomePage({
     };
     const dailyTaskPlaceholder: HomeAppSlot = {
       id: 'wishlist',
-      label: '願望',
+      label: launcherLabels.wishlist,
       icon: '🌠',
+      iconUrl: tabIconUrls.wishlist.trim() || undefined,
       launch: 'wishlist',
     };
     const soulmateSlot: HomeAppSlot = {
@@ -842,32 +843,37 @@ export function HomePage({
     };
     const moodLettersSlot: HomeAppSlot = {
       id: 'mood-letters',
-      label: '心情星球',
+      label: launcherLabels['mood-letters'],
       icon: '🫧',
+      iconUrl: tabIconUrls['mood-letters'].trim() || undefined,
       launch: 'moodLetters',
     };
     const annualLettersSlot: HomeAppSlot = {
       id: 'letters-ab',
-      label: '年度信件',
+      label: launcherLabels['letters-ab'],
       icon: '📜',
+      iconUrl: tabIconUrls['letters-ab'].trim() || undefined,
       launch: 'lettersAB',
     };
     const archiveSlot: HomeAppSlot = {
       id: 'archive',
-      label: '總攬',
+      label: launcherLabels.archive,
       icon: '🗂',
+      iconUrl: tabIconUrls.archive.trim() || undefined,
       launch: 'archive',
     };
     const lightPathSlot: HomeAppSlot = {
       id: 'light-path',
-      label: '留光給妳的路',
+      label: launcherLabels['light-path'],
       icon: '✨',
+      iconUrl: tabIconUrls['light-path'].trim() || undefined,
       launch: 'lightPath',
     };
     const healingCampfireSlot: HomeAppSlot = {
       id: 'healing-campfire',
-      label: '治癒篝火',
+      label: launcherLabels['healing-campfire'],
       icon: '🔥',
+      iconUrl: tabIconUrls['healing-campfire'].trim() || undefined,
       launch: 'healingCampfire',
     };
     const settingsShortcutSlot: HomeAppSlot = {
@@ -884,11 +890,11 @@ export function HomePage({
       launch: 'mPhone',
     };
     // M app slots (moveable — appear on Anni home when not in appsHiddenOnHome)
-    const questionnaireSlot: HomeAppSlot = { id: 'questionnaire', label: '問卷', icon: '📋', launch: 'questionnaire' };
-    const memoSlot: HomeAppSlot = { id: 'memo', label: "M's memo", icon: '🧷', launch: 'memo' };
-    const murmurSlot: HomeAppSlot = { id: 'murmur', label: '碎碎念', icon: '💭', launch: 'murmur' };
-    const selfIntroSlot: HomeAppSlot = { id: 'self-intro', label: '自我介紹', icon: '🪪', launch: 'selfIntro' };
-    const bookshelfSlot: HomeAppSlot = { id: 'bookshelf', label: '書架', icon: '📚', launch: 'bookshelf' };
+    const questionnaireSlot: HomeAppSlot = { id: 'questionnaire', label: launcherLabels.questionnaire, icon: '📋', iconUrl: tabIconUrls.questionnaire.trim() || undefined, launch: 'questionnaire' };
+    const memoSlot: HomeAppSlot = { id: 'memo', label: launcherLabels.memo, icon: '🧷', iconUrl: tabIconUrls.memo.trim() || undefined, launch: 'memo' };
+    const murmurSlot: HomeAppSlot = { id: 'murmur', label: launcherLabels.murmur, icon: '💭', iconUrl: tabIconUrls.murmur.trim() || undefined, launch: 'murmur' };
+    const selfIntroSlot: HomeAppSlot = { id: 'self-intro', label: launcherLabels['self-intro'], icon: '🪪', iconUrl: tabIconUrls['self-intro'].trim() || undefined, launch: 'selfIntro' };
+    const bookshelfSlot: HomeAppSlot = { id: 'bookshelf', label: launcherLabels.bookshelf, icon: '📚', iconUrl: tabIconUrls.bookshelf.trim() || undefined, launch: 'bookshelf' };
     const hiddenSet = new Set(appsHiddenOnHome);
     const hideIf = (slot: HomeAppSlot) => !hiddenSet.has(slot.id);
 
@@ -981,6 +987,17 @@ export function HomePage({
     launcherLabels.tarot,
     launcherLabels.album,
     launcherLabels.notes,
+    launcherLabels.wishlist,
+    launcherLabels['letters-ab'],
+    launcherLabels.archive,
+    launcherLabels['light-path'],
+    launcherLabels['healing-campfire'],
+    launcherLabels['mood-letters'],
+    launcherLabels.questionnaire,
+    launcherLabels.memo,
+    launcherLabels.murmur,
+    launcherLabels['self-intro'],
+    launcherLabels.bookshelf,
     tabIconUrls.fitness,
     tabIconUrls.pomodoro,
     tabIconUrls.period,
@@ -992,6 +1009,17 @@ export function HomePage({
     tabIconUrls.tarot,
     tabIconUrls.album,
     tabIconUrls.notes,
+    tabIconUrls.wishlist,
+    tabIconUrls['letters-ab'],
+    tabIconUrls.archive,
+    tabIconUrls['light-path'],
+    tabIconUrls['healing-campfire'],
+    tabIconUrls['mood-letters'],
+    tabIconUrls.questionnaire,
+    tabIconUrls.memo,
+    tabIconUrls.murmur,
+    tabIconUrls['self-intro'],
+    tabIconUrls.bookshelf,
   ]);
 
   useEffect(() => {

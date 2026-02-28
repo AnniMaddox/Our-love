@@ -184,6 +184,17 @@ function normalizeTabIconUrls(value: unknown, fallback: TabIconUrls): TabIconUrl
     album: normalizeString(input.album, fallback.album),
     notes: normalizeString(input.notes, fallback.notes),
     settings: normalizeString(input.settings, fallback.settings),
+    wishlist: normalizeString(input.wishlist, fallback.wishlist),
+    'letters-ab': normalizeString(input['letters-ab'], fallback['letters-ab']),
+    archive: normalizeString(input.archive, fallback.archive),
+    'light-path': normalizeString(input['light-path'], fallback['light-path']),
+    'healing-campfire': normalizeString(input['healing-campfire'], fallback['healing-campfire']),
+    'mood-letters': normalizeString(input['mood-letters'], fallback['mood-letters']),
+    questionnaire: normalizeString(input.questionnaire, fallback.questionnaire),
+    memo: normalizeString(input.memo, fallback.memo),
+    murmur: normalizeString(input.murmur, fallback.murmur),
+    'self-intro': normalizeString(input['self-intro'], fallback['self-intro']),
+    bookshelf: normalizeString(input.bookshelf, fallback.bookshelf),
   };
 }
 
@@ -210,6 +221,17 @@ function normalizeAppLabels(value: unknown, fallback: AppLabels): AppLabels {
       normalizedNotes === '便條' || normalizedNotes === '心情日記'
         ? fallback.notes
         : normalizedNotes,
+    wishlist: normalizeString(input.wishlist, fallback.wishlist),
+    'letters-ab': normalizeString(input['letters-ab'], fallback['letters-ab']),
+    archive: normalizeString(input.archive, fallback.archive),
+    'light-path': normalizeString(input['light-path'], fallback['light-path']),
+    'healing-campfire': normalizeString(input['healing-campfire'], fallback['healing-campfire']),
+    'mood-letters': normalizeString(input['mood-letters'], fallback['mood-letters']),
+    questionnaire: normalizeString(input.questionnaire, fallback.questionnaire),
+    memo: normalizeString(input.memo, fallback.memo),
+    murmur: normalizeString(input.murmur, fallback.murmur),
+    'self-intro': normalizeString(input['self-intro'], fallback['self-intro']),
+    bookshelf: normalizeString(input.bookshelf, fallback.bookshelf),
   };
 }
 

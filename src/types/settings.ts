@@ -54,7 +54,18 @@ export type TabIconKey =
   | 'diary'
   | 'album'
   | 'notes'
-  | 'settings';
+  | 'settings'
+  | 'wishlist'
+  | 'letters-ab'
+  | 'archive'
+  | 'light-path'
+  | 'healing-campfire'
+  | 'mood-letters'
+  | 'questionnaire'
+  | 'memo'
+  | 'murmur'
+  | 'self-intro'
+  | 'bookshelf';
 export type TabIconUrls = Record<TabIconKey, string>;
 export type AppLabelKey =
   | 'home'
@@ -71,7 +82,18 @@ export type AppLabelKey =
   | 'period'
   | 'diary'
   | 'album'
-  | 'notes';
+  | 'notes'
+  | 'wishlist'
+  | 'letters-ab'
+  | 'archive'
+  | 'light-path'
+  | 'healing-campfire'
+  | 'mood-letters'
+  | 'questionnaire'
+  | 'memo'
+  | 'murmur'
+  | 'self-intro'
+  | 'bookshelf';
 export type AppLabels = Record<AppLabelKey, string>;
 
 export const DEFAULT_TAB_ICON_URLS: TabIconUrls = {
@@ -89,6 +111,17 @@ export const DEFAULT_TAB_ICON_URLS: TabIconUrls = {
   album: '',
   notes: '',
   settings: '',
+  wishlist: '',
+  'letters-ab': '',
+  archive: '',
+  'light-path': '',
+  'healing-campfire': '',
+  'mood-letters': '',
+  questionnaire: '',
+  memo: '',
+  murmur: '',
+  'self-intro': '',
+  bookshelf: '',
 };
 
 export const DEFAULT_APP_LABELS: AppLabels = {
@@ -107,6 +140,17 @@ export const DEFAULT_APP_LABELS: AppLabels = {
   diary: '日記',
   album: '相冊',
   notes: '便利貼',
+  wishlist: '願望',
+  'letters-ab': '年度信件',
+  archive: '總攬',
+  'light-path': '留光',
+  'healing-campfire': '治癒篝火',
+  'mood-letters': '心情星球',
+  questionnaire: '問卷',
+  memo: "M's memo",
+  murmur: '碎碎念',
+  'self-intro': '自我介紹',
+  bookshelf: '書架',
 };
 
 export const LEGACY_HOME_POLAROID_MESSAGES = [
@@ -281,6 +325,8 @@ export type AppSettings = {
   archiveFontUrl: string;
   notesFontUrl: string;
   campfireFontUrl: string;
+  mPhoneFontUrl: string;
+  mPhoneFontUrlSlots: string[];
   diaryCoverFitMode: DiaryCoverFitMode;
   mDiaryLineHeight: number;
   mDiaryContentFontSize: number;
@@ -385,6 +431,8 @@ export const DEFAULT_SETTINGS: AppSettings = {
   archiveFontUrl: '',
   notesFontUrl: '',
   campfireFontUrl: '',
+  mPhoneFontUrl: '',
+  mPhoneFontUrlSlots: ['', '', ''],
   diaryCoverFitMode: 'cover',
   mDiaryLineHeight: 2.16,
   mDiaryContentFontSize: 14,

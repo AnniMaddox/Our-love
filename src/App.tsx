@@ -33,6 +33,7 @@ import {
   DIARY_CUSTOM_FONT_FAMILY,
   HEALING_CAMPFIRE_CUSTOM_FONT_FAMILY,
   LETTER_CUSTOM_FONT_FAMILY,
+  MPHONE_CUSTOM_FONT_FAMILY,
   NOTES_CUSTOM_FONT_FAMILY,
   SOULMATE_CUSTOM_FONT_FAMILY,
   buildFontFaceRule,
@@ -132,6 +133,17 @@ const DEFAULT_TAB_ICONS: Record<TabIconKey, string> = {
   album: '📷',
   notes: '📝',
   settings: '⚙️',
+  wishlist: '🌠',
+  'letters-ab': '📜',
+  archive: '🗂',
+  'light-path': '✨',
+  'healing-campfire': '🔥',
+  'mood-letters': '🫧',
+  questionnaire: '📋',
+  memo: '🧷',
+  murmur: '💭',
+  'self-intro': '🪪',
+  bookshelf: '📚',
 };
 
 const CalendarPage = lazy(() => import('./pages/CalendarPage').then((m) => ({ default: m.CalendarPage })));
@@ -461,6 +473,17 @@ function App() {
       diary: fallbackLabel(settings.appLabels.diary, '日記'),
       album: fallbackLabel(settings.appLabels.album, '相冊'),
       notes: fallbackLabel(settings.appLabels.notes, '便利貼'),
+      wishlist: fallbackLabel(settings.appLabels.wishlist, '願望'),
+      'letters-ab': fallbackLabel(settings.appLabels['letters-ab'], '年度信件'),
+      archive: fallbackLabel(settings.appLabels.archive, '總攬'),
+      'light-path': fallbackLabel(settings.appLabels['light-path'], '留光'),
+      'healing-campfire': fallbackLabel(settings.appLabels['healing-campfire'], '治癒篝火'),
+      'mood-letters': fallbackLabel(settings.appLabels['mood-letters'], '心情星球'),
+      questionnaire: fallbackLabel(settings.appLabels.questionnaire, '問卷'),
+      memo: fallbackLabel(settings.appLabels.memo, "M's memo"),
+      murmur: fallbackLabel(settings.appLabels.murmur, '碎碎念'),
+      'self-intro': fallbackLabel(settings.appLabels['self-intro'], '自我介紹'),
+      bookshelf: fallbackLabel(settings.appLabels.bookshelf, '書架'),
     }),
     [settings.appLabels],
   );
@@ -496,6 +519,7 @@ function App() {
   const archiveFontFamily = settings.archiveFontUrl.trim() ? ARCHIVE_CUSTOM_FONT_FAMILY : '';
   const notesFontFamily = settings.notesFontUrl.trim() ? NOTES_CUSTOM_FONT_FAMILY : '';
   const campfireFontFamily = settings.campfireFontUrl.trim() ? HEALING_CAMPFIRE_CUSTOM_FONT_FAMILY : '';
+  const mPhoneFontFamily = settings.mPhoneFontUrl?.trim() ? MPHONE_CUSTOM_FONT_FAMILY : '';
   const [unreadEmailIds, setUnreadEmailIds] = useState<Set<string>>(new Set<string>());
   const [starredEmailIds, setStarredEmailIds] = useState<Set<string>>(new Set<string>());
   const [readIdsLoaded, setReadIdsLoaded] = useState(false);
@@ -923,6 +947,23 @@ function App() {
     }
     style.textContent = buildFontFaceRule(HEALING_CAMPFIRE_CUSTOM_FONT_FAMILY, href);
   }, [settings.campfireFontUrl]);
+
+  // Load M's Phone custom font
+  useEffect(() => {
+    const href = settings.mPhoneFontUrl?.trim() ?? '';
+    const styleId = 'mphone-custom-font-style';
+    let style = document.getElementById(styleId) as HTMLStyleElement | null;
+    if (!href) {
+      style?.remove();
+      return;
+    }
+    if (!style) {
+      style = document.createElement('style');
+      style.id = styleId;
+      document.head.appendChild(style);
+    }
+    style.textContent = buildFontFaceRule(MPHONE_CUSTOM_FONT_FAMILY, href);
+  }, [settings.mPhoneFontUrl]);
 
   const handleImportLetterFiles = useCallback(async (files: File[]) => {
     const now = Date.now();
@@ -2284,6 +2325,7 @@ function App() {
                 <MPhonePage
                   initialScreen={mPhoneInitialScreen}
                   appsOnMPhone={settings.appsHiddenOnHome ?? []}
+                  mPhoneFontFamily={mPhoneFontFamily}
                   onLaunchApp={(appId) => {
                     setLaunchSource('mPhone');
                     setLauncherApp(appId);

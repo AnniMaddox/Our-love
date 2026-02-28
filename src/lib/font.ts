@@ -6,6 +6,7 @@ export const SOULMATE_CUSTOM_FONT_FAMILY = '__memorial_soulmate_font__';
 export const ARCHIVE_CUSTOM_FONT_FAMILY = '__memorial_archive_font__';
 export const NOTES_CUSTOM_FONT_FAMILY = '__memorial_notes_font__';
 export const HEALING_CAMPFIRE_CUSTOM_FONT_FAMILY = '__memorial_healing_campfire_font__';
+export const MPHONE_CUSTOM_FONT_FAMILY = '__memorial_mphone_font__';
 
 function escapeCssString(value: string) {
   return value.replace(/\\/g, '\\\\').replace(/'/g, "\\'");

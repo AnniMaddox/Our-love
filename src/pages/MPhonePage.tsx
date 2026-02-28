@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef, type CSSProperties } from 'react';
 import './MPhonePage.css';
 
 // ═══════════════════════════════════════
@@ -45,6 +45,7 @@ export type MPhonePageProps = {
   onReturnToMyPhone: () => void;
   initialScreen?: 'lock' | 'home';
   appsOnMPhone?: string[]; // all slotIds currently on M's phone (= appsHiddenOnHome)
+  mPhoneFontFamily?: string;
 };
 
 // ═══════════════════════════════════════
@@ -524,7 +525,7 @@ function MPhoneSettingsView({
 // MAIN COMPONENT
 // ═══════════════════════════════════════
 
-export function MPhonePage({ onLaunchApp, onReturnToMyPhone, initialScreen, appsOnMPhone }: MPhonePageProps) {
+export function MPhonePage({ onLaunchApp, onReturnToMyPhone, initialScreen, appsOnMPhone, mPhoneFontFamily }: MPhonePageProps) {
   const [now, setNow] = useState(() => new Date());
   const [screen, setScreen] = useState<MPhoneScreen>(initialScreen ?? 'lock');
   const [homePageIdx, setHomePageIdx] = useState(0);
@@ -732,7 +733,10 @@ export function MPhonePage({ onLaunchApp, onReturnToMyPhone, initialScreen, apps
   const dateStr = fmtDate(now);
 
   return (
-    <div className="mphone-root">
+    <div
+      className="mphone-root"
+      style={mPhoneFontFamily ? ({ '--mphone-font': `'${mPhoneFontFamily}', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif` } as CSSProperties) : undefined}
+    >
 
       {/* Wallpaper */}
       <div className="mphone-wallpaper" style={{ backgroundImage: `url('${wallpaperUrl}')` }} aria-hidden="true" />
